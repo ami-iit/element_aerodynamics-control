@@ -13,7 +13,8 @@ The existing achievements of control algorithm applied on flying iRonCub robot a
 ### - To simulate the flying environment of robot closer to reality by considering aerodynamics force
 
 
-### - To obtain asymptotic stability on flying humanoid robot 
+### - To obtain asymptotic stability on flying humanoid robot considering aerodynamics effects
+
 
 
 ## Outcomes
