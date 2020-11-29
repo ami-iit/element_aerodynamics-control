@@ -5,29 +5,24 @@
 <img src="https://github.com/HuitongIIT.png" width="180">|
 
 ## Background
-The existing achievements of control algorithm applied on flying iRonCub robot are based on the assumption that the aerodynamics effects are negligible. This project aims to research on the possible control logics considering the aerodynamics force on flying iRonCub robot. Combined with the results from CFD analysis which contributes to the estimated aerodynamics force that can be applied on the  robot model, theoretically available controllers and following simulation are expected to be achieved. Further more ,experimentals would be organized based on the achievments of proper designed controllers and successful simulation which could bring the `Flying Humanoid Robot` closer to the reality. 
+The existing achievements of control algorithm with the reference as [IEEE-RAL 2018 momentum-based controller](https://arxiv.org/abs/1702.06075) applied on flying iRonCub robot are based on the assumption that the aerodynamics effects are negligible. This project aims to design the controller considering the aerodynamics force on flying iRonCub robot which is managed to be a further step of [element_ironcub-control](https://github.com/dic-iit/element_ironcub-control#design-a-controller-that-considers-aerodynamic-effects-and-jets-dynamics). Combined with the results from CFD analysis which contributes to the estimated aerodynamics force that can be applied on the  robot model, theoretically available controllers and following simulation are expected to be achieved. Further more ,experimentals would be organized based on the achievments of proper designed controllers and successful simulation which could bring the `Flying Humanoid Robot` closer to the reality. 
 
 ## Objectives
-### - To study the aerodynamics effects on flying humanoid robot
 
-### - To simulate the flying environment of robot closer to reality by considering aerodynamics force
-
-
-### - To obtain asymptotic stability on flying humanoid robot considering aerodynamics effects
+### - To redesign the [controller](https://arxiv.org/abs/1702.06075) with the effects of aerodynamics forces
 
 
 
 ## Outcomes
 The possible outcomes of this element:
-### - simplified robot model built with the results from CFD analysis 
-In order to design a controller under non negligible aerodynamics effects, simplified robot model is needed at the beginning. Moreover, broken down single body from a `whole-body robot model` would be considered as the first step of studying on aerodynamics force based on reasonable assumptions. With the results obtained from single body analysis considering aerodynamic effects, the simplified `whole body` model can be built.
+### - A library for simplified robot models in Matlab
 
-### - Design a controller with the consideration of aerodynamics effects
-After buiding models,applicable control algorithm and proper tunning of controller are needed to obtian asymptotic stabilization of flying robot.Results contribute to [element_ironcub-control](https://github.com/dic-iit/element_ironcub-control)
+### - Add aerodynamics effects to the control algrithm based on [1](https://arxiv.org/abs/1702.06075) and [2](https://ieeexplore-ieee-org.biblio.iit.it/document/8624985) 
 
-### - simulations via simulator software 
+### - Aerodynamics effects analysis while taking off and landing 
 
-### - experimentals and publicants
+### - A demo where the simulated iRonCub exploits aerodynamics during horizontal, high-velocity flight
+
 
 ## Milestones
 The following milestones have been identified for this project:
