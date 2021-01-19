@@ -29,8 +29,8 @@ The possible outcomes of this element:
 The following milestones have been identified for this project:
 ### - Build simplified robot models with aerodynamics effects ,related to [epic](https://github.com/dic-iit/element_aerodynamics-control/issues/4) 
 ### - flight controller design by considering aerodynamics forces
-### - Simulation for Ironcub exploiting non-vertical ,high velocity flight 
-### - experimental with Ironcub flying 
+### - Simulation for iRonCub exploiting non-vertical ,high velocity flight 
+### - experimental with iRonCub flying 
 
 
 
