@@ -12,7 +12,7 @@ classdef State < handle
     %   ode_step - Integrates the system using ODE45 method
 
     properties
-        w_H_b (4, 4) double;
+        w_H_b (4, 4) double; % public propertites, which can be accessed from outside
         s;
         base_pose_dot (6, 1) double;
         s_dot;

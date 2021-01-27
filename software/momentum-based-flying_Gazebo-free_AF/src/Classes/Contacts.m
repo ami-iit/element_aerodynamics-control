@@ -28,7 +28,7 @@ classdef Contacts < handle
 
             obj.foot_print = foot_print;
             obj.S = [zeros(6, robot.NDOF); ...
-                    eye(robot.NDOF)];
+                    eye(robot.NDOF)];  % robot.NDOF is used since the property NDOF is accessable from outside 
             obj.mu = friction_coefficient;
             obj.prepare_optimization_matrix();
         end

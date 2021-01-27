@@ -55,6 +55,9 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
             generalized_total_wrench = generalized_jet_wrench + obj.generalized_external_wrenches;
             % update the total wrench with the computed contact forces and
             % update the state of the robot under contact with the ground
+            % use the 
+            
+            
             [generalized_total_wrench, wrench_left_foot, wrench_right_foot, base_pose_dot, s_dot] = ...
                 obj.contacts.compute_contact(obj.robot, torque, generalized_total_wrench, obj.state.base_pose_dot, obj.state.s_dot);
             % sets the velocity in the state
@@ -64,7 +67,7 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
             % integrate the dynamics
             [w_H_b, s, base_pose_dot, s_dot] = obj.state.euler_step(base_pose_ddot, s_ddot);
             % update the robot state
-            obj.robot.set_robot_state(w_H_b, s, base_pose_dot, s_dot)
+            obj.robot.set_robot_state(w_H_b, s, base_pose_dot, s_dot) % inputs are accessed from State propertites
         end
 
         function [jet_intensities, generalized_jet_wrench] = compute_jet_intensities_and_generalized_jet_wrench(obj, u)

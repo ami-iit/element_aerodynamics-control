@@ -12,7 +12,7 @@ classdef Robot < handle
     %    forward_dynamics - Compute forward dynamics
 
     properties
-        NDOF; % DOF of the robot
+        NDOF; % DOF of the robot  set public properties to let outside to reach
     end
 
     properties (Access = private)

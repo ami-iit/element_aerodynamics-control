@@ -9,7 +9,10 @@ classdef My_fraction < handle
     
     methods
         
-        
+        function set(obj,num,deno)
+            obj.numerator=num;
+            obj.denominator=deno;
+        end
         function result = fraction(obj)
             %METHOD1 Summary of this method goes here
             %   Detailed explanation goes here
