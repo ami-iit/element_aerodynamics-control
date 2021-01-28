@@ -8,7 +8,8 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
         contact_config;
         jets_config;
         tStep; % time interaction of every step
-        v_wind;rho;
+        my_struct;
+%         v_wind;rho;
     end
 
     properties (DiscreteState)

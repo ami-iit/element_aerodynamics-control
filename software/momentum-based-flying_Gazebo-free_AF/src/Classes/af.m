@@ -29,8 +29,8 @@ classdef af < handle
             obj.v_wind=v_wind;
             obj.rho=rho;
         end
-        function set_Ka(obj)
-            obj.gama=4; %set a random constant number for gama of chest as for now ,but it should be decided by frame
+        function set_Ka(obj, gama,  Ka)
+            obj.gama=gama; %set a random constant number for gama of chest as for now ,but it should be decided by frame
             obj.Ka=obj.rho*obj.gama*0.5;
             
         end
