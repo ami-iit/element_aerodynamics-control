@@ -8,6 +8,7 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
         contact_config;
         jets_config;
         tStep; % time interaction of every step
+        v_wind;rho;
     end
 
     properties (DiscreteState)
@@ -17,6 +18,7 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
     
     properties (Access = private)
         robot; contacts; state;
+        af; % class for caculating aerodynamics forces
         jets;
         jets_frame containers.Map;
         generalized_external_wrenches;
@@ -29,6 +31,7 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.robot = Robot(obj.robot_config);
             obj.contacts = Contacts(obj.contact_config.foot_print, obj.robot, obj.contact_config.friction_coefficient);
             obj.state = State(obj.tStep);
+            obj.af=af(obj.v_wind,obj.rho);
             % using a conteiner map to access with a index to the relative jet frame
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
             % instantiate 4 different jets - diffent coefficients
@@ -46,16 +49,15 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
             
             % reset external wrenches
             obj.reset_external_wrenches();
-            % add the external wrenches acting on the robot (more than jets forces and contact forces)
-            obj.add_aerodynamics_wrench(zeros(6,1), 'chest'); % zeros(6,1) = wrench, 'chest'=frame, to compute generalized external force (aerodynamics forces)
-            % ... add more if you need!
+            % add the external wrenches acting on the robot (more than jets
+            % forces and contact forces) aerodynamics forces
+            generalized_aerodynamics_wrench=obj.af.compute_gener_af(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,'chest'); % chest frame
             % computing the jets forces
             [jet_intensities, generalized_jet_wrench] = obj.compute_jet_intensities_and_generalized_jet_wrench(jets_input);%jets_input could be jet throttle or intensity dot
             % computes the contact quantites and the velocity after a possible impact
-            generalized_total_wrench = generalized_jet_wrench + obj.generalized_external_wrenches;
+            generalized_total_wrench = generalized_jet_wrench + generalized_aerodynamics_wrench;
             % update the total wrench with the computed contact forces and
             % update the state of the robot under contact with the ground
-            % use the 
             
             
             [generalized_total_wrench, wrench_left_foot, wrench_right_foot, base_pose_dot, s_dot] = ...
@@ -102,9 +104,7 @@ ssclassdef step_block < matlab.System & matlab.system.mixin.Propagates
             f = J' * wrench;
         end
         
-        function add_external_wrench(obj, wrench, frame)
-            obj.generalized_external_wrenches  = obj.generalized_external_wrenches + obj.compute_generalized_wrench(wrench, frame);
-        end
+        
         
         function reset_external_wrenches(obj)
            obj.generalized_external_wrenches = zeros(obj.robot.NDOF + 6,1); 
