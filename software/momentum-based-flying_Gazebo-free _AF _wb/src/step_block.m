@@ -21,9 +21,9 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         af; % class for caculating aerodynamics forces
         jets;
         jets_frame containers.Map;
-        af_frame; % the frame we consider to add aerodynamics forces on, up to now only 'chest' 
+        af_frame containers.Map; % the frame we consider to add aerodynamics forces on, up to now only 'chest' 
         generalized_external_wrenches;% external wrenches (more than jets forces and contact forces), aerodynamics forces in this case
-   
+        
     end
 
     methods (Access = protected)
@@ -35,7 +35,8 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             
             % using a conteiner map to access with a index to the relative jet frame
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
-            obj.af_frame='chest';% set frame on 'chest'
+            obj.af_frame = containers.Map([1,2,3,4,5,6,7,8,9,10],{'head','chest','r_upper_arm','l_upper_arm',...
+                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg'}) ;% set frame on 
             obj.af=Af(obj.Af_config);% object of Af class with Af_config as input
             % instantiate 4 different jets - diffent coefficients
             for i = 1:4
@@ -55,9 +56,11 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % add the external wrenches acting on the robot (more than jets
             % forces and contact forces) aerodynamics forces
             
-            generalized_aerodynamics_wrench=obj.Af.compute_gener_af(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame); % chest frame
-            %compute generalized aerodynamics wrench on chest 
-            obj.add_external_wrench(generalized_aerodynamics_wrench);% compute extra external wrenches
+            generalized_aerodynamics_wb=obj.compute_aero_wholebody();
+            figure;
+            
+            %compute generalized aerodynamics wrench on whole body 
+            obj.add_external_wrench(generalized_aerodynamics_wb);% compute extra external wrenches
             %obj.add_external_wrench(zeros(6,1));
             % computing the jets forces
             [jet_intensities, generalized_jet_wrench] = obj.compute_jet_intensities_and_generalized_jet_wrench(jets_input);%jets_input could be jet throttle or intensity dot
@@ -78,7 +81,20 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % update the robot state
             obj.robot.set_robot_state(w_H_b, s, base_pose_dot, s_dot) % inputs are accessed from State propertites
         end
-
+        
+        function generalized_aerodynamics_wb=compute_aero_wholebody(obj)
+            
+            % for whole body aerodynamics forces, 10 links are considered
+            generalized_aerodynamics_wb=zeros(29,1);
+            for i=1:10
+                generalized_aerodynamics_wrench=obj.Af.compute_gener_af(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));% for one single link
+                generalized_aerodynamics_wb=generalized_aerodynamics_wb+generalized_aerodynamics_wrench;
+            
+            end
+          
+        end
+        
+        
         function [jet_intensities, generalized_jet_wrench] = compute_jet_intensities_and_generalized_jet_wrench(obj, u)
             % u is jet input
             generalized_jet_wrench = zeros(29, 1); % 29=23+6, n+ dof of floating base
