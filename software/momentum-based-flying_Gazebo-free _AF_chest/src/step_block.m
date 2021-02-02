@@ -7,8 +7,8 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         robot_config;
         contact_config;
         jets_config;
-        tStep; % time interaction of every step
-        Af_config;% configuration parameters related to aerodynamics forces
+        tStep; 
+        Af_config;
     end
 
     properties (DiscreteState)

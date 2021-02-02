@@ -7,8 +7,8 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         robot_config;
         contact_config;
         jets_config;
-        tStep; % time interaction of every step
-        Af_config;% configuration parameters related to aerodynamics forces
+        tStep; 
+        Af_config;
     end
 
     properties (DiscreteState)
@@ -47,7 +47,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 obj.robot_config.initialConditions.base_pose_dot, obj.robot_config.initialConditions.s_dot);
         end
 
-        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot] = stepImpl(obj, jets_input, torque)
+        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,generalized_aerodynamics_wb] = stepImpl(obj, jets_input, torque)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             
@@ -140,7 +140,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
 
         end
 
-        function [out, out2, out3, out4, out5, out6, out7] = getOutputSizeImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7,out8] = getOutputSizeImpl(~)
             % Return size for each output port
             out = [4 4]; % homogeneous matrix dim
             out2 = [23 1]; % joints position vector dim
@@ -149,9 +149,10 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = [4 1]; % jet intensities vector dim
             out6 = [6 1]; % wrench left foot vector dim
             out7 = [6 1]; % wrench right foot vector dim
+            out8 = [29 1]; % aerodynamics generalized wrench dim
         end
 
-        function [out, out2, out3, out4, out5, out6, out7] = getOutputDataTypeImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7, out8] = getOutputDataTypeImpl(~)
             % Return data type for each output port
             out = "double";
             out2 = "double";
@@ -160,9 +161,10 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = "double";
             out6 = "double";
             out7 = "double";
+            out8 = "double";
         end
 
-        function [out, out2, out3, out4, out5, out6, out7] = isOutputComplexImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7, out8] = isOutputComplexImpl(~)
             % Return true for each output port with complex data
             out = false;
             out2 = false;
@@ -171,9 +173,10 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = false;
             out6 = false;
             out7 = false;
+            out8 = false;
         end
 
-        function [out, out2, out3, out4, out5, out6, out7] = isOutputFixedSizeImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7, out8] = isOutputFixedSizeImpl(~)
             % Return true for each output port with fixed size
             out = true;
             out2 = true;
@@ -182,6 +185,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = true;
             out6 = true;
             out7 = true;
+            out8 = true;
         end
 
     end
