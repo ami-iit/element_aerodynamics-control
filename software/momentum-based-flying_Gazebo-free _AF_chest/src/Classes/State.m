@@ -13,9 +13,9 @@ classdef State < handle
 
     properties
         w_H_b (4, 4) double;
-        s;
+        s (23,1) double;
         base_pose_dot (6, 1) double;
-        s_dot;
+        s_dot (23,1) double;
         dt double;
     end
 

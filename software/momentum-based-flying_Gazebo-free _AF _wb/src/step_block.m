@@ -57,7 +57,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % forces and contact forces) aerodynamics forces
             
             generalized_aerodynamics_wb=obj.compute_aero_wholebody();
-            figure;
+            
             
             %compute generalized aerodynamics wrench on whole body 
             obj.add_external_wrench(generalized_aerodynamics_wb);% compute extra external wrenches
@@ -87,7 +87,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % for whole body aerodynamics forces, 10 links are considered
             generalized_aerodynamics_wb=zeros(29,1);
             for i=1:10
-                generalized_aerodynamics_wrench=obj.Af.compute_gener_af(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));% for one single link
+                generalized_aerodynamics_wrench=obj.af.compute_gener_af(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));% for one single link
                 generalized_aerodynamics_wb=generalized_aerodynamics_wb+generalized_aerodynamics_wrench;
             
             end
@@ -129,7 +129,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         
         
         
-        function obj.reset_external_wrenches(obj)
+        function reset_external_wrenches(obj)
            obj.generalized_external_wrenches = zeros(obj.robot.NDOF + 6,1); %set size 
         end
         function add_external_wrench(obj, otherwrench)

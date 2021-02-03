@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.6"
+    ComputedModelVersion    "2.8"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -640,14 +640,14 @@ Model {
 	}
 	Object {
 	  $ObjectID		  13
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [2445.0, 1143.0]
 	  ZoomFactor		  [1.25]
-	  Offset		  [-887.118092189741, -341.01730546066011]
-	  SceneRectInView	  [-887.118092189741, -341.01730546066011, 1956.0, 914.4]
+	  Offset		  [-887.118092189741, -341.01730546066017]
+	  SceneRectInView	  [-887.118092189741, -341.01730546066017, 1956.0, 914.4]
 	}
 	Object {
 	  $ObjectID		  14
@@ -678,9 +678,9 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2431"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-477.97651912215179, -110.19920184759735]
-	  SceneRectInView	  [-477.97651912215179, -110.19920184759735, 1956.0, 914.4]
+	  ZoomFactor		  [0.98159509202453987]
+	  Offset		  [-477.97651912215179, -235.21482684759741]
+	  SceneRectInView	  [-477.97651912215179, -235.21482684759741, 2490.84375, 1164.43125]
 	}
 	Object {
 	  $ObjectID		  17
@@ -805,14 +805,14 @@ Model {
 	}
 	Object {
 	  $ObjectID		  28
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-231.99096379014975, 459.31750365739578]
-	  SceneRectInView	  [-231.99096379014975, 459.31750365739578, 1956.0, 914.4]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-295.89513045681645, 629.23312865739535]
+	  SceneRectInView	  [-295.89513045681645, 629.23312865739535, 2445.0, 1143.0]
 	}
 	Object {
 	  $ObjectID		  29
@@ -1294,6 +1294,19 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  72
+	  Type			  "GLUE2:SpreadSheet"
+	  ID			  "ModelData"
+	  Visible		  [1]
+	  CreateCallback	  "DataView.createSpreadSheetComponent"
+	  UserData		  ""
+	  Floating		  [0]
+	  DockPosition		  "Bottom"
+	  Width			  [2511]
+	  Height		  [218]
+	  Minimized		  "On"
+	}
+	Object {
+	  $ObjectID		  73
 	  Type			  "Simulink:Editor:ReferencedFiles"
 	  ID			  "Referenced Files"
 	  Visible		  [0]
@@ -1306,7 +1319,7 @@ Model {
 	  Minimized		  "Unset"
 	}
 	Object {
-	  $ObjectID		  73
+	  $ObjectID		  74
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1318,19 +1331,6 @@ Model {
 	  Height		  [480]
 	  Minimized		  "On"
 	}
-	Object {
-	  $ObjectID		  74
-	  Type			  "GLUE2:SpreadSheet"
-	  ID			  "ModelData"
-	  Visible		  [1]
-	  CreateCallback	  "DataView.createSpreadSheetComponent"
-	  UserData		  ""
-	  Floating		  [0]
-	  DockPosition		  "Bottom"
-	  Width			  [2511]
-	  Height		  [218]
-	  Minimized		  "On"
-	}
 	PropName		"DockComponentsInfo"
       }
       WindowState	      "AAAA/wAAAAD9AAAAAwAAAAAAAAC9AAAB+PwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
@@ -1339,7 +1339,7 @@ Model {
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
       "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
       "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAABz8AAADb/AEAAAAB+wAAADYAR"
-      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAP///wAACbMAAAS0AAAAAQAAA"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAACbMAAAS0AAAAAQAAA"
       "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
       "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
       "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
@@ -1362,9 +1362,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Feb 02 11:51:20 2021"
-  RTWModifiedTimeStamp	  534167473
-  ModelVersionFormat	  "%<AutoIncrement:2.6>"
+  LastModifiedDate	  "Tue Feb 02 15:26:05 2021"
+  RTWModifiedTimeStamp	  534179765
+  ModelVersionFormat	  "%<AutoIncrement:2.8>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2716,12 +2716,6 @@ Model {
       ContentPreviewEnabled   off
       ConfigSource	      "Workspace"
       ConfigObject	      "'WBTConfigRobot'"
-      RobotName		      "'icubSim'"
-      UrdfFile		      "'model.urdf'"
-      ControlledJoints	      "{'l_elbow','l_shoulder_pitch','torso_roll'}"
-      ControlBoardsNames      "{'left_arm','right_arm','torso'}"
-      LocalName		      "'WBT'"
-      GravityVector	      "[0,0,-9.81]"
     }
     Block {
       BlockType		      Constant
@@ -22664,8 +22658,20 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true)),"
-      "'Version','2020b')"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','1.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
+      "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
+      "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
+      "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686"
+      " 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Marker','o','MarkerSize',8)}},'User"
+      "DefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'iRonCub/4'}},'ShowContent',true,'Placement',1)},'DisplayPr"
+      "opertyDefaults',struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.00000','"
+      "MaxYLimMag','1.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0"
+      "],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623"
+      "529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1"
+      ";0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.6509803921"
+      "56863])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'"
+      "Version','2020b')),'Version','2020b','Position',[155 514 560 420])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -30280,7 +30286,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"125"
+	ZoomFactor		"98"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
@@ -30323,7 +30329,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "125"
+	    ZoomFactor		    "100"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -34996,7 +35002,7 @@ Model {
 	      Labels		      [0, 0]
 	      SrcBlock		      "MATLAB System1"
 	      SrcPort		      6
-	      Points		      [157, 0; 0, 20]
+	      Points		      [168, 0; 0, 20]
 	      DstBlock		      "wrench_LFoot"
 	      DstPort		      1
 	    }
@@ -35006,12 +35012,12 @@ Model {
 	      Labels		      [0, 0]
 	      SrcBlock		      "MATLAB System1"
 	      SrcPort		      7
-	      Points		      [79, 0; 0, 25]
+	      Points		      [100, 0; 0, 25]
 	      DstBlock		      "wrench_RFoot"
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      313
+	      ZOrder		      315
 	      SrcBlock		      "MATLAB System1"
 	      SrcPort		      8
 	      Points		      [28, 0; 0, 50]
