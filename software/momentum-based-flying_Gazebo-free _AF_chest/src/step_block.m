@@ -19,7 +19,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
     
     properties (Access = private)
         robot; contacts; state;
-        af; 
+        aerodynamics; 
         jets;
         jets_frame containers.Map;
         af_frame; 
@@ -36,7 +36,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % using a conteiner map to access with a index to the relative jet frame
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});             obj.af_frame='chest';% set frame on 'chest'
             obj.af_frame='chest';
-            obj.af=Af(obj.aerodynamics_config);% object of Af class with Af_config as input
+            obj.aerodynamics=Aerodynamics_force(obj.aerodynamics_config);% object of Af class with Af_config as input
             % instantiate 4 different jets - diffent coefficients
             for i = 1:4
                 obj.jets{i} = Jet(obj.jets_config.coefficients(i, :), obj.jets_config.init_thrust(i), obj.tStep);
@@ -54,11 +54,11 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.reset_external_wrenches();
             % add the external wrenches acting on the robot (more than jets
             % forces and contact forces) aerodynamics forces
-            relative_velocity=obj.af.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame);% v_a
-            w_kaxis_link=obj.af.compute_kaxis(obj.robot,obj.af_frame);% k unit vector of link frame [0 0 1] expressed in world orientation frame
+            relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame);% v_a
+            w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.af_frame);% k unit vector of link frame [0 0 1] expressed in world orientation frame
             
-            aerodynamics_forces=obj.af.compute_af_link(relative_velocity,w_kaxis_link);
-            generalized_aerodynamics_wrench=obj.af.compute_gener_af(obj.robot,aerodynamics_forces,obj.af_frame);
+            aerodynamics_forces=obj.aerodynamics.compute_af_link(relative_velocity,w_kaxis_link);
+            generalized_aerodynamics_wrench=obj.aerodynamics.compute_gener_af(obj.robot,aerodynamics_forces,obj.af_frame);
             
             %compute generalized aerodynamics wrench on chest 
             %relative_velocity=obj.af.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame);

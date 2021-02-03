@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.10"
+    ComputedModelVersion    "2.11"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -645,9 +645,9 @@ Model {
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.5705521472392638]
-	  Offset		  [-527.10559218974106, -206.98019608566028]
-	  SceneRectInView	  [-527.10559218974106, -206.98019608566028, 1556.77734375, 727.76953125]
+	  ZoomFactor		  [0.6]
+	  Offset		  [-1306.7761651064081, -387.22108150232691]
+	  SceneRectInView	  [-1306.7761651064081, -387.22108150232691, 4075.0, 1905.0]
 	}
 	Object {
 	  $ObjectID		  14
@@ -678,9 +678,9 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2431"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.3742331288343559]
-	  Offset		  [-295.33835645474107, -129.71674160764206]
-	  SceneRectInView	  [-295.33835645474107, -129.71674160764206, 1779.1741071428571, 831.73660714285711]
+	  ZoomFactor		  [1.0791523956490647]
+	  Offset		  [-295.33835645474107, -243.43073086545456]
+	  SceneRectInView	  [-295.33835645474107, -243.43073086545456, 2265.6670270647319, 1059.1645856584821]
 	}
 	Object {
 	  $ObjectID		  17
@@ -810,9 +810,9 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.75]
-	  Offset		  [81.652488590802818, 765.89979532406221]
-	  SceneRectInView	  [81.652488590802818, 765.89979532406221, 1397.1428571428571, 653.14285714285711]
+	  ZoomFactor		  [1.3742331288343559]
+	  Offset		  [111.25070287651693, 692.76809889549065]
+	  SceneRectInView	  [111.25070287651693, 692.76809889549065, 1779.1741071428571, 831.73660714285711]
 	}
 	Object {
 	  $ObjectID		  29
@@ -1362,9 +1362,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Feb 03 16:23:31 2021"
-  RTWModifiedTimeStamp	  534270165
-  ModelVersionFormat	  "%<AutoIncrement:2.10>"
+  LastModifiedDate	  "Wed Feb 03 16:35:12 2021"
+  RTWModifiedTimeStamp	  534270780
+  ModelVersionFormat	  "%<AutoIncrement:2.11>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2622,7 +2622,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "157"
+    ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3154"
     SimulinkSubDomain	    "Simulink"
@@ -22658,21 +22658,21 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.24236','MaxYLimReal','0.63602','YLabelReal','','MinYLimMag"
-      "','0.00000','MaxYLimMag','0.63602','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
-      "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
-      "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
-      "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686"
-      " 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Marker','o','MarkerSize',8)}},'User"
-      "DefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'iRonCub/4:1','iRonCub/4:2','iRonCub/4:3'}},'ShowContent',t"
-      "rue,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.24236','MaxYLimReal','0.63602','YLabelRea"
-      "l','','MinYLimMag','0.00000','MaxYLimMag','0.63602','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagP"
-      "hase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOr"
-      "der',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.71764"
-      "7058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0"
-      ".0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','"
-      "XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[155 514 "
-      "560 420])"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','0.0448','MaxYLimReal','0.55262','YLabelReal','','MinYLimMag',"
+      "'0.0448','MaxYLimMag','0.55262','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesCol"
+      "or',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666666"
+      "66666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725"
+      "49019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0."
+      "650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Marker','o','MarkerSize',8)}},'UserDef"
+      "inedChannelNames',{{}},'NumLines',3,'LineNames',{{'iRonCub/4:1','iRonCub/4:2','iRonCub/4:3'}},'ShowContent',true"
+      ",'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','0.0448','MaxYLimReal','0.55262','YLabelReal',''"
+      ",'MinYLimMag','0.0448','MaxYLimMag','0.55262','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',"
+      "false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',["
+      "0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.71764705882"
+      "3529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.07450"
+      "98039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY'),e"
+      "xtmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[155 514 560 42"
+      "0])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -30287,7 +30287,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"137"
+	ZoomFactor		"108"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
@@ -30330,7 +30330,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "175"
+	    ZoomFactor		    "137"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -35018,7 +35018,7 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      317
+	      ZOrder		      318
 	      SrcBlock		      "MATLAB System1"
 	      SrcPort		      8
 	      Points		      [28, 0; 0, 50]

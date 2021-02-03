@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.14"
+    ComputedModelVersion    "2.15"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -645,9 +645,9 @@ Model {
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.75]
-	  Offset		  [-614.10396902706589, -124.23929750358667]
-	  SceneRectInView	  [-614.10396902706589, -124.23929750358667, 1397.1428571428571, 653.14285714285711]
+	  ZoomFactor		  [1.25]
+	  Offset		  [-844.96111188420855, -202.63929750358653]
+	  SceneRectInView	  [-844.96111188420855, -202.63929750358653, 1956.0, 914.4]
 	}
 	Object {
 	  $ObjectID		  14
@@ -678,9 +678,9 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2431"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.5]
-	  Offset		  [-208.62947472651308, -211.66273039632077]
-	  SceneRectInView	  [-208.62947472651308, -211.66273039632077, 1630.0, 762.0]
+	  ZoomFactor		  [1.1779141104294479]
+	  Offset		  [-208.62947472651297, -315.84241789632074]
+	  SceneRectInView	  [-208.62947472651297, -315.84241789632074, 2075.703125, 970.35937499999989]
 	}
 	Object {
 	  $ObjectID		  17
@@ -810,9 +810,9 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.75]
-	  Offset		  [-46.831176305037161, 489.83210042523172]
-	  SceneRectInView	  [-46.831176305037161, 489.83210042523172, 1397.1428571428571, 653.14285714285711]
+	  ZoomFactor		  [1.3742331288343559]
+	  Offset		  [-46.831176305037161, 400.53522542523172]
+	  SceneRectInView	  [-46.831176305037161, 400.53522542523172, 1779.1741071428571, 831.73660714285711]
 	}
 	Object {
 	  $ObjectID		  29
@@ -1294,19 +1294,6 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  72
-	  Type			  "Simulink:Editor:ReferencedFiles"
-	  ID			  "Referenced Files"
-	  Visible		  [0]
-	  CreateCallback	  ""
-	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
-	  Floating		  [0]
-	  DockPosition		  "Left"
-	  Width			  [640]
-	  Height		  [480]
-	  Minimized		  "Unset"
-	}
-	Object {
-	  $ObjectID		  73
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1319,7 +1306,7 @@ Model {
 	  Minimized		  "On"
 	}
 	Object {
-	  $ObjectID		  74
+	  $ObjectID		  73
 	  Type			  "GLUE2:SpreadSheet"
 	  ID			  "ModelData"
 	  Visible		  [1]
@@ -1330,6 +1317,19 @@ Model {
 	  Width			  [2511]
 	  Height		  [218]
 	  Minimized		  "On"
+	}
+	Object {
+	  $ObjectID		  74
+	  Type			  "Simulink:Editor:ReferencedFiles"
+	  ID			  "Referenced Files"
+	  Visible		  [0]
+	  CreateCallback	  ""
+	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
+	  Floating		  [0]
+	  DockPosition		  "Left"
+	  Width			  [640]
+	  Height		  [480]
+	  Minimized		  "Unset"
 	}
 	PropName		"DockComponentsInfo"
       }
@@ -1362,9 +1362,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Feb 03 14:27:04 2021"
-  RTWModifiedTimeStamp	  534263087
-  ModelVersionFormat	  "%<AutoIncrement:2.14>"
+  LastModifiedDate	  "Wed Feb 03 16:45:21 2021"
+  RTWModifiedTimeStamp	  534271428
+  ModelVersionFormat	  "%<AutoIncrement:2.15>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2622,7 +2622,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "175"
+    ZoomFactor		    "125"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3156"
     SimulinkSubDomain	    "Simulink"
@@ -22671,21 +22671,21 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-9.58532','MaxYLimReal','16.27492','YLabelReal','','MinYLimMa"
-      "g','0.00000','MaxYLimMag','16.27492','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Ax"
-      "esColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066"
-      "6666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83"
-      "1372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.07450980392156"
-      "86 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Marker','o','MarkerSize',8)}},'Us"
-      "erDefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'iRonCub/4:1','iRonCub/4:2','iRonCub/4:3'}},'ShowContent'"
-      ",true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-9.58532','MaxYLimReal','16.27492','YLabel"
-      "Real','','MinYLimMag','0.00000','MaxYLimMag','16.27492','LegendVisibility','off','XGrid',true,'YGrid',true,'Plot"
-      "MagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'Col"
-      "orOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.7"
-      "17647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1"
-      ";1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscal"
-      "e','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[156 "
-      "345 550 427])"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-10.23205','MaxYLimReal','10.52337','YLabelReal','','MinYLimM"
+      "ag','0.00000','MaxYLimMag','10.52337','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'A"
+      "xesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06"
+      "66666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8"
+      "31372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215"
+      "686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Marker','o','MarkerSize',8)}},'U"
+      "serDefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'iRonCub/4:1','iRonCub/4:2','iRonCub/4:3'}},'ShowContent"
+      "',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-10.23205','MaxYLimReal','10.52337','YLab"
+      "elReal','','MinYLimMag','0.00000','MaxYLimMag','10.52337','LegendVisibility','off','XGrid',true,'YGrid',true,'Pl"
+      "otMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'C"
+      "olorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0"
+      ".717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1"
+      " 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutosc"
+      "ale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[15"
+      "6 345 550 427])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -30302,7 +30302,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"150"
+	ZoomFactor		"118"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
@@ -30347,7 +30347,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "175"
+	    ZoomFactor		    "137"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport

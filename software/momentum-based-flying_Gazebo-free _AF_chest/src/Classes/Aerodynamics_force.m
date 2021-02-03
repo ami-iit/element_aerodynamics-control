@@ -1,4 +1,4 @@
-classdef Af < handle
+classdef Aerodynamics_force < handle
     % the class Af (aerodynamics forces) handles the computation of
     %  aerodynamics forces 
     %rho:air density
@@ -7,37 +7,34 @@ classdef Af < handle
     %C_D_link: drag coefficient
     %C_L_link:lift coefficient
     
-    properties
-        N_link;
-    end
     
     properties (Access = private)
         
-        v_wind; % R^3
         
-        rho;%R
-        gama (13,1) double;
-        Ka (13,1) double; %R
-        C_D;
-        C_L;
+        v_wind; 
+        
+        rho;
+        gama;
+        Ka; 
+        C_D_link;
+        C_L_link;
         
      %need contianer map in future to place all the robot links ,
      
     end
     
     methods  
-        function obj=Af(aerodynamics_config)
+        function obj=Aerodynamics_force(config)
             %af Construct an instance of this class
             %   v_wind - the wind velocity vector expressed in inertial frame 
             %   rho - air density
             %   gama - shape coefficient
-            obj.N_link=aerodynamics_config.NOL;
-            obj.v_wind=aerodynamics_config.v_wind;
-            obj.rho=aerodynamics_config.rho;
-            obj.gama=aerodynamics_config.gama;%vector 13X1
-            obj.Ka=aerodynamics_config.Ka;%vector 13X1
-            obj.C_D=aerodynamics_config.C_D;%vector 13X1
-            obj.C_L=aerodynamics_config.C_L;%vector 13X1
+            obj.v_wind=config.v_wind;
+            obj.rho=config.rho;
+            obj.gama=config.gama;
+            obj.Ka=config.Ka;
+            obj.C_D_link=config.C_D_link;
+            obj.C_L_link=config.C_L_link;
         end
         
         
@@ -62,24 +59,15 @@ classdef Af < handle
     methods 
         
         
-        function aerodynamics_forces=compute_af_link(obj,relative_velocity,w_kaxis_link,frame)
+        function aerodynamics_forces=compute_af_link(obj,relative_velocity,w_kaxis_link)
             
             % calculate aerodynamics forces expressed as a vector in world frame since all the
             % vectors are expressed in world frame
-            [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame);
             AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);
-            aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
+            aerodynamics_forces=-obj.Ka*norm(relative_velocity)*((obj.C_D_link+obj.C_L_link*cot(AoA))*relative_velocity+obj.C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
             % aerodynamics_forces \in R^3
             
         
-        end
-        
-        function [Ka_link,C_D_link,C_L_link]=get_coeff(obj,frame) % get force coefficients and shape coefficient for one link
-            frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
-            Ka_link=obj.Ka(frame_number(frame));
-            C_D_link=obj.C_D(frame_number(frame));
-            C_L_link=obj.C_L(frame_number(frame));
         end
         
         function relative_velocity=compute_relative_v(obj,robot,base_pose_dot,s_dot,frame) %base__pose_dot and s_dot are from the state before forward dynamics
