@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.8"
+    ComputedModelVersion    "2.10"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -640,14 +640,14 @@ Model {
 	}
 	Object {
 	  $ObjectID		  13
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-887.118092189741, -341.01730546066017]
-	  SceneRectInView	  [-887.118092189741, -341.01730546066017, 1956.0, 914.4]
+	  ZoomFactor		  [1.5705521472392638]
+	  Offset		  [-527.10559218974106, -206.98019608566028]
+	  SceneRectInView	  [-527.10559218974106, -206.98019608566028, 1556.77734375, 727.76953125]
 	}
 	Object {
 	  $ObjectID		  14
@@ -678,9 +678,9 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2431"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [0.98159509202453987]
-	  Offset		  [-477.97651912215179, -235.21482684759741]
-	  SceneRectInView	  [-477.97651912215179, -235.21482684759741, 2490.84375, 1164.43125]
+	  ZoomFactor		  [1.3742331288343559]
+	  Offset		  [-295.33835645474107, -129.71674160764206]
+	  SceneRectInView	  [-295.33835645474107, -129.71674160764206, 1779.1741071428571, 831.73660714285711]
 	}
 	Object {
 	  $ObjectID		  17
@@ -805,14 +805,14 @@ Model {
 	}
 	Object {
 	  $ObjectID		  28
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
 	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [-295.89513045681645, 629.23312865739535]
-	  SceneRectInView	  [-295.89513045681645, 629.23312865739535, 2445.0, 1143.0]
+	  ZoomFactor		  [1.75]
+	  Offset		  [81.652488590802818, 765.89979532406221]
+	  SceneRectInView	  [81.652488590802818, 765.89979532406221, 1397.1428571428571, 653.14285714285711]
 	}
 	Object {
 	  $ObjectID		  29
@@ -1362,9 +1362,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Feb 02 15:26:05 2021"
-  RTWModifiedTimeStamp	  534179765
-  ModelVersionFormat	  "%<AutoIncrement:2.8>"
+  LastModifiedDate	  "Wed Feb 03 16:23:31 2021"
+  RTWModifiedTimeStamp	  534270165
+  ModelVersionFormat	  "%<AutoIncrement:2.10>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2622,7 +2622,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "125"
+    ZoomFactor		    "157"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3154"
     SimulinkSubDomain	    "Simulink"
@@ -22658,20 +22658,21 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag"
-      "','0.00000','MaxYLimMag','1.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.24236','MaxYLimReal','0.63602','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','0.63602','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
       "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
       "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
       "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686"
       " 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Marker','o','MarkerSize',8)}},'User"
-      "DefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'iRonCub/4'}},'ShowContent',true,'Placement',1)},'DisplayPr"
-      "opertyDefaults',struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.00000','"
-      "MaxYLimMag','1.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0"
-      "],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623"
-      "529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1"
-      ";0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.6509803921"
-      "56863])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'"
-      "Version','2020b')),'Version','2020b','Position',[155 514 560 420])"
+      "DefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'iRonCub/4:1','iRonCub/4:2','iRonCub/4:3'}},'ShowContent',t"
+      "rue,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.24236','MaxYLimReal','0.63602','YLabelRea"
+      "l','','MinYLimMag','0.00000','MaxYLimMag','0.63602','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagP"
+      "hase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOr"
+      "der',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.71764"
+      "7058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0"
+      ".0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','"
+      "XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[155 514 "
+      "560 420])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -30286,7 +30287,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"98"
+	ZoomFactor		"137"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
@@ -30329,7 +30330,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
+	    ZoomFactor		    "175"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -30394,12 +30395,12 @@ Model {
 	      MaskDisplay	      "disp('step_block');\nport_label('input',1,'jets_input');\nport_label('input',2,'torque');\np"
 	      "ort_label('output',1,'w_H_b');\nport_label('output',2,'s');\nport_label('output',3,'base_pose_dot');\nport_labe"
 	      "l('output',4,'s_dot');\nport_label('output',5,'jet_intensities');\nport_label('output',6,'wrench_left_foot');\n"
-	      "port_label('output',7,'wrench_right_foot');\nport_label('output',8,'generalized_aerodynamics_wb');\n"
+	      "port_label('output',7,'wrench_right_foot');\nport_label('output',8,'aerodynamics_forces_wb');\n"
 	      robot_config	      "robot_config"
 	      contact_config	      "contact_config"
 	      jets_config	      "jets_config"
 	      tStep		      "Config.tStep"
-	      Af_config		      "Af_config"
+	      aerodynamics_config     "aerodynamics_config"
 	      SimulateUsing	      "Interpreted execution"
 	      Port {
 		PortNumber		1
@@ -34903,7 +34904,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "generalized_aerodynamics_wb"
+	      Name		      "aerodynamics_forces_wb"
 	      SID		      "3152"
 	      Position		      [690, 1013, 720, 1027]
 	      ZOrder		      1286
@@ -35017,11 +35018,11 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      315
+	      ZOrder		      317
 	      SrcBlock		      "MATLAB System1"
 	      SrcPort		      8
 	      Points		      [28, 0; 0, 50]
-	      DstBlock		      "generalized_aerodynamics_wb"
+	      DstBlock		      "aerodynamics_forces_wb"
 	      DstPort		      1
 	    }
 	  }
@@ -35052,7 +35053,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "generalized_aerodynamics_wb"
+	  Name			  "aerodynamics_forces_wb"
 	  SID			  "3153"
 	  Position		  [340, 333, 370, 347]
 	  ZOrder		  1263
@@ -35104,7 +35105,7 @@ Model {
 	  SrcBlock		  "Forward Dynamics"
 	  SrcPort		  4
 	  Points		  [58, 0; 0, 25]
-	  DstBlock		  "generalized_aerodynamics_wb"
+	  DstBlock		  "aerodynamics_forces_wb"
 	  DstPort		  1
 	}
       }

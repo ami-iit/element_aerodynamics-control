@@ -46,7 +46,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 obj.robot_config.initialConditions.base_pose_dot, obj.robot_config.initialConditions.s_dot);
         end
 
-        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,generalized_aerodynamics_wrench] = stepImpl(obj, jets_input, torque)
+        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,aerodynamics_forces] = stepImpl(obj, jets_input, torque)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             
@@ -140,7 +140,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = [4 1]; % jet intensities vector dim
             out6 = [6 1]; % wrench left foot vector dim
             out7 = [6 1]; % wrench right foot vector dim
-            out8 = [29 1];
+            out8 = [3 1];
         end
 
         function [out, out2, out3, out4, out5, out6, out7,out8] = getOutputDataTypeImpl(~)

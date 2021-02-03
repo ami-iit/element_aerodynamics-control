@@ -8,7 +8,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         contact_config;
         jets_config;
         tStep; 
-        Af_config;
+        aerodynamics_config;
     end
 
     properties (DiscreteState)
@@ -35,9 +35,9 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             
             % using a conteiner map to access with a index to the relative jet frame
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
-            obj.af_frame = containers.Map([1,2,3,4,5,6,7,8,9,10],{'head','chest','r_upper_arm','l_upper_arm',...
-                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg'}) ;% set frame on 
-            obj.af=Af(obj.Af_config);% object of Af class with Af_config as input
+            obj.af_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
+                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;% set frame on 
+            obj.af=Af(obj.aerodynamics_config);% object of Af class with Af_config as input
             % instantiate 4 different jets - diffent coefficients
             for i = 1:4
                 obj.jets{i} = Jet(obj.jets_config.coefficients(i, :), obj.jets_config.init_thrust(i), obj.tStep);
@@ -47,7 +47,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 obj.robot_config.initialConditions.base_pose_dot, obj.robot_config.initialConditions.s_dot);
         end
 
-        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,generalized_aerodynamics_wb] = stepImpl(obj, jets_input, torque)
+        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,aerodynamics_forces_wb] = stepImpl(obj, jets_input, torque)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             
@@ -56,7 +56,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % add the external wrenches acting on the robot (more than jets
             % forces and contact forces) aerodynamics forces
             
-            generalized_aerodynamics_wb=obj.compute_aero_wholebody();
+            [generalized_aerodynamics_wb,aerodynamics_forces_wb]=obj.compute_aero_wholebody();
             
             
             %compute generalized aerodynamics wrench on whole body 
@@ -82,13 +82,22 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.robot.set_robot_state(w_H_b, s, base_pose_dot, s_dot) % inputs are accessed from State propertites
         end
         
-        function generalized_aerodynamics_wb=compute_aero_wholebody(obj)
+        function [generalized_aerodynamics_wb,aerodynamics_forces_wb]=compute_aero_wholebody(obj)
             
             % for whole body aerodynamics forces, 10 links are considered
             generalized_aerodynamics_wb=zeros(29,1);
-            for i=1:10
-                generalized_aerodynamics_wrench=obj.af.compute_gener_af(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));% for one single link
-                generalized_aerodynamics_wb=generalized_aerodynamics_wb+generalized_aerodynamics_wrench;
+            aerodynamics_forces_wb=zeros(3,1);
+            for i=1:obj.af.N_link
+                relative_velocity=obj.af.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));
+                w_kaxis_link=obj.af.compute_kaxis(obj.robot,obj.af_frame(i));
+                aerodynamics_forces_single=obj.af.compute_af_link(relative_velocity,w_kaxis_link,obj.af_frame(i));
+                aerodynamics_forces_wb=aerodynamics_forces_wb+aerodynamics_forces_single;
+                % total whole body aerodynamics forces
+                
+                aerodynamics_wrench_single=obj.af.compute_gener_af(obj.robot,aerodynamics_forces_single,obj.af_frame(i));
+                %generalized aerodynamics wrench for one single link
+                
+                generalized_aerodynamics_wb=generalized_aerodynamics_wb+aerodynamics_wrench_single;% total aerodynamics wrench
             
             end
           
@@ -149,7 +158,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = [4 1]; % jet intensities vector dim
             out6 = [6 1]; % wrench left foot vector dim
             out7 = [6 1]; % wrench right foot vector dim
-            out8 = [29 1]; % aerodynamics generalized wrench dim
+            out8 = [3 1]; % aerodynamics generalized wrench dim
         end
 
         function [out, out2, out3, out4, out5, out6, out7, out8] = getOutputDataTypeImpl(~)
