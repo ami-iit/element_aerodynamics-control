@@ -1,11 +1,15 @@
-classdef Aerodynamics_force < handle
-    % the class Af (aerodynamics forces) handles the computation of
-    %  aerodynamics forces 
+classdef Aerodynamics_force_link < handle
+    % the class Aaerodynamics_forces handles the computation of
+    %  aerodynamics forces on one single link
     %rho:air density
     %gama : shape coefficient
     %Ka : Ka = rho*gama/2
     %C_D_link: drag coefficient
     %C_L_link:lift coefficient
+    %link list:  ['head'=1,
+    %,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1'=6,
+    %'l_elbow_1'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
+    %'l_lower_leg'=11,'r_foot'=12,'l_foot'=13]
     
     properties
         N_link;
@@ -20,13 +24,12 @@ classdef Aerodynamics_force < handle
         Ka (13,1) double; 
         C_D;
         C_L;
-        
-     %need contianer map in future to place all the robot links ,
-     
     end
+     
+    
     
     methods  
-        function obj=Aerodynamics_force(aerodynamics_config)
+        function obj=Aerodynamics_force_link(aerodynamics_config)
             %af Construct an instance of this class
             %   v_wind - the wind velocity vector expressed in inertial frame 
             %   rho - air density
@@ -42,12 +45,13 @@ classdef Aerodynamics_force < handle
         
         
             
-        % F_a=-Ka*|v_a|*((C_D()+C_L()cot(AoA))*v_a+C_L()/sin(AoA)*|v_a|*k) formula of computing aerodynamics forces on each link
+        % F_a=-Ka*|v_a|*((C_D()+C_L()cot(AoA))*v_a+C_L()/sin(AoA)*|v_a|*w_kaxis) formula of computing aerodynamics forces on each link
         
         function generalized_aerodynamics_wrench=compute_gener_af(obj,robot,aerodynamics_forces,frame)
             % calculate generalized aerodynamics forces acting on one
-            % single link
-            %generalized_aerodynamics_wrench = zeros(29, 1); % 29=23+6, n+ dof of floating base
+            % single link which transfers aerodynamics forces from COM of
+            % the link to the base frame of robot
+            %generalized_aerodynamics_wrench = zeros(6+NDOF, 1); % 29=23+6, n+ dof of floating base
             
             
             J=robot.get_frame_jacobian(frame); % jacobian of specific frame 
@@ -64,10 +68,10 @@ classdef Aerodynamics_force < handle
         
         function aerodynamics_forces=compute_af_link(obj,relative_velocity,w_kaxis_link,frame)
             
-            % calculate aerodynamics forces expressed as a vector in world frame since all the
-            % vectors are expressed in world frame
-            [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame);
-            AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);
+            % calculate aerodynamics forces (R^3) expressed as a vector in world frame since all the
+            % vectors in formula are expressed in world frame
+            [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame); % get coefficients of one single link
+            AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);% compute angle of attack for a specific link
             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
             % aerodynamics_forces \in R^3
             
@@ -89,7 +93,7 @@ classdef Aerodynamics_force < handle
             
             robot_velocity=[base_pose_dot;s_dot]; %29X1
             J=robot.get_frame_jacobian(frame);% 6X29
-            link_velocity=J*robot_velocity;% 6X1
+            link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
             relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
         end
@@ -100,7 +104,7 @@ classdef Aerodynamics_force < handle
            
            
         end
-        function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and k axis is defined as angle of attack
+        function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and -k axis is defined as angle of attack
             
             AoA=atan2(norm(cross(relative_velocity,w_kaxis_link)),dot(relative_velocity,w_kaxis_link));
             

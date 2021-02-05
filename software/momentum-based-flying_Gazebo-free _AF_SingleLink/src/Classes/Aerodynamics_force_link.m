@@ -104,7 +104,7 @@ classdef Aerodynamics_force_link < handle
            
            
         end
-        function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and k axis is defined as angle of attack
+        function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and -k axis is defined as angle of attack
             
             AoA=atan2(norm(cross(relative_velocity,w_kaxis_link)),dot(relative_velocity,w_kaxis_link));
             

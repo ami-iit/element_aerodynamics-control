@@ -37,7 +37,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
             obj.af_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;% set frame on 
-            obj.aerodynamics=Aerodynamics_force(obj.aerodynamics_config);% object of Af class with Af_config as input
+            obj.aerodynamics=Aerodynamics_force_link(obj.aerodynamics_config);% object of Af class with Af_config as input
             % instantiate 4 different jets - diffent coefficients
             for i = 1:4
                 obj.jets{i} = Jet(obj.jets_config.coefficients(i, :), obj.jets_config.init_thrust(i), obj.tStep);
@@ -47,7 +47,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 obj.robot_config.initialConditions.base_pose_dot, obj.robot_config.initialConditions.s_dot);
         end
 
-        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,aerodynamics_forces_wb] = stepImpl(obj, jets_input, torque)
+        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb] = stepImpl(obj, jets_input, torque)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             
@@ -56,7 +56,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % add the external wrenches acting on the robot (more than jets
             % forces and contact forces) aerodynamics forces
             
-            [generalized_aerodynamics_wb,aerodynamics_forces_wb]=obj.compute_aero_wholebody();
+            [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb]=obj.compute_aero_wholebody();
             
             
             %compute generalized aerodynamics wrench on whole body 
@@ -86,22 +86,27 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.robot.set_robot_state(w_H_b, s, base_pose_dot, s_dot) % inputs are accessed from State propertites
         end
         
-        function [generalized_aerodynamics_wb,aerodynamics_forces_wb]=compute_aero_wholebody(obj)
+        function [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb]=compute_aero_wholebody(obj)
             
             % for whole body aerodynamics forces, 10 links are considered
             generalized_aerodynamics_wb=zeros(29,1);
-            aerodynamics_forces_wb=zeros(3,1);
+            aerodynamics_forces_wb=zeros(3,obj.aerodynamics.N_link);
+            relative_velocity_wb=zeros(3,obj.aerodynamics.N_link);
+            AoA_wb=zeros(1,obj.aerodynamics.N_link);
             for i=1:obj.aerodynamics.N_link
-                relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));
+                relative_velocity_wb(1:3,i)=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));
                 w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.af_frame(i));
-                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity,w_kaxis_link,obj.af_frame(i));
-                aerodynamics_forces_wb=aerodynamics_forces_wb+aerodynamics_forces_single;
-                % total whole body aerodynamics forces
+                AoA_wb(i)=obj.aerodynamics.compute_AoA(w_kaxis_link,relative_velocity_wb(1:3,i));
+                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.af_frame(i));
+                aerodynamics_forces_wb(1:3,i)=aerodynamics_forces_single;
+                %  whole body aerodynamics forces distributed on different
+                %  links
                 
                 aerodynamics_wrench_single=obj.aerodynamics.compute_gener_af(obj.robot,aerodynamics_forces_single,obj.af_frame(i));
                 %generalized aerodynamics wrench for one single link
                 
                 generalized_aerodynamics_wb=generalized_aerodynamics_wb+aerodynamics_wrench_single;% total aerodynamics wrench
+                
             
             end
           
@@ -153,7 +158,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
 
         end
 
-        function [out, out2, out3, out4, out5, out6, out7,out8] = getOutputSizeImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = getOutputSizeImpl(~)
             % Return size for each output port
             out = [4 4]; % homogeneous matrix dim
             out2 = [23 1]; % joints position vector dim
@@ -162,10 +167,12 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out5 = [4 1]; % jet intensities vector dim
             out6 = [6 1]; % wrench left foot vector dim
             out7 = [6 1]; % wrench right foot vector dim
-            out8 = [3 1]; % aerodynamics generalized wrench dim
+            out8 = [3 13];% aerodynamics forces vector dim
+            out9 = [3 13];% relative velocity vector dim
+            out10 = [1 13];% AoA dim
         end
 
-        function [out, out2, out3, out4, out5, out6, out7, out8] = getOutputDataTypeImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = getOutputDataTypeImpl(~)
             % Return data type for each output port
             out = "double";
             out2 = "double";
@@ -175,9 +182,11 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out6 = "double";
             out7 = "double";
             out8 = "double";
+            out9 = "double";
+            out10 = "double";
         end
 
-        function [out, out2, out3, out4, out5, out6, out7, out8] = isOutputComplexImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = isOutputComplexImpl(~)
             % Return true for each output port with complex data
             out = false;
             out2 = false;
@@ -187,9 +196,11 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out6 = false;
             out7 = false;
             out8 = false;
+            out9 = false;
+            out10 = false;
         end
 
-        function [out, out2, out3, out4, out5, out6, out7, out8] = isOutputFixedSizeImpl(~)
+        function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = isOutputFixedSizeImpl(~)
             % Return true for each output port with fixed size
             out = true;
             out2 = true;
@@ -199,8 +210,11 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out6 = true;
             out7 = true;
             out8 = true;
+            out9 = true;
+            out10 = true;
         end
 
     end
+
 
 end
