@@ -70,8 +70,12 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % update the state of the robot under contact with the ground
             
             
-            [generalized_total_wrench, wrench_left_foot, wrench_right_foot, base_pose_dot, s_dot] = ...
-                obj.contacts.compute_contact(obj.robot, torque, generalized_total_wrench, obj.state.base_pose_dot, obj.state.s_dot);
+%             [generalized_total_wrench, wrench_left_foot, wrench_right_foot, base_pose_dot, s_dot] = ...
+%                 obj.contacts.compute_contact(obj.robot, torque, generalized_total_wrench, obj.state.base_pose_dot, obj.state.s_dot);
+            wrench_left_foot = zeros(6,1);
+            wrench_right_foot = zeros(6,1);
+            base_pose_dot = obj.state.base_pose_dot;
+            s_dot = obj.state.s_dot;
             % sets the velocity in the state
             obj.state.set_velocity(base_pose_dot, s_dot);
             % compute the robot acceleration

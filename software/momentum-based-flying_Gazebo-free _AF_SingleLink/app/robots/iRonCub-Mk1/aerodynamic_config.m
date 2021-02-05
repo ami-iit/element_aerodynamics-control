@@ -6,7 +6,10 @@
 aerodynamics_config.v_wind=[10;10;10];%m/s  wind velocity
 aerodynamics_config.rho=1.225; % kg/m^3 ,air density at 101.325kPa and 15 degree
 aerodynamics_config.NOL=13; %number of links considered to be added aerodynamics forces
-% ['head','chest','root_link','r_upper_arm','l_upper_arm','r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot']
+% ['head'=1
+%,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1'=6,
+%'l_elbow_1'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
+%'l_lower_leg'=11,'r_foot'=12,'l_foot'=13]
 aerodynamics_config.gama=zeros(aerodynamics_config.NOL,1);
 % section area is defined as Base X Height which are the parameters of a
 % cylinder that is ablt to cover the link geometry

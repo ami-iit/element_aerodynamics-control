@@ -13,7 +13,10 @@ classdef State < handle
 
     properties
         w_H_b (4, 4) double;
-        s (23,1) double;
+        s (23,1) double;% set size of s and sdot , because the initial value 
+        %is zero and the initial size cannot be defined which causes error
+        %in computing relative velocity in Aerodynamics_forces class. but
+        %the size depends on NDOF , it could 23 or 25 
         base_pose_dot (6, 1) double;
         s_dot (23,1) double;
         dt double;
