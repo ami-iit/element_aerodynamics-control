@@ -22,7 +22,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         jetFrameList = {'chest_l_jet_turbine', 'chest_r_jet_turbine', 'l_arm_jet_turbine', 'r_arm_jet_turbine'};
         X, Y, Z; % coordinate for the jet cones
         jets;
-        aerodynamics_forces;
+        X0,Y0,Z0;
+        XA,YA,ZA;
         aerodynamics_force_vector;
         
     end
@@ -38,7 +39,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 if obj.config.visualizeJets
                     obj.prepareJets();
                 end
-
+             obj.prepareAerodynamics_forces();
             end
            
         end
@@ -48,12 +49,12 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             icon = ["Robot", "Visualizer"];
         end
 
-        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces,AoA,relative_velocity,v_wind)
+        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces,v_wind)
 
             %          plot wind velocity vector with beginning point at world frame origin
 %             obj.prepareWind_Velocity(v_wind);
             
-            obj.set_aerodynamics_forces(aerodynamics_forces);
+            
             if obj.config.visualizeRobot
                 iDynTreeWrappers.setRobotState(obj.KinDynModel, world_H_base, joints_positions, base_velocity, joints_velocity, obj.g);
                 iDynTreeWrappers.updateVisualization(obj.KinDynModel, obj.visualizer);
@@ -63,7 +64,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                     obj.updateJets(jetIntensities);
                 end
            
-            obj.prepareAerodynamics_forces();
+            obj.updateAerodynamics_forces(aerodynamics_forces);
 
             end
             
@@ -74,9 +75,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             
         end
         
-        function set_aerodynamics_forces(obj,fa)
-            obj.aerodynamics_forces=fa;
-        end
+        
         
             
         function prepareRobot(obj)
@@ -148,17 +147,33 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
         end
         
-        function prepareAerodynamics_forces(obj)
-              H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
-              X0=H(1,4);
-              Y0=H(2,4);
-              Z0=H(3,4);
+        function updateAerodynamics_forces(obj,aerodynamics_forces)
+             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
+              X0_update=H(1,4);
+              Y0_update=H(2,4);
+              Z0_update=H(3,4);
+              XA_update=aerodynamics_forces(1);
+              YA_update=aerodynamics_forces(2);
+              ZA_update=aerodynamics_forces(3);
               
-              obj.aerodynamics_force_vector=quiver3(X0,Y0,Z0,obj.aerodynamics_forces(1),obj.aerodynamics_forces(2),obj.aerodynamics_forces(3),0.5);
+              set(obj.aerodynamics_force_vector,'XData',X0_update,'YData',Y0_update,'ZData',...
+                  Z0_update,'UData',XA_update,'VData',YA_update,'WData',ZA_update,0.5);
+              
+        end
+        
+        function prepareAerodynamics_forces(obj)
+              ini_aero_forces_wb=zeros(3,1);
+            H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
+              obj.X0=H(1,4);
+              obj.Y0=H(2,4);
+              obj.Z0=H(3,4);
+              obj.XA=ini_aero_forces_wb(1);
+              obj.YA=ini_aero_forces_wb(2);
+              obj.ZA=ini_aero_forces_wb(3);
+              
+              obj.aerodynamics_force_vector=quiver3(obj.X0,obj.Y0,obj.Z0,obj.XA,obj.YA,obj.ZA,0.5);
               obj.aerodynamics_force_vector.LineWidth=2;
               obj.aerodynamics_force_vector.ShowArrowHead='on';
-              pause(0.00001);
-             delete(obj.aerodynamics_force_vector);
              
         end
         

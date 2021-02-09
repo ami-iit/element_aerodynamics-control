@@ -4,9 +4,11 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
     %@author: Giuseppe L'Erario
 
+    
+    
     properties (Nontunable)
         config
-        
+       
         
     end
 
@@ -24,14 +26,17 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         jets;
         linkFrame= {'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'};
-        aerodynamics_forces_wb (3,13) double;
-        aerodynamics_force_vector_1  ;
-        aerodynamics_force_vector_2;
+        
+        aerodynamics_force_vector  ;
+       
+        X0,Y0,Z0;
+        XA,YA,ZA;
     end
 
     methods (Access = protected)
 
         function setupImpl(obj)
+            
 
             if obj.config.visualizeRobot
                 % Perform one-time calculations, such as computing constants
@@ -40,7 +45,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 if obj.config.visualizeJets
                     obj.prepareJets();
                 end
-
+             obj.prepareAerodynamics_forces();
             end
            
         end
@@ -50,12 +55,12 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             icon = ["Robot", "Visualizer"];
         end
 
-        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces_wb,AoA,relative_velocity,v_wind)
+        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces_wb,v_wind)
 
             %          plot wind velocity vector with beginning point at world frame origin
 %             obj.prepareWind_Velocity(v_wind);
-            
-            obj.set_aerodynamics_forces(aerodynamics_forces_wb);
+%             obj.prepareWind_Velocity(v_wind);
+           
             if obj.config.visualizeRobot
                 iDynTreeWrappers.setRobotState(obj.KinDynModel, world_H_base, joints_positions, base_velocity, joints_velocity, obj.g);
                 iDynTreeWrappers.updateVisualization(obj.KinDynModel, obj.visualizer);
@@ -65,8 +70,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                     obj.updateJets(jetIntensities);
                 end
            
-            obj.prepareAerodynamics_forces();
-
+            obj.updateAerodynamics_forces(aerodynamics_forces_wb);
+            
             end
             
  
@@ -76,10 +81,9 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             
         end
         
-        function set_aerodynamics_forces(obj,fa_wb)
-            obj.aerodynamics_forces_wb=zeros(3,length(obj.linkFrame));
-            obj.aerodynamics_forces_wb=fa_wb;
-        end
+       
+            
+        
         
             
         function prepareRobot(obj)
@@ -151,51 +155,49 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
         end
         
+        
+        function updateAerodynamics_forces(obj,aerodynamics_forces_wb)
+            
+            for ii=1:length(obj.linkFrame)
+                
+                H_update = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{ii});
+                
+              X0_update{ii}=H_update(1,4);
+              Y0_update{ii}=H_update(2,4);
+              Z0_update{ii}=H_update(3,4);
+              XA_update{ii}=aerodynamics_forces_wb(1,ii);
+              YA_update{ii}=aerodynamics_forces_wb(2,ii);
+              ZA_update{ii}=aerodynamics_forces_wb(3,ii);
+                
+                %'XData',X0_update{ii},'YData',Y0_update{ii},'ZData',Z0_update{ii},
+            set(obj.aerodynamics_force_vector{ii},'XData',X0_update{ii},'YData',Y0_update{ii},'ZData',Z0_update{ii},'UData',XA_update{ii},...
+                'VData',YA_update{ii},'WData',ZA_update{ii});
+            end
+        end
+        
         function prepareAerodynamics_forces(obj)
-%             obj.aerodynamics_force_vector=zeros(1,length(obj.linkFrame));
-%             for i=1:length(obj.linkFrame)
-%               H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{i});
-%               X0{i}=H(1,4);
-%               Y0{i}=H(2,4);
-%               Z0{i}=H(3,4);
-%               XA{i}=obj.aerodynamics_forces_wb(1,i);
-%               YA{i}=obj.aerodynamics_forces_wb(2,i);
-%               ZA{i}=obj.aerodynamics_forces_wb(3,i);
-%               
-%               obj.aerodynamics_force_vector{i}=quiver3(X0{i},Y0{i},Z0{i},XA{i},YA{i},ZA{i},0.05);
-%               obj.aerodynamics_force_vector{i}.LineWidth=2;
-%               obj.aerodynamics_force_vector{i}.ShowArrowHead='on';
-%               
-%               
-%             end
-%%head
-            H_1= iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{1});
-            X0_1=H_1(1,4);
-            Y0_1=H_1(2,4);
-            Z0_1=H_1(3,4);
-              XA_1=obj.aerodynamics_forces_wb(1,1)+X0_1;
-              YA_1=obj.aerodynamics_forces_wb(2,1)+Y0_1;
-              ZA_1=obj.aerodynamics_forces_wb(3,1)+Z0_1;
-            obj.aerodynamics_force_vector_1=quiver3(X0_1,Y0_1,Z0_1,XA_1,YA_1,ZA_1);
-              obj.aerodynamics_force_vector_1.LineWidth=2;
-              obj.aerodynamics_force_vector_1.ShowArrowHead='on'; 
+            
+            ini_aero_forces_wb=zeros(3,13);
+            
+            
+            
+            for i=1:length(obj.linkFrame)
+               
+              H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{i});
+              obj.X0{i}=H(1,4);
+              obj.Y0{i}=H(2,4);
+              obj.Z0{i}=H(3,4);
+              obj.XA{i}=ini_aero_forces_wb(1,i);
+              obj.YA{i}=ini_aero_forces_wb(2,i);
+              obj.ZA{i}=ini_aero_forces_wb(3,i);
               
-              %%chest
-              H_2= iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{2});
-            X0_2=H_2(1,4);
-            Y0_2=H_2(2,4);
-            Z0_2=H_2(3,4);
-              XA_2=obj.aerodynamics_forces_wb(1,2)+X0_2;
-              YA_2=obj.aerodynamics_forces_wb(2,2)+Y0_2;
-              ZA_2=obj.aerodynamics_forces_wb(3,2)+Z0_2;
-            obj.aerodynamics_force_vector_2=quiver3(X0_2,Y0_2,Z0_2,XA_2,YA_2,ZA_2);
-              obj.aerodynamics_force_vector_2.LineWidth=2;
-              obj.aerodynamics_force_vector_2.ShowArrowHead='on'; 
+              obj.aerodynamics_force_vector{i}=quiver3(obj.X0{i},obj.Y0{i},obj.Z0{i},obj.XA{i},obj.YA{i},obj.ZA{i},'AutoScaleFactor',0.08);
+              obj.aerodynamics_force_vector{i}.LineWidth=2;
+              obj.aerodynamics_force_vector{i}.ShowArrowHead='on';
               
-              pause(0.00001);
               
-             delete(obj.aerodynamics_force_vector_1);
-             delete(obj.aerodynamics_force_vector_2);
+            end
+
               
              
         end

@@ -6,6 +6,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
     properties (Nontunable)
         config
+        
+        
     end
 
     properties (DiscreteState)
@@ -20,6 +22,10 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         jetFrameList = {'chest_l_jet_turbine', 'chest_r_jet_turbine', 'l_arm_jet_turbine', 'r_arm_jet_turbine'};
         X, Y, Z; % coordinate for the jet cones
         jets;
+        X0,Y0,Z0;
+        XA,YA,ZA;
+        aerodynamics_force_vector;
+        
     end
 
     methods (Access = protected)
@@ -28,14 +34,14 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
             if obj.config.visualizeRobot
                 % Perform one-time calculations, such as computing constants
-                obj.prepareRobot()
+                obj.prepareRobot()  % get obj.visualizer
 
                 if obj.config.visualizeJets
                     obj.prepareJets();
                 end
-
+             obj.prepareAerodynamics_forces();
             end
-
+           
         end
 
         function icon = getIconImpl(~)
@@ -43,8 +49,12 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             icon = ["Robot", "Visualizer"];
         end
 
-        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities)
+        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces,v_wind)
 
+            %          plot wind velocity vector with beginning point at world frame origin
+%             obj.prepareWind_Velocity(v_wind);
+            
+            
             if obj.config.visualizeRobot
                 iDynTreeWrappers.setRobotState(obj.KinDynModel, world_H_base, joints_positions, base_velocity, joints_velocity, obj.g);
                 iDynTreeWrappers.updateVisualization(obj.KinDynModel, obj.visualizer);
@@ -53,11 +63,21 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 if obj.config.visualizeJets
                     obj.updateJets(jetIntensities);
                 end
+           
+            obj.updateAerodynamics_forces(aerodynamics_forces);
 
             end
-
+            
+ 
+            
+           
+            
+            
         end
-
+        
+        
+        
+            
         function prepareRobot(obj)
             % Main variable of iDyntreeWrappers used for many things including updating
             % robot position and getting world to frame transforms
@@ -82,6 +102,11 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             width = 1300;
             height = 1300;
             set(gcf, 'position', [x0, y0, width, height]);
+            
+            
+            
+
+            
             %             set(gcf,'doublebuffer','off');
         end
 
@@ -121,7 +146,55 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             end
 
         end
-
+        
+        function updateAerodynamics_forces(obj,aerodynamics_forces)
+             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
+              X0_update=H(1,4);
+              Y0_update=H(2,4);
+              Z0_update=H(3,4);
+              XA_update=aerodynamics_forces(1);
+              YA_update=aerodynamics_forces(2);
+              ZA_update=aerodynamics_forces(3);
+              
+              set(obj.aerodynamics_force_vector,'XData',X0_update,'YData',Y0_update,'ZData',...
+                  Z0_update,'UData',XA_update,'VData',YA_update,'WData',ZA_update);
+              
+        end
+        
+        function prepareAerodynamics_forces(obj)
+              ini_aero_forces_wb=zeros(3,1);
+            H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
+              obj.X0=H(1,4);
+              obj.Y0=H(2,4);
+              obj.Z0=H(3,4);
+              obj.XA=ini_aero_forces_wb(1);
+              obj.YA=ini_aero_forces_wb(2);
+              obj.ZA=ini_aero_forces_wb(3);
+              
+              obj.aerodynamics_force_vector=quiver3(obj.X0,obj.Y0,obj.Z0,obj.XA,obj.YA,obj.ZA,0.5);
+              obj.aerodynamics_force_vector.LineWidth=2;
+              obj.aerodynamics_force_vector.ShowArrowHead='on';
+             
+        end
+        
+        function prepareWind_Velocity(obj,v_wind)
+%             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'base_link');
+%             X_0=H(1,4);
+%             Y_0=H(2,4)+0.5;
+%             Z_0=H(3,4);
+            X_0=0;
+            Y_0=0.5;
+            Z_0=0.5;
+            q1=quiver3(X_0:X_0+0.2,Y_0:Y_0+0.2,Z_0:Z_0+0.2,v_wind(1)+X_0:v_wind+X_0+0.2,v_wind(2)+Y_0:v_wind(2)+Y_0+0.2,v_wind(3)+Z_0:v_wind(3)+Z_0+0.2,'AutoScaleFactor',0.05,'Color','r','LineWidth',4,'ShowArrowHead','on');
+%             q2=quiver3(X_0,Y_0,Z_0-0.05,v_wind(1)+X_0,v_wind(2)+Y_0,v_wind(3)+Z_0-0.05,'AutoScaleFactor',0.05,'Color','r','LineWidth',4,'ShowArrowHead','on');
+%             q3=quiver3(X_0,Y_0,Z_0-0.1,v_wind(1)+X_0,v_wind(2)+Y_0,v_wind(3)+Z_0-0.1,'AutoScaleFactor',0.05,'Color','r','LineWidth',4,'ShowArrowHead','on');
+            
+%             pause(0.00001);
+%              delete(q1);
+%              delete(q2);
+%              delete(q3);
+        end
+        
     end
 
 end
