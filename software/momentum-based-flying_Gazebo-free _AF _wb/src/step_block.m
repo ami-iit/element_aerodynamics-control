@@ -92,11 +92,18 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             generalized_aerodynamics_wb=zeros(29,1);
             aerodynamics_forces_wb=zeros(3,obj.aerodynamics.N_link);
             relative_velocity_wb=zeros(3,obj.aerodynamics.N_link);
+            
             AoA_wb=zeros(1,obj.aerodynamics.N_link);
+            
+            
             for i=1:obj.aerodynamics.N_link
                 relative_velocity_wb(1:3,i)=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));
+                
+%                 ini_relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,zeros(6,1),zeros(23,1),obj.af_frame(i));
                 w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.af_frame(i));
                 AoA_wb(i)=obj.aerodynamics.compute_AoA(w_kaxis_link,relative_velocity_wb(1:3,i));
+                
+%                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.af_frame(i));
                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.af_frame(i));
                 aerodynamics_forces_wb(1:3,i)=aerodynamics_forces_single;
                 %  whole body aerodynamics forces distributed on different
@@ -107,6 +114,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 
                 generalized_aerodynamics_wb=generalized_aerodynamics_wb+aerodynamics_wrench_single;% total aerodynamics wrench
                 
+               
             
             end
           
@@ -170,6 +178,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out8 = [3 13];% aerodynamics forces vector dim
             out9 = [3 13];% relative velocity vector dim
             out10 = [1 13];% AoA dim
+           
         end
 
         function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = getOutputDataTypeImpl(~)
@@ -184,6 +193,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out8 = "double";
             out9 = "double";
             out10 = "double";
+           
         end
 
         function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = isOutputComplexImpl(~)
@@ -198,6 +208,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out8 = false;
             out9 = false;
             out10 = false;
+           
         end
 
         function [out, out2, out3, out4, out5, out6, out7,out8,out9,out10] = isOutputFixedSizeImpl(~)
@@ -212,6 +223,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             out8 = true;
             out9 = true;
             out10 = true;
+            
         end
 
     end

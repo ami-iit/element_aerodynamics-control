@@ -17,7 +17,7 @@ classdef Aerodynamics_force_link < handle
     
     properties (Access = private)
         
-        v_wind; % R^3
+        v_wind (3,1) double; % R^3
         
         rho;%R
         gama (13,1) double;
@@ -110,7 +110,7 @@ classdef Aerodynamics_force_link < handle
             
         end
             
-        
+       
         
         
         

@@ -39,7 +39,10 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 if obj.config.visualizeJets
                     obj.prepareJets();
                 end
-             obj.prepareAerodynamics_forces();
+                
+                if obj.config.aerodynamics_forces
+                   obj.prepareAerodynamics_forces();
+                end
             end
            
         end
@@ -63,8 +66,10 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 if obj.config.visualizeJets
                     obj.updateJets(jetIntensities);
                 end
-           
-            obj.updateAerodynamics_forces(aerodynamics_forces);
+                
+                if obj.config.aerodynamics_forces
+                    obj.updateAerodynamics_forces(aerodynamics_forces);
+                end
 
             end
             
@@ -149,9 +154,13 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         
         function updateAerodynamics_forces(obj,aerodynamics_forces)
              H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
-              X0_update=H(1,4);
-              Y0_update=H(2,4);
-              Z0_update=H(3,4);
+%               X0_update=H(1,4);
+%               Y0_update=H(2,4);
+%               Z0_update=H(3,4);
+              
+              X0_update=0;
+              Y0_update=0;
+              Z0_update=0;
               XA_update=aerodynamics_forces(1);
               YA_update=aerodynamics_forces(2);
               ZA_update=aerodynamics_forces(3);
@@ -164,14 +173,17 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         function prepareAerodynamics_forces(obj)
               ini_aero_forces_wb=zeros(3,1);
             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
-              obj.X0=H(1,4);
-              obj.Y0=H(2,4);
-              obj.Z0=H(3,4);
+%               obj.X0=H(1,4);
+%               obj.Y0=H(2,4);
+%               obj.Z0=H(3,4);
+              obj.X0=0;
+              obj.Y0=0;
+              obj.Z0=0;
               obj.XA=ini_aero_forces_wb(1);
               obj.YA=ini_aero_forces_wb(2);
               obj.ZA=ini_aero_forces_wb(3);
               
-              obj.aerodynamics_force_vector=quiver3(obj.X0,obj.Y0,obj.Z0,obj.XA,obj.YA,obj.ZA,0.5);
+              obj.aerodynamics_force_vector=quiver3(obj.X0,obj.Y0,obj.Z0,obj.XA,obj.YA,obj.ZA,2);
               obj.aerodynamics_force_vector.LineWidth=2;
               obj.aerodynamics_force_vector.ShowArrowHead='on';
              
