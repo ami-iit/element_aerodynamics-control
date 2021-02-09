@@ -11,7 +11,8 @@ aerodynamics_config.gama=zeros(aerodynamics_config.NOL,1);
 % section area is defined as Base X Height which are the parameters of a
 % cylinder that is ablt to cover the link geometry
 aerodynamics_config.gama(1)=0.22589*0.18996; % head  base X height   m^2
-aerodynamics_config.gama(2)=0.23076*0.18693; % chest
+%aerodynamics_config.gama(2)=0.23076*0.18693; % chest
+aerodynamics_config.gama(2)=0.46822*0.32683; % chest+turbine
 aerodynamics_config.gama(3)=0.23050*0.21007; % root_link
 aerodynamics_config.gama(4)=0.10440*0.130; % r_upper_arm
 aerodynamics_config.gama(5)=0.10440*0.130; %l_upper_arm
