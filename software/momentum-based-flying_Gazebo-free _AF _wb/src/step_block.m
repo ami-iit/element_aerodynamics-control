@@ -21,7 +21,10 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         aerodynamics; % object for caculating aerodynamics forces
         jets;
         jets_frame containers.Map;
-        af_frame containers.Map; % the frame we consider to add aerodynamics forces on, up to now only 'chest' 
+        
+        link_frame containers.Map; % the frame we consider to add aerodynamics forces on, up to now only 'chest' 
+        axis_frame containers.Map;
+        
         generalized_external_wrenches;% external wrenches (more than jets forces and contact forces), aerodynamics forces in this case
         
     end
@@ -35,8 +38,12 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             
             % using a conteiner map to access with a index to the relative jet frame
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
-            obj.af_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
+            obj.link_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;% set frame on 
+            obj.axis_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
+                'r_arm_jet_turbine','l_arm_jet_turbine','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;%frames for getting symmetric axis
+            
+            
             obj.aerodynamics=Aerodynamics_force_link(obj.aerodynamics_config);% object of Af class with Af_config as input
             % instantiate 4 different jets - diffent coefficients
             for i = 1:4
@@ -97,19 +104,19 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             
             
             for i=1:obj.aerodynamics.N_link
-                relative_velocity_wb(1:3,i)=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.af_frame(i));
+                relative_velocity_wb(1:3,i)=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.link_frame(i));
                 
-%                 ini_relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,zeros(6,1),zeros(23,1),obj.af_frame(i));
-                w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.af_frame(i));
+                ini_relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,zeros(6,1),zeros(23,1),obj.link_frame(i));
+                w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.axis_frame(i));
                 AoA_wb(i)=obj.aerodynamics.compute_AoA(w_kaxis_link,relative_velocity_wb(1:3,i));
                 
 %                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.af_frame(i));
-                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.af_frame(i));
+                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.link_frame(i));
                 aerodynamics_forces_wb(1:3,i)=aerodynamics_forces_single;
                 %  whole body aerodynamics forces distributed on different
                 %  links
                 
-                aerodynamics_wrench_single=obj.aerodynamics.compute_gener_af(obj.robot,aerodynamics_forces_single,obj.af_frame(i));
+                aerodynamics_wrench_single=obj.aerodynamics.compute_gener_af(obj.robot,aerodynamics_forces_single,obj.link_frame(i));
                 %generalized aerodynamics wrench for one single link
                 
                 generalized_aerodynamics_wb=generalized_aerodynamics_wb+aerodynamics_wrench_single;% total aerodynamics wrench

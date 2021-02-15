@@ -53,7 +53,7 @@ classdef Aerodynamics_force_link < handle
             % the link to the base frame of robot
             %generalized_aerodynamics_wrench = zeros(6+NDOF, 1); % 29=23+6, n+ dof of floating base
             
-            
+            %here the frame is real link frame
             J=robot.get_frame_jacobian(frame); % jacobian of specific frame 
             
             %aerodynamics_wrench=[aerodynamics_forces;zeros(3,1)]; % aerodynamics torque effects are neglected 
@@ -70,6 +70,8 @@ classdef Aerodynamics_force_link < handle
             
             % calculate aerodynamics forces (R^3) expressed as a vector in world frame since all the
             % vectors in formula are expressed in world frame
+            
+            %here the frame is real link frame
             [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame); % get coefficients of one single link
             AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);% compute angle of attack for a specific link
             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
@@ -79,6 +81,7 @@ classdef Aerodynamics_force_link < handle
         end
         
         function [Ka_link,C_D_link,C_L_link]=get_coeff(obj,frame) % get force coefficients and shape coefficient for one link
+            %here the frame is real link frame
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             Ka_link=obj.Ka(frame_number(frame));
@@ -91,19 +94,51 @@ classdef Aerodynamics_force_link < handle
             %velocity of link frame origin w.r.t inertial frame and the
             %wind velocity expressed in the inertial frame
             
+            %here the frame is real link frame
             robot_velocity=[base_pose_dot;s_dot]; %29X1
             J=robot.get_frame_jacobian(frame);% 6X29
             link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
             relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
         end
-        function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of link frame expressed in inertial orientation
-            w_H_link=robot.get_frame_H(frame); % 4X4
+        function w_kaxis_link=compute_kaxis(obj,robot,axis_frame)  % unit vector of link frame expressed in inertial orientation
+%             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
+%                 'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             
-            w_kaxis_link=w_H_link(1:3,3);
+% r_arm_jet_turbine and l_arm_jet_turbine frames are used because it is
+% more reasonable to consider the symmetric axis of arm turbine as the z
+% axis of these two frames than using the real frames `r_elbow_1` and
+% 'l_elbow_1`
+
+            frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
+                'r_arm_jet_turbine','l_arm_jet_turbine','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
+            
+            w_H_link=robot.get_frame_H(axis_frame); % 4X4
+            symmetric_axis=obj.set_symmetric_axis();
+            w_kaxis_link=w_H_link(1:3,1:3)*symmetric_axis(1:3,frame_number(axis_frame));
            
            
         end
+        
+        function symmetric_axis=set_symmetric_axis(obj)
+            symmetric_axis=zeros(3,obj.N_link);
+            symmetric_axis(1:3,1)=-[0;1;0]; %head
+            symmetric_axis(1:3,2)=-[0;1;0];%chest
+            symmetric_axis(1:3,3)=-[0;0;1];%root link
+            symmetric_axis(1:3,4)=[0;0;1];%r_upper_arm
+            symmetric_axis(1:3,5)=[0;0;1];%l_upper_room
+%             symmetric_axis(1:3,6)=-[1;0;0];%r_elbow_1
+%             symmetric_axis(1:3,7)=[1;0;0];%l_elbow_1
+            symmetric_axis(1:3,6)=[0;0;1];%r_arm_jet_turbine
+            symmetric_axis(1:3,7)=[0;0;1];%l_arm_jet_turbine
+            symmetric_axis(1:3,8)=-[0;0;1];%r_upper_leg
+            symmetric_axis(1:3,9)=-[0;0;1];%l_upper_leg
+            symmetric_axis(1:3,10)=-[0;0;1];%r_lower_leg
+            symmetric_axis(1:3,11)=-[0;0;1];%l_lower_leg
+            symmetric_axis(1:3,12)=[0;0;1];%r_foot
+            symmetric_axis(1:3,13)=[0;0;1];%l_foot
+        end
+        
         function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and -k axis is defined as angle of attack
             
             AoA=atan2(norm(cross(relative_velocity,w_kaxis_link)),dot(relative_velocity,w_kaxis_link));

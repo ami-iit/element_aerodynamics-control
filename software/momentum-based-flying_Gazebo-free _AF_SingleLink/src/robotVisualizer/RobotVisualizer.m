@@ -6,7 +6,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
     properties (Nontunable)
         config
-        
+       
         
     end
 
@@ -25,7 +25,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         X0,Y0,Z0;
         XA,YA,ZA;
         aerodynamics_force_vector;
-        
+        link_frame='r_elbow_1';
     end
 
     methods (Access = protected)
@@ -153,7 +153,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         end
         
         function updateAerodynamics_forces(obj,aerodynamics_forces)
-             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
+             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.link_frame);
 %               X0_update=H(1,4);
 %               Y0_update=H(2,4);
 %               Z0_update=H(3,4);
@@ -172,7 +172,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         
         function prepareAerodynamics_forces(obj)
               ini_aero_forces_wb=zeros(3,1);
-            H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest');
+            H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.link_frame);
 %               obj.X0=H(1,4);
 %               obj.Y0=H(2,4);
 %               obj.Z0=H(3,4);

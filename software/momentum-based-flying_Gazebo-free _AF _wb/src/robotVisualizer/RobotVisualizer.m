@@ -51,6 +51,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 end
             end
            
+           
+            
         end
 
         function icon = getIconImpl(~)
