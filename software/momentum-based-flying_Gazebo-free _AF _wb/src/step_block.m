@@ -110,7 +110,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.axis_frame(i));
                 AoA_wb(i)=obj.aerodynamics.compute_AoA(w_kaxis_link,relative_velocity_wb(1:3,i));
                 
-                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.af_frame(i));
+                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.link_frame(i));
 %                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.link_frame(i));
                 aerodynamics_forces_wb(1:3,i)=aerodynamics_forces_single;
                 %  whole body aerodynamics forces distributed on different
