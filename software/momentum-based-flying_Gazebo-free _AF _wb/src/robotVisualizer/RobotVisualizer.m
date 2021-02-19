@@ -25,7 +25,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         X, Y, Z; % coordinate for the jet cones
         jets;
         linkFrame= {'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'};
+                'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'};
         
         aerodynamics_force_vector  ;
        
@@ -62,9 +62,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 
         function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces_wb,v_wind)
 
-            %          plot wind velocity vector with beginning point at world frame origin
-%             obj.prepareWind_Velocity(v_wind);
-%             obj.prepareWind_Velocity(v_wind);
+
            
             if obj.config.visualizeRobot
                 iDynTreeWrappers.setRobotState(obj.KinDynModel, world_H_base, joints_positions, base_velocity, joints_velocity, obj.g);
@@ -208,7 +206,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
               obj.YA{i}=ini_aero_forces_wb(2,i);
               obj.ZA{i}=ini_aero_forces_wb(3,i);
               
-              obj.aerodynamics_force_vector{i}=quiver3(obj.X0{i},obj.Y0{i},obj.Z0{i},obj.XA{i},obj.YA{i},obj.ZA{i},'AutoScaleFactor',2);
+              obj.aerodynamics_force_vector{i}=quiver3(obj.X0{i},obj.Y0{i},obj.Z0{i},obj.XA{i},obj.YA{i},obj.ZA{i},'AutoScaleFactor',50);
               obj.aerodynamics_force_vector{i}.LineWidth=2;
               obj.aerodynamics_force_vector{i}.ShowArrowHead='on';
               

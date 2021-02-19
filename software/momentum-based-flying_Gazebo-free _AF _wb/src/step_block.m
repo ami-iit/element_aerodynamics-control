@@ -39,9 +39,9 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % using a conteiner map to access with a index to the relative jet frame
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
             obj.link_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;% set frame on 
+                'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;% set frame on 
             obj.axis_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_arm_jet_turbine','l_arm_jet_turbine','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;%frames for getting symmetric axis
+                'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;%frames for getting symmetric axis
             
             
             obj.aerodynamics=Aerodynamics_force_link(obj.aerodynamics_config);% object of Af class with Af_config as input
@@ -110,8 +110,13 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.axis_frame(i));
                 AoA_wb(i)=obj.aerodynamics.compute_AoA(w_kaxis_link,relative_velocity_wb(1:3,i));
                 
+<<<<<<< HEAD
+%                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.link_frame(i)); 
+                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.link_frame(i));
+=======
                  aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.link_frame(i));
 %                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.link_frame(i));
+>>>>>>> 4d9e4d19ead2fad91f760c9a6319e099cda5be18
                 aerodynamics_forces_wb(1:3,i)=aerodynamics_forces_single;
                 %  whole body aerodynamics forces distributed on different
                 %  links

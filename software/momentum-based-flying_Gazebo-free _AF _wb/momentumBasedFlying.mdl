@@ -644,10 +644,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.5705521472392638]
-	  Offset		  [-799.61902224926575, -111.99156141304036]
-	  SceneRectInView	  [-799.61902224926575, -111.99156141304036, 1556.77734375, 727.76953125]
+	  Extents		  [1920.0, 1143.0]
+	  ZoomFactor		  [1.233317023598931]
+	  Offset		  [-799.61902224926575, -211.4913020136263]
+	  SceneRectInView	  [-799.61902224926575, -211.4913020136263, 1556.77734375, 926.76901245117188]
 	}
 	Object {
 	  $ObjectID		  14
@@ -677,10 +677,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2431"
-	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.5]
-	  Offset		  [-312.69321990311096, -19.724878020852543]
-	  SceneRectInView	  [-312.69321990311096, -19.724878020852543, 1630.0, 762.0]
+	  Extents		  [1920.0, 1143.0]
+	  ZoomFactor		  [1.1779141104294479]
+	  Offset		  [-312.69321990311084, -123.90456552085249]
+	  SceneRectInView	  [-312.69321990311084, -123.90456552085249, 1629.9999999999998, 970.35937499999989]
 	}
 	Object {
 	  $ObjectID		  17
@@ -809,10 +809,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
-	  Extents		  [2445.0, 1143.0]
+	  Extents		  [1920.0, 1143.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [-35.71446639431656, 531.85450026267858]
-	  SceneRectInView	  [-35.71446639431656, 531.85450026267858, 2445.0, 1143.0]
+	  Offset		  [-364.78125, 531.85450026267858]
+	  SceneRectInView	  [-364.78125, 531.85450026267858, 1920.0, 1143.0]
 	}
 	Object {
 	  $ObjectID		  29
@@ -1305,6 +1305,19 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  73
+	  Type			  "GLUE2:SpreadSheet"
+	  ID			  "ModelData"
+	  Visible		  [1]
+	  CreateCallback	  "DataView.createSpreadSheetComponent"
+	  UserData		  ""
+	  Floating		  [0]
+	  DockPosition		  "Bottom"
+	  Width			  [2511]
+	  Height		  [218]
+	  Minimized		  "On"
+	}
+	Object {
+	  $ObjectID		  74
 	  Type			  "Simulink:Editor:ReferencedFiles"
 	  ID			  "Referenced Files"
 	  Visible		  [0]
@@ -1317,7 +1330,7 @@ Model {
 	  Minimized		  "Unset"
 	}
 	Object {
-	  $ObjectID		  74
+	  $ObjectID		  75
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1329,19 +1342,6 @@ Model {
 	  Height		  [480]
 	  Minimized		  "On"
 	}
-	Object {
-	  $ObjectID		  75
-	  Type			  "GLUE2:SpreadSheet"
-	  ID			  "ModelData"
-	  Visible		  [1]
-	  CreateCallback	  "DataView.createSpreadSheetComponent"
-	  UserData		  ""
-	  Floating		  [0]
-	  DockPosition		  "Bottom"
-	  Width			  [2511]
-	  Height		  [218]
-	  Minimized		  "On"
-	}
 	PropName		"DockComponentsInfo"
       }
       WindowState	      "AAAA/wAAAAD9AAAAAwAAAAAAAAC9AAAB+PwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
@@ -1350,7 +1350,7 @@ Model {
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
       "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
       "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAABz8AAADb/AEAAAAB+wAAADYAR"
-      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAP///wAACbMAAAS0AAAAAQAAA"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAACbMAAAS0AAAAAQAAA"
       "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
       "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
       "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
@@ -1373,7 +1373,7 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Feb 09 16:07:39 2021"
+  LastModifiedDate	  "Fri Feb 19 10:55:14 2021"
   RTWModifiedTimeStamp	  534786589
   ModelVersionFormat	  "%<AutoIncrement:2.19>"
   SampleTimeColors	  off
@@ -2633,7 +2633,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "157"
+    ZoomFactor		    "123"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3166"
     SimulinkSubDomain	    "Simulink"
@@ -2760,6 +2760,12 @@ Model {
       ContentPreviewEnabled   off
       ConfigSource	      "Workspace"
       ConfigObject	      "'WBTConfigRobot'"
+      RobotName		      "'icubSim'"
+      UrdfFile		      "'model.urdf'"
+      ControlledJoints	      "{'l_elbow','l_shoulder_pitch','torso_roll'}"
+      ControlBoardsNames      "{'left_arm','right_arm','torso'}"
+      LocalName		      "'WBT'"
+      GravityVector	      "[0,0,-9.81]"
     }
     Block {
       BlockType		      Constant
@@ -30394,7 +30400,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"150"
+	ZoomFactor		"118"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
