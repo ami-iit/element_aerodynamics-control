@@ -22,8 +22,8 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         jets;
         jets_frame containers.Map;
         
-        link_frame containers.Map; % the frame we consider to add aerodynamics forces on, up to now only 'chest' 
-        axis_frame containers.Map;
+        link_frame containers.Map; % the frame we consider to add aerodynamics forces on
+        
         
         generalized_external_wrenches;% external wrenches (more than jets forces and contact forces), aerodynamics forces in this case
         
@@ -40,11 +40,10 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.jets_frame = containers.Map([1, 2, 3, 4], {'l_arm_jet_turbine', 'r_arm_jet_turbine', 'chest_l_jet_turbine', 'chest_r_jet_turbine'});
             obj.link_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;% set frame on 
-            obj.axis_frame = containers.Map([1,2,3,4,5,6,7,8,9,10,11,12,13],{'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}) ;%frames for getting symmetric axis
             
             
-            obj.aerodynamics=Aerodynamics_force_link(obj.aerodynamics_config);% object of Af class with Af_config as input
+            
+            obj.aerodynamics=Aerodynamics_force_link(obj.aerodynamics_config);% object of Aerodynamics_force_link class with aerodynamics_config as input
             % instantiate 4 different jets - diffent coefficients
             for i = 1:4
                 obj.jets{i} = Jet(obj.jets_config.coefficients(i, :), obj.jets_config.init_thrust(i), obj.tStep);
@@ -96,7 +95,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         function [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb]=compute_aero_wholebody(obj)
             
             % for whole body aerodynamics forces, 10 links are considered
-            generalized_aerodynamics_wb=zeros(29,1);
+            generalized_aerodynamics_wb=zeros(obj.robot.NDOF+6,1);
             aerodynamics_forces_wb=zeros(3,obj.aerodynamics.N_link);
             relative_velocity_wb=zeros(3,obj.aerodynamics.N_link);
             
@@ -106,17 +105,17 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             for i=1:obj.aerodynamics.N_link
                 relative_velocity_wb(1:3,i)=obj.aerodynamics.compute_relative_v(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,obj.link_frame(i));
                 
-                ini_relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,zeros(6,1),zeros(23,1),obj.link_frame(i));
-                w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.axis_frame(i));
+%                 ini_relative_velocity=obj.aerodynamics.compute_relative_v(obj.robot,zeros(6,1),zeros(23,1),obj.link_frame(i));
+                w_kaxis_link=obj.aerodynamics.compute_kaxis(obj.robot,obj.link_frame(i));
                 AoA_wb(i)=obj.aerodynamics.compute_AoA(w_kaxis_link,relative_velocity_wb(1:3,i));
                 
-<<<<<<< HEAD
+
 %                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.link_frame(i)); 
                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.link_frame(i));
-=======
-                 aerodynamics_forces_single=obj.aerodynamics.compute_af_link(ini_relative_velocity,w_kaxis_link,obj.link_frame(i));
-%                aerodynamics_forces_single=obj.aerodynamics.compute_af_link(relative_velocity_wb(1:3,i),w_kaxis_link,obj.link_frame(i));
->>>>>>> 4d9e4d19ead2fad91f760c9a6319e099cda5be18
+
+
+
+
                 aerodynamics_forces_wb(1:3,i)=aerodynamics_forces_single;
                 %  whole body aerodynamics forces distributed on different
                 %  links
@@ -135,7 +134,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         
         function [jet_intensities, generalized_jet_wrench] = compute_jet_intensities_and_generalized_jet_wrench(obj, u)
             % u is jet input
-            generalized_jet_wrench = zeros(29, 1); % 29=23+6, n+ dof of floating base
+            generalized_jet_wrench = zeros(obj.robot.NDOF+6, 1); %  n+ dof of floating base
             jet_intensities = zeros(4, 1);
             % compute for every jet the thrust and the generalized wrench contribution
             % using the relative frame (the container map is used here)

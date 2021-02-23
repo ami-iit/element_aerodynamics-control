@@ -7,8 +7,8 @@ classdef Aerodynamics_force_link < handle
     %C_D_link: drag coefficient
     %C_L_link:lift coefficient
     %link list:  ['head'=1,
-    %,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1'=6,
-    %'l_elbow_1'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
+    %,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1_aero_frame'=6,
+    %'l_elbow_1_aero_frame'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
     %'l_lower_leg'=11,'r_foot'=12,'l_foot'=13]
     
     properties
@@ -53,7 +53,7 @@ classdef Aerodynamics_force_link < handle
             % the link to the base frame of robot
             %generalized_aerodynamics_wrench = zeros(6+NDOF, 1); %  n+ dof of floating base
             
-            %here the frame is real link frame
+           
             J=robot.get_frame_jacobian(frame); % jacobian of specific frame 
             
             %aerodynamics_wrench=[aerodynamics_forces;zeros(3,1)]; % aerodynamics torque effects are neglected 
@@ -71,7 +71,7 @@ classdef Aerodynamics_force_link < handle
             % calculate aerodynamics forces (R^3) expressed as a vector in world frame since all the
             % vectors in formula are expressed in world frame
             
-            %here the frame is real link frame
+           
             [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame); % get coefficients of one single link
             AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);% compute angle of attack for a specific link
             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
@@ -81,7 +81,7 @@ classdef Aerodynamics_force_link < handle
         end
         
         function [Ka_link,C_D_link,C_L_link]=get_coeff(obj,frame) % get force coefficients and shape coefficient for one link
-            %here the frame is real link frame
+            
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             Ka_link=obj.Ka(frame_number(frame));
@@ -94,28 +94,23 @@ classdef Aerodynamics_force_link < handle
             %velocity of link frame origin w.r.t inertial frame and the
             %wind velocity expressed in the inertial frame
             
-            %here the frame is real link frame
+           
             robot_velocity=[base_pose_dot;s_dot]; %(Ndof+6)X1
             J=robot.get_frame_jacobian(frame);% 6X(Ndof+6)
             link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
             relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
         end
-        function w_kaxis_link=compute_kaxis(obj,robot,axis_frame)  % unit vector of body frame expressed in inertial orientation
+        function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of body frame expressed in inertial orientation
 
-% `r_arm_jet_turbine` and `l_arm_jet_turbine` frames are used because it is
-% more reasonable to consider the symmetric axis of arm turbine as the z
-% axis of these two frames than using the real frames `r_elbow_1` and
-% 'l_elbow_1`
-%thus variable name "axis_frame" is used here to distinguish it from real
-%link frame
+
 
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             
-            w_H_link=robot.get_frame_H(axis_frame); % 4X4
+            w_H_link=robot.get_frame_H(frame); % 4X4
             symmetric_axis=obj.set_symmetric_axis();
-            w_kaxis_link=w_H_link(1:3,1:3)*symmetric_axis(1:3,frame_number(axis_frame));
+            w_kaxis_link=w_H_link(1:3,1:3)*symmetric_axis(1:3,frame_number(frame));
            
            
         end
@@ -128,8 +123,8 @@ classdef Aerodynamics_force_link < handle
             symmetric_axis(1:3,4)=[0;0;1];%r_upper_arm  z
             symmetric_axis(1:3,5)=[0;0;1];%l_upper_room  z
 
-            symmetric_axis(1:3,6)=[0;0;1];%r_arm_jet_turbine  z
-            symmetric_axis(1:3,7)=[0;0;1];%l_arm_jet_turbine  z
+            symmetric_axis(1:3,6)=[0;0;1];%r_elbow_1_aero_frame z
+            symmetric_axis(1:3,7)=[0;0;1];%l_elbow_1_aero_frame  z
             symmetric_axis(1:3,8)=-[0;0;1];%r_upper_leg  -z
             symmetric_axis(1:3,9)=-[0;0;1];%l_upper_leg  -z
             symmetric_axis(1:3,10)=-[0;0;1];%r_lower_leg  -z

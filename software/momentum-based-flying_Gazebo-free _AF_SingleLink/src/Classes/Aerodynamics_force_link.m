@@ -7,8 +7,8 @@ classdef Aerodynamics_force_link < handle
     %C_D_link: drag coefficient
     %C_L_link:lift coefficient
     %link list:  ['head'=1,
-    %,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1'=6,
-    %'l_elbow_1'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
+    %,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1_aero_frame'=6,
+    %'l_elbow_1_aero_frame'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
     %'l_lower_leg'=11,'r_foot'=12,'l_foot'=13]
     
     properties
@@ -80,7 +80,7 @@ classdef Aerodynamics_force_link < handle
         
         function [Ka_link,C_D_link,C_L_link]=get_coeff(obj,frame) % get force coefficients and shape coefficient for one link
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
+                'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             Ka_link=obj.Ka(frame_number(frame));
             C_D_link=obj.C_D(frame_number(frame));
             C_L_link=obj.C_L(frame_number(frame));
@@ -99,7 +99,7 @@ classdef Aerodynamics_force_link < handle
         end
         function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of link frame expressed in inertial orientation
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
-                'r_elbow_1','l_elbow_1','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
+                'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             
             w_H_link=robot.get_frame_H(frame); % 4X4
             symmetric_axis=obj.set_symmetric_axis();
@@ -110,19 +110,20 @@ classdef Aerodynamics_force_link < handle
         
         function symmetric_axis=set_symmetric_axis(obj)
             symmetric_axis=zeros(3,obj.N_link);
-            symmetric_axis(1:3,1)=-[0;1;0]; %head
-            symmetric_axis(1:3,2)=-[0;1;0];%chest
-            symmetric_axis(1:3,3)=-[0;0;1];%root link
-            symmetric_axis(1:3,4)=[0;0;1];%r_upper_arm
-            symmetric_axis(1:3,5)=[0;0;1];%l_upper_room
-            symmetric_axis(1:3,6)=-[1;0;0];%r_elbow_1
-            symmetric_axis(1:3,7)=[1;0;0];%l_elbow_1
-            symmetric_axis(1:3,8)=-[0;0;1];%r_upper_leg
-            symmetric_axis(1:3,9)=-[0;0;1];%l_upper_leg
-            symmetric_axis(1:3,10)=-[0;0;1];%r_lower_leg
-            symmetric_axis(1:3,11)=-[0;0;1];%l_lower_leg
-            symmetric_axis(1:3,12)=[0;0;1];%r_foot
-            symmetric_axis(1:3,13)=[0;0;1];%l_foot
+            symmetric_axis(1:3,1)=-[0;1;0]; %head -y
+            symmetric_axis(1:3,2)=-[0;1;0];%chest  -y
+            symmetric_axis(1:3,3)=-[0;0;1];%root link  -z
+            symmetric_axis(1:3,4)=[0;0;1];%r_upper_arm  z
+            symmetric_axis(1:3,5)=[0;0;1];%l_upper_room  z
+
+            symmetric_axis(1:3,6)=[0;0;1];%r_elbow_1_aero_frame z
+            symmetric_axis(1:3,7)=[0;0;1];%l_elbow_1_aero_frame  z
+            symmetric_axis(1:3,8)=-[0;0;1];%r_upper_leg  -z
+            symmetric_axis(1:3,9)=-[0;0;1];%l_upper_leg  -z
+            symmetric_axis(1:3,10)=-[0;0;1];%r_lower_leg  -z
+            symmetric_axis(1:3,11)=-[0;0;1];%l_lower_leg  -z
+            symmetric_axis(1:3,12)=[0;0;1];%r_foot  z
+            symmetric_axis(1:3,13)=[0;0;1];%l_foot  z
         end
         
         function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and -k axis is defined as angle of attack

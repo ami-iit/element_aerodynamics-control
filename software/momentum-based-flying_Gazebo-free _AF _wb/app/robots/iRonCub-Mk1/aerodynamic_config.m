@@ -3,7 +3,7 @@
 %              COMMON aerodynamics related CONFIGURATION PARAMETERS                      %
 %                                                                         %
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-aerodynamics_config.v_wind=[0;10;0];%m/s  wind velocity
+aerodynamics_config.v_wind=[0;0.000001;0];%m/s  wind velocity
 aerodynamics_config.rho=1.225; % kg/m^3 ,air density at 101.325kPa and 15 degree
 aerodynamics_config.NOL=13; %number of links considered to be added aerodynamics forces
 % ['head'=1
@@ -19,8 +19,8 @@ aerodynamics_config.gama(2)=0.46822*0.32683; % chest+turbine
 aerodynamics_config.gama(3)=0.23050*0.21007; % root_link
 aerodynamics_config.gama(4)=0.10440*0.130; % r_upper_arm
 aerodynamics_config.gama(5)=0.10440*0.130; %l_upper_arm
-aerodynamics_config.gama(6)=0.17566*0.24622; %r_elbow_1
-aerodynamics_config.gama(7)=0.17566*0.24622; %l_elbow_1
+aerodynamics_config.gama(6)=0.17566*0.24622; %r_elbow_1  r_elbow_1_aero_frame
+aerodynamics_config.gama(7)=0.17566*0.24622; %l_elbow_1  l_elbow_1_aero_frame
 aerodynamics_config.gama(8)=0.130*0.190; %r_upper_leg
 aerodynamics_config.gama(9)=0.130*0.190; %l_upper_leg
 aerodynamics_config.gama(10)=0.130*0.200; %r_lower_leg

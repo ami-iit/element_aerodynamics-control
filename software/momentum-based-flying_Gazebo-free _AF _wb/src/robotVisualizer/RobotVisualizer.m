@@ -24,13 +24,15 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         jetFrameList = {'chest_l_jet_turbine', 'chest_r_jet_turbine', 'l_arm_jet_turbine', 'r_arm_jet_turbine'};
         X, Y, Z; % coordinate for the jet cones
         jets;
+        
+        %modification for plotting aerodynamics forces
         linkFrame= {'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'};
         
         aerodynamics_force_vector  ;
        
-        X0,Y0,Z0;
-        XA,YA,ZA;
+        X0,Y0,Z0; %coordinate for initial point of aerodynamics force vector
+        XA,YA,ZA; %coordinate for end point of aerodynamics force vector
     end
 
     methods (Access = protected)
@@ -46,6 +48,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                     obj.prepareJets();
                 end
                 
+                
+                %prepare the initial position of aerodynamics force vector
                 if obj.config.aerodynamics_forces
                     obj.prepareAerodynamics_forces();
                 end
@@ -60,7 +64,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             icon = ["Robot", "Visualizer"];
         end
 
-        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces_wb,v_wind)
+        function stepImpl(obj, world_H_base, base_velocity, joints_positions, joints_velocity, jetIntensities,aerodynamics_forces_wb)
 
 
            
@@ -107,7 +111,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             % Prepare figure, handles and variables required for the update, some extra
             % options are commented.
             [obj.visualizer, ~] = iDynTreeWrappers.prepareVisualization(obj.KinDynModel, obj.config.meshFilePrefix, ...
-                'color', [1, 1, 1], 'material', 'metal', 'transparency', 1, 'debug', true, 'view', obj.pov, ...
+                'color', [1, 1, 1], 'material', 'metal', 'transparency', 0.8, 'debug', true, 'view', obj.pov, ...
                 'groundOn', true, 'groundColor', [0.5 0.5 0.5], 'groundTransparency', 0.5);
             % The size of the visualizer matlab figure
             x0 = 300;
@@ -161,18 +165,21 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         end
         
         
+        %update the aerodynamics forces for each link
         function updateAerodynamics_forces(obj,aerodynamics_forces_wb)
             
             for ii=1:length(obj.linkFrame)
                 
-                H_update = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{ii});
+                H_update = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, obj.linkFrame{ii}); %get homougeneous transformation matrix of each link
                 
 %               
 %               X0_update{ii}=0;
 %               Y0_update{ii}=0;
 %               Z0_update{ii}=0;
 
-              X0_update=H_update(1,4);
+%initial point of the aerodynamics force vector which is also the assumed
+%application point of aerodynamcis forces
+              X0_update=H_update(1,4); % origin of the link frame
               Y0_update=H_update(2,4);
               Z0_update=H_update(3,4);
 
@@ -189,7 +196,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
         
         function prepareAerodynamics_forces(obj) % pepare aerodynamics forces plotting
             
-            ini_aero_forces_wb=zeros(3,13); % this value is not real initial aerodynamics force of robot but just to prepare the plot
+            ini_aero_forces_wb=zeros(3,13); % this value is not real initial aerodynamics force of robot but just to prepare the plot of aerodynamics
+            %force vector
             
             
             for i=1:length(obj.linkFrame)
@@ -206,7 +214,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
               obj.YA{i}=ini_aero_forces_wb(2,i);
               obj.ZA{i}=ini_aero_forces_wb(3,i);
               
-              obj.aerodynamics_force_vector{i}=quiver3(obj.X0{i},obj.Y0{i},obj.Z0{i},obj.XA{i},obj.YA{i},obj.ZA{i},'AutoScaleFactor',50);
+              obj.aerodynamics_force_vector{i}=quiver3(obj.X0{i},obj.Y0{i},obj.Z0{i},obj.XA{i},obj.YA{i},obj.ZA{i},'AutoScaleFactor',10);
               obj.aerodynamics_force_vector{i}.LineWidth=2;
               obj.aerodynamics_force_vector{i}.ShowArrowHead='on';
               
@@ -217,23 +225,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
              
         end
         
-        function prepareWind_Velocity(obj,v_wind)
-%             H = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'base_link');
-%             X_0=H(1,4);
-%             Y_0=H(2,4)+0.5;
-%             Z_0=H(3,4);
-            X_0=0;
-            Y_0=0.5;
-            Z_0=0.5;
-            q1=quiver3(X_0:X_0+0.2,Y_0:Y_0+0.2,Z_0:Z_0+0.2,v_wind(1)+X_0:v_wind+X_0+0.2,v_wind(2)+Y_0:v_wind(2)+Y_0+0.2,v_wind(3)+Z_0:v_wind(3)+Z_0+0.2,'AutoScaleFactor',0.05,'Color','r','LineWidth',4,'ShowArrowHead','on');
-%             q2=quiver3(X_0,Y_0,Z_0-0.05,v_wind(1)+X_0,v_wind(2)+Y_0,v_wind(3)+Z_0-0.05,'AutoScaleFactor',0.05,'Color','r','LineWidth',4,'ShowArrowHead','on');
-%             q3=quiver3(X_0,Y_0,Z_0-0.1,v_wind(1)+X_0,v_wind(2)+Y_0,v_wind(3)+Z_0-0.1,'AutoScaleFactor',0.05,'Color','r','LineWidth',4,'ShowArrowHead','on');
-            
-%             pause(0.00001);
-%              delete(q1);
-%              delete(q2);
-%              delete(q3);
-        end
+        
         
     end
 
