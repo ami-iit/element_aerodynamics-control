@@ -17,7 +17,7 @@ classdef Aerodynamics_force_link < handle
     
     properties (Access = private)
         
-        v_wind (3,1) double; % R^3
+        v_wind (3,1) double ; % R^3
         
         rho;%R
         gama (13,1) double;
@@ -37,10 +37,10 @@ classdef Aerodynamics_force_link < handle
             obj.N_link=aerodynamics_config.NOL;
             obj.v_wind=aerodynamics_config.v_wind;
             obj.rho=aerodynamics_config.rho;
-            obj.gama=aerodynamics_config.gama;%vector 13X1
-            obj.Ka=aerodynamics_config.Ka;%vector 13X1
-            obj.C_D=aerodynamics_config.C_D;%vector 13X1
-            obj.C_L=aerodynamics_config.C_L;%vector 13X1
+            obj.gama=aerodynamics_config.gama;%vector N_linkX1
+            obj.Ka=aerodynamics_config.Ka;%vector N_linkX1
+            obj.C_D=aerodynamics_config.C_D;%vector 
+            obj.C_L=aerodynamics_config.C_L;%vector 
         end
         
         
@@ -51,9 +51,9 @@ classdef Aerodynamics_force_link < handle
             % calculate generalized aerodynamics forces acting on one
             % single link which transfers aerodynamics forces from COM of
             % the link to the base frame of robot
-            %generalized_aerodynamics_wrench = zeros(6+NDOF, 1); % 29=23+6, n+ dof of floating base
+            %generalized_aerodynamics_wrench = zeros(6+NDOF, 1); %  n+ dof of floating base
             
-            
+           
             J=robot.get_frame_jacobian(frame); % jacobian of specific frame 
             
             %aerodynamics_wrench=[aerodynamics_forces;zeros(3,1)]; % aerodynamics torque effects are neglected 
@@ -70,8 +70,12 @@ classdef Aerodynamics_force_link < handle
             
             % calculate aerodynamics forces (R^3) expressed as a vector in world frame since all the
             % vectors in formula are expressed in world frame
+            
+           
             [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame); % get coefficients of one single link
             AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);% compute angle of attack for a specific link
+            AoA = max(AoA, 1e-8); %set tolerance to avoid Inf value 
+            
             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
             % aerodynamics_forces \in R^3
             
@@ -79,6 +83,7 @@ classdef Aerodynamics_force_link < handle
         end
         
         function [Ka_link,C_D_link,C_L_link]=get_coeff(obj,frame) % get force coefficients and shape coefficient for one link
+            
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             Ka_link=obj.Ka(frame_number(frame));
@@ -91,13 +96,21 @@ classdef Aerodynamics_force_link < handle
             %velocity of link frame origin w.r.t inertial frame and the
             %wind velocity expressed in the inertial frame
             
-            robot_velocity=[base_pose_dot;s_dot]; %29X1
-            J=robot.get_frame_jacobian(frame);% 6X29
+            
+            robot_velocity=[base_pose_dot;s_dot]; %(Ndof+6)X1
+            J=robot.get_frame_jacobian(frame);% 6X(Ndof+6)
             link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
-            relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
+            
+            
+            
+                relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
+          
         end
-        function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of link frame expressed in inertial orientation
+        function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of body frame expressed in inertial orientation
+
+
+
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
             
@@ -128,7 +141,7 @@ classdef Aerodynamics_force_link < handle
         
         function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and -k axis is defined as angle of attack
             
-            AoA=atan2(norm(cross(relative_velocity,w_kaxis_link)),dot(relative_velocity,w_kaxis_link));
+            AoA=atan2(norm(cross(relative_velocity,-w_kaxis_link)),dot(relative_velocity,-w_kaxis_link));
             
         end
             

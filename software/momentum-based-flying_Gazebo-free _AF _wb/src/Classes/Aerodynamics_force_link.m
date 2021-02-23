@@ -17,7 +17,7 @@ classdef Aerodynamics_force_link < handle
     
     properties (Access = private)
         
-        v_wind (3,1) double; % R^3
+        v_wind (3,1) double ; % R^3
         
         rho;%R
         gama (13,1) double;
@@ -74,6 +74,8 @@ classdef Aerodynamics_force_link < handle
            
             [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame); % get coefficients of one single link
             AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);% compute angle of attack for a specific link
+            AoA = max(AoA, 1e-8); %set tolerance to avoid Inf value 
+            
             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
             % aerodynamics_forces \in R^3
             
@@ -94,12 +96,16 @@ classdef Aerodynamics_force_link < handle
             %velocity of link frame origin w.r.t inertial frame and the
             %wind velocity expressed in the inertial frame
             
-           
+            
             robot_velocity=[base_pose_dot;s_dot]; %(Ndof+6)X1
             J=robot.get_frame_jacobian(frame);% 6X(Ndof+6)
             link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
-            relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
+            
+            
+            
+                relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
+          
         end
         function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of body frame expressed in inertial orientation
 
