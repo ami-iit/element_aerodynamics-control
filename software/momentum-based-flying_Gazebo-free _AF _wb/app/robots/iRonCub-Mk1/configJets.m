@@ -47,5 +47,5 @@ Config.thrust_noise = 0.0;
 Config.fl.KP = [20, 20, 40, 40] * 0.5;
 Config.fl.KI = [15; 15; 30; 30] * 0.5;
 
-Config.jet.u_max = 200; %200
+Config.jet.u_max = 200;
 Config.jet.u_min = 25;

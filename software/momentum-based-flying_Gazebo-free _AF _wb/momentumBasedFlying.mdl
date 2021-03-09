@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.22"
+    ComputedModelVersion    "2.23"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -644,10 +644,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2271"
-	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [1.5]
-	  Offset		  [-136.50913314069123, -94.922572268998181]
-	  SceneRectInView	  [-136.50913314069123, -94.922572268998181, 1630.0, 762.0]
+	  Extents		  [1920.0, 1143.0]
+	  ZoomFactor		  [1.1779141104294479]
+	  Offset		  [-136.50913314069112, -199.10225976899812]
+	  SceneRectInView	  [-136.50913314069112, -199.10225976899812, 1629.9999999999998, 970.35937499999989]
 	}
 	Object {
 	  $ObjectID		  14
@@ -765,10 +765,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "8"
-	  Extents		  [2445.0, 1143.0]
-	  ZoomFactor		  [2.0]
-	  Offset		  [190.46117918475238, 194.04200470235639]
-	  SceneRectInView	  [190.46117918475238, 194.04200470235639, 1222.5, 571.5]
+	  Extents		  [1920.0, 1143.0]
+	  ZoomFactor		  [1.5705521472392638]
+	  Offset		  [190.46117918475238, 115.90723907735639]
+	  SceneRectInView	  [190.46117918475238, 115.90723907735639, 1222.5, 727.76953125]
 	}
 	Object {
 	  $ObjectID		  25
@@ -809,10 +809,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
-	  Extents		  [2445.0, 1143.0]
+	  Extents		  [1920.0, 1143.0]
 	  ZoomFactor		  [1.0]
 	  Offset		  [-364.78125, 531.85450026267858]
-	  SceneRectInView	  [-364.78125, 531.85450026267858, 2445.0, 1143.0]
+	  SceneRectInView	  [-364.78125, 531.85450026267858, 1920.0, 1143.0]
 	}
 	Object {
 	  $ObjectID		  29
@@ -1350,7 +1350,7 @@ Model {
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
       "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
       "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAABz8AAADb/AEAAAAB+wAAADYAR"
-      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAACbMAAAS0AAAAAQAAA"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAP///wAACbMAAAS0AAAAAQAAA"
       "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
       "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
       "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
@@ -1373,9 +1373,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Feb 23 17:10:09 2021"
-  RTWModifiedTimeStamp	  536000926
-  ModelVersionFormat	  "%<AutoIncrement:2.22>"
+  LastModifiedDate	  "Tue Mar 09 11:56:43 2021"
+  RTWModifiedTimeStamp	  537191800
+  ModelVersionFormat	  "%<AutoIncrement:2.23>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2797,7 +2797,7 @@ Model {
       }
       System {
 	Name			"FLYING CONTROLLER (CORE) V2.5"
-	Location		[166, 289, 2681, 1702]
+	Location		[-54, 68, 2461, 1481]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -2813,7 +2813,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"150"
+	ZoomFactor		"118"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
@@ -10211,7 +10211,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Joint Torque Control for Flying"
-		Location		[45, 27, 2560, 1440]
+		Location		[-54, 68, 2461, 1481]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -10455,7 +10455,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "Integrate Joints Velocity error"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -10573,7 +10573,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "QP_torqueControl"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -11857,7 +11857,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Momentum Control for Flying"
-		Location		[45, 27, 2560, 1440]
+		Location		[-54, 68, 2461, 1481]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -13684,7 +13684,7 @@ Model {
 		  }
 		  System {
 		    Name		    "QP Solver and Integrate Contact Forces Derivative"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -17134,7 +17134,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Flying State Machine"
-	    Location		    [-48, 228, 2467, 1641]
+	    Location		    [-54, 68, 2461, 1481]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -17150,7 +17150,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "200"
+	    ZoomFactor		    "157"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -18612,7 +18612,7 @@ Model {
 		    RequestExecContextInheritance off
 		    System {
 		    Name		    "Rotational PID Controller"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -20382,7 +20382,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Take Off/Landing State Detector"
-		Location		[45, 27, 2560, 1440]
+		Location		[-54, 68, 2461, 1481]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -21059,7 +21059,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Get System State"
-	    Location		    [45, 27, 2560, 1440]
+	    Location		    [-54, 68, 2461, 1481]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -21182,7 +21182,7 @@ Model {
 	      }
 	      System {
 		Name			"Change Contact Forces Representation"
-		Location		[45, 27, 2560, 1440]
+		Location		[-54, 68, 2461, 1481]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -22494,7 +22494,7 @@ Model {
       }
       System {
 	Name			"Robot visualizer"
-	Location		[45, 27, 2560, 1440]
+	Location		[-54, 68, 2461, 1481]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -22748,7 +22748,7 @@ Model {
       }
       System {
 	Name			"Visualizer"
-	Location		[45, 27, 2560, 1440]
+	Location		[-54, 68, 2461, 1481]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -23661,7 +23661,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Gains and State Machine"
-	    Location		    [45, 27, 2560, 1440]
+	    Location		    [-54, 68, 2461, 1481]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -25959,7 +25959,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Momentum Task"
-	    Location		    [45, 27, 2560, 1440]
+	    Location		    [-54, 68, 2461, 1481]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -30307,8 +30307,8 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.03788','MaxYLimReal','0.23451','YLabelReal','','MinYLimMag"
-      "','0.00000','MaxYLimMag','0.23451','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','1.00000','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
       "olor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666"
       "6666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83137"
       "2549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 "
@@ -30332,8 +30332,8 @@ Model {
       "et_y','iRonCub/4:21','iRonCub/4:22','iRonCub/4:23','iRonCub/4:24','iRonCub/4:25','iRonCub/4:26','iRonCub/4:27','"
       "iRonCub/4:28','iRonCub/4:29','iRonCub/4:30','iRonCub/4:31','iRonCub/4:32','iRonCub/4:33','iRonCub/4:34','iRonCub"
       "/4:35','iRonCub/4:36','iRonCub/4:37','iRonCub/4:38','iRonCub/4:39'}},'ShowContent',true,'Placement',1)},'Display"
-      "PropertyDefaults',struct('MinYLimReal','-0.03788','MaxYLimReal','0.23451','YLabelReal','','MinYLimMag','0.00000'"
-      ",'MaxYLimMag','0.23451','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 "
+      "PropertyDefaults',struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.00000'"
+      ",'MaxYLimMag','1.00000','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 "
       "0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.62"
       "3529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 "
       "1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392"
@@ -30356,7 +30356,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"iRonCub"
-	Location		[45, 27, 2560, 1440]
+	Location		[-54, 68, 2461, 1481]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -30664,7 +30664,7 @@ Model {
 		  }
 		  System {
 		    Name		    "Compute generalized external wrench and jet thrust"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -31477,7 +31477,7 @@ Model {
 		    }
 		    System {
 		    Name		    "Dynamic Quantities"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -31730,7 +31730,7 @@ Model {
 		    }
 		    System {
 		    Name		    "Kinematic Quantities"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -31870,7 +31870,7 @@ Model {
 		    RequestExecContextInheritance off
 		    System {
 		    Name		    "Compute Thrusts Axes and Arms"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -33907,7 +33907,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "State Integration"
-		    Location		    [45, 27, 2560, 1440]
+		    Location		    [-54, 68, 2461, 1481]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
