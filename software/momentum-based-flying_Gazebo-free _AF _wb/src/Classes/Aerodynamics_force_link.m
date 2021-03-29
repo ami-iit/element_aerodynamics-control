@@ -11,6 +11,25 @@ classdef Aerodynamics_force_link < handle
     %'l_elbow_1_aero_frame'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
     %'l_lower_leg'=11,'r_foot'=12,'l_foot'=13]
     
+    
+    %%the computation of this class is based on paper "nonlinear feedback
+    %%control of axisymmetric aerial vehicles" , the mathematical model of
+    %%aerodynamics force is :
+    %%     F_a=-Ka*|v_a|*((C_D()+C_L()cot(AoA))*v_a+C_L()/sin(AoA)*|v_a|*w_kaxis)
+    %%where Ka is the shape coeffient related to the object, v_a is defined
+    %%by v_a=v_link-v_wind , the relative velocity between the link linear
+    %%velocity and wind velocity ,all expressed w.r.t inertial frame; C_D
+    %%and C_L are force coefficients which are only dependent on Re and
+    %%angle of attack AoA. The value of Ka,CD,CL are set inside
+    %%configuration file: aerodynamic_config.m 
+    %%w_kaxis presents the symmetric axis direction of each link ( each link is
+    %%assumed as axisymmetric) expressed in inertial frame ( |k_axis|=1 )
+    %%angle of attack AoA is defined as the angle between two vectors: v_a
+    %%and -w_kaxis;  this mathematical model is based on the assumption of
+    %%axisymmetric object, thus the laetral angle \beta doesn't influence
+    %%aerodynamic forces
+    %%
+    
     properties
         N_link;
     end
@@ -49,8 +68,8 @@ classdef Aerodynamics_force_link < handle
         
         function generalized_aerodynamics_wrench=compute_gener_af(obj,robot,aerodynamics_forces,frame)
             % calculate generalized aerodynamics forces acting on one
-            % single link which transfers aerodynamics forces from COM of
-            % the link to the base frame of robot
+            % single link which maps aerodynamics forces from single links
+            % to the whole robot
             %generalized_aerodynamics_wrench = zeros(6+NDOF, 1); %  n+ dof of floating base
             
            
@@ -104,7 +123,7 @@ classdef Aerodynamics_force_link < handle
             
             
             
-                relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
+                relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate v_a=v_link-v_wind
           
         end
         function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of body frame expressed in inertial orientation
@@ -121,7 +140,7 @@ classdef Aerodynamics_force_link < handle
            
         end
         
-        function symmetric_axis=set_symmetric_axis(obj)
+        function symmetric_axis=set_symmetric_axis(obj) %choose one axis as symmetric axis from existing link frame
             symmetric_axis=zeros(3,obj.N_link);
             symmetric_axis(1:3,1)=-[0;1;0]; %head -y
             symmetric_axis(1:3,2)=-[0;1;0];%chest  -y
@@ -141,6 +160,8 @@ classdef Aerodynamics_force_link < handle
         
         function AoA=compute_AoA(obj,w_kaxis_link,relative_velocity) % the angle between relative velocity and -k axis is defined as angle of attack
             
+            %angle of attack is defined by the angle between relative
+            %velocity and opposite direction of symmetric axis
             AoA=atan2(norm(cross(relative_velocity,-w_kaxis_link)),dot(relative_velocity,-w_kaxis_link));
             
         end
