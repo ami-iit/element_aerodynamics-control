@@ -35,8 +35,6 @@ Config.USE_NATIVE_GUI                   = true;
 
 % Visualizer
 confVisualizer.visualizeRobot = true;
-confVisualizer.visualizeJets  = false;
-confVisualizer.aerodynamics_forces=true;
 % Control type:
 %
 % Default controller => MOMENTUM BASED CONTROL WITH LYAPUNOV STABILITY (IEEE-RAL)
