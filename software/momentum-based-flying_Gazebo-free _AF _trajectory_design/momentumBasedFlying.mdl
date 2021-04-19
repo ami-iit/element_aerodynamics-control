@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.59"
+    ComputedModelVersion    "2.62"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -501,11 +501,11 @@ Model {
     OrderedModelArguments   1
   }
   LogicAnalyzerPlugin	  "on"
-  WebScopes_FoundationPlugin "on"
+  SLCCPlugin		  "on"
   AnimationPlugin	  "on"
   slcheck_filter_plugin	  "on"
+  WebScopes_FoundationPlugin "on"
   DiagnosticSuppressor	  "on"
-  SLCCPlugin		  "on"
   NotesPlugin		  "on"
   EnableAccessToBaseWorkspace on
   ScopeRefreshTime	  0.035000
@@ -529,7 +529,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [72.0, 27.0, 1848.0, 1173.0]
+      Location		      [0.0, 0.0, 2560.0, 1440.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -677,10 +677,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2431"
-	  Extents		  [1920.0, 1080.0]
+	  Extents		  [2490.0, 1170.0]
 	  ZoomFactor		  [1.1129897106419981]
 	  Offset		  [-360.23488656977747, -123.90456552085249]
-	  SceneRectInView	  [-360.23488656977747, -123.90456552085249, 1725.083333333333, 970.35937499999989]
+	  SceneRectInView	  [-360.23488656977747, -123.90456552085249, 2237.2174479166665, 1051.2226562499998]
 	}
 	Object {
 	  $ObjectID		  17
@@ -695,14 +695,14 @@ Model {
 	}
 	Object {
 	  $ObjectID		  18
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "1821"
-	  Extents		  [1778.0, 903.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-203.00609257990129, 715.8075420633204]
-	  SceneRectInView	  [-203.00609257990129, 715.8075420633204, 1422.4, 722.4]
+	  Extents		  [2490.0, 1170.0]
+	  ZoomFactor		  [0.8921875]
+	  Offset		  [-947.70830368870406, 150.30823117338002]
+	  SceneRectInView	  [-947.70830368870406, 150.30823117338002, 2790.8931698774081, 1311.38353765324]
 	}
 	Object {
 	  $ObjectID		  19
@@ -761,14 +761,14 @@ Model {
 	}
 	Object {
 	  $ObjectID		  24
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1778.0, 903.0]
+	  Extents		  [2490.0, 1170.0]
 	  ZoomFactor		  [1.25]
 	  Offset		  [-803.92742155869564, -375.18767826920316]
-	  SceneRectInView	  [-803.92742155869564, -375.18767826920316, 1422.4, 722.4]
+	  SceneRectInView	  [-803.92742155869564, -375.18767826920316, 1992.0, 936.0]
 	}
 	Object {
 	  $ObjectID		  25
@@ -809,10 +809,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2438"
-	  Extents		  [1920.0, 1080.0]
+	  Extents		  [2490.0, 1170.0]
 	  ZoomFactor		  [1.0]
 	  Offset		  [-364.78125, 355.0]
-	  SceneRectInView	  [-364.78125, 355.0, 1920.0, 1080.0]
+	  SceneRectInView	  [-364.78125, 355.0, 2490.0, 1170.0]
 	}
 	Object {
 	  $ObjectID		  29
@@ -820,10 +820,10 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2780"
-	  Extents		  [1778.0, 903.0]
+	  Extents		  [2490.0, 1170.0]
 	  ZoomFactor		  [1.42226889738107]
-	  Offset		  [396.2061513787088, -21.668192699560279]
-	  SceneRectInView	  [396.2061513787088, -21.668192699560279, 1250.1152231297219, 634.9010385186383]
+	  Offset		  [396.20615137870891, -21.668192699560279]
+	  SceneRectInView	  [396.20615137870891, -21.668192699560279, 1750.7237939218267, 822.62925256567758]
 	}
 	Object {
 	  $ObjectID		  30
@@ -1305,6 +1305,19 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  73
+	  Type			  "GLUE2:SpreadSheet"
+	  ID			  "ModelData"
+	  Visible		  [1]
+	  CreateCallback	  "DataView.createSpreadSheetComponent"
+	  UserData		  ""
+	  Floating		  [0]
+	  DockPosition		  "Bottom"
+	  Width			  [2556]
+	  Height		  [218]
+	  Minimized		  "On"
+	}
+	Object {
+	  $ObjectID		  74
 	  Type			  "Simulink:Editor:ReferencedFiles"
 	  ID			  "Referenced Files"
 	  Visible		  [0]
@@ -1317,7 +1330,7 @@ Model {
 	  Minimized		  "Unset"
 	}
 	Object {
-	  $ObjectID		  74
+	  $ObjectID		  75
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1329,19 +1342,6 @@ Model {
 	  Height		  [480]
 	  Minimized		  "On"
 	}
-	Object {
-	  $ObjectID		  75
-	  Type			  "GLUE2:SpreadSheet"
-	  ID			  "ModelData"
-	  Visible		  [1]
-	  CreateCallback	  "DataView.createSpreadSheetComponent"
-	  UserData		  ""
-	  Floating		  [0]
-	  DockPosition		  "Bottom"
-	  Width			  [1844]
-	  Height		  [218]
-	  Minimized		  "On"
-	}
 	PropName		"DockComponentsInfo"
       }
       WindowState	      "AAAA/wAAAAD9AAAAAwAAAAAAAAC9AAAB+PwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
@@ -1350,7 +1350,7 @@ Model {
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
       "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
       "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAABz8AAADb/AEAAAAB+wAAADYAR"
-      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAABxgAAAPEAAAAAQAAA"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAACeAAAATPAAAAAQAAA"
       "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
       "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
       "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
@@ -1362,7 +1362,7 @@ Model {
       }
       WindowUuid	      "c4f6b7aa-a2eb-4804-8bef-f10f750dcd77"
     }
-    BDUuid		    "74692523-c099-4479-8ba9-69978e99e5a2"
+    BDUuid		    "62487e9d-e55c-4a55-a2a5-64a292b34188"
   }
   HideAutomaticNames	  on
   SequenceViewerTimePrecision 3
@@ -1371,11 +1371,11 @@ Model {
   Creator		  "gnava"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "tong_hui"
+  LastModifiedBy	  "icublap127"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Apr 12 12:29:17 2021"
-  RTWModifiedTimeStamp	  540131325
-  ModelVersionFormat	  "%<AutoIncrement:2.59>"
+  LastModifiedDate	  "Fri Apr 16 18:44:16 2021"
+  RTWModifiedTimeStamp	  540499453
+  ModelVersionFormat	  "%<AutoIncrement:2.62>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2628,7 +2628,7 @@ Model {
   }
   System {
     Name		    "momentumBasedFlying"
-    Location		    [72, 27, 1920, 1200]
+    Location		    [0, 0, 2560, 1440]
     SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
     Open		    on
     PortBlocksUseCompactNotation off
@@ -2659,25 +2659,25 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData2'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.39195','MaxYLimReal','3.52759','YLabelReal','','MinYLimMag"
-      "','0.00000','MaxYLimMag','3.52759','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
-      "olor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666"
-      "6666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83137"
-      "2549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 "
-      "0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Visible','on'),struct('Visible','on'"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','0.1707','MaxYLimReal','2.32139','YLabelReal','','MinYLimMag',"
+      "'0.1707','MaxYLimMag','2.32139','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColo"
+      "r',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666666"
+      "6666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83137254"
+      "9019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.6"
+      "50980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Visible','on'),struct('Visible','on'),s"
+      "truct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct('Visible','on'"
       "),struct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct('Visible','"
-      "on'),struct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct('Visible"
-      "','on'),struct('Visible','on')}},'UserDefinedChannelNames',{{'head','chest','root link','r_upper_arm','l_upperar"
-      "m','r_arm_jet','l_arm_jet','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}},'NumLines"
-      "',13,'LineNames',{{'head','chest','root link','r_upper_arm','l_upperarm','r_arm_jet','l_arm_jet','r_upper_leg','"
-      "l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}},'ShowContent',true,'Placement',1)},'DisplayProperty"
-      "Defaults',struct('MinYLimReal','-0.39195','MaxYLimReal','3.52759','YLabelReal','','MinYLimMag','0.00000','MaxYLi"
-      "mMag','3.52759','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'Axes"
-      "TickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.6235294117"
-      "64706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.3921"
-      "56862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])"
-      "),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version"
-      "','2020b')),'Version','2020b','Position',[473 238 1310 584],'VisibleAtModelOpen','on')"
+      "on'),struct('Visible','on')}},'UserDefinedChannelNames',{{'head','chest','root link','r_upper_arm','l_upperarm',"
+      "'r_arm_jet','l_arm_jet','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}},'NumLines',1"
+      "3,'LineNames',{{'head','chest','root link','r_upper_arm','l_upperarm','r_arm_jet','l_arm_jet','r_upper_leg','l_u"
+      "pper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDef"
+      "aults',struct('MinYLimReal','0.1707','MaxYLimReal','2.32139','YLabelReal','','MinYLimMag','0.1707','MaxYLimMag',"
+      "'2.32139','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickCo"
+      "lor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 "
+      "1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.3921568627"
+      "45098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extm"
+      "gr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','202"
+      "0b')),'Version','2020b','Position',[473 238 1310 584])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -2808,7 +2808,7 @@ Model {
       }
       System {
 	Name			"FLYING CONTROLLER (CORE) V2.5"
-	Location		[72, 27, 1920, 1200]
+	Location		[0, 0, 2560, 1440]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -2908,7 +2908,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Dynamics and Kinematics"
-	    Location		    [72, 27, 1920, 1200]
+	    Location		    [0, 0, 2560, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -10222,7 +10222,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Joint Torque Control for Flying"
-		Location		[72, 27, 1920, 1200]
+		Location		[0, 0, 2560, 1440]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -10466,7 +10466,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "Integrate Joints Velocity error"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -10584,7 +10584,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "QP_torqueControl"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -12390,7 +12390,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "Momentum Control"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -12406,7 +12406,7 @@ Model {
 		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
-		    ZoomFactor		    "125"
+		    ZoomFactor		    "89"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -13695,7 +13695,7 @@ Model {
 		  }
 		  System {
 		    Name		    "QP Solver and Integrate Contact Forces Derivative"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -17145,7 +17145,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Flying State Machine"
-	    Location		    [72, 27, 1920, 1200]
+	    Location		    [0, 0, 2560, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -18793,7 +18793,7 @@ Model {
 		    RequestExecContextInheritance off
 		    System {
 		    Name		    "Rotational PID Controller"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -20630,7 +20630,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Take Off/Landing State Detector"
-		Location		[72, 27, 1920, 1200]
+		Location		[0, 0, 2560, 1440]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -21307,7 +21307,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Get System State"
-	    Location		    [72, 27, 1920, 1200]
+	    Location		    [0, 0, 2560, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -21430,7 +21430,7 @@ Model {
 	      }
 	      System {
 		Name			"Change Contact Forces Representation"
-		Location		[72, 27, 1920, 1200]
+		Location		[0, 0, 2560, 1440]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -22726,7 +22726,7 @@ Model {
       Name		      "Robot visualizer"
       SID		      "2780"
       Ports		      [2]
-      Position		      [-705, 110, -625, 190]
+      Position		      [-700, 122, -625, 208]
       ZOrder		      1126
       BlockMirror	      on
       TreatAsAtomicUnit	      on
@@ -22736,13 +22736,11 @@ Model {
 	$PropName		"MaskObject"
 	$ObjectID		90
 	$ClassName		"Simulink.Mask"
-	Display			"image('/home/giuseppe/Documents/thesis/Modeling, Identification and Control of Model Jet Engines for Aeria"
-	"l Humanoid Robotics/images/iRonCub_tiff.png'); % Use \"Edit Image\" on toolstrip to change."
 	RunInitForIconRedraw	"off"
       }
       System {
 	Name			"Robot visualizer"
-	Location		[72, 27, 1920, 1200]
+	Location		[0, 0, 2560, 1440]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -22764,14 +22762,14 @@ Model {
 	  BlockType		  Inport
 	  Name			  "State"
 	  SID			  "2785"
-	  Position		  [630, 213, 660, 227]
+	  Position		  [630, 243, 660, 257]
 	  ZOrder		  1129
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "aerodynamics_forces_wb"
 	  SID			  "3161"
-	  Position		  [685, 368, 715, 382]
+	  Position		  [630, 393, 660, 407]
 	  ZOrder		  1131
 	  HideAutomaticName	  off
 	  Port			  "2"
@@ -22781,7 +22779,7 @@ Model {
 	  Name			  "Bus\nSelector"
 	  SID			  "2786"
 	  Ports			  [1, 5]
-	  Position		  [705, 127, 710, 313]
+	  Position		  [695, 124, 705, 376]
 	  ZOrder		  1130
 	  OutputSignals		  "w_H_b,basePose_dot,joints_position,joints_velocity,jet_intensities"
 	  Port {
@@ -22810,10 +22808,10 @@ Model {
 	  Name			  "Robot Visualizer"
 	  SID			  "2779"
 	  Ports			  [6]
-	  Position		  [845, 133, 1180, 437]
+	  Position		  [845, 123, 1180, 427]
 	  ZOrder		  1124
-	  System		  "RobotVisualizer"
-	  MaskType		  "RobotVisualizer"
+	  System		  "RobotVisualizer_iDynTree"
+	  MaskType		  "RobotVisualizer_iDynTree"
 	  MaskDisplay		  "disp(['Robot' char(10) 'Visualizer']);\nport_label('input',1,'world_H_base');\nport_label('input',2"
 	  ",'base_velocity');\nport_label('input',3,'joints_positions');\nport_label('input',4,'joints_velocity');\nport_label"
 	  "('input',5,'jetIntensities');\nport_label('input',6,'aerodynamics_forces_wb');\n"
@@ -22833,7 +22831,6 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector"
 	  SrcPort		  1
-	  Points		  [96, 0; 0, 10]
 	  DstBlock		  "Robot Visualizer"
 	  DstPort		  1
 	}
@@ -22843,7 +22840,6 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector"
 	  SrcPort		  3
-	  Points		  [58, 0; 0, 40]
 	  DstBlock		  "Robot Visualizer"
 	  DstPort		  3
 	}
@@ -22853,7 +22849,6 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector"
 	  SrcPort		  2
-	  Points		  [77, 0; 0, 25]
 	  DstBlock		  "Robot Visualizer"
 	  DstPort		  2
 	}
@@ -22863,7 +22858,6 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector"
 	  SrcPort		  4
-	  Points		  [38, 0; 0, 55]
 	  DstBlock		  "Robot Visualizer"
 	  DstPort		  4
 	}
@@ -22873,7 +22867,6 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector"
 	  SrcPort		  5
-	  Points		  [19, 0; 0, 70]
 	  DstBlock		  "Robot Visualizer"
 	  DstPort		  5
 	}
@@ -22881,7 +22874,6 @@ Model {
 	  ZOrder		  183
 	  SrcBlock		  "aerodynamics_forces_wb"
 	  SrcPort		  1
-	  Points		  [79, 0; 0, 35]
 	  DstBlock		  "Robot Visualizer"
 	  DstPort		  6
 	}
@@ -22957,21 +22949,21 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-125.00000','MaxYLimReal','125.00000','YLabelReal','','MinYLi"
-      "mMag',' 0.00000','MaxYLimMag','125.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',fals"
-      "e,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 "
-      "0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098"
-      " 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803"
-      "9215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'N"
-      "umLines',4,'LineNames',{{'jetsIntensitiesDot_star:1','jetsIntensitiesDot_star:2','jetsIntensitiesDot_star:3','je"
-      "tsIntensitiesDot_star:4'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-1"
-      "25.00000','MaxYLimReal','125.00000','YLabelReal','','MinYLimMag',' 0.00000','MaxYLimMag','125.00000','LegendVisi"
-      "bility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803"
-      "922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.41176470588235"
-      "3 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019"
-      "608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('To"
-      "ols','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','202"
-      "0b','Position',[1020 267 550 427],'VisibleAtModelOpen','on')"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-104.8333','MaxYLimReal','122.75926','YLabelReal','','MinYLim"
+      "Mag',' 0.00000','MaxYLimMag','122.75926','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false"
+      ",'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0"
+      ".0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 "
+      "0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039"
+      "215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'Nu"
+      "mLines',4,'LineNames',{{'jetsIntensitiesDot_star:1','jetsIntensitiesDot_star:2','jetsIntensitiesDot_star:3','jet"
+      "sIntensitiesDot_star:4'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-10"
+      "4.8333','MaxYLimReal','122.75926','YLabelReal','','MinYLimMag',' 0.00000','MaxYLimMag','122.75926','LegendVisibi"
+      "lity','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627450980392"
+      "2 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 "
+      "0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.83137254901960"
+      "8 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tool"
+      "s','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b"
+      "','Position',[1020 267 550 427])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -23047,7 +23039,7 @@ Model {
       }
       System {
 	Name			"Visualizer"
-	Location		[72, 27, 1920, 1200]
+	Location		[0, 0, 2560, 1440]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -23075,7 +23067,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "CoM Kinematics"
-	    Location		    [72, 27, 1920, 1200]
+	    Location		    [0, 0, 2560, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -23152,8 +23144,7 @@ Model {
 	      "666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.058823529"
 	      "4117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache',[]),"
 	      "extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Configu"
-	      "ration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1125 325 626 505],'Visible"
-	      "AtModelOpen','on')"
+	      "ration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1125 325 626 505])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -23232,8 +23223,7 @@ Model {
 	      "6666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.05"
 	      "88235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCach"
 	      "e',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr."
-	      "Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1259 1 647 537],'Vi"
-	      "sibleAtModelOpen','on')"
+	      "Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1259 1 647 537])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -23989,7 +23979,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Gains and State Machine"
-	    Location		    [72, 27, 1920, 1200]
+	    Location		    [0, 0, 2560, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -26380,8 +26370,7 @@ Model {
 	      "666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.058823529"
 	      "4117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache',[]),"
 	      "extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Configu"
-	      "ration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[619 257 623 559],'VisibleA"
-	      "tModelOpen','on')"
+	      "ration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[619 257 623 559])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -26995,8 +26984,7 @@ Model {
 	      "666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.058823"
 	      "5294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache',["
 	      "]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Conf"
-	      "iguration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1180 542 731 432],'Visi"
-	      "bleAtModelOpen','on')"
+	      "iguration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1180 542 731 432])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -27074,8 +27062,7 @@ Model {
 	      "6666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.05882"
 	      "35294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache',"
 	      "[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Con"
-	      "figuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[395 213 1111 522],'Vis"
-	      "ibleAtModelOpen','on')"
+	      "figuration('Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[390 208 1121 515])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -28169,7 +28156,7 @@ Model {
 	      ";0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayConten"
 	      "tCache',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false,'Pr"
 	      "eviousZoomMode','ZoomOut'),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2020"
-	      "b','Position',[551 319 818 342],'VisibleAtModelOpen','on')"
+	      "b','Position',[551 319 818 342])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -30638,8 +30625,8 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.22813','MaxYLimReal','0.12319','YLabelReal','','MinYLimMag"
-      "','0.00000','MaxYLimMag','0.22813','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-1.21132','MaxYLimReal','4.10192','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','4.10192','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
       "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
       "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
       "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686"
@@ -30663,14 +30650,14 @@ Model {
       "jet_y','iRonCub/4:21','iRonCub/4:22','iRonCub/4:23','iRonCub/4:24','iRonCub/4:25','iRonCub/4:26','iRonCub/4:27',"
       "'iRonCub/4:28','iRonCub/4:29','iRonCub/4:30','iRonCub/4:31','iRonCub/4:32','iRonCub/4:33','iRonCub/4:34','iRonCu"
       "b/4:35','iRonCub/4:36','iRonCub/4:37','iRonCub/4:38','iRonCub/4:39'}},'ShowContent',true,'Placement',1)},'Displa"
-      "yPropertyDefaults',struct('MinYLimReal','-0.22813','MaxYLimReal','0.12319','YLabelReal','','MinYLimMag','0.00000"
-      "','MaxYLimMag','0.22813','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 "
+      "yPropertyDefaults',struct('MinYLimReal','-1.21132','MaxYLimReal','4.10192','YLabelReal','','MinYLimMag','0.00000"
+      "','MaxYLimMag','4.10192','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 "
       "0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0."
       "623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.27450980392156"
       "9 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.6509803"
-      "92156863])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',tru"
-      "e,'Version','2020b')),'Version','2020b','Position',[1104 215 924 547],'VisibleAtModelOpen','on','OpenAtMdlStart'"
-      ",true)"
+      "92156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY'),extmgr.Configuration('"
+      "Tools','Measurements',true,'Version','2020b')),'Version','2020b','Position',[1401 227 924 547],'VisibleAtModelOp"
+      "en','on','OpenAtMdlStart',true)"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -30687,7 +30674,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"iRonCub"
-	Location		[72, 27, 1920, 1200]
+	Location		[0, 0, 2560, 1440]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -30730,7 +30717,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Forward Dynamics"
-	    Location		    [72, 27, 1920, 1200]
+	    Location		    [0, 0, 2560, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -30995,7 +30982,7 @@ Model {
 		  }
 		  System {
 		    Name		    "Compute generalized external wrench and jet thrust"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -31808,7 +31795,7 @@ Model {
 		    }
 		    System {
 		    Name		    "Dynamic Quantities"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -32061,7 +32048,7 @@ Model {
 		    }
 		    System {
 		    Name		    "Kinematic Quantities"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -32201,7 +32188,7 @@ Model {
 		    RequestExecContextInheritance off
 		    System {
 		    Name		    "Compute Thrusts Axes and Arms"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -34238,7 +34225,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "State Integration"
-		    Location		    [72, 27, 1920, 1200]
+		    Location		    [0, 0, 2560, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -35649,10 +35636,10 @@ Model {
       ZOrder		      137
       SrcBlock		      "iRonCub"
       SrcPort		      1
-      Points		      [-244, 0; 0, -15]
+      Points		      [-244, 0]
       Branch {
-	ZOrder			316
-	Points			[0, -290]
+	ZOrder			383
+	Points			[0, -305]
 	DstBlock		"Bus\nSelector"
 	DstPort			1
       }
@@ -35844,16 +35831,15 @@ Model {
       ZOrder		      276
       SrcBlock		      "iRonCub"
       SrcPort		      4
-      Points		      [-6, 0; 0, -35; -225, 0]
+      Points		      [-6, 0; 0, -35; -227, 0]
       Branch {
 	ZOrder			311
-	Points			[0, -15]
 	DstBlock		"Robot visualizer"
 	DstPort			2
       }
       Branch {
 	ZOrder			310
-	Points			[-2, 0; 0, 74]
+	Points			[0, 74]
 	Branch {
 	  ZOrder		  346
 	  Points		  [-66, 0; 0, 86]
@@ -38818,9 +38804,6 @@ Stateflow {
     screen		    [1 1 2966 1200 1.25]
     treeNode		    [0 150 0 0]
     viewObj		    149
-    visible		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    84
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -41123,9 +41106,6 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 251 0 0]
     viewObj		    250
-    visible		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    8
     decomposition	    CLUSTER_CHART
     type		    EML_CHART

@@ -7,7 +7,7 @@ component_path = [getenv('COMPONENT_IRONCUB_PREFIX') '/component_ironcub'];
 
 confVisualizer.robotName = 'iRonCub-Mk1';
 
-confVisualizer.fileName = 'model_stl.urdf';
+confVisualizer.fileName = 'model.urdf';
 
 confVisualizer.meshFilePrefix = [component_path '/models'];
 confVisualizer.modelPath = [component_path '/models/' confVisualizer.robotName '/iRonCub/robots/' confVisualizer.robotName '/'];
