@@ -3,7 +3,7 @@
 %              COMMON aerodynamics related CONFIGURATION PARAMETERS                      %
 %                                                                         %
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-aerodynamics_config.v_wind=[0;5;0];%m/s  wind velocity
+aerodynamics_config.v_wind=[0;0;0];%m/s  wind velocity
 aerodynamics_config.rho=1.225; % kg/m^3 ,air density at 101.325kPa and 15 degree
 aerodynamics_config.NOL=13; %number of links considered to be added aerodynamics forces
 % ['head'=1
@@ -41,5 +41,5 @@ aerodynamics_config.Ka=aerodynamics_config.rho*aerodynamics_config.gama*0.5; % G
 
 aerodynamics_config.C_0=zeros(aerodynamics_config.NOL,1);%drag coefficient
 aerodynamics_config.C_1=zeros(aerodynamics_config.NOL,1);%lift coefficient
-aerodynamics_config.C_0(1:end)=0.5*ones(aerodynamics_config.NOL,1); % assume as constant value for all the links
-aerodynamics_config.C_1(1:end)=0.5*ones(aerodynamics_config.NOL,1); % assume as constant value for all the links
+aerodynamics_config.C_0(1:end)=10*ones(aerodynamics_config.NOL,1); % assume as constant value for all the links
+aerodynamics_config.C_1(1:end)=10*ones(aerodynamics_config.NOL,1); % assume as constant value for all the links

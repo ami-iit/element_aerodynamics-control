@@ -2,7 +2,7 @@
 % combined by 4 parts: up (+z) -> left(+y) -> front (+x) -> down(-z) 
 % at the starting and end point of each part , the CoM velocity is zero ,
 % the acc is defined as sin shape to avoid impact at the beginning 
-
+ % author: HUI TONG
 
 function pos_vel_acc_jerk_CoM_des=trajectory_design(t,posCoM_int,posCoM)
 

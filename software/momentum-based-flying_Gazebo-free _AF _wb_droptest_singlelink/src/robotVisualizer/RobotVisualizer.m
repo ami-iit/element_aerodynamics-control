@@ -2,7 +2,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
     % matlab.System handling the robot visualization
     % go in app/robots/iRonCub*/initVisualizer.m to change the setup config
 
-    %@author: Giuseppe L'Erario
+    %@author: Giuseppe L'Erario   HUI TONG
 
     properties (Nontunable)
         config

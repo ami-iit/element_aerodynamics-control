@@ -28,7 +28,7 @@ classdef Aerodynamics_force_link < handle
     %%and -w_kaxis;  this mathematical model is based on the assumption of
     %%axisymmetric object, thus the laetral angle \beta doesn't influence
     %%aerodynamic forces
-    %%
+    % author: HUI TONG
     
     properties
         N_link;

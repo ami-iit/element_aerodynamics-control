@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "2.63"
+    ComputedModelVersion    "2.65"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -766,9 +766,9 @@ Model {
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [2490.0, 1170.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-803.92742155869564, -375.18767826920316]
-	  SceneRectInView	  [-803.92742155869564, -375.18767826920316, 1992.0, 936.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-911.52742155869555, -469.98767826920312]
+	  SceneRectInView	  [-911.52742155869555, -469.98767826920312, 2490.0, 1170.0]
 	}
 	Object {
 	  $ObjectID		  25
@@ -1305,19 +1305,6 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  73
-	  Type			  "GLUE2:PropertyInspector"
-	  ID			  "Property Inspector"
-	  Visible		  [1]
-	  CreateCallback	  ""
-	  UserData		  ""
-	  Floating		  [0]
-	  DockPosition		  "Right"
-	  Width			  [640]
-	  Height		  [480]
-	  Minimized		  "On"
-	}
-	Object {
-	  $ObjectID		  74
 	  Type			  "GLUE2:SpreadSheet"
 	  ID			  "ModelData"
 	  Visible		  [1]
@@ -1330,7 +1317,7 @@ Model {
 	  Minimized		  "On"
 	}
 	Object {
-	  $ObjectID		  75
+	  $ObjectID		  74
 	  Type			  "Simulink:Editor:ReferencedFiles"
 	  ID			  "Referenced Files"
 	  Visible		  [0]
@@ -1342,6 +1329,19 @@ Model {
 	  Height		  [480]
 	  Minimized		  "Unset"
 	}
+	Object {
+	  $ObjectID		  75
+	  Type			  "GLUE2:PropertyInspector"
+	  ID			  "Property Inspector"
+	  Visible		  [1]
+	  CreateCallback	  ""
+	  UserData		  ""
+	  Floating		  [0]
+	  DockPosition		  "Right"
+	  Width			  [640]
+	  Height		  [480]
+	  Minimized		  "On"
+	}
 	PropName		"DockComponentsInfo"
       }
       WindowState	      "AAAA/wAAAAD9AAAAAwAAAAAAAAC9AAAB+PwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
@@ -1350,7 +1350,7 @@ Model {
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
       "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
       "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAABz8AAADb/AEAAAAB+wAAADYAR"
-      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAP///wAACeAAAATPAAAAAQAAA"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAACeAAAATPAAAAAQAAA"
       "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
       "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
       "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
@@ -1373,9 +1373,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tong_hui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Apr 19 16:03:18 2021"
-  RTWModifiedTimeStamp	  540748907
-  ModelVersionFormat	  "%<AutoIncrement:2.63>"
+  LastModifiedDate	  "Tue Apr 20 11:09:43 2021"
+  RTWModifiedTimeStamp	  540815165
+  ModelVersionFormat	  "%<AutoIncrement:2.65>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2644,7 +2644,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "125"
+    ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3182"
     SimulinkSubDomain	    "Simulink"
@@ -22726,7 +22726,7 @@ Model {
       Name		      "Robot visualizer"
       SID		      "2780"
       Ports		      [2]
-      Position		      [-700, 124, -625, 211]
+      Position		      [-780, 124, -625, 231]
       ZOrder		      1126
       BlockMirror	      on
       TreatAsAtomicUnit	      on
@@ -30625,8 +30625,8 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-1.21132','MaxYLimReal','4.10192','YLabelReal','','MinYLimMag"
-      "','0.00000','MaxYLimMag','4.10192','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-1.53524','MaxYLimReal','4.24474','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','4.24474','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
       "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
       "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
       "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686"
@@ -30650,8 +30650,8 @@ Model {
       "jet_y','iRonCub/4:21','iRonCub/4:22','iRonCub/4:23','iRonCub/4:24','iRonCub/4:25','iRonCub/4:26','iRonCub/4:27',"
       "'iRonCub/4:28','iRonCub/4:29','iRonCub/4:30','iRonCub/4:31','iRonCub/4:32','iRonCub/4:33','iRonCub/4:34','iRonCu"
       "b/4:35','iRonCub/4:36','iRonCub/4:37','iRonCub/4:38','iRonCub/4:39'}},'ShowContent',true,'Placement',1)},'Displa"
-      "yPropertyDefaults',struct('MinYLimReal','-1.21132','MaxYLimReal','4.10192','YLabelReal','','MinYLimMag','0.00000"
-      "','MaxYLimMag','4.10192','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 "
+      "yPropertyDefaults',struct('MinYLimReal','-1.53524','MaxYLimReal','4.24474','YLabelReal','','MinYLimMag','0.00000"
+      "','MaxYLimMag','4.24474','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 "
       "0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0."
       "623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.27450980392156"
       "9 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.6509803"
@@ -35645,6 +35645,7 @@ Model {
       }
       Branch {
 	ZOrder			275
+	Points			[0, 5]
 	DstBlock		"Robot visualizer"
 	DstPort			1
       }
@@ -35831,7 +35832,7 @@ Model {
       ZOrder		      276
       SrcBlock		      "iRonCub"
       SrcPort		      4
-      Points		      [-6, 0; 0, -35; -227, 0]
+      Points		      [-6, 0; 0, -35; -227, 0; 0, 20]
       Branch {
 	ZOrder			311
 	DstBlock		"Robot visualizer"
@@ -35839,7 +35840,7 @@ Model {
       }
       Branch {
 	ZOrder			310
-	Points			[0, 74]
+	Points			[0, 54]
 	Branch {
 	  ZOrder		  346
 	  Points		  [-66, 0; 0, 86]

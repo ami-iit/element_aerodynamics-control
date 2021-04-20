@@ -10,6 +10,7 @@ classdef Aerodynamics_force_link < handle
     %,'chest'=2,'root_link'=3,'r_upper_arm'=4,'l_upper_arm'=5,'r_elbow_1_aero_frame'=6,
     %'l_elbow_1_aero_frame'=7,'r_upper_leg'=8,'l_upper_leg'=9,'r_lower_leg'=10,
     %'l_lower_leg'=11,'r_foot'=12,'l_foot'=13]
+    % author: HUI TONG
     
     properties
         N_link;
