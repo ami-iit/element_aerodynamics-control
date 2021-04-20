@@ -35,8 +35,8 @@ Config.USE_NATIVE_GUI                   = true;
 
 % Visualizer
 confVisualizer.visualizeRobot = true;
-confVisualizer.visualizeJets  = false;
-confVisualizer.aerodynamics_forces=true;
+%confVisualizer.visualizeJets  = false;
+%confVisualizer.aerodynamics_forces=true;
 % Control type:
 %
 % Default controller => MOMENTUM BASED CONTROL WITH LYAPUNOV STABILITY (IEEE-RAL)
@@ -68,7 +68,7 @@ component_path = [getenv('COMPONENT_IRONCUB_PREFIX') '/component_ironcub'];
 
 Config.robotName = 'iRonCub-Mk1';
 
-Config.fileName = 'model_stl.urdf';
+Config.fileName = 'model.urdf';
 
 Config.modelPath = [component_path '/models/' Config.robotName '/iRonCub/robots/' Config.robotName '/'];
 
