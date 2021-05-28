@@ -120,16 +120,16 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
         function prepareAerodynamics_forces(obj) 
             % prepare aerodynamics forces plotting            
             force = iDynTree.Direction();
-            for i=1:length(obj.linkFrame)
-                disp(obj.linkFrame{i})
-                linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform(obj.linkFrame{i});
+            
+                linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
                 for j=1:3
-                    % note that the indexing starts from 0 (not from 1) as
+                    % note that the indexing starts from 0 (not from 1)
+                    % as
                     % in C++
                     force.setVal(j-1, 0);
                 end
                 obj.viz.vectors().addVector(linkTransform.getPosition(), force);
-            end
+            
         end 
         
         function updateJets(obj, jetIntensities)
@@ -145,14 +145,16 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
         function updateAerodynamics_forces(obj,aerodynamics_forces_wb)
             %update the aerodynamics forces for each link
             force = iDynTree.Direction();
-            for i=1:length(obj.linkFrame)
+            
+                for i=1:1
                 linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform(obj.linkFrame{i});
                 for j=1:3
                     % the single aerodynamics force is scaled by a constant factor
                     force.setVal(j-1, aerodynamics_forces_wb(j, i) * obj.scaling_factor);
                 end
                 obj.viz.vectors().updateVector(i-1, linkTransform.getPosition(), force);
-            end
+            
+                end
         end
     end
 end

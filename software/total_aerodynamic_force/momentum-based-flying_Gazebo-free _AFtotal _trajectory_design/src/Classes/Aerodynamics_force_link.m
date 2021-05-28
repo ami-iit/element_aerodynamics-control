@@ -21,8 +21,8 @@ classdef Aerodynamics_force_link < handle
         v_wind (3,1) double ; % R^3
         
         rho;%R
-        gama (13,1) double;
-        Ka (13,1) double; 
+        gama (14,1) double;
+        Ka (14,1) double; 
 %         C_D;
 %         C_L;
         
@@ -71,9 +71,7 @@ classdef Aerodynamics_force_link < handle
             
             % only one single link frame is considered now 
         end
-    end
     
-    methods 
         
         
         function aerodynamics_forces=compute_af_link(obj,relative_velocity,w_kaxis_link,frame)
@@ -83,16 +81,16 @@ classdef Aerodynamics_force_link < handle
             
            AoA=obj.compute_AoA(relative_velocity,w_kaxis_link);% compute angle of attack for a specific link
             
-            [Ka_link,C_D_link,C_L_link]=obj.get_coeff(frame,AoA); % get coefficients of one single link
+            [Ka_link,C_D_link,C_N_link]=obj.get_coeff(frame,AoA); % get coefficients of one single link
             
             AoA = max(AoA, 1e-8); %set tolerance to avoid Inf value 
-             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity+C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
+             aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_N_link*cot(AoA))*relative_velocity+C_N_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
             % aerodynamics_forces \in R^3
             %aerodynamics_forces=-Ka_link*norm(relative_velocity)*((C_D_link+C_L_link*cot(AoA))*relative_velocity);
         %aerodynamics_forces=-Ka_link*norm(relative_velocity)*(C_L_link/sin(AoA)*norm(relative_velocity)*w_kaxis_link);
         end
         
-        function [Ka_link,C_D_link,C_L_link]=get_coeff(obj,frame,AoA,beta) % get force coefficients and shape coefficient for one link
+        function [Ka_link,C_D_link,C_N_link]=get_coeff(obj,frame,AoA,beta) % get force coefficients and shape coefficient for one link
             
             frame_number = containers.Map({'head','chest','root_link','r_upper_arm','l_upper_arm',...
                 'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot','com'},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
@@ -103,9 +101,10 @@ classdef Aerodynamics_force_link < handle
             C_0_link=obj.C_0(frame_number(frame));
             C_1_link=obj.C_1(frame_number(frame));
             C_2_link=obj.C_2(frame_number(frame));
+            C_3_link=obj.C_3(frame_number(frame));
             
             C_D_link=C_0_link+C_1_link*(sin(AoA)^2)*(cos(beta)^2)+C_2_link*(cos(beta)^2);
-            C_L_link=C_3_link*sin(2*AoA);
+            C_N_link=C_3_link*sin(2*AoA);
             
         end
         
@@ -116,7 +115,8 @@ classdef Aerodynamics_force_link < handle
             
             
             robot_velocity=[base_pose_dot;s_dot]; %(Ndof+6)X1
-            J=robot.get_frame_jacobian(frame);% 6X(Ndof+6)
+             J=robot.get_frame_jacobian(frame);% 6X(Ndof+6)
+           
             link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
             
@@ -125,6 +125,21 @@ classdef Aerodynamics_force_link < handle
                 relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
           
         end
+        
+        function Va_com=get_com_va(obj,robot,base_pose_dot,s_dot) % get CoM velocity
+             
+            robot_velocity=[base_pose_dot;s_dot]; %(Ndof+6)X1
+            
+             J_com=robot.get_com_jacobian(); % 3X29
+             linear_velocity_com=J_com*robot_velocity;% 3X1 link velocity (linear and angular) w.r.t inertial frame
+            
+            
+            
+            
+                Va_com=linear_velocity_com-obj.v_wind; %expressed in world coordinate 
+          
+        end
+        
         function w_kaxis_link=compute_kaxis(obj,robot,frame)  % unit vector of body frame expressed in inertial orientation
 
 
@@ -171,25 +186,45 @@ classdef Aerodynamics_force_link < handle
             %axis which is the plane of (i,j)
           Va_proj=Va_com-dot(Va_com,w_kaxis_chest)/(norm(w_kaxis_chest)^2)*w_kaxis_chest;
           sgn=sign(cross(Va_proj,w_iaxis_chest));%sign of beta angle 
+          
           beta_nosign=atan2(norm(cross(Va_proj,w_iaxis_chest)),dot(Va_proj,w_iaxis_chest)); %angle value range [0,pi]
           beta=sgn(3)*beta_nosign; %[-pi,pi]
             
         end
        
-      function [ w_kaxis_chest,w_iaxis_chest]=chest_rot(obj,robot)
+      function [w_kaxis_chest,w_iaxis_chest]=chest_rot(obj,robot)
              %in order to calculate lateral angle beta, i and k axis of chest link
             
             %is needed [1;0;0]
             w_H_chest=robot.get_frame_H('chest'); % 4X4
             symmetric_axis=obj.set_symmetric_axis();
-            w_kaxis_chest=w_H_chest(1:3,1:3)*symmetric_axis(1:3,frame_number('chest'));
+            w_kaxis_chest=w_H_chest(1:3,1:3)*symmetric_axis(1:3,2);
            
             
             w_iaxis_chest=w_H_chest(1:3,1:3)*[0;0;-1];
       end  
         
         %calculate total aerodynamic force
-        function [ 
+        function [Fa_total,Fa_drag,Fa_side,Fa_normal]=compute_total_af(obj,w_kaxis_chest,w_iaxis_chest,Va_com)
+           
+            AoA=obj.compute_AoA(w_kaxis_chest,Va_com);
+            beta=obj.compute_beta(w_kaxis_chest,w_iaxis_chest,Va_com);
+           [Ka_com,C_D_tot,C_N_tot]=obj.get_coeff('com',AoA,beta); % get coefficients of total aerodynamic force, 1 
+          
+           % aerodynamic force is decomposed into three components:drag (Y),
+           % sideforce (X),normal force (Z)  , Va_com is along -Y
+           Fa_drag=-Ka_com*norm(Va_com)*C_D_tot*Va_com; 
+           %basic rotation matrix around z axis , which rotates y-axis into
+           %x-axis   Rz=[cos(-90) -sin(-90) 0;sin(-90) cos(-90) 0;0 0 1]
+           Rz=[0 1 0;-1 0 0;0 0 1];
+           Fa_side=0*(Rz*(-Va_com));
+           %basic rotation matrix around x axis , which rotates y-axis into
+           %z-axis   Rx=[1 0 0;0 cos90 -sin90;0 sin90 cos90]
+           Rx=[1 0 0;0 0 -1;0 1 0];
+           Fa_normal=Ka_com*norm(Va_com)*C_N_tot*(Rx*(-Va_com));
+           
+           Fa_total=Fa_drag+Fa_side+Fa_normal;
+        end
         
     end
 end

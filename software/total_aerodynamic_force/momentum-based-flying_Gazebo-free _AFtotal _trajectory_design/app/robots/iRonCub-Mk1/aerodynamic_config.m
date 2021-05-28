@@ -36,7 +36,6 @@ aerodynamics_config.Ka(14)=1;% for total aerodynamic force
 % aerodynamics_config.C_D(1:end)=200*ones(aerodynamics_config.NOL,1); % assume as constant value 
 % aerodynamics_config.C_L(1:end)=1*ones(aerodynamics_config.NOL,1); % assume as constant value
 
-%C_D=C_0+2*C_1*(sin(AoA))^2   ,   C_L=C_1*sin(2*AoA)
 
 
 

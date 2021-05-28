@@ -123,6 +123,9 @@ classdef Robot < handle
             % OUTPUT: - w_H_b of relative to the frame
             w_H_b = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, frame);
         end
+        function J_com=get_com_jacobian(obj)
+            J_com=iDynTreeWrappers.getCenterOfMassJacobian(obj.KinDynModel);
+        end
 
         function J = get_frame_jacobian(obj, frame)
             % get_frame_jacobian Returns the Jacobian of a specified frame
