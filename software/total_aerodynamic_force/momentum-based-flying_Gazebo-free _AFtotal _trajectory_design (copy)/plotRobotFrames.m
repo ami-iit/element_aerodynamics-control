@@ -2,7 +2,7 @@
 component_path = [getenv('COMPONENT_IRONCUB_PREFIX') '/component_ironcub'];
 robotName='iRonCub-Mk1'; %% Name of the robot  
 
-testFrames = {'l_sole'}; %% The frames to display
+testFrames = {'head', 'root_link', 'r_elbow_1'}; %% The frames to display
 
 
 meshFilePrefix = [component_path '/models']; %% Path to the model meshes

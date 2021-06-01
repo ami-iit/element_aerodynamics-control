@@ -180,41 +180,41 @@ classdef Aerodynamics_force_link < handle
            
         %use chest orientation to define the overall lateral angle of robot ,
        %range [-pi,pi]
-        function beta=compute_beta(obj,w_kaxis_chest,w_iaxis_chest,Va_com)
+        function beta=compute_beta(obj,w_kaxis_root,w_iaxis_root,Va_com)
            % the overall lateral angle beta of robot is defined as the angle between the
            % projection of Va_com on plane (i,j) of chest frame and the -k
            % axis of chest frame
            
             %calculate the projection of va on the plane perpendicular to k
             %axis which is the plane of (i,j)
-          Va_proj=Va_com-dot(Va_com,w_kaxis_chest)/(norm(w_kaxis_chest)^2)*w_kaxis_chest;
-          sgn=sign(cross(Va_proj,w_iaxis_chest));%sign of beta angle 
+          Va_proj=Va_com-dot(Va_com,w_kaxis_root)/(norm(w_kaxis_root)^2)*w_kaxis_root;
+          sgn=sign(cross(Va_proj,w_iaxis_root));%sign of beta angle 
           
-          beta_nosign=atan2(norm(cross(Va_proj,w_iaxis_chest)),dot(Va_proj,w_iaxis_chest)); %angle value range [0,pi]
+          beta_nosign=atan2(norm(cross(-Va_proj,w_iaxis_root)),dot(-Va_proj,w_iaxis_root)); %angle value range [0,pi]
           beta=sgn(3)*beta_nosign; %[-pi,pi]
             
         end
        
-      function [w_kaxis_chest,w_iaxis_chest]=chest_rot(obj,robot)
+      function [w_kaxis_root,w_iaxis_root]=root_rot(obj,robot)
              %in order to calculate overall lateral angle beta, i and k
              %axis of chest frame is needed
              
-            w_H_chest=robot.get_frame_H('chest'); % 4X4
+            w_H_root=robot.get_frame_H('root_link'); % 4X4
             symmetric_axis=obj.set_symmetric_axis();
-            w_kaxis_chest=w_H_chest(1:3,1:3)*symmetric_axis(1:3,2);
+            w_kaxis_root=w_H_root(1:3,1:3)*symmetric_axis(1:3,2);
            
             
-            w_iaxis_chest=w_H_chest(1:3,1:3)*[0;0;-1];
+            w_iaxis_root=w_H_root(1:3,1:3)*[1;0;0];
       end  
         
         %calculate total aerodynamic force which is decomposed into three
         %elements: drag force, normal force,side force
-        function [Fa_total,Fa_drag,Fa_side,Fa_normal]=compute_total_af(obj,w_kaxis_chest,w_iaxis_chest,Va_com)
+        function [Fa_total,Fa_drag,Fa_side,Fa_normal]=compute_total_af(obj,w_kaxis_root,w_iaxis_root,Va_com)
            
             %the overall angle of attack is defined as the angle between Va_com and -k
             %axis of chest frame
-            AoA=obj.compute_AoA(w_kaxis_chest,Va_com);
-            beta=obj.compute_beta(w_kaxis_chest,w_iaxis_chest,Va_com);
+            AoA=obj.compute_AoA(w_kaxis_root,Va_com);
+            beta=obj.compute_beta(w_kaxis_root,w_iaxis_root,Va_com);
            [Ka_com,C_D_tot,C_N_tot]=obj.get_coeff('com',AoA,beta); % get coefficients of total aerodynamic force, 1 
           
            % aerodynamic force is decomposed into three components:drag (+Ya),

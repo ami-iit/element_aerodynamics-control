@@ -100,10 +100,10 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
 %             Fa_normal=zeros(3,1);
             
                 relative_velocity_wb=obj.aerodynamics.get_com_va(obj.robot,obj.state.base_pose_dot,obj.state.s_dot);% Va_com
-                [w_kaxis_chest,w_iaxis_chest]=obj.aerodynamics.chest_rot(obj.robot);% k and i axis of chest frame
-                AoA_wb=obj.aerodynamics.compute_AoA(w_kaxis_chest,relative_velocity_wb);%overall angle of attck
-                beta=obj.aerodynamics.compute_beta(w_kaxis_chest,w_iaxis_chest,relative_velocity_wb); %overall lateral angle
-                [Fa_total,Fa_drag,Fa_side,Fa_normal]=obj.aerodynamics.compute_total_af(w_kaxis_chest,w_iaxis_chest,relative_velocity_wb); %total aerodynamic force
+                [w_kaxis_root,w_iaxis_root]=obj.aerodynamics.root_rot(obj.robot);% k and i axis of chest frame
+                AoA_wb=obj.aerodynamics.compute_AoA(w_kaxis_root,relative_velocity_wb);%overall angle of attck
+                beta=obj.aerodynamics.compute_beta(w_kaxis_root,w_iaxis_root,relative_velocity_wb); %overall lateral angle
+                [Fa_total,Fa_drag,Fa_side,Fa_normal]=obj.aerodynamics.compute_total_af(w_kaxis_root,w_iaxis_root,relative_velocity_wb); %total aerodynamic force
 
                 aerodynamics_forces_wb=Fa_total;
                
