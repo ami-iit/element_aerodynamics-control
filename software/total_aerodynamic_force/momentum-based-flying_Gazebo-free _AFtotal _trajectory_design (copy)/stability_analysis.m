@@ -15,6 +15,7 @@
 % handle the data extracted from simulink
 
 %time series
+close all
 ntime=size(linMom_err_SCOPE.time,1);
 T_end=Config.simulationTime;%end time
 
@@ -184,13 +185,13 @@ title('jerkCoM_x')
 
  
  %display angle of attack and Va
- aoa=zeros(13,ntime);
- va_norm=zeros(13,ntime);
+ aoa=zeros(1,ntime);
+ va_norm=zeros(1,ntime);
  for i=1:ntime
-     for j=1:13
-         aoa(j,i)=AoA.Data(1,j,i);
-         va_norm(j,i)=norm(Va.Data(:,j,i));
-     end
+     
+         aoa(i)=AoA.Data(1,1,i);
+         va_norm(i)=norm(Va.Data(:,1,i));
+     
  end
  
  figure(11)
@@ -198,21 +199,21 @@ title('jerkCoM_x')
  title('angle of attack');
 
 %display cd and cl
-cd=zeros(13,ntime);
-cl=zeros(13,ntime);
-for  i=1:ntime
-     for j=1:13
-         cd(j,i)=aerodynamics_config.C_0(j)+2*aerodynamics_config.C_1(j)*sin(aoa(j,i))^2;
-         cl(j,i)=aerodynamics_config.C_1(j)*sin(2*aoa(j,i));
-     end
-end
-figure(12)
-plot(tt,cd)
-title('drag coefficient');
-
-figure(13)
-plot(tt,cl)
-title('lift coefficient');
+% cd=zeros(13,ntime);
+% cl=zeros(13,ntime);
+% for  i=1:ntime
+%      for j=1:13
+%          cd(j,i)=aerodynamics_config.C_0(j)+2*aerodynamics_config.C_1(j)*sin(aoa(j,i))^2;
+%          cl(j,i)=aerodynamics_config.C_1(j)*sin(2*aoa(j,i));
+%      end
+% end
+% figure(12)
+% plot(tt,cd)
+% title('drag coefficient');
+% 
+% figure(13)
+% plot(tt,cl)
+% title('lift coefficient');
 
 figure(14)
 plot(tt,va_norm)

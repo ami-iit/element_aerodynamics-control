@@ -3,7 +3,7 @@
 %              COMMON aerodynamics related CONFIGURATION PARAMETERS                      %
 %                                                                         %
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-aerodynamics_config.v_wind=[-3;0;0];%m/s  wind velocity
+aerodynamics_config.v_wind=[-7.5*sqrt(2)/2;-7.5*sqrt(2)/2;0];%m/s  wind velocity
 aerodynamics_config.rho=1.225; % kg/m^3 ,air density at 101.325kPa and 15 degree
 aerodynamics_config.NOL=14; %number of links considered to be added aerodynamics forces + total aerodynamic force application frame 'com'
 % ['head'=1
@@ -46,4 +46,4 @@ aerodynamics_config.C_3=zeros(aerodynamics_config.NOL,1);%
 aerodynamics_config.C_0(end)=0.1326; 
 aerodynamics_config.C_1(end)=0.0818;
 aerodynamics_config.C_2(end)=0.0279;
-aerodynamics_config.C_3(end)=0.0374;
+aerodynamics_config.C_3(end)=0.0376;

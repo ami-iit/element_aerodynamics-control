@@ -5,7 +5,8 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
     %@author: Giuseppe L'Erario
     
     properties (Nontunable)
-        config
+        config;
+        
     end
     
     properties (DiscreteState)
@@ -20,17 +21,22 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
         linkFrame= {'head','chest','root_link','r_upper_arm','l_upper_arm',...
             'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'};
         scaling_factor = 0.5;
+        cfd_axis={'k','i','j'};
     end
     
     methods (Access = protected)
         
         function setupImpl(obj)
+            
             if obj.config.visualizeRobot
                 % Perform one-time calculations, such as computing constants
                 obj.prepareRobot()  % get obj.visualizer
                 obj.prepareJets();
                 %prepare the initial position of aerodynamics force vector
                 obj.prepareAerodynamics_forces();
+                
+                %prepare the initial position of cfd frame origin
+                obj.prepareCFD_body_frame();
             end
         end
         
@@ -46,7 +52,9 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
                 if obj.viz.run()
                     obj.updateVisualization(world_H_base, joints_positions);
                     obj.updateJets(jetIntensities);
+                    
                     obj.updateAerodynamics_forces(aerodynamics_forces_wb);
+                    obj.updateCFD_body_frame();
                     obj.viz.draw()
                 else
                     error('Closing visualizer.')
@@ -132,6 +140,25 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
             
         end 
         
+        function prepareCFD_body_frame(obj)
+            %prepare the created CFD frame basic elements (axis)
+            axis = iDynTree.Direction();
+            
+            frame_origin = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
+            for i=1:length(obj.cfd_axis)
+                disp(obj.cfd_axis{i})
+                
+                for j=1:3
+                    % note that the indexing starts from 0 (not from 1)
+                    % as in C++
+                    
+                    axis.setVal(j-1, 0);
+                end
+                obj.viz.vectors().addVector(frame_origin.getPosition(), axis);
+            
+             end
+        end
+        
         function updateJets(obj, jetIntensities)
             jet_int_iDyn = iDynTree.VectorDynSize(4);   
             max_jets_int = 220;
@@ -146,15 +173,54 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
             %update the aerodynamics forces for each link
             force = iDynTree.Direction();
             
-                for i=1:1
-                linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform(obj.linkFrame{i});
+            
+                %for i=1:1
+                linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
                 for j=1:3
                     % the single aerodynamics force is scaled by a constant factor
-                    force.setVal(j-1, aerodynamics_forces_wb(j, i) * obj.scaling_factor);
+                    force.setVal(j-1, aerodynamics_forces_wb(j) * obj.scaling_factor);
                 end
-                obj.viz.vectors().updateVector(i-1, linkTransform.getPosition(), force);
+                obj.viz.vectors().updateVector(0, linkTransform.getPosition(), force);
             
-                end
+                %end
         end
+        
+        function updateCFD_body_frame(obj)
+            %update the created CFD frame basic elements (axis)
+            axis = iDynTree.Direction();
+            
+            
+            linkTransform_root = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'root_link');
+            linkTransform_head = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'head');
+            o_root=linkTransform_root(1:3,4);
+            o_head=linkTransform_head(1:3,4);
+            kaxis=(o_root-o_head)/norm(o_root-o_head);
+            
+            linkTransform_l = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest_l_jet_turbine');
+            linkTransform_r = iDynTreeWrappers.getWorldTransform(obj.KinDynModel, 'chest_r_jet_turbine');
+            o_l=linkTransform_l(1:3,4);
+            o_r=linkTransform_r(1:3,4);
+             o_r_to_l=o_l-o_r; % vector starting from o_r and point towards o_l
+             proj=o_r_to_l-dot(o_r_to_l,kaxis)/(norm(kaxis)^2)*(kaxis);% projection of vector o_r_to_l 
+             %on the plane that is normal to vector w_kaxis_cfd
+             
+             
+             jaxis=proj/norm(proj); % j axis is defined
+             
+           
+            
+            iaxis=cross(jaxis,kaxis);
+            cfd_frame=[kaxis iaxis jaxis];
+            
+            frame_origin = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
+            for i=1:length(obj.cfd_axis)
+                for j=1:3
+                    % the single axis vector is scaled by a constant factor
+                    axis.setVal(j-1, cfd_frame(j, i)*0.5);
+                end
+                obj.viz.vectors().updateVector(i, frame_origin.getPosition(), axis);
+            end
+           
+        end   
     end
 end

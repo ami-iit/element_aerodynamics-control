@@ -1,5 +1,5 @@
 %plot force coefficients
-
+close all
 nt=size(AoA.Data,3);
 tt=AoA.Time;
 aoa=zeros(nt,1);
@@ -13,7 +13,7 @@ Fd_norm=zeros(1,nt);
 
 Fn=zeros(3,nt);
 Fn_norm=zeros(1,nt);
-
+angle=zeros(nt,1);
 Cd=zeros(nt,1);
 Cn=zeros(nt,1);
 for i=1:nt
@@ -26,6 +26,7 @@ for i=1:nt
     Fd_norm(i)=norm(Fd(:,i));
     Fn_norm(i)=norm(Fn(:,i));
     
+    angle(i)=atan2(norm(cross(va(:,i),Fd(:,i))),dot(va(:,i),Fd(:,i)));
     %force coefficients
     Cd(i)=Fd_norm(i)/(va_norm(i)^2);
     Cn(i)=Fn_norm(i)/(va_norm(i)^2);
@@ -79,8 +80,11 @@ title('beta angle')
 xlabel('time')
 ylabel('angle degree')
 
-
-
+figure
+plot(tt,rad2deg(angle))
+xlabel('time')
+ylabel('angle degree')
+title('angle between Va and Y axis')
 
 
 
