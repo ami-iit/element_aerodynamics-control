@@ -2,7 +2,7 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
     % matlab.System handling the robot visualization
     % go in app/robots/iRonCub*/initVisualizer.m to change the setup config
     
-    %@author: Giuseppe L'Erario
+    %@author: Giuseppe L'Erario  , Hui Tong
     
     properties (Nontunable)
         config;
@@ -129,22 +129,26 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
             % prepare aerodynamics forces plotting            
             force = iDynTree.Direction();
             
-                linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform('root_link'); %choose root link frame origin as the virtual point to observe aerodynamic force
+                %linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform('root_link'); %choose root link frame origin as the virtual point to observe aerodynamic force
+                o_com=iDynTreeWrappers.getCenterOfMassPosition(obj.KinDynModel);
+                p_com=iDynTree.Position(o_com(1),o_com(2),o_com(3));
+               
                 for j=1:3
                     % note that the indexing starts from 0 (not from 1)
                     % as in C++
                     
                     force.setVal(j-1, 0);
                 end
-                obj.viz.vectors().addVector(linkTransform.getPosition(), force);
-            
+                %obj.viz.vectors().addVector(linkTransform.getPosition(), force);
+                obj.viz.vectors().addVector(p_com, force);
         end 
         
         function prepareCFD_body_frame(obj)
             %prepare the created CFD frame basic elements (axis)
             axis = iDynTree.Direction();
-            
-            frame_origin = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
+            o_com=iDynTreeWrappers.getCenterOfMassPosition(obj.KinDynModel);
+            p_com=iDynTree.Position(o_com(1),o_com(2),o_com(3));
+            %frame_origin = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
             for i=1:length(obj.cfd_axis)
                 disp(obj.cfd_axis{i})
                 
@@ -154,7 +158,7 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
                     
                     axis.setVal(j-1, 0);
                 end
-                obj.viz.vectors().addVector(frame_origin.getPosition(), axis);
+                obj.viz.vectors().addVector(p_com, axis);
             
              end
         end
@@ -174,15 +178,15 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
             force = iDynTree.Direction();
             
             
-                %for i=1:1
-                linkTransform = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
+                o_com=iDynTreeWrappers.getCenterOfMassPosition(obj.KinDynModel);
+                p_com=iDynTree.Position(o_com(1),o_com(2),o_com(3));
                 for j=1:3
                     % the single aerodynamics force is scaled by a constant factor
                     force.setVal(j-1, aerodynamics_forces_wb(j) * obj.scaling_factor);
                 end
-                obj.viz.vectors().updateVector(0, linkTransform.getPosition(), force);
+                obj.viz.vectors().updateVector(0, p_com, force);
             
-                %end
+                
         end
         
         function updateCFD_body_frame(obj)
@@ -212,13 +216,15 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
             iaxis=cross(jaxis,kaxis);
             cfd_frame=[kaxis iaxis jaxis];
             
-            frame_origin = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
+            o_com=iDynTreeWrappers.getCenterOfMassPosition(obj.KinDynModel);
+            p_com=iDynTree.Position(o_com(1),o_com(2),o_com(3));
+            %frame_origin = obj.KinDynModel.kinDynComp.getWorldTransform('root_link');
             for i=1:length(obj.cfd_axis)
                 for j=1:3
                     % the single axis vector is scaled by a constant factor
                     axis.setVal(j-1, cfd_frame(j, i)*0.5);
                 end
-                obj.viz.vectors().updateVector(i, frame_origin.getPosition(), axis);
+                obj.viz.vectors().updateVector(i, p_com, axis);
             end
            
         end   
