@@ -13,10 +13,11 @@ classdef Robot < handle
 
     properties
         NDOF; % DOF of the robot
+        
     end
 
     properties (Access = private)
-        KinDynModel; % kynDyn robot model
+        KinDynModel;% kynDyn robot model
         g = [0, 0, -9.81]; % gravity vector
         M_iDyn; % mass matrix iDynTree
         J_LFoot_iDyntree; % Jacobian relative to left foot

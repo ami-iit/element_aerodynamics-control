@@ -93,27 +93,24 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
         end
         
         function [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal]=compute_aero_wholebody(obj)
-            generalized_aerodynamics_wb=zeros(29,1);
-%             aerodynamics_forces_wb=zeros(3,1);
-%             relative_velocity_wb=zeros(3,1);
-%             Fa_drag=zeros(3,1);
-%             Fa_normal=zeros(3,1);
-            
+                generalized_aerodynamics_wb=zeros(29,1);
+
+                %center of mass velocity is used to present the robot
+                %linear velocity
                 relative_velocity_wb=obj.aerodynamics.get_com_va(obj.robot,obj.state.base_pose_dot,obj.state.s_dot);% Va_com
-                [w_kaxis_chest,w_iaxis_chest]=obj.aerodynamics.chest_rot(obj.robot);% k and i axis of chest frame
-                AoA_wb=obj.aerodynamics.compute_AoA(w_kaxis_chest,relative_velocity_wb);%overall angle of attck
-                beta=obj.aerodynamics.compute_beta(w_kaxis_chest,w_iaxis_chest,relative_velocity_wb); %overall lateral angle
-                [Fa_total,Fa_drag,Fa_side,Fa_normal]=obj.aerodynamics.compute_total_af(w_kaxis_chest,w_iaxis_chest,relative_velocity_wb); %total aerodynamic force
+                [w_kaxis_cfd,w_iaxis_cfd,w_jaxis_cfd]=obj.aerodynamics.cfd_body_frame(obj.robot);% defined body frame
+                AoA_wb=obj.aerodynamics.compute_AoA(w_kaxis_cfd,relative_velocity_wb);%defined alpha angle
+                beta=obj.aerodynamics.compute_beta(w_kaxis_cfd,w_iaxis_cfd,relative_velocity_wb); %defined beta angle
+                
+                [w_xaxis_va,w_yaxis_va,w_zaxis_va]=obj.aerodynamics.cfd_velocity_frame(w_kaxis_cfd,w_iaxis_cfd,w_jaxis_cfd,beta,AoA_wb); % relative velocity frame
+                [Fa_total,Fa_drag,Fa_side,Fa_normal]=obj.aerodynamics.compute_total_af(w_kaxis_cfd,w_iaxis_cfd,w_xaxis_va,w_yaxis_va,w_zaxis_va,relative_velocity_wb); %total aerodynamic force
 
                 aerodynamics_forces_wb=Fa_total;
                
                 J_com=obj.robot.get_com_jacobian(); % 3x29 CoM jacobian
                 generalized_aerodynamics_wb=J_com'*aerodynamics_forces_wb;% 29x1 generalized aerodynamic wrench 
                 
-                
         
-            
-   
         end
         
         
