@@ -30,6 +30,8 @@ classdef Aerodynamics_force_link < handle
         C_1;
         C_2;
         C_3;
+        C_4;
+        C_5;
     end
      
     
@@ -53,6 +55,8 @@ classdef Aerodynamics_force_link < handle
             obj.C_1=aerodynamics_config.C_1;
             obj.C_2=aerodynamics_config.C_2;
             obj.C_3=aerodynamics_config.C_3;
+            obj.C_4=aerodynamics_config.C_4;
+            obj.C_5=aerodynamics_config.C_5;
         end
         
         
@@ -106,10 +110,12 @@ classdef Aerodynamics_force_link < handle
             C_1_link=obj.C_1(frame_number(frame));
             C_2_link=obj.C_2(frame_number(frame));
             C_3_link=obj.C_3(frame_number(frame));
+            C_4_link=obj.C_4(frame_number(frame));
+            C_5_link=obj.C_5(frame_number(frame));
             
             %aerodynamic coefficients model
-            C_D_link=C_0_link+C_1_link*(sin(AoA)^2)*(cos(beta)^2)+C_2_link*(cos(beta)^2); % drag force coefficient
-            C_N_link=C_3_link*sin(2*AoA); % normal force coefficient
+            C_D_link=C_0_link+C_1_link*(sin(AoA)^2)*(cos(beta)^3)+C_2_link*(cos(beta)^3)+C_3_link*(cos(beta)^2); % drag force coefficient
+            C_N_link=C_4_link+C_5_link*sin(2*AoA)*(cos(beta)^2); % normal force coefficient
             
         end
         
@@ -226,7 +232,8 @@ classdef Aerodynamics_force_link < handle
              % chest turbine on the plane that is perpendicular to k axis
              w_H_lchest=robot.get_frame_H('chest_l_jet_turbine');
              o_l=w_H_lchest(1:3,4);
-             
+            
+
              w_H_rchest=robot.get_frame_H('chest_r_jet_turbine');
              o_r=w_H_rchest(1:3,4);
              o_r_to_l=o_l-o_r; % vector starting from o_r and point towards o_l

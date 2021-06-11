@@ -41,9 +41,8 @@ for i=1:nt
     Cd(i)=Fd_norm(i)/(va_norm(i)^2); % fd/v^2
     Cn(i)=Fn_norm(i)/(va_norm(i)^2); % fn/v^2
     
-
-    cd_fit(i)=0.1326+0.0818*(sin(aoa(i))^2)*(cos(bb(i))^2)+0.0279*(cos(bb(i))^2); %check the implementation of force coefficient model
-    cn_fit(i)=0.0376*sin(2*aoa(i));
+    cd_fit(i)=0.1327-0.0858*(sin(aoa(i))^2)*(cos(bb(i))^3)+0.0679*(cos(bb(i))^3)+0.0949*(cos(bb(i))^2); %check the implementation of force coefficient model
+    cn_fit(i)=0.0042+0.0598*sin(2*aoa(i))*(cos(bb(i))^2);
     
 end
 
