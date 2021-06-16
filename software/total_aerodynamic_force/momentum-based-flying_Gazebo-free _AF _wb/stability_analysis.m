@@ -245,7 +245,7 @@ title('normal force')
 xlabel('time')
 
 %save figures
-path='/home/tong_hui/Documents/iit_tong/Aerodynamics_control_element/stability_test/hovering/fast_speed/ne_20x';    
+path='/home/tong_hui/Documents/iit_tong/Aerodynamics_control_element/stability_test/hovering/wind_gust/wind_3_13';    
 saveas(figure(1),fullfile(path,['pos_err' '.jpg']));
 saveas(figure(2),fullfile(path,['lin_mom_err' '.jpg']));
 saveas(figure(3),fullfile(path,['pos_err_norm' '.jpg']));

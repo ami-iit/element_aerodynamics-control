@@ -3,7 +3,7 @@
 %              COMMON aerodynamics related CONFIGURATION PARAMETERS                      %
 %                                                                         %
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-aerodynamics_config.v_wind=[-10;0;0];%m/s  wind velocity
+%aerodynamics_config.v_wind=[-5;0;0];%m/s  wind velocity
 aerodynamics_config.rho=1.225; % kg/m^3 ,air density at 101.325kPa and 15 degree
 aerodynamics_config.NOL=14; %number of links considered to be added aerodynamics forces + total aerodynamic force application frame 'com'
 % ['head'=1
@@ -34,8 +34,7 @@ aerodynamics_config.Ka(14)=1;% for total aerodynamic force, we consider the refr
 %the analyzed force coefficients equal to f/v^2
 
 % identified coefficients of the force model for total aerodynamic force
-% model: cd=c0+c1*sin(a)^2*cos(beta)^2+c2*cos(beta)^2  (drag) ;
-% cn=c3*sin(2a) (normal froce)
+
 aerodynamics_config.C_0=zeros(aerodynamics_config.NOL,1);%
 aerodynamics_config.C_1=zeros(aerodynamics_config.NOL,1);%
 aerodynamics_config.C_2=zeros(aerodynamics_config.NOL,1);%

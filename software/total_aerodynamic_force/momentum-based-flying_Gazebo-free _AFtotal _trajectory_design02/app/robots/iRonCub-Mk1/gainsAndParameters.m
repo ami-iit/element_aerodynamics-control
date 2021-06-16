@@ -146,7 +146,7 @@ Config.sat.jointTorquesDotMax                = 300;
 Config.sat.deadZoneThreshold                 = 0.00001;
 
 % QP boundaries
-Config.sat.maxJetsIntVar                     = [100;100;100;100];%[100; 100; 100; 100];
+Config.sat.maxJetsIntVar                     = [150;150;150;150];%[100; 100; 100; 100];
 Config.sat.maxJetsInt                        = [100; 100; 220; 220];
 Config.sat.maxJointVelDes                    = 45 .* pi/180 .* ones(Config.N_DOF,1);
 Config.sat.maxContactForcesVar               = 100 .* ones(12,1);

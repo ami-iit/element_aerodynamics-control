@@ -24,7 +24,7 @@ addpath(genpath('./src/'));
 addpath(genpath('../matlab-library/'));
 
 % Simulation time and delta_t [s]
-Config.simulationTime                   = 11;%14;%inf;
+Config.simulationTime                   = 18;%11;%14;%inf; 12+2
 Config.tStep                            = 0.01;%0.005;
 jets_config.use_jet_dyn                 = false;
 
