@@ -1,7 +1,7 @@
 % a trajecotry is designed for doing stability test, the trajectory is
 % combined by 5 parts
-% at the starting and end point of each part , the CoM velocity is zero ,
-% the acc is defined as sin shape to avoid impact at the beginning 
+
+% the acc is defined as sin shape to avoid impact 
  % author: HUI TONG
 
 function pos_vel_acc_jerk_CoM_des=trajectory_design(t,posCoM_int,posCoM)
