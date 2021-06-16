@@ -245,7 +245,7 @@ title('normal force')
 xlabel('time')
 
 %save figures
-% path='/home/tong_hui/Documents/iit_tong/Aerodynamics_control_element/stability_test/trajectory02/no_af/speed_9';    
+% path='/home/tong_hui/Documents/iit_tong/Aerodynamics_control_element/stability_test/trajectory02/no_af/speed_11';    
 % saveas(figure(1),fullfile(path,['pos_err' '.jpg']));
 % saveas(figure(2),fullfile(path,['lin_mom_err' '.jpg']));
 % saveas(figure(3),fullfile(path,['pos_err_norm' '.jpg']));
@@ -253,6 +253,9 @@ xlabel('time')
 % saveas(figure(5),fullfile(path,['base_rot_err_norm' '.jpg']));
 % saveas(figure(6),fullfile(path,['angu_mom_err' '.jpg']));
 % saveas(figure(7),fullfile(path,['robot_trajectory' '.jpg']));
+% saveas(figure(8),fullfile(path,['velz' '.jpg']));
+% saveas(figure(9),fullfile(path,['vely' '.jpg']));
+% saveas(figure(10),fullfile(path,['velx' '.jpg']));
 % saveas(figure(11),fullfile(path,['aoa' '.jpg']));
 % saveas(figure(12),fullfile(path,['va_norm' '.jpg']));
 % saveas(figure(13),fullfile(path,['aero_force' '.jpg']));

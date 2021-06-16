@@ -1,5 +1,19 @@
 % a trajecotry is designed for doing stability test, the trajectory is
 % combined by 5 parts
+%Part 1: going up, accelerate until reaches the max vel then decelerate to
+%zero, time: [0,Ts] duration: Ts
+
+%Part 2: going forward, accelerate until reaches max vel ,
+%time:(Ts,Ts+Ts2/2] duration: Ts2/2
+
+%Part 3: going forward with constant velocity which is the max vel, time:
+%(Ts+Ts2/2, Ts+Ts2/2+T_const] duration: T_const
+
+%Part 4: going forward, decelerate until reaches zero vel, time:
+%(Ts+Ts2/2+T_const,Ts+Ts2/2+T_const+Ts3/2] duration: Ts3/2
+
+%Part 5: hovering, time: (Ts+Ts2/2+T_const+Ts3/2, end] duraton: until the
+%end
 
 % the acc is defined as sin shape to avoid impact 
  % author: HUI TONG
@@ -18,7 +32,7 @@ pos_vel_acc_jerk_CoM_des=zeros(3,4);
   
     
 A_p1=0.8; % acc_max for going up
-A_p2=3; % acc_max for going forward along +x axis
+A_p2=3.5; % acc_max for going forward along +x axis
 f_p1=0.5;%frequency of going up
 f_p2=1/10;%frequency of going forward while accelerating
 f_p3=1/10;%frequency of going forward while decelerating
