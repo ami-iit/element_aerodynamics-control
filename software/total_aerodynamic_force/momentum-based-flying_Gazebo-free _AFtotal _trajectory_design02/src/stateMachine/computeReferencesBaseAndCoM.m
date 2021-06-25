@@ -125,32 +125,32 @@ function [pos_vel_acc_jerk_CoM_des, rot_vel_acc_jerk_base_des] = ...
     end
     
     % let robot rotate 30 deg for pitch to fly forward
-%     if 0<t 
-%        rpyBase_ref(2)=-deg2rad(30);
-%     
-%     end
+
+
     theta=0;
 
-%     if 0<t && t<=6
+%     if 0<t && t<=10.3485
 %         theta=-30;
 %         
-%     elseif 6<t && t<=10
-%         theta=15/8*((t-6+4)^2)-15*(t-6+4);
-%     elseif 10<t
-%         theta=0;
+%     elseif 10.3485<t && t<=14
+%         theta=15/8*((t-10.3485+4)^2)-15*(t-10.3485+4);
+%     elseif 14<t
+%         theta=15/8*((14-10.3485+4)^2)-15*(14-10.3485+4); %-5 deg
 %         
 %     end
     
-    if 0<t && t<=10.3485
+    if 0<t && t<=10
         theta=-30;
         
-    elseif 10.3485<t && t<=14
-        theta=15/8*((t-10.3485+4)^2)-15*(t-10.3485+4);
+    elseif 10<t && t<=14
+        theta=10/8*((t-10)^2)-30;
     elseif 14<t
-        theta=15/8*((14-10.3485+4)^2)-15*(14-10.3485+4);
+        theta=10/8*((14-10)^2)-30; %-10 deg
         
     end
     rpyBase_ref(2)=deg2rad(theta);
+    
+    
 
     % output reference (to be smoothed)
     pos_vel_acc_jerk_CoM_des  = [posCoM_ref, zeros(3)];

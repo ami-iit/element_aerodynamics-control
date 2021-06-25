@@ -43,7 +43,9 @@ classdef Aerodynamics_force_link < handle
             %   rho - air density
             %   gama - shape coefficient
             obj.N_link=aerodynamics_config.NOL;
-            obj.v_wind=aerodynamics_config.v_wind;
+            %obj.v_wind=aerodynamics_config.v_wind;
+            %obj.v_wind=v_wind;
+            
             obj.rho=aerodynamics_config.rho;
             obj.gama=aerodynamics_config.gama;%vector N_linkX1
             obj.Ka=aerodynamics_config.Ka;%vector N_linkX1
@@ -119,7 +121,7 @@ classdef Aerodynamics_force_link < handle
             
         end
         
-        function relative_velocity=compute_relative_v(obj,robot,base_pose_dot,s_dot,frame) %base__pose_dot and s_dot are from the state before forward dynamics
+        function relative_velocity=compute_relative_v(obj,robot,base_pose_dot,s_dot,frame,v_wind) %base__pose_dot and s_dot are from the state before forward dynamics
             %this function computes the relative velocity between linear
             %velocity of link frame origin w.r.t inertial frame and the
             %wind velocity expressed in the inertial frame
@@ -131,11 +133,11 @@ classdef Aerodynamics_force_link < handle
             link_velocity=J*robot_velocity;% 6X1 link velocity (linear and angular) w.r.t inertial frame
             linear_velocity_link=link_velocity(1:3);
            
-            relative_velocity=linear_velocity_link-obj.v_wind; %expressed in world coordinate 
+            relative_velocity=linear_velocity_link-v_wind; %expressed in world coordinate 
           
         end
         
-        function Va_com=get_com_va(obj,robot,base_pose_dot,s_dot) % get relative velocity of the robot and CoM velocity is assumed to present the
+        function Va_com=get_com_va(obj,robot,base_pose_dot,s_dot,v_wind) % get relative velocity of the robot and CoM velocity is assumed to present the
             %robot linear velocity
              
             robot_velocity=[base_pose_dot;s_dot]; %(Ndof+6)X1
@@ -143,7 +145,7 @@ classdef Aerodynamics_force_link < handle
             J_com=robot.get_com_jacobian(); % 3X29 CoM jacobian
             linear_velocity_com=J_com*robot_velocity;% 3X1 CoM velocity (linear only) w.r.t inertial frame
           
-            Va_com=linear_velocity_com-obj.v_wind; % relative velocity expressed in world coordinate 
+            Va_com=linear_velocity_com-v_wind; % relative velocity expressed in world coordinate 
           
         end
         

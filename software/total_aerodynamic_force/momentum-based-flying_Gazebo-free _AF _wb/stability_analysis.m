@@ -33,6 +33,9 @@ angMom_err=zeros(ntime,3);
 baseRot_err=zeros(ntime,3);
 baseRot_err_norm=zeros(ntime,1);
 
+LDot_linear=zeros(ntime,3);
+LDot_angular=zeros(ntime,3);
+
 for i=1:ntime
     
     for j=1:3
@@ -44,6 +47,9 @@ for i=1:ntime
     angMom_err(i,j)=angMom_err_SCOPE.signals(j).values(1,1,i);
     baseRot_err(i,j)=baseRot_err_SCOPE.signals(j).values(i);
     
+    LDot_linear(i,j)=LDotEstLinear_SCOPE.signals(j).values(1,1,i);
+    
+    LDot_angular(i,j)=LDotEstAngular_SCOPE.signals(j).values(1,1,i);
     end
      baseRot_err_norm(i)=baseRotErrNorm_SCOPE.signals.values(i);
      
@@ -210,6 +216,10 @@ xlabel('time')
  
  Fn_norm=zeros(1,ntime);%normal force norm
  Fa_norm=zeros(1,ntime);
+ 
+ V_wind=v_wind.Data';
+ Designed_gain=vary_gain.Data';
+ Smooth_gain=smooth_gain.Data';
  for i=1:ntime
      
          aoa(i)=AoA.Data(1,1,i);
@@ -217,6 +227,7 @@ xlabel('time')
          Fd_norm(i)=norm(Fa_drag.Data(:,1,i));
          Fn_norm(i)=norm(Fa_normal.Data(:,1,i));
          Fa_norm(i)=norm(Fa.Data(:,1,i));
+         
  end
  
  figure(11)
@@ -244,8 +255,42 @@ plot(tt,Fn_norm)
 title('normal force')
 xlabel('time')
 
+figure(14)
+plot(tt,LDot_linear)
+legend('x','y','z')
+title('linear momentum derivative')
+xlabel('time')
+
+figure(15)
+plot(tt,LDot_angular)
+legend('x','y','z')
+title('angular momentum derivative')
+xlabel('time')
+
+figure(16)
+plot(tt,V_wind)
+legend('x','y','z')
+title('wind velocity')
+xlabel('time')
+ylabel('m/s')
+
+figure(17)
+plot(tt,Designed_gain)
+legend('x','y','z')
+title('Designed gain')
+xlabel('time')
+
+
+figure(18)
+plot(tt,Smooth_gain)
+legend('x','y','z')
+title('Smooth gain')
+xlabel('time')
+
+
+
 %save figures
-path='/home/tong_hui/Documents/iit_tong/Aerodynamics_control_element/stability_test/hovering/wind_gust/wind_3_13';    
+path='/home/tong_hui/Documents/iit_tong/Aerodynamics_control_element/gain_scheduling/hovering/wind_gust_3_15/scheduling_01';    
 saveas(figure(1),fullfile(path,['pos_err' '.jpg']));
 saveas(figure(2),fullfile(path,['lin_mom_err' '.jpg']));
 saveas(figure(3),fullfile(path,['pos_err_norm' '.jpg']));
@@ -253,8 +298,18 @@ saveas(figure(4),fullfile(path,['base_rot_err' '.jpg']));
 saveas(figure(5),fullfile(path,['base_rot_err_norm' '.jpg']));
 saveas(figure(6),fullfile(path,['angu_mom_err' '.jpg']));
 saveas(figure(7),fullfile(path,['robot_trajectory' '.jpg']));
+saveas(figure(8),fullfile(path,['velz' '.jpg']));
+saveas(figure(9),fullfile(path,['vely' '.jpg']));
+saveas(figure(10),fullfile(path,['velx' '.jpg']));
 saveas(figure(11),fullfile(path,['aoa' '.jpg']));
 saveas(figure(12),fullfile(path,['va_norm' '.jpg']));
 saveas(figure(13),fullfile(path,['aero_force' '.jpg']));
+saveas(figure(14),fullfile(path,['LDot_linear' '.jpg']));
+saveas(figure(15),fullfile(path,['LDot_angular' '.jpg']));
+saveas(figure(16),fullfile(path,['wind_velocity' '.jpg']));
+saveas(figure(17),fullfile(path,['designed_gain' '.jpg']));
+saveas(figure(18),fullfile(path,['smooth_gain' '.jpg']));
+
+
 
 save(fullfile(path,'test.mat'));    

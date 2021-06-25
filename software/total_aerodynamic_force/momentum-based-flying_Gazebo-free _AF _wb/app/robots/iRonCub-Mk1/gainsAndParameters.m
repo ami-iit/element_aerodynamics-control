@@ -84,13 +84,13 @@ Config.minVerticalForces                = 3.5;
 %% CONTROLLER GAINS
 
 % Linear momentum gains 
-% Config.gains.momentum.KP_linear = [15, 15, 15];         
 Config.gains.momentum.KP_linear = [15, 15, 15];         
+Config.gains.momentum.KP2_linear = [31, 31, 31];         
 Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 
 % Attitude controller gains
-Config.gains.momentum.KP_angular = 50 .* ones(1,3);                            
+Config.gains.momentum.KP_angular = 50 .* ones(1,3); %50                           
 % Config.gains.momentum.KD_angular = 125 .* ones(1,3); 
 Config.gains.momentum.KD_angular = 2*sqrt(Config.gains.momentum.KP_angular); 
 

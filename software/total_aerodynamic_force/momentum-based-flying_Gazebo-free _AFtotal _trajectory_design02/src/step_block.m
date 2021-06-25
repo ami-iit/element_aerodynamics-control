@@ -53,7 +53,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
                 obj.robot_config.initialConditions.base_pose_dot, obj.robot_config.initialConditions.s_dot);
         end
 
-        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal] = stepImpl(obj, jets_input, torque)
+        function [w_H_b, s, base_pose_dot, s_dot, jet_intensities, wrench_left_foot, wrench_right_foot,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal] = stepImpl(obj, jets_input, torque, v_wind)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             
@@ -62,7 +62,7 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             % add the external wrenches acting on the robot (more than jets
             % forces and contact forces) aerodynamics forces
             
-            [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal]=obj.compute_aero_wholebody();
+            [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal]=obj.compute_aero_wholebody(v_wind);
             
             
             %compute generalized aerodynamics wrench on whole body 
@@ -92,12 +92,12 @@ classdef step_block < matlab.System & matlab.system.mixin.Propagates
             obj.robot.set_robot_state(w_H_b, s, base_pose_dot, s_dot) % inputs are accessed from State propertites
         end
         
-        function [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal]=compute_aero_wholebody(obj)
+        function [generalized_aerodynamics_wb,aerodynamics_forces_wb,relative_velocity_wb,AoA_wb,beta,Fa_drag,Fa_normal]=compute_aero_wholebody(obj,v_wind)
                 generalized_aerodynamics_wb=zeros(29,1);
 
                 %center of mass velocity is used to present the robot
                 %linear velocity
-                relative_velocity_wb=obj.aerodynamics.get_com_va(obj.robot,obj.state.base_pose_dot,obj.state.s_dot);% Va_com
+                relative_velocity_wb=obj.aerodynamics.get_com_va(obj.robot,obj.state.base_pose_dot,obj.state.s_dot,v_wind);% Va_com
                 [w_kaxis_cfd,w_iaxis_cfd,w_jaxis_cfd]=obj.aerodynamics.cfd_body_frame(obj.robot);% defined body frame
                 AoA_wb=obj.aerodynamics.compute_AoA(w_kaxis_cfd,relative_velocity_wb);%defined alpha angle
                 beta=obj.aerodynamics.compute_beta(w_kaxis_cfd,w_iaxis_cfd,relative_velocity_wb); %defined beta angle
