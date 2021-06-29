@@ -85,7 +85,7 @@ Config.minVerticalForces                = 3.5;
 
 % Linear momentum gains 
 Config.gains.momentum.KP_linear = [15, 15, 15];         
-Config.gains.momentum.KP2_linear = [7.5, 7.5, 7.5];         
+Config.gains.momentum.KP2_linear =[15, 15, 15];   % [7.5, 7.5, 7.5];         
 Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 

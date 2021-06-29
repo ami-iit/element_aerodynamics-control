@@ -105,7 +105,7 @@ plot(A1,Cd1,'x','MarkerSize',8)
 hold on
 plot(aa,cd1_RG,'r')
 legend('cfd data beta=0','RG estimated cd')
-xlabel('angle of attack /deg');
+xlabel('alpha angle/deg');
 ylabel('drag coefficient')
 title('fd/v^2')
 %plot cl 
@@ -115,9 +115,9 @@ plot(A1,Cn1,'x','MarkerSize',8)
 hold on
 plot(aa,cl1_RG,'r')
 legend('cfd data beta=0','RG estimated cl')
-xlabel('angle of attack');
-ylabel('lift coefficient')
-title('fl/v^2')
+xlabel('alpha angle/deg');
+ylabel('normal force coefficient')
+title('fn/v^2')
 
 % c2 and c3 are estimated by the data in sheet 3,4,5 Alpha=90,60,120 LS Regression is
 % used due to the fact that the chosen model already has penalty from cfd data 
@@ -143,7 +143,20 @@ ylabel('Cd/Cd_0')
 title('drag coefficients')
 legend('mean value from cfd','estimated')
 
-
+Cn3_am=Cn3/Cn(1);
+Cn4_am=Cn4/Cn4(1);
+Cn5_am=Cn5/Cn5(1);
+Cn_mean=(Cn3_am+Cn4_am+Cn5_am)/3;
+Pn=polyfit(cos(B3_r),Cn_mean,3);
+Cn_est=polyval(Pn,cos(tt_r));
+figure
+plot(B3,Cn_mean,'b-x','MarkerSize',8);
+hold on 
+plot(tt,Cn_est,'r');
+xlabel('beta /deg');
+ylabel('Cn/Cn_0')
+title('normal force coefficients')
+legend('mean value from cfd','estimated')
 
 
 c0_model1=C1_RG(1);
@@ -245,8 +258,8 @@ R3=sum((Y_Cn_est3-Cn).^2)/ns;
 RMSE_cn3=sqrt(R3);
 
 
-%% Model 04 cn=c1*sin(2a)*cos(2beta)+c2*sin(2a)*cos(4beta)
-x4_cn=[sin(2*A_r).*cos(2*B_r) sin(2*A_r).*cos(4*B_r)];
+%% Model 04 cn=c1*sin(2a)*cos(beta)^3+c2*sin(2a)*cos(beta)
+x4_cn=[sin(2*A_r).*(cos(B_r).^3)  cos(B_r)];
 
 
 

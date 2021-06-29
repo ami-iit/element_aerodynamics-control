@@ -3,7 +3,7 @@ function v_wind=generate_wind(t)
 v_wind=zeros(3,1);
 simu_windgust=true;
 v_const=3; %constant wind speed
-v_gust=20; % wind gust 53 works, 54 failed
+v_gust=10; % wind gust 53 works, 54 failed
 v_raise=v_gust-v_const; % difference between wind gust and constant wind speed
 
 sigma=2; % sigma for gaussian distribution
