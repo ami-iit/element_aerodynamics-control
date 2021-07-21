@@ -1,5 +1,9 @@
 A short introduction of the software files is listed here.
-1. in the folder [distributed_aerodynamic_force](), the
-aerodynamic forces are distributed all over the body by acting on multiple links. But there are no specific identified aerodynamic models applied in this part.
+1. in the folder [distributed_aerodynamic_force](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/distributed_aerodynamic_force), the
+aerodynamic forces are distributed all over the body by acting on multiple links. But there are no specific identified aerodynamic models applied in the simulator.
 
-2. in the folder []()
+2. in the folder [test](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/test), a dropping test is done to verify the implementation of the aerodynamic forces in software side, as in [quantitative tests](https://github.com/dic-iit/element_aerodynamics-control/issues/29#issuecomment-797621024).
+3. in the folder [total_aerodynamic_force](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/total_aerodynamic_force), the total aerodynamic forces acting on the CoM of the robot are implemented in the simulator with the identified aerodynamic models. The aerodynamic forces are added to the forward dynamics of the robot system only. Inside the file, two cases are introduced: 1). [hovering](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/total_aerodynamic_force/momentum-based-flying_Gazebo-free%20_AFtotal%20_hovering) , 2). [high-speed flight](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/total_aerodynamic_force/momentum-based-flying_Gazebo-free%20_AFtotal%20_high_speed): robot flies following the designed [trajectory](https://github.com/dic-iit/element_aerodynamics-control/issues/57).
+4. in the folder [total_aerodynamic_force_linearFeedback](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/total_aerodynamic_force_linearFeedback), the modelled aerodynamic forces are also added to the time derivative of the centroidal momentum of the robot on which the feedback law is applied. As in the previous folder, [hovering](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/total_aerodynamic_force_linearFeedback/momentum-based-flying_Gazebo-free%20_AFtotal_hovering) and [high speed flight](https://github.com/dic-iit/element_aerodynamics-control/tree/main/software/total_aerodynamic_force_linearFeedback/momentum-based-flying_Gazebo-free%20_AFtotal%20_high_speed) are placed.
+
+
