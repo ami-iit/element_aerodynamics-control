@@ -30,8 +30,8 @@ The following milestones have been identified for this project:
 ### - Build simplified robot models with aerodynamic effects ,[achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/4) 
 ### - Implement aerodynamic forces into current simulator,[achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/10) 
 ### - Model identification of aerodynamic forces on iRonCub with the data from CFD analysis
-### - Robustness test of current controller with aerodynamic effects, [In Progress](https://github.com/dic-iit/element_aerodynamics-control/issues/34) 
-### - Modify the current controller in order to handle aerodynamic effects, [In Progress](https://github.com/dic-iit/element_aerodynamics-control/issues/20)
+### - Robustness test of current controller with aerodynamic effects, [achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/34) 
+### - Modify the current controller in order to handle aerodynamic effects, [achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/20)
 
 
 
