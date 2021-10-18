@@ -65,7 +65,7 @@ Config.SAVE_WORKSPACE                   = false;
 component_path = [getenv('COMPONENT_IRONCUB_PREFIX') '/component_ironcub'];
 
 Config.robotName = 'iRonCub-Mk1';
-
+setenv('YARP_ROBOT_NAME', Config.robotName)
 Config.fileName = 'model_stl.urdf';
 
 Config.modelPath = [component_path '/models/' Config.robotName '/iRonCub/robots/' Config.robotName '/'];

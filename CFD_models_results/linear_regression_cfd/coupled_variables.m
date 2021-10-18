@@ -1,5 +1,5 @@
 clc
-clear all
+clear variables
 close all
 
 %this script is to load all the cfd data and proceed linear regression
