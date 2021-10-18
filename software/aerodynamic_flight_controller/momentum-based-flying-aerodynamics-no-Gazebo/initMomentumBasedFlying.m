@@ -24,7 +24,7 @@ setenv('YARP_ROBOT_NAME', Config.robotName)
 import wbc.*
 addpath(genpath('./src/'));
 addpath(genpath('../matlab-library/'));
-
+addpath('../controlAndDataGui/');
 % Simulation time and delta_t [s]
 Config.simulationTime                   = inf;
 Config.tStep                            = 0.01;%0.005;
