@@ -17,21 +17,20 @@ The existing achievements of control algorithm with the reference as [IEEE-RAL 2
 
 ## Outcomes
 The possible outcomes of this element:
-### - A simplified robot models in Matlab
+### - Simplified aerodynamic models to evaluate aerodynamic effects on iRonCub
 
 ### - A simulator of flying iRonCub contains aerodynamics forces
 
 ### - A controller that stabilizes the flying iRonCub with aerodynamic effects
 
-
+### - Publication for aerodynamic-flight-control
 
 ## Milestones
 The following milestones have been identified for this project:
-### - Build simplified robot models with aerodynamic effects ,[achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/4) 
-### - Implement aerodynamic forces into current simulator,[achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/10) 
-### - Model identification of aerodynamic forces on iRonCub with the data from CFD analysis,[achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/42)
-### - Robustness test of current controller with aerodynamic effects, [achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/34) 
-### - Modify the current controller in order to handle aerodynamic effects, [achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/20)
-
+### - Identify the model of aerodynamic forces on iRonCub with CFD analysis,[achieved](https://github.com/ami-iit/element_aerodynamics-control/issues/42);
+### - Implementation of aerodynamic models on Matlab-Based simulator ,[achieved](https://github.com/ami-iit/element_aerodynamics-control/issues/56);
+### - Proceed robustness tests of current controller with aerodynamics effects,[achieved](https://github.com/ami-iit/element_aerodynamics-control/issues/34);
+### - Improve the current controller to take care of aerodynamics effects on iRonCub, [achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/20);
+### - Prepare a publication of the thesis work for ICRA 2022, [In progress](https://github.com/ami-iit/element_aerodynamics-control/issues/65).
 
 
