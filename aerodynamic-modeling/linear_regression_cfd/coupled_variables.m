@@ -80,7 +80,8 @@ ns=size(A,1); % size of the data set
 %% Model  cd=c0 + c1*sin(a)^2 * cos(beta)^3 + c2*cos(beta)^3+c3*cos(beta)^2
 %XD=[ones(ns,1) (sin(A_r).^2).*(cos(B_r).^2)  cos(B_r).^2];   
 XD_app_use=[(sin(A_r).^2).*(cos(B_r).^3)  cos(B_r).^3 cos(B_r).^2];
-
+XD=[ones(ns,1) (sin(A_r).^2).*(cos(B_r).^3)  cos(B_r).^3 cos(B_r).^2];
+c_dmodel=XD\Cd;
 
 
 %% Model identification for normal force coefficient
@@ -89,6 +90,12 @@ XD_app_use=[(sin(A_r).^2).*(cos(B_r).^3)  cos(B_r).^3 cos(B_r).^2];
 %% Model  cn=c4+c5*sin(2a)*cos(beta)^2
 XN_app_use=sin(2*A_r).*(cos(B_r).^2);
 
+XN=[ones(ns,1) sin(2*A_r).*(cos(B_r).^2)];
+c_nmodel=XN\Cn;
+
+%disp('The identified constant coefficients are:')
+
+sprintf('The identified constant coefficients are:\n c0=%f,\n c1=%f,\n c2=%f,\n c3=%f,\n c4=%f,\n c5=%f', c_dmodel(1),c_dmodel(2),c_dmodel(3),c_dmodel(4),c_nmodel(1),c_nmodel(2))
 
 
 
