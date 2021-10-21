@@ -14,12 +14,14 @@ The [aerodynamic-flight-controllers](https://github.com/ami-iit/element_aerodyna
 
 2) In [momentum-based-flying-aerodynamics-no-Gazebo_linear_feedback](https://github.com/ami-iit/element_aerodynamics-control/tree/clean_up/software/aerodynamic_flight_controller/momentum-based-flying-aerodynamics-no-Gazebo_linear_feedback), aerodynamic forces are not only introduced to the system, but also considered in the momentum-based-controller.
 
-Reading materials related to aerodynamic-flight-controllers:
+
+
+3) How to use the aerodynbamic-flight-controllers, see [wiki page](https://github.com/ami-iit/element_aerodynamics-control/wiki#aerodynamic-flight-controller).
+
+### Reading materials related to aerodynamic-flight-controllers:
 
 [1] https://github.com/ami-iit/material/tree/master/lab-papers/pucci-2017-ral-momentum_flight_humanoid/pdf
 
 [2] https://ieeexplore.ieee.org/abstract/document/8624985
 
 [3] https://github.com/ami-iit/material/blob/master/lab-master-theses/tong_hui.pdf
-
-3) How to use the aerodynbamic-flight-controllers, see [wiki page](https://github.com/ami-iit/element_aerodynamics-control/wiki#aerodynamic-flight-controller).
