@@ -1,4 +1,4 @@
-Overview of [aerodynamic-flight-controllers](https://github.com/ami-iit/element_aerodynamics-control/tree/clean_up/software/aerodynamic_flight_controller).
+## Overview of aerodynamic-flight-controllers
 
 The [aerodynamic-flight-controllers](https://github.com/ami-iit/element_aerodynamics-control/tree/clean_up/software/aerodynamic_flight_controller) are built based on the work of [momentum-based-flight-no-gazebo](https://github.com/ami-iit/element_ironcub-control/tree/master/software/flight-controllers/momentum-based-flight-no-gazebo) controller done in https://github.com/ami-iit/element_ironcub-control. The aerodynbamic-flight-controllers aim at evaluating the aerodynamic effects on iRonCub and studying possible control techniques to handle aerodynamic effects.
 
