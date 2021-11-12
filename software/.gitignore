@@ -23,10 +23,10 @@ slprj/
 # Matlab binary .mat files
 *.mat
 
+
 # Matlab figures
 *.fig
-!/flying-controllers/momentum-based-flying/src/controlGui/ironcubControlGui.fig
-!/flying-controllers/momentum-based-flying/src/visualGui/flightDataGui.fig
+!flight-controllers/controlAndDataGui/*.fig
 
 # Simulink autosave
 *.autosave
