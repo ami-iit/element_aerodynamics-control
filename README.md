@@ -33,4 +33,4 @@ The following milestones have been identified for this project:
 ### - Improve the current controller to take care of aerodynamics effects on iRonCub, [achieved](https://github.com/dic-iit/element_aerodynamics-control/issues/20);
 ### - Prepare a publication of the thesis work for ICRA 2022, [in progress](https://github.com/ami-iit/element_aerodynamics-control/issues/65).
 
-
+For furhter introduction of the repo concpets, please see the documentation in [wiki](https://github.com/ami-iit/element_aerodynamics-control/wiki).
