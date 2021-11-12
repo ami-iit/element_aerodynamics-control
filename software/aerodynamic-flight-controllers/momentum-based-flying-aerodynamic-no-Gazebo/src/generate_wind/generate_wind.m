@@ -6,7 +6,7 @@ function v_wind=generate_wind(t)
 v_wind=zeros(3,1); %size of wind velocity vector
 simu_windgust=true;
 v_const=3; %constant wind speed
-v_gust=20; % wind gust peak value
+v_gust=10; % wind gust peak value
 v_raise=v_gust-v_const; % difference between wind gust and constant wind speed
 
 sigma=2; % sigma for gaussian distribution

@@ -80,6 +80,11 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
                 T.setRotation(baseRotation_iDyntree);
                 T.setPosition(baseOrigin_iDyntree);
                 obj.viz.modelViz('iRonCub').setPositions(T, s)
+                obj.viz.camera().setTarget(baseOrigin_iDyntree);
+                camera_offset = [1.5,1.1,0]';
+                camera_position = iDynTree.Position();
+                camera_position.fromMatlab(camera_offset + world_H_base(1:3,4));
+                obj.viz.camera().setPosition(camera_position);
         end
         
         

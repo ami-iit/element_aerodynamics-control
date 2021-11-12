@@ -6,7 +6,7 @@
 %rho:air density 1.225 kg/m^3 , at 101.325kPa and 15 degree
 %gama : shape coefficient
 %Ka : Ka = rho*gama/2
-aerodynamics_config.Ka=1;
+aerodynamics_config.Ka=0;%1;
 % we consider the constant coefficient Ka which is related to the robot's shape 
 %coefficient and air density as 1,
 

@@ -248,8 +248,8 @@ end
  Fa_norm=zeros(1,ntime);
  
  V_wind=v_wind.Data';
- Designed_gain=vary_gain.Data';
- Smooth_gain=smooth_gain.Data';
+% Designed_gain=vary_gain.Data';
+ %Smooth_gain=smooth_gain.Data';
  for i=1:ntime
      
          aoa(i)=alpha.Data(1,1,i);
@@ -314,19 +314,19 @@ title('wind velocity')
 xlabel('time')
 ylabel('m/s')
 
-figure(17)
-plot(tt,Designed_gain)
-legend('x','y','z')
-title('Designed gain')
-xlabel('time')
-ylabel('scalar value')
-
-figure(18)
-plot(tt,Smooth_gain)
-legend('x','y','z')
-title('Smooth gain')
-xlabel('time')
-ylabel('scalar value')
+% figure(17)
+% plot(tt,Designed_gain)
+% legend('x','y','z')
+% title('Designed gain')
+% xlabel('time')
+% ylabel('scalar value')
+% 
+% figure(18)
+% plot(tt,Smooth_gain)
+% legend('x','y','z')
+% title('Smooth gain')
+% xlabel('time')
+% ylabel('scalar value')
 
 figure(19)
 plot(tt,linMom_err_norm)
@@ -359,7 +359,7 @@ ylabel('m/s')
 
 
 %save figures .tiff
-% path='/home/...';    
+%path='/home/tonghui/Documents/tong_hui/paper_submission/simulation_results/no_linear_feedback/hovering/no_af/';    
 % saveas(figure(1),fullfile(path,['pos_err' '.tiff']));
 % saveas(figure(2),fullfile(path,['lin_mom_err' '.tiff']));
 % saveas(figure(3),fullfile(path,['pos_err_norm' '.tiff']));
