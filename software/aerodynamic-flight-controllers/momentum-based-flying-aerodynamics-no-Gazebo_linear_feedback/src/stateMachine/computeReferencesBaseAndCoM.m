@@ -123,6 +123,22 @@ function [pos_vel_acc_jerk_CoM_des, rot_vel_acc_jerk_base_des] = ...
         % saturation on CoM position while balancing
         posCoM_ref       = saturateInput(posCoM_ref, (posCoM_landing + Config.references.minCoMPos_balancing), (posCoM_landing + Config.references.maxCoMPos_balancing));  
     end
+    %robot pitch down during high-speed flight
+    if Config.pitch_down ==true
+        
+        theta=0;
+        if 0<t && t<=10
+            theta=-30;
+            
+        elseif 10<t && t<=14
+            theta=10/8*((t-10)^2)-30;
+        elseif 14<t
+            theta=10/8*((14-10)^2)-30; %-10 deg
+            
+        end
+        rpyBase_ref(2)=deg2rad(theta);
+        
+    end
     
     % output reference (to be smoothed)
     pos_vel_acc_jerk_CoM_des  = [posCoM_ref, zeros(3)];

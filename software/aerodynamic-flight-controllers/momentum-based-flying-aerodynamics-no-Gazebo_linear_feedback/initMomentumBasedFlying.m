@@ -34,13 +34,16 @@ choice=menu_customized('Select trajectory type','iRonCub Control Gui','Scenario 
 if choice==1 
     Config.high_speed_trajectory            = false;
     Config.simulationTime                   = inf;
+    Config.pitch_down                       = false;
 elseif choice==2
     Config.high_speed_trajectory            = false;
-    Config.simulationTime                   = 35; % regarding to the scenario designed for paper submission
+    Config.simulationTime                   = 35;% regarding to the scenario designed for paper submission
+    Config.pitch_down                       = false;
 elseif choice==3
     
     Config.high_speed_trajectory            = true;
-    Config.simulationTime                   = 35; % regarding to the scenario designed for paper submission
+    Config.simulationTime                   = 35;% regarding to the scenario designed for paper submission
+    Config.pitch_down                       = true;
 end
 Config.tStep                            = 0.01;%0.005;
 jets_config.use_jet_dyn                 = false;
