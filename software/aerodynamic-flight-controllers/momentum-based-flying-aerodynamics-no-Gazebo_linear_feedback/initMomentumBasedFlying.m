@@ -28,7 +28,7 @@ addpath('../controlAndDataGui/');
 % Simulation time and delta_t [s]
 
 %select the trajectory type and simulation time
-choice=menu('Select trajectory type','iRonCub Control Gui','Scenario 1: Hovering','Scenario 2: High-speed Flight');
+choice=menu_customized('Select trajectory type','iRonCub Control Gui','Scenario 1: Hovering','Scenario 2: High-speed Flight');
 
 
 if choice==1 
