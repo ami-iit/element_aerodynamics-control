@@ -8,8 +8,10 @@
 %%run this script after finishing the simulation or loading saved data
 
 
+clear variables
 close all
-clc
+
+
 
 
 %load the simulink model
@@ -93,40 +95,43 @@ figure(1)
 plot(tt,posCoM_err,tt,CoM_err_max*ones(ntime,1))
 legend('CoMerr_x','CoMerr_y','CoMerr_z')
 title('posCoM error ');
-xlabel('time')
+xlabel('time [s]')
 ylabel('m')
 figure(2)
 plot(tt,linMom_err,tt,linMom_err_max*ones(ntime,1))
 legend('linMomErr_x','linMomErr_y','linMomErr_z')
 title('linear momentum error');
-xlabel('time')
+xlabel('time [s]')
 ylabel('kg x m/s')
 
 figure(3)
-plot(tt,posCoM_err_norm,'b',tt,posCoM_err_norm_mean*ones(ntime,1),'r')
-legend('norm error of CoM position','mean value of norm error')
-title('posCoM error norm')
-xlabel('time')
-ylabel('m')
+%plot(tt,posCoM_err_norm,'b',tt,posCoM_err_norm_mean*ones(ntime,1),'r')
+%legend('norm error of CoM position','mean value of norm error')
+plot(tt,posCoM_err_norm,'b','LineWidth',2)
+%legend('norm error of CoM position')
+
+title('posCoM error norm','FontSize',10)
+xlabel('time [s]','FontSize',10)
+ylabel('m','FontSize',10)
 
 figure(4)
 plot(tt,baseRot_err)
 legend('roll','pitch','yaw')
 title('base rotation error');
-xlabel('time')
+xlabel('time [s]')
 ylabel('degree')
 
 figure(5)
 plot(tt,baseRot_err_norm)
 title('base rotation error norm')
-xlabel('time')
+xlabel('time [s]')
 ylabel('degree')
 
 figure(6)
 plot(tt,angMom_err)
 legend('x','y','z')
 title('angular momentum error')
-xlabel('time')
+xlabel('time [s]')
 ylabel('kg x m/s')
 
 
@@ -136,7 +141,7 @@ ylabel('kg x m/s')
 figure(7)
 plot(tt,posCoM,'-',tt,posCoM_des,'--')
 legend('CoM pos x','CoM pos y','CoM pos z','desired CoM pos x','desired CoM pos y','desired CoM pos z')
-xlabel('time')
+xlabel('time [s]')
 ylabel('position: m')
 
 title('robot CoM position')
@@ -147,20 +152,20 @@ vel_z=diff(posCoM(:,3))/deltaT;
 acc_z=diff(vel_z)/deltaT;
 jerk_z=diff(acc_z)/deltaT;
 subplot(3,1,1)
-plot(tt(1:end-1),vel_z,'b')
-title('vel_z');
-xlabel('time')
-ylabel('m/s')
+plot(tt(1:end-1),vel_z,'b','LineWidth',2)
+title('vel_z','FontSize',18);
+xlabel('time [s]','FontSize',18)
+ylabel('m/s','FontSize',18)
 subplot(3,1,2)
-plot(tt(1:end-2),acc_z,'g')
-title('accCoM_z')
-xlabel('time')
-ylabel('m/s^2')
+plot(tt(1:end-2),acc_z,'g','LineWidth',2)
+title('accCoM_z','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('m/s^2','FontSize',18)
 subplot(3,1,3)
-plot(tt(1:end-3),jerk_z,'r')
-title('jerkCoM_z')
-xlabel('time')
-ylabel('m/s^3')
+plot(tt(1:end-3),jerk_z,'r','LineWidth',2)
+title('jerkCoM_z','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('m/s^3','FontSize',18)
 %vel acc jerk y direction
 figure(9)
 
@@ -168,44 +173,47 @@ vel_y=diff(posCoM(:,2))/deltaT;
 acc_y=diff(vel_y)/deltaT;
 jerk_y=diff(acc_y)/deltaT;
 subplot(3,1,1)
-plot(tt(1:end-1),vel_y,'b')
-title('vel_y');
-xlabel('time')
-ylabel('m/s')
+plot(tt(1:end-1),vel_y,'b','LineWidth',2)
+title('vel_y','FontSize',18);
+xlabel('time [s]','FontSize',18)
+ylabel('m/s','FontSize',18)
 
 subplot(3,1,2)
-plot(tt(1:end-2),acc_y,'g')
-title('accCoM_y')
-xlabel('time')
-ylabel('m/s^2')
+plot(tt(1:end-2),acc_y,'g','LineWidth',2)
+title('accCoM_y','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('m/s^2','FontSize',18)
 
 subplot(3,1,3)
-plot(tt(1:end-3),jerk_y,'r')
-title('jerkCoM_y')
-xlabel('time')
-ylabel('m/s^3')
+plot(tt(1:end-3),jerk_y,'r','LineWidth',2)
+title('jerkCoM_y','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('m/s^3','FontSize',18)
+
+
 % vel acc jerk x direction
 figure(10)
 vel_x=diff(posCoM(:,1))/deltaT;
 acc_x=diff(vel_x)/deltaT;
 jerk_x=diff(acc_x)/deltaT;
 subplot(3,1,1)
-plot(tt(1:end-1),vel_x,'b')
-title('vel_x');
-xlabel('time')
-ylabel('m/s')
+plot(tt(1:end-1),vel_x,'b','LineWidth',2)
+title('vel_x','FontSize',18);
+xlabel('time [s]','FontSize',18)
+ylabel('m/s','FontSize',18)
 
 subplot(3,1,2)
-plot(tt(1:end-2),acc_x,'g')
-title('accCoM_x')
-xlabel('time')
-ylabel('m/s^2')
+plot(tt(1:end-2),acc_x,'g','LineWidth',2)
+title('accCoM_x','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('m/s^2','FontSize',18)
 
 subplot(3,1,3)
-plot(tt(1:end-3),jerk_x,'r')
-title('jerkCoM_x')
-xlabel('time')
-ylabel('m/s^3')
+plot(tt(1:end-3),jerk_x,'r','LineWidth',2)
+title('jerkCoM_x','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('m/s^3','FontSize',18)
+
 
 
 % CoM velocity norm
@@ -263,56 +271,58 @@ end
  figure(11)
  plot(tt,aoa)
  title('alpha angle');
- xlabel('time')
+ xlabel('time [s]')
  ylabel('degree')
 
 figure(12)
 plot(tt,va_norm)
 title('relative velocity');
-xlabel('time')
+xlabel('time [s]')
 ylabel('m/s')
 
 figure(13)
 subplot(3,1,1)
 plot(tt,Fa_norm)
 title('total aerodynamic force')
-xlabel('time')
+xlabel('time [s]')
 ylabel('N')
 
 
 subplot(3,1,2)
 plot(tt,Fd_norm)
 title('drag force')
-xlabel('time')
+xlabel('time [s]')
 ylabel('N')
 
 subplot(3,1,3)
 plot(tt,Fn_norm)
 title('normal force')
-xlabel('time')
+xlabel('time [s]')
 ylabel('N')
 
 figure(14)
 plot(tt,LDot_linear)
 legend('x','y','z')
 title('linear momentum derivative')
-xlabel('time')
+xlabel('time [s]')
 ylabel('N')
 
 figure(15)
 plot(tt,LDot_angular)
 legend('x','y','z')
 title('angular momentum derivative')
-xlabel('time')
+xlabel('time [s]')
 ylabel('N')
 
-
 figure(16)
-plot(tt,V_wind)
-legend('x','y','z')
-title('wind velocity')
-xlabel('time')
-ylabel('m/s')
+P=plot(tt,V_wind,'LineWidth',4);
+legend('x','y','z','Location','southoutside','NumColumns',3,'FontSize',12)
+P(3).LineStyle='--';
+title('wind velocity','FontSize',10)
+xlabel('time [s]','FontSize',10)
+ylabel('m/s','FontSize',10)
+ylim([-12 2]);
+
 
 % figure(17)
 % plot(tt,Designed_gain)
@@ -329,29 +339,29 @@ ylabel('m/s')
 % ylabel('scalar value')
 
 figure(19)
-plot(tt,linMom_err_norm)
-title('linear momentum error norm')
-xlabel('time')
-ylabel('kg x m/s')
-
+plot(tt,linMom_err_norm,'LineWidth',2)
+title('linear momentum error norm','FontSize',18)
+xlabel('time [s]','FontSize',18)
+ylabel('kg x m/s','FontSize',18)
 figure(20)
 plot(tt,angMom_err_norm)
 title('angular momentum error norm')
-xlabel('time')
+xlabel('time [s]')
 ylabel('kg x m/s')
 
 figure(21)
 plot(tt(1:end-1),vcom)
 title('CoM velocity')
 legend('x','y','z')
-xlabel('time')
+xlabel('time [s]')
 ylabel('m/s')
 
 figure(22)
 plot(tt,vcom_norm)
 title('CoM velocity norm')
-xlabel('time')
+xlabel('time [s]')
 ylabel('m/s')
+
 
 
 
@@ -359,7 +369,7 @@ ylabel('m/s')
 
 
 %save figures .tiff
-%path='/home/tonghui/Documents/tong_hui/paper_submission/simulation_results/no_linear_feedback/hovering/no_af/';    
+%path='/home/...';    
 % saveas(figure(1),fullfile(path,['pos_err' '.tiff']));
 % saveas(figure(2),fullfile(path,['lin_mom_err' '.tiff']));
 % saveas(figure(3),fullfile(path,['pos_err_norm' '.tiff']));
