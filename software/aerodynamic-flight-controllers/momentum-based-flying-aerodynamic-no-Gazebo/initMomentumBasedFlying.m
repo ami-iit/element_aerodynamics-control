@@ -17,7 +17,7 @@ close all
 clc
 
 %% GENERAL SIMULATION INFO
-Config.robotName = 'iRonCub-Mk1';
+Config.robotName = 'iRonCub-Mk1_1';
 setenv('YARP_ROBOT_NAME', Config.robotName)
 
 % Set path to the utility functions and to WBC library
