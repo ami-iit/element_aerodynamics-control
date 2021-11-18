@@ -8,7 +8,7 @@
 %%run this script after finishing the simulation or loading saved data
 
 
-clear variables
+%clear variables
 close all
 
 

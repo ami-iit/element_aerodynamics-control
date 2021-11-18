@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "3.21"
+    ComputedModelVersion    "3.22"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -578,7 +578,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [670.0, 225.0, 1207.0, 760.0]
+      Location		      [361.0, 211.0, 1207.0, 760.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -603,12 +603,12 @@ Model {
 	  $ObjectID		  5
 	  IsActive		  [1]
 	  IsTabbed		  [1]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3225"
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
 	  Extents		  [1137.0, 490.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-268.97172619047592, -51.611904761904839]
-	  SceneRectInView	  [-268.97172619047592, -51.611904761904839, 909.6, 392.0]
+	  ZoomFactor		  [0.6]
+	  Offset		  [-1146.910795635617, -345.44570471475464]
+	  SceneRectInView	  [-1146.910795635617, -345.44570471475464, 1895.0, 816.66666666666674]
 	}
 	Object {
 	  $ObjectID		  6
@@ -779,12 +779,12 @@ Model {
 	  $ObjectID		  21
 	  IsActive		  [0]
 	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkTopLevel"
-	  LoadSaveID		  "0"
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3225"
 	  Extents		  [1137.0, 490.0]
-	  ZoomFactor		  [0.5]
-	  Offset		  [-1231.2186232521531, -371.54201078335535]
-	  SceneRectInView	  [-1231.2186232521531, -371.54201078335535, 2274.0, 980.0]
+	  ZoomFactor		  [1.25]
+	  Offset		  [-268.97172619047592, -51.611904761904839]
+	  SceneRectInView	  [-268.97172619047592, -51.611904761904839, 909.6, 392.0]
 	}
 	Object {
 	  $ObjectID		  22
@@ -1464,6 +1464,19 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  83
+	  Type			  "Simulink:Editor:ReferencedFiles"
+	  ID			  "Referenced Files"
+	  Visible		  [0]
+	  CreateCallback	  ""
+	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
+	  Floating		  [0]
+	  DockPosition		  "Left"
+	  Width			  [640]
+	  Height		  [480]
+	  Minimized		  "Unset"
+	}
+	Object {
+	  $ObjectID		  84
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1476,7 +1489,7 @@ Model {
 	  Minimized		  "On"
 	}
 	Object {
-	  $ObjectID		  84
+	  $ObjectID		  85
 	  Type			  "GLUE2:SpreadSheet"
 	  ID			  "ModelData"
 	  Visible		  [1]
@@ -1487,19 +1500,6 @@ Model {
 	  Width			  [1203]
 	  Height		  [218]
 	  Minimized		  "On"
-	}
-	Object {
-	  $ObjectID		  85
-	  Type			  "Simulink:Editor:ReferencedFiles"
-	  ID			  "Referenced Files"
-	  Visible		  [0]
-	  CreateCallback	  ""
-	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
-	  Floating		  [0]
-	  DockPosition		  "Left"
-	  Width			  [640]
-	  Height		  [480]
-	  Minimized		  "Unset"
 	}
 	PropName		"DockComponentsInfo"
       }
@@ -1531,9 +1531,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tonghui"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Oct 26 19:15:15 2021"
-  RTWModifiedTimeStamp	  557147088
-  ModelVersionFormat	  "%<AutoIncrement:3.21>"
+  LastModifiedDate	  "Thu Nov 18 10:54:37 2021"
+  RTWModifiedTimeStamp	  559132936
+  ModelVersionFormat	  "%<AutoIncrement:3.22>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2829,9 +2829,9 @@ Model {
   }
   System {
     Name		    "momentumBasedFlying"
-    Location		    [607, 310, 1814, 1070]
+    Location		    [361, 211, 1568, 971]
     SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
-    Open		    off
+    Open		    on
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
     ExecutionDomainType	    "Deduce"
@@ -2845,7 +2845,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "50"
+    ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3279"
     SimulinkSubDomain	    "Simulink"
@@ -14009,7 +14009,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "Momentum Control"
-		    Location		    [247, 163, 1454, 923]
+		    Location		    [670, 225, 1877, 985]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -20106,7 +20106,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Flying State Machine"
-	    Location		    [247, 163, 1454, 923]
+	    Location		    [670, 225, 1877, 985]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -20172,7 +20172,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Compute Gains And References"
-		Location		[247, 163, 1454, 923]
+		Location		[670, 225, 1877, 985]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -20290,7 +20290,7 @@ Model {
 		  }
 		  System {
 		    Name		    "Compute Gains"
-		    Location		    [247, 163, 1454, 923]
+		    Location		    [670, 225, 1877, 985]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -24977,7 +24977,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Get System State"
-	    Location		    [247, 163, 1454, 923]
+	    Location		    [670, 225, 1877, 985]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -25100,7 +25100,7 @@ Model {
 	      }
 	      System {
 		Name			"Change Contact Forces Representation"
-		Location		[247, 163, 1454, 923]
+		Location		[670, 225, 1877, 985]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -26074,7 +26074,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"JoyStick Commands"
-	Location		[247, 163, 1454, 923]
+	Location		[670, 225, 1877, 985]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -26687,7 +26687,7 @@ Model {
       }
       System {
 	Name			"Robot visualizer"
-	Location		[247, 163, 1454, 923]
+	Location		[670, 225, 1877, 985]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -26947,7 +26947,7 @@ Model {
       }
       System {
 	Name			"Visualizer"
-	Location		[247, 163, 1454, 923]
+	Location		[670, 225, 1877, 985]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -27859,7 +27859,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Gains and State Machine"
-	    Location		    [247, 163, 1454, 923]
+	    Location		    [670, 225, 1877, 985]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -30157,7 +30157,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Momentum Task"
-	    Location		    [247, 163, 1454, 923]
+	    Location		    [670, 225, 1877, 985]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -31746,7 +31746,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Task and Base Frame Kinematics"
-	    Location		    [247, 163, 1454, 923]
+	    Location		    [670, 225, 1877, 985]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -34510,7 +34510,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"iRonCub"
-	Location		[247, 163, 1454, 923]
+	Location		[670, 225, 1877, 985]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -34561,7 +34561,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Forward Dynamics"
-	    Location		    [247, 163, 1454, 923]
+	    Location		    [670, 225, 1877, 985]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -34699,7 +34699,7 @@ Model {
 	      ContentPreviewEnabled   on
 	      System {
 		Name			"aerodynamic visualizer"
-		Location		[247, 163, 1454, 923]
+		Location		[670, 225, 1877, 985]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -35344,9 +35344,9 @@ Model {
       ContentPreviewEnabled   on
       System {
 	Name			"wind generator"
-	Location		[670, 225, 1877, 985]
+	Location		[323, 101, 1530, 861]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
-	Open			on
+	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
 	ExecutionDomainType	"Deduce"
@@ -35507,20 +35507,20 @@ Model {
 	  ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extmgr."
 	  "Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('Sources"
 	  "','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain',true,'S"
-	  "erializedDisplays',{struct('MinYLimReal','-49.5','MaxYLimReal','5.5','YLabelReal','','MinYLimMag','0.00000','MaxYLi"
-	  "mMag','49.5','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickC"
-	  "olor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.07450980392156"
-	  "86 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;"
-	  "0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Sig"
-	  "nalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'MATLAB Function:1'"
-	  ",'MATLAB Function:2','MATLAB Function:3'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('Min"
-	  "YLimReal','-49.5','MaxYLimReal','5.5','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','49.5','LegendVisibility'"
-	  ",'off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.6862"
-	  "74509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160784313"
-	  "72549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039"
-	  "215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigati"
-	  "on',true),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[965 30"
-	  "0 630 371],'VisibleAtModelOpen','on')"
+	  "erializedDisplays',{struct('MinYLimReal','-11.25','MaxYLimReal','1.25','YLabelReal','','MinYLimMag','0.00000','MaxY"
+	  "LimMag','11.25','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTi"
+	  "ckColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.07450980392"
+	  "15686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.07450980392156"
+	  "86;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<"
+	  "SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'MATLAB Function"
+	  ":1','MATLAB Function:2','MATLAB Function:3'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('"
+	  "MinYLimReal','-11.25','MaxYLimReal','1.25','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','11.25','LegendVisib"
+	  "ility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 "
+	  "0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160"
+	  "78431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745"
+	  "098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Na"
+	  "vigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',["
+	  "965 300 630 371])"
 	  NumInputPorts		  "1"
 	  Floating		  off
 	}
