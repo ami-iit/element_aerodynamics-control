@@ -26,7 +26,7 @@ slprj/
 
 # Matlab figures
 *.fig
-!flight-controllers/controlAndDataGui/*.fig
+!aerodynamic-flight-controllers/controlAndDataGui/*.fig
 
 # Simulink autosave
 *.autosave
