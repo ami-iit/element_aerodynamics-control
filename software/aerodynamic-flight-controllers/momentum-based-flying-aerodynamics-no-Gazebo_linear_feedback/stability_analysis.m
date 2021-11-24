@@ -78,17 +78,17 @@ end
 posCoM_err_norm_mean=mean(posCoM_err_norm); % mean norm error
 
 
-%find the maximum CoM position error 
-CoM_err_max_x=max(abs(posCoM_err(:,1)));
-CoM_err_max_y=max(abs(posCoM_err(:,2)));
-CoM_err_max_z=max(abs(posCoM_err(:,3)));
-CoM_err_max=max([CoM_err_max_x,CoM_err_max_y,CoM_err_max_z]);
-
-%find the maximum linear momentum error
-linMom_err_max_x=max(abs(linMom_err(:,1)));
-linMom_err_max_y=max(abs(linMom_err(:,2)));
-linMom_err_max_z=max(abs(linMom_err(:,3)));
-linMom_err_max=max([linMom_err_max_x,linMom_err_max_y,linMom_err_max_z]);
+% %find the maximum CoM position error 
+% CoM_err_max_x=max(abs(posCoM_err(:,1)));
+% CoM_err_max_y=max(abs(posCoM_err(:,2)));
+% CoM_err_max_z=max(abs(posCoM_err(:,3)));
+% CoM_err_max=max([CoM_err_max_x,CoM_err_max_y,CoM_err_max_z]);
+% 
+% %find the maximum linear momentum error
+% linMom_err_max_x=max(abs(linMom_err(:,1)));
+% linMom_err_max_y=max(abs(linMom_err(:,2)));
+% linMom_err_max_z=max(abs(linMom_err(:,3)));
+% linMom_err_max=max([linMom_err_max_x,linMom_err_max_y,linMom_err_max_z]);
 
     
 figure(1)
@@ -105,11 +105,7 @@ xlabel('time [s]')
 ylabel('kg x m/s')
 
 figure(3)
-%plot(tt,posCoM_err_norm,'b',tt,posCoM_err_norm_mean*ones(ntime,1),'r')
-%legend('norm error of CoM position','mean value of norm error')
 plot(tt,posCoM_err_norm,'b','LineWidth',2)
-%legend('norm error of CoM position')
-
 title('posCoM error norm','FontSize',10)
 xlabel('time [s]','FontSize',10)
 ylabel('m','FontSize',10)
@@ -166,9 +162,9 @@ plot(tt(1:end-3),jerk_z,'r','LineWidth',2)
 title('jerkCoM_z','FontSize',18)
 xlabel('time [s]','FontSize',18)
 ylabel('m/s^3','FontSize',18)
+
 %vel acc jerk y direction
 figure(9)
-
 vel_y=diff(posCoM(:,2))/deltaT;
 acc_y=diff(vel_y)/deltaT;
 jerk_y=diff(acc_y)/deltaT;
@@ -256,8 +252,7 @@ end
  Fa_norm=zeros(1,ntime);
  
  V_wind=v_wind.Data';
-% Designed_gain=vary_gain.Data';
- %Smooth_gain=smooth_gain.Data';
+
  for i=1:ntime
      
          aoa(i)=alpha.Data(1,1,i);
@@ -323,7 +318,9 @@ xlabel('time [s]','FontSize',10)
 ylabel('m/s','FontSize',10)
 ylim([-12 2]);
 
-
+%% ploting scheduled gain
+%Designed_gain=vary_gain.Data';
+%Smooth_gain=smooth_gain.Data';
 % figure(17)
 % plot(tt,Designed_gain)
 % legend('x','y','z')
@@ -368,30 +365,29 @@ ylabel('m/s')
 
 
 
-%save figures .tiff
+%save figures .eps
 %path='/home/...';    
-% saveas(figure(1),fullfile(path,['pos_err' '.tiff']));
-% saveas(figure(2),fullfile(path,['lin_mom_err' '.tiff']));
-% saveas(figure(3),fullfile(path,['pos_err_norm' '.tiff']));
-% saveas(figure(4),fullfile(path,['base_rot_err' '.tiff']));
-% saveas(figure(5),fullfile(path,['base_rot_err_norm' '.tiff']));
-% saveas(figure(6),fullfile(path,['angu_mom_err' '.tiff']));
-% saveas(figure(7),fullfile(path,['robot_trajectory' '.tiff']));
-% saveas(figure(8),fullfile(path,['velz' '.tiff']));
-% saveas(figure(9),fullfile(path,['vely' '.tiff']));
-% saveas(figure(10),fullfile(path,['velx' '.tiff']));
-% saveas(figure(11),fullfile(path,['aoa' '.tiff']));
-% saveas(figure(12),fullfile(path,['va_norm' '.tiff']));
-% saveas(figure(13),fullfile(path,['aero_force' '.tiff']));
-% saveas(figure(14),fullfile(path,['LDot_linear' '.tiff']));
-% saveas(figure(15),fullfile(path,['LDot_angular' '.tiff']));
-% saveas(figure(16),fullfile(path,['wind_velocity' '.tiff']));
-% saveas(figure(17),fullfile(path,['designed_gain' '.tiff']));
-% saveas(figure(18),fullfile(path,['smooth_gain' '.tiff']));
-% saveas(figure(19),fullfile(path,['linMom_err_norm' '.tiff']));
-% saveas(figure(20),fullfile(path,['angMom_err_norm' '.tiff']));
-% saveas(figure(21),fullfile(path,['vcom' '.tiff']));
-% saveas(figure(22),fullfile(path,['vcom_norm' '.tiff']));
-% 
+% saveas(figure(1),fullfile(path,['pos_err' '.eps']),'epsc2');
+% saveas(figure(2),fullfile(path,['lin_mom_err' '.eps']),'epsc2');
+% saveas(figure(3),fullfile(path,['pos_err_norm' '.eps']),'epsc2');
+% saveas(figure(4),fullfile(path,['base_rot_err' '.eps']),'epsc2');
+% saveas(figure(5),fullfile(path,['base_rot_err_norm' '.eps']),'epsc2');
+% saveas(figure(6),fullfile(path,['angu_mom_err' '.eps']),'epsc2');
+% saveas(figure(7),fullfile(path,['robot_trajectory' '.eps']),'epsc2');
+% saveas(figure(8),fullfile(path,['velz' '.eps']),'epsc2');
+% saveas(figure(9),fullfile(path,['vely' '.eps']),'epsc2');
+% saveas(figure(10),fullfile(path,['velx' '.eps']),'epsc2');
+% saveas(figure(11),fullfile(path,['aoa' '.eps']),'epsc2');
+% saveas(figure(12),fullfile(path,['va_norm' '.eps']),'epsc2');
+% saveas(figure(13),fullfile(path,['aero_force' '.eps']),'epsc2');
+% saveas(figure(14),fullfile(path,['LDot_linear' '.eps']),'epsc2');
+% saveas(figure(15),fullfile(path,['LDot_angular' '.eps']),'epsc2');
+% saveas(figure(16),fullfile(path,['wind_velocity' '.eps']),'epsc2');
+% saveas(figure(17),fullfile(path,['designed_gain' '.eps']),'epsc2');
+% saveas(figure(18),fullfile(path,['smooth_gain' '.eps']),'epsc2');
+% saveas(figure(19),fullfile(path,['linMom_err_norm' '.eps']),'epsc2');
+% saveas(figure(20),fullfile(path,['angMom_err_norm' '.eps']),'epsc2');
+% saveas(figure(21),fullfile(path,['vcom' '.eps']),'epsc2');
+% saveas(figure(22),fullfile(path,['vcom_norm' '.eps']),'epsc2');
 % 
 % save(fullfile(path,'test.mat'));    
