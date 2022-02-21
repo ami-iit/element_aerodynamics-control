@@ -19,3 +19,4 @@ aerodynamics_config.C_2=0.0679;
 aerodynamics_config.C_3=0.0949;
 aerodynamics_config.C_4=0.0042;
 aerodynamics_config.C_5=0.0598;
+aerodynamics_config.wind_type=3; % 1- static wind, 2- ramp wind gust, 3- cos wind gust

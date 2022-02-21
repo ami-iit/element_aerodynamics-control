@@ -1,27 +1,41 @@
 %this function is used to simulate the wind
 %@author: HUI TONG
 
-function v_wind=generate_wind(t)
+function v_wind=generate_wind(t,aerodynamics_config)
 
 v_wind=zeros(3,1); %size of wind velocity vector
-simu_windgust=true;
-v_const=3; %constant wind speed
-v_gust=10; % wind gust peak value
-v_raise=v_gust-v_const; % difference between wind gust and constant wind speed
 
-sigma=2; % sigma for gaussian distribution
-mu=8; % mean value for gaussian distribution 
+v_min=3; %constant wind speed
+v_max=15; % wind gust peak value
+v_raise=v_max-v_min; % difference between wind gust and constant wind speed
+theta_wind=pi; %wind direction (in plane X-Y)
+k_wind=[cos(theta_wind) sin(theta_wind) 0]'; %wind direction unit vector
 
-%generate gaussian distributed wind along time to simulate the wind gust 
- if simu_windgust
-     if t<=20
-        v_wind=[-(v_const+v_raise*exp(-(t - mu).^2/(2*sigma^2)));0;0];
-     else
-         v_wind=[-v_const;0;0]; 
-     end
+if aerodynamics_config.wind_type==1 %static wind
 
- else
-    v_wind=[-v_const;0;0]; % constnt wind 
- end
-
+   v_wind=v_min*k_wind;
+elseif aerodynamics_config.wind_type==2 %ramp gust
+   if t<5
+       v_wind=v_min*k_wind;
+   elseif t>=5&&t<20
+       v_amp=v_min+v_raise*((t-5)/(20-5));
+       v_wind=v_amp*k_wind;
+   elseif t>=20
+       v_wind=v_max*k_wind;
+   end
+elseif aerodynamics_config.wind_type==3 %cos gust
+    if t<5
+        v_wind=v_min*k_wind;
+    elseif t>=5&&t<20
+        v_amp=v_min+v_raise/2*(1-cos((t-5)/(20-5)*2*pi));
+        v_wind=v_amp*k_wind;
+    elseif t>=20
+        v_wind=v_min*k_wind;
+    end
 end
+end
+
+
+ 
+
+
