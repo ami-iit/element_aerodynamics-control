@@ -3,7 +3,8 @@
 % nontunable (Config in all the functions of the controller is used as
 % tunable parameter).
 
-component_path = [getenv('COMPONENT_IRONCUB_PREFIX') '/component_ironcub'];
+
+component_path = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
 
 confVisualizer.robotName = 'iRonCub-Mk1_1';
 

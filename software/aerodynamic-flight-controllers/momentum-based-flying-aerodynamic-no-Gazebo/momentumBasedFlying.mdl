@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "3.22"
+    ComputedModelVersion    "3.23"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -547,12 +547,12 @@ Model {
     }
     OrderedModelArguments   1
   }
-  WebScopes_FoundationPlugin "on"
-  LogicAnalyzerPlugin	  "on"
-  DiagnosticSuppressor	  "on"
-  SLCCPlugin		  "on"
-  slcheck_filter_plugin	  "on"
   AnimationPlugin	  "on"
+  LogicAnalyzerPlugin	  "on"
+  SLCCPlugin		  "on"
+  WebScopes_FoundationPlugin "on"
+  DiagnosticSuppressor	  "on"
+  slcheck_filter_plugin	  "on"
   SimscapeDaeAutoSolver	  "ode23t"
   SimscapeModelParametersPlugin	"on"
   NotesPlugin		  "on"
@@ -578,7 +578,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [361.0, 211.0, 1207.0, 760.0]
+      Location		      [2117.0, 142.0, 1207.0, 760.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -1464,19 +1464,6 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  83
-	  Type			  "Simulink:Editor:ReferencedFiles"
-	  ID			  "Referenced Files"
-	  Visible		  [0]
-	  CreateCallback	  ""
-	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
-	  Floating		  [0]
-	  DockPosition		  "Left"
-	  Width			  [640]
-	  Height		  [480]
-	  Minimized		  "Unset"
-	}
-	Object {
-	  $ObjectID		  84
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1489,7 +1476,7 @@ Model {
 	  Minimized		  "On"
 	}
 	Object {
-	  $ObjectID		  85
+	  $ObjectID		  84
 	  Type			  "GLUE2:SpreadSheet"
 	  ID			  "ModelData"
 	  Visible		  [1]
@@ -1500,6 +1487,19 @@ Model {
 	  Width			  [1203]
 	  Height		  [218]
 	  Minimized		  "On"
+	}
+	Object {
+	  $ObjectID		  85
+	  Type			  "Simulink:Editor:ReferencedFiles"
+	  ID			  "Referenced Files"
+	  Visible		  [0]
+	  CreateCallback	  ""
+	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
+	  Floating		  [0]
+	  DockPosition		  "Left"
+	  Width			  [640]
+	  Height		  [480]
+	  Minimized		  "Unset"
 	}
 	PropName		"DockComponentsInfo"
       }
@@ -1529,11 +1529,11 @@ Model {
   Created		  "Fri May 25 14:35:31 2018"
   Creator		  "gnava"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "tonghui"
+  LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Nov 18 10:54:37 2021"
-  RTWModifiedTimeStamp	  559132936
-  ModelVersionFormat	  "%<AutoIncrement:3.22>"
+  LastModifiedDate	  "Wed Feb 23 17:22:44 2022"
+  RTWModifiedTimeStamp	  567537759
+  ModelVersionFormat	  "%<AutoIncrement:3.23>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -2829,7 +2829,7 @@ Model {
   }
   System {
     Name		    "momentumBasedFlying"
-    Location		    [361, 211, 1568, 971]
+    Location		    [2117, 142, 3324, 902]
     SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
     Open		    on
     PortBlocksUseCompactNotation off
@@ -14009,7 +14009,7 @@ Model {
 		  RequestExecContextInheritance	off
 		  System {
 		    Name		    "Momentum Control"
-		    Location		    [670, 225, 1877, 985]
+		    Location		    [361, 211, 1568, 971]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -20106,7 +20106,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Flying State Machine"
-	    Location		    [670, 225, 1877, 985]
+	    Location		    [361, 211, 1568, 971]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -20172,7 +20172,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Compute Gains And References"
-		Location		[670, 225, 1877, 985]
+		Location		[361, 211, 1568, 971]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -20290,7 +20290,7 @@ Model {
 		  }
 		  System {
 		    Name		    "Compute Gains"
-		    Location		    [670, 225, 1877, 985]
+		    Location		    [361, 211, 1568, 971]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    on
 		    PortBlocksUseCompactNotation off
@@ -24977,7 +24977,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Get System State"
-	    Location		    [670, 225, 1877, 985]
+	    Location		    [361, 211, 1568, 971]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -25100,7 +25100,7 @@ Model {
 	      }
 	      System {
 		Name			"Change Contact Forces Representation"
-		Location		[670, 225, 1877, 985]
+		Location		[361, 211, 1568, 971]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
@@ -26074,7 +26074,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"JoyStick Commands"
-	Location		[670, 225, 1877, 985]
+	Location		[361, 211, 1568, 971]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -26687,7 +26687,7 @@ Model {
       }
       System {
 	Name			"Robot visualizer"
-	Location		[670, 225, 1877, 985]
+	Location		[361, 211, 1568, 971]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -26947,7 +26947,7 @@ Model {
       }
       System {
 	Name			"Visualizer"
-	Location		[670, 225, 1877, 985]
+	Location		[361, 211, 1568, 971]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -27859,7 +27859,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Gains and State Machine"
-	    Location		    [670, 225, 1877, 985]
+	    Location		    [361, 211, 1568, 971]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -30157,7 +30157,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Momentum Task"
-	    Location		    [670, 225, 1877, 985]
+	    Location		    [361, 211, 1568, 971]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -31746,7 +31746,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Task and Base Frame Kinematics"
-	    Location		    [670, 225, 1877, 985]
+	    Location		    [361, 211, 1568, 971]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -34510,7 +34510,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"iRonCub"
-	Location		[670, 225, 1877, 985]
+	Location		[361, 211, 1568, 971]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			on
 	PortBlocksUseCompactNotation off
@@ -34561,7 +34561,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Forward Dynamics"
-	    Location		    [670, 225, 1877, 985]
+	    Location		    [361, 211, 1568, 971]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    on
 	    PortBlocksUseCompactNotation off
@@ -34699,7 +34699,7 @@ Model {
 	      ContentPreviewEnabled   on
 	      System {
 		Name			"aerodynamic visualizer"
-		Location		[670, 225, 1877, 985]
+		Location		[361, 211, 1568, 971]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			on
 		PortBlocksUseCompactNotation off
