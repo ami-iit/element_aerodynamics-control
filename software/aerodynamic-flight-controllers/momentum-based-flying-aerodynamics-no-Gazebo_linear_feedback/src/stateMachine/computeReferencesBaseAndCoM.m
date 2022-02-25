@@ -127,18 +127,18 @@ function [pos_vel_acc_jerk_CoM_des, rot_vel_acc_jerk_base_des] = ...
     %robot pitch down during high-speed flight
     if Config.pitch_down ==true
         
-        theta=0;
-        if 0<t && t<=10
-            theta=-30;
-            
-        elseif 10<t && t<=14
-            theta=15/8*((t-10)^2)-30;
-            %theta=10/8*((t-10)^2)-30;
-        elseif 14<t 
-            %theta=10/8*((14-10)^2)-30; %-10 deg
-             theta=0;
+        theta=-30;
+%         if 0<t && t<=10
+%             theta=-30;
+%             
+%         elseif 10<t && t<=14
+%             theta=15/8*((t-10)^2)-30;
+%             %theta=10/8*((t-10)^2)-30;
+%         elseif 14<t 
+%             %theta=10/8*((14-10)^2)-30; %-10 deg
+%              theta=0;
         
-        end
+%         end
         rpyBase_ref(2)=deg2rad(theta);
         
     end

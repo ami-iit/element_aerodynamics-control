@@ -13,14 +13,14 @@ k_wind=[cos(theta_wind) sin(theta_wind) 0]'; %wind direction unit vector
 
 if aerodynamics_config.wind_type==1 %static wind
 
-   v_wind=v_min*k_wind;
+   v_wind=15*k_wind;%v_min*k_wind;
 elseif aerodynamics_config.wind_type==2 %ramp gust
    if t<5
        v_wind=v_min*k_wind;
-   elseif t>=5&&t<20
-       v_amp=v_min+v_raise*((t-5)/(20-5));
+   elseif t>=5&&t<10
+       v_amp=v_min+v_raise*((t-5)/(10-5));
        v_wind=v_amp*k_wind;
-   elseif t>=20
+   elseif t>=10
        v_wind=v_max*k_wind;
    end
 elseif aerodynamics_config.wind_type==3 %cos gust

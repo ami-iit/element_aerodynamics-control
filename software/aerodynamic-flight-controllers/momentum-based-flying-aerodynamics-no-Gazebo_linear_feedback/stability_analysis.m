@@ -22,7 +22,7 @@ close all
 % %run simulation
 % set_param(bdroot,'simulationcommand','start')
 
-%load('/home/.../test.mat') % load the saved data in workspace 
+%load('C:\Tong_Hui\iRonCub\data_paper\original\high-speed\wind_cos\test.mat') % load the saved data in workspace 
 
 ntime=size(linMom_err_SCOPE.time,1); % time series size
 T_end=linMom_err_SCOPE.time(end);%end time
@@ -92,13 +92,13 @@ posCoM_err_norm_mean=mean(posCoM_err_norm); % mean norm error
 
     
 figure(1)
-plot(tt,posCoM_err,tt,CoM_err_max*ones(ntime,1))
+plot(tt,posCoM_err)
 legend('CoMerr_x','CoMerr_y','CoMerr_z')
 title('posCoM error ');
 xlabel('time [s]')
 ylabel('m')
 figure(2)
-plot(tt,linMom_err,tt,linMom_err_max*ones(ntime,1))
+plot(tt,linMom_err)
 legend('linMomErr_x','linMomErr_y','linMomErr_z')
 title('linear momentum error');
 xlabel('time [s]')
@@ -316,7 +316,7 @@ P(3).LineStyle='--';
 title('wind velocity','FontSize',10)
 xlabel('time [s]','FontSize',10)
 ylabel('m/s','FontSize',10)
-ylim([-12 2]);
+ylim([-17 2]);
 
 %% ploting scheduled gain
 %Designed_gain=vary_gain.Data';
@@ -366,7 +366,7 @@ ylabel('m/s')
 
 
 %save figures .eps
-%path='/home/...';    
+% path='C:\Tong_Hui\iRonCub\data_paper\original\hover\wind_cos';    
 % saveas(figure(1),fullfile(path,['pos_err' '.eps']),'epsc2');
 % saveas(figure(2),fullfile(path,['lin_mom_err' '.eps']),'epsc2');
 % saveas(figure(3),fullfile(path,['pos_err_norm' '.eps']),'epsc2');
@@ -391,3 +391,31 @@ ylabel('m/s')
 % saveas(figure(22),fullfile(path,['vcom_norm' '.eps']),'epsc2');
 % 
 % save(fullfile(path,'test.mat'));    
+
+
+%save figures .jpg
+path='C:\Tong_Hui\iRonCub\data_paper\feedback\high-speed\wind_ramp';    
+saveas(figure(1),fullfile(path,['pos_err' '.jpg']));
+saveas(figure(2),fullfile(path,['lin_mom_err' '.jpg']));
+saveas(figure(3),fullfile(path,['pos_err_norm' '.jpg']));
+saveas(figure(4),fullfile(path,['base_rot_err' '.jpg']));
+saveas(figure(5),fullfile(path,['base_rot_err_norm' '.jpg']));
+saveas(figure(6),fullfile(path,['angu_mom_err' '.jpg']));
+saveas(figure(7),fullfile(path,['robot_trajectory' '.jpg']));
+saveas(figure(8),fullfile(path,['velz' '.jpg']));
+saveas(figure(9),fullfile(path,['vely' '.jpg']));
+saveas(figure(10),fullfile(path,['velx' '.jpg']));
+saveas(figure(11),fullfile(path,['aoa' '.jpg']));
+saveas(figure(12),fullfile(path,['va_norm' '.jpg']));
+saveas(figure(13),fullfile(path,['aero_force' '.jpg']));
+saveas(figure(14),fullfile(path,['LDot_linear' '.jpg']));
+saveas(figure(15),fullfile(path,['LDot_angular' '.jpg']));
+saveas(figure(16),fullfile(path,['wind_velocity' '.jpg']));
+saveas(figure(17),fullfile(path,['designed_gain' '.jpg']));
+saveas(figure(18),fullfile(path,['smooth_gain' '.jpg']));
+saveas(figure(19),fullfile(path,['linMom_err_norm' '.jpg']));
+saveas(figure(20),fullfile(path,['angMom_err_norm' '.jpg']));
+saveas(figure(21),fullfile(path,['vcom' '.jpg']));
+saveas(figure(22),fullfile(path,['vcom_norm' '.jpg']));
+% 
+save(fullfile(path,'test.mat'));    

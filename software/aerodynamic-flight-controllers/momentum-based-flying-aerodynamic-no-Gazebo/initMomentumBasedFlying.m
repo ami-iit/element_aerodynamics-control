@@ -63,7 +63,7 @@ confVisualizer.visualizeJets  = false;
 % If USE_ATTITUDE_CONTROL = true => LINEAR MOMENTUM AND ATTITUDE CONTROL (IEEE-HUMANOIDS)
 %
 Config.USE_ATTITUDE_CONTROL             = true;
-Config.Gain_scheduling                  = false;
+Config.Gain_scheduling                  = true;
 
 % If Config.INCLUDE_THRUST_LIMITS and/or Config.INCLUDE_JOINTS_LIMITS are
 % set to true, the thrusts limits and/or the joints limits are included in
