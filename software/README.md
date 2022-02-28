@@ -1,9 +1,8 @@
 ## Overview of aerodynamic-flight-controllers
 
-The [aerodynamic-flight-controllers](https://github.com/ami-iit/element_aerodynamics-control/tree/clean_up/software/aerodynamic_flight_controller) are built based on the work of [momentum-based-flight-no-gazebo](https://github.com/ami-iit/element_ironcub-control/tree/master/software/flight-controllers/momentum-based-flight-no-gazebo) controller done in https://github.com/ami-iit/element_ironcub-control. The aerodynbamic-flight-controllers aim at evaluating the aerodynamic effects on iRonCub and studying possible control techniques to handle aerodynamic effects.
+The [aerodynamic-flight-controllers](/aerodynamic_flight_controllers) are built based on the [momentum-based-flight-no-gazebo](https://github.com/ami-iit/element_ironcub-control/tree/master/software/flight-controllers/momentum-based-flight-no-gazebo) controller from https://github.com/ami-iit/element_ironcub-control. The aerodynbamic-flight-controllers aim at evaluating the aerodynamic effects on iRonCub and study possible control techniques to handle aerodynamic effects.
 
-
-1) In [momentum-based-flying-aerodynamic-no-Gazebo](https://github.com/ami-iit/element_aerodynamics-control/tree/clean_up/software/aerodynamic_flight_controller/momentum-based-flying-aerodynamic-no-Gazebo), aerodynamic forces are introduced to the system, and the simulator supplies three types of trajectories. 
+1) In [momentum-based-flight-aerodynamics](/aerodynamic_flight_controllers/momentum-based-flight-aerodynamics), aerodynamic forces are introduced to the simulator and to the controller, and the controller is tested with three types of trajectories. 
 
 ![image](https://user-images.githubusercontent.com/74595921/138114345-406ea74d-b327-46c6-be4b-83a9b7a9ca94.png)
 
@@ -12,11 +11,7 @@ The [aerodynamic-flight-controllers](https://github.com/ami-iit/element_aerodyna
 * `Scenario 1: Hovering` returns the hovering phase of iRonCub with a finite simulation time defined by the user;
 * `Scenario 2: High-speed Flight` returns the designed high-speed flight trajectory with a finite simulation time defined by the user.
 
-2) In [momentum-based-flying-aerodynamics-no-Gazebo_linear_feedback](https://github.com/ami-iit/element_aerodynamics-control/tree/clean_up/software/aerodynamic_flight_controller/momentum-based-flying-aerodynamics-no-Gazebo_linear_feedback), aerodynamic forces are not only introduced to the system, but also considered in the momentum-based-controller.
-
-
-
-3) How to use the aerodynbamic-flight-controllers, see [wiki page](https://github.com/ami-iit/element_aerodynamics-control/wiki#aerodynamic-flight-controller).
+2) For how to use the aerodynamic-flight-controllers, see also the [wiki page](https://github.com/ami-iit/element_aerodynamics-control/wiki#aerodynamic-flight-controller).
 
 ### Reading materials related to aerodynamic-flight-controllers:
 
