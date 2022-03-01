@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "3.68"
+    ComputedModelVersion    "3.76"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -19,7 +19,7 @@ Model {
     IsExportFunctionModel   0
     SimulinkSubDomainType   "Simulink"
     NumParameterArguments   0
-    NumExternalFileReferences 24
+    NumExternalFileReferences 29
     ExternalFileReference {
       Reference		      "WBToolboxLibrary/Utilities/Configuration"
       Path		      "momentumBasedFlight/Configuration"
@@ -114,6 +114,34 @@ Model {
       Type		      "LIBRARY_BLOCK"
     }
     ExternalFileReference {
+      Reference		      "WBToolboxLibrary/Utilities/MatchSignalSizes"
+      Path		      "momentumBasedFlight/FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And Ref"
+      "erences/Compute Gains/MatchSignalSizes"
+      SID		      "3519:923"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "WBToolboxLibrary/Utilities/MatchSignalSizes"
+      Path		      "momentumBasedFlight/FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And Ref"
+      "erences/Compute Gains/MatchSignalSizes1"
+      SID		      "3519:924"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
+      Path		      "momentumBasedFlight/FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And Ref"
+      "erences/Compute Gains/MinimumJerkTrajectoryGenerator"
+      SID		      "3519:921"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
+      Path		      "momentumBasedFlight/FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And Ref"
+      "erences/Compute Gains/MinimumJerkTrajectoryGenerator1"
+      SID		      "3519:922"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
       Reference		      "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
       Path		      "momentumBasedFlight/FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And Ref"
       "erences/Smooth CoM and Base References/Smooth Position References/Compute Smooth Jerk Reference"
@@ -189,6 +217,12 @@ Model {
       SID		      "3211"
       Type		      "LIBRARY_BLOCK"
     }
+    ExternalFileReference {
+      Reference		      "iDynVisualizer/iDynTree Visualizer++"
+      Path		      "momentumBasedFlight/Robot visualizer/iDynTree Visualizer++"
+      SID		      "3542"
+      Type		      "LIBRARY_BLOCK"
+    }
     OrderedModelArguments   1
   }
   AnimationPlugin	  "on"
@@ -242,7 +276,7 @@ Model {
       }
       Array {
 	Type			"Simulink.EditorInfo"
-	Dimension		117
+	Dimension		119
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [1]
@@ -259,105 +293,6 @@ Model {
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3519:321"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.5414693137156101]
-	  Offset		  [1768.6696945357639, 91.952166316904311]
-	  SceneRectInView	  [1768.6696945357639, 91.952166316904311, 1568.6332374476988, 741.50032688284523]
-	}
-	Object {
-	  $ObjectID		  7
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3519:390"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.778309409888357]
-	  Offset		  [10.265807174887755, -27.872645739910354]
-	  SceneRectInView	  [10.265807174887755, -27.872645739910354, 1359.7183856502245, 642.74529147982071]
-	}
-	Object {
-	  $ObjectID		  8
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "2431"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [2.0724907063197024]
-	  Offset		  [248.58535243834081, 352.24484304932736]
-	  SceneRectInView	  [248.58535243834081, 352.24484304932736, 1166.7121076233184, 551.51031390134528]
-	}
-	Object {
-	  $ObjectID		  9
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3519:913"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [6.0106884627475639]
-	  Offset		  [-57.329184100418416, -68.080622384937229]
-	  SceneRectInView	  [-57.329184100418416, -68.080622384937229, 402.28336820083683, 190.16124476987446]
-	}
-	Object {
-	  $ObjectID		  10
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "523"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.75]
-	  Offset		  [-431.61755952380986, -257.26190476190476]
-	  SceneRectInView	  [-431.61755952380986, -257.26190476190476, 1381.7142857142858, 653.14285714285711]
-	}
-	Object {
-	  $ObjectID		  11
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:212"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.2361419068736141]
-	  Offset		  [899.69523192264569, -86.325560538116633]
-	  SceneRectInView	  [899.69523192264569, -86.325560538116633, 1956.0860986547086, 924.65112107623327]
-	}
-	Object {
-	  $ObjectID		  12
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:534"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [2.5340909090909092]
-	  Offset		  [1249.0620795964126, 853.47533632286991]
-	  SceneRectInView	  [1249.0620795964126, 853.47533632286991, 954.18834080717488, 451.04932735426007]
-	}
-	Object {
-	  $ObjectID		  13
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:525"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.69195751138088]
-	  Offset		  [309.78289307735417, -57.274439461883446]
-	  SceneRectInView	  [309.78289307735417, -57.274439461883446, 1429.1139013452917, 675.54887892376689]
-	}
-	Object {
-	  $ObjectID		  14
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "1614"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.5692684920310584]
-	  Offset		  [-808.86355461556161, -426.68202693370171]
-	  SceneRectInView	  [-808.86355461556161, -426.68202693370171, 1540.8453125, 728.36484375]
-	}
-	Object {
-	  $ObjectID		  15
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "3519"
 	  Extents		  [2418.0, 1143.0]
 	  ZoomFactor		  [3.2262895350186138]
@@ -365,128 +300,7 @@ Model {
 	  SceneRectInView	  [332.19971234309622, 177.86152752353556, 749.46776281380755, 354.27694495292889]
 	}
 	Object {
-	  $ObjectID		  16
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "507"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [2.8912188829070677]
-	  Offset		  [-372.29412094426442, -90.604773032917834]
-	  SceneRectInView	  [-372.29412094426442, -90.604773032917834, 836.32547307132461, 395.33499409450951]
-	}
-	Object {
-	  $ObjectID		  17
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3510"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [2.0841121495327104]
-	  Offset		  [263.17420473654715, -97.717488789237677]
-	  SceneRectInView	  [263.17420473654715, -97.717488789237677, 1160.2062780269057, 548.43497757847535]
-	}
-	Object {
-	  $ObjectID		  18
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:548"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [5.2356666096183471]
-	  Offset		  [1457.3260329497907, 945.34484505753142]
-	  SceneRectInView	  [1457.3260329497907, 945.34484505753142, 461.8323091004184, 218.31030988493723]
-	}
-	Object {
-	  $ObjectID		  19
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3212"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [2.1518030836508628]
-	  Offset		  [-276.63117154811721, -63.591217124925265]
-	  SceneRectInView	  [-276.63117154811721, -63.591217124925265, 1123.7087716676629, 531.18243424985053]
-	}
-	Object {
-	  $ObjectID		  20
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "2271"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [2.4202723122809515]
-	  Offset		  [-257.69072306485356, -70.130454040271985]
-	  SceneRectInView	  [-257.69072306485356, -70.130454040271985, 999.06113362970711, 472.26090808054397]
-	}
-	Object {
-	  $ObjectID		  21
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.9769503546099294]
-	  Offset		  [340.94029918721981, -56.081614349775748]
-	  SceneRectInView	  [340.94029918721981, -56.081614349775748, 1223.0959641255604, 578.1632286995515]
-	}
-	Object {
-	  $ObjectID		  22
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3519:905"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [4.9230769230769234]
-	  Offset		  [305.3984375, 22.4140625]
-	  SceneRectInView	  [305.3984375, 22.4140625, 491.15625, 232.171875]
-	}
-	Object {
-	  $ObjectID		  23
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:254"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.3605857230018303]
-	  Offset		  [247.54101387331832, -832.78968609865478]
-	  SceneRectInView	  [247.54101387331832, -832.78968609865478, 1777.1757847533634, 840.07937219730945]
-	}
-	Object {
-	  $ObjectID		  24
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "87"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.83993399339934]
-	  Offset		  [-859.41300798766815, -533.60896860986554]
-	  SceneRectInView	  [-859.41300798766815, -533.60896860986554, 1314.1775784753363, 621.217937219731]
-	}
-	Object {
-	  $ObjectID		  25
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:281"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.39]
-	  Offset		  [-543.85448516187057, -272.42805755395682]
-	  SceneRectInView	  [-543.85448516187057, -272.42805755395682, 1739.5683453237411, 822.30215827338134]
-	}
-	Object {
-	  $ObjectID		  26
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "474"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.5400552486187846]
-	  Offset		  [-153.61489630044844, 6.90941704035879]
-	  SceneRectInView	  [-153.61489630044844, 6.90941704035879, 1570.0735426008969, 742.18116591928242]
-	}
-	Object {
-	  $ObjectID		  27
+	  $ObjectID		  7
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -497,29 +311,194 @@ Model {
 	  SceneRectInView	  [321.58914748953976, 229.26412787656903, 589.10295502092049, 278.47174424686193]
 	}
 	Object {
-	  $ObjectID		  28
+	  $ObjectID		  8
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3225"
+	  LoadSaveID		  "523"
 	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [5.8987653119393126]
-	  Offset		  [67.626621969234208, -22.884681755902974]
-	  SceneRectInView	  [67.626621969234208, -22.884681755902974, 409.91629131368921, 193.76936351180595]
+	  ZoomFactor		  [1.75]
+	  Offset		  [-431.61755952380986, -257.26190476190476]
+	  SceneRectInView	  [-431.61755952380986, -257.26190476190476, 1381.7142857142858, 653.14285714285711]
 	}
 	Object {
-	  $ObjectID		  29
+	  $ObjectID		  9
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "514"
+	  LoadSaveID		  "3519:321"
 	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-367.04526045003229, -355.96399743754012]
-	  SceneRectInView	  [-367.04526045003229, -355.96399743754012, 1934.4, 914.4]
+	  ZoomFactor		  [1.5414693137156101]
+	  Offset		  [1768.6696945357639, 91.952166316904311]
+	  SceneRectInView	  [1768.6696945357639, 91.952166316904311, 1568.6332374476988, 741.50032688284523]
 	}
 	Object {
-	  $ObjectID		  30
+	  $ObjectID		  10
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "87"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.83993399339934]
+	  Offset		  [-859.41300798766815, -533.60896860986554]
+	  SceneRectInView	  [-859.41300798766815, -533.60896860986554, 1314.1775784753363, 621.217937219731]
+	}
+	Object {
+	  $ObjectID		  11
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "2271"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.4202723122809515]
+	  Offset		  [-257.69072306485356, -70.130454040271985]
+	  SceneRectInView	  [-257.69072306485356, -70.130454040271985, 999.06113362970711, 472.26090808054397]
+	}
+	Object {
+	  $ObjectID		  12
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "507"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.8912188829070677]
+	  Offset		  [-372.29412094426442, -90.604773032917834]
+	  SceneRectInView	  [-372.29412094426442, -90.604773032917834, 836.32547307132461, 395.33499409450951]
+	}
+	Object {
+	  $ObjectID		  13
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3519:390"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.778309409888357]
+	  Offset		  [10.265807174887755, -27.872645739910354]
+	  SceneRectInView	  [10.265807174887755, -27.872645739910354, 1359.7183856502245, 642.74529147982071]
+	}
+	Object {
+	  $ObjectID		  14
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3212"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.1518030836508628]
+	  Offset		  [-276.63117154811721, -63.591217124925265]
+	  SceneRectInView	  [-276.63117154811721, -63.591217124925265, 1123.7087716676629, 531.18243424985053]
+	}
+	Object {
+	  $ObjectID		  15
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:254"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.3605857230018303]
+	  Offset		  [247.54101387331832, -832.78968609865478]
+	  SceneRectInView	  [247.54101387331832, -832.78968609865478, 1777.1757847533634, 840.07937219730945]
+	}
+	Object {
+	  $ObjectID		  16
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "2431"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.0724907063197024]
+	  Offset		  [248.58535243834081, 352.24484304932736]
+	  SceneRectInView	  [248.58535243834081, 352.24484304932736, 1166.7121076233184, 551.51031390134528]
+	}
+	Object {
+	  $ObjectID		  17
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3519:913"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [6.0106884627475639]
+	  Offset		  [-57.329184100418416, -68.080622384937229]
+	  SceneRectInView	  [-57.329184100418416, -68.080622384937229, 402.28336820083683, 190.16124476987446]
+	}
+	Object {
+	  $ObjectID		  18
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:281"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.39]
+	  Offset		  [-543.85448516187057, -272.42805755395682]
+	  SceneRectInView	  [-543.85448516187057, -272.42805755395682, 1739.5683453237411, 822.30215827338134]
+	}
+	Object {
+	  $ObjectID		  19
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "1614"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.5692684920310584]
+	  Offset		  [-808.86355461556161, -426.68202693370171]
+	  SceneRectInView	  [-808.86355461556161, -426.68202693370171, 1540.8453125, 728.36484375]
+	}
+	Object {
+	  $ObjectID		  20
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3510"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.0841121495327104]
+	  Offset		  [263.17420473654715, -97.717488789237677]
+	  SceneRectInView	  [263.17420473654715, -97.717488789237677, 1160.2062780269057, 548.43497757847535]
+	}
+	Object {
+	  $ObjectID		  21
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "843"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [3.1644518272425248]
+	  Offset		  [-89.695763577563014, -40.91522084343157]
+	  SceneRectInView	  [-89.695763577563014, -40.91522084343157, 764.11338582677172, 361.2]
+	}
+	Object {
+	  $ObjectID		  22
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.9769503546099294]
+	  Offset		  [340.94029918721981, -56.081614349775748]
+	  SceneRectInView	  [340.94029918721981, -56.081614349775748, 1223.0959641255604, 578.1632286995515]
+	}
+	Object {
+	  $ObjectID		  23
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:484"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [5.114350675404574]
+	  Offset		  [1448.0, 940.75560930962342]
+	  SceneRectInView	  [1448.0, 940.75560930962342, 472.78729079497907, 223.48878138075315]
+	}
+	Object {
+	  $ObjectID		  24
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3519:329"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.0770755818690421]
+	  Offset		  [-661.74024581589958, -250.14646312761505]
+	  SceneRectInView	  [-661.74024581589958, -250.14646312761505, 1164.1367416317992, 550.2929262552301]
+	}
+	Object {
+	  $ObjectID		  25
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -530,7 +509,117 @@ Model {
 	  SceneRectInView	  [261.15265905269052, -164.85650224215249, 1702.358744394619, 804.713004484305]
 	}
 	Object {
+	  $ObjectID		  26
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3225"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [5.8987653119393126]
+	  Offset		  [67.626621969234208, -22.884681755902974]
+	  SceneRectInView	  [67.626621969234208, -22.884681755902974, 409.91629131368921, 193.76936351180595]
+	}
+	Object {
+	  $ObjectID		  27
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "514"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.25]
+	  Offset		  [-367.04526045003229, -355.96399743754012]
+	  SceneRectInView	  [-367.04526045003229, -355.96399743754012, 1934.4, 914.4]
+	}
+	Object {
+	  $ObjectID		  28
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3517:157"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.75]
+	  Offset		  [-173.1364412680216, -513.799148099607]
+	  SceneRectInView	  [-173.1364412680216, -513.799148099607, 1381.7142857142858, 653.14285714285711]
+	}
+	Object {
+	  $ObjectID		  29
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "490"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.5822259136212624]
+	  Offset		  [-45.138393458030009, -254.13266178266176]
+	  SceneRectInView	  [-45.138393458030009, -254.13266178266176, 1528.2267716535434, 722.4]
+	}
+	Object {
+	  $ObjectID		  30
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3519:905"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [4.9230769230769234]
+	  Offset		  [305.3984375, 22.4140625]
+	  SceneRectInView	  [305.3984375, 22.4140625, 491.15625, 232.171875]
+	}
+	Object {
 	  $ObjectID		  31
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "474"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.5400552486187846]
+	  Offset		  [-153.61489630044844, 6.90941704035879]
+	  SceneRectInView	  [-153.61489630044844, 6.90941704035879, 1570.0735426008969, 742.18116591928242]
+	}
+	Object {
+	  $ObjectID		  32
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:534"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [2.5340909090909092]
+	  Offset		  [1249.0620795964126, 853.47533632286991]
+	  SceneRectInView	  [1249.0620795964126, 853.47533632286991, 954.18834080717488, 451.04932735426007]
+	}
+	Object {
+	  $ObjectID		  33
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:525"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.69195751138088]
+	  Offset		  [309.78289307735417, -57.274439461883446]
+	  SceneRectInView	  [309.78289307735417, -57.274439461883446, 1429.1139013452917, 675.54887892376689]
+	}
+	Object {
+	  $ObjectID		  34
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:548"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [5.2356666096183471]
+	  Offset		  [1457.3260329497907, 945.34484505753142]
+	  SceneRectInView	  [1457.3260329497907, 945.34484505753142, 461.8323091004184, 218.31030988493723]
+	}
+	Object {
+	  $ObjectID		  35
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "3537:212"
+	  Extents		  [2418.0, 1143.0]
+	  ZoomFactor		  [1.2361419068736141]
+	  Offset		  [899.69523192264569, -86.325560538116633]
+	  SceneRectInView	  [899.69523192264569, -86.325560538116633, 1956.0860986547086, 924.65112107623327]
+	}
+	Object {
+	  $ObjectID		  36
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -541,18 +630,7 @@ Model {
 	  SceneRectInView	  [1457.3260329497907, 940.34484505753142, 461.8323091004184, 218.31030988493723]
 	}
 	Object {
-	  $ObjectID		  32
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "3537:484"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [5.114350675404574]
-	  Offset		  [1457.2626046025105, 940.75560930962342]
-	  SceneRectInView	  [1457.2626046025105, 940.75560930962342, 472.78729079497907, 223.48878138075315]
-	}
-	Object {
-	  $ObjectID		  33
+	  $ObjectID		  37
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -563,7 +641,7 @@ Model {
 	  SceneRectInView	  [-545.1296875, -171.79999999999995, 1934.4, 914.4]
 	}
 	Object {
-	  $ObjectID		  34
+	  $ObjectID		  38
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -574,7 +652,7 @@ Model {
 	  SceneRectInView	  [16.227886771300462, -99.997309417040356, 863.10672645739908, 407.99461883408071]
 	}
 	Object {
-	  $ObjectID		  35
+	  $ObjectID		  39
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -585,7 +663,7 @@ Model {
 	  SceneRectInView	  [-969.11687570067261, 148.56412556053817, 2838.7103139013452, 1341.8717488789237]
 	}
 	Object {
-	  $ObjectID		  36
+	  $ObjectID		  40
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -596,7 +674,7 @@ Model {
 	  SceneRectInView	  [62.8326359832636, -150.97489539748955, 374.3347280334728, 176.94979079497907]
 	}
 	Object {
-	  $ObjectID		  37
+	  $ObjectID		  41
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -607,7 +685,7 @@ Model {
 	  SceneRectInView	  [-285.16214576863354, 70.341614906832319, 1501.8633540372671, 709.93788819875772]
 	}
 	Object {
-	  $ObjectID		  38
+	  $ObjectID		  42
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -618,7 +696,7 @@ Model {
 	  SceneRectInView	  [-142.50460904811717, -84.152433642782441, 518.93890559623435, 245.30486728556488]
 	}
 	Object {
-	  $ObjectID		  39
+	  $ObjectID		  43
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -629,7 +707,7 @@ Model {
 	  SceneRectInView	  [-211.12584335774062, -51.16612349633894, 658.61887421548124, 311.33224699267788]
 	}
 	Object {
-	  $ObjectID		  40
+	  $ObjectID		  44
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -640,7 +718,7 @@ Model {
 	  SceneRectInView	  [-207.20873430962342, -90.163689853556491, 381.47996861924685, 180.32737970711298]
 	}
 	Object {
-	  $ObjectID		  41
+	  $ObjectID		  45
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -651,7 +729,7 @@ Model {
 	  SceneRectInView	  [79.1171875, -294.0, 1209.0, 571.5]
 	}
 	Object {
-	  $ObjectID		  42
+	  $ObjectID		  46
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -662,7 +740,7 @@ Model {
 	  SceneRectInView	  [-548.67140204596421, -52.784753363228731, 1344.5381165919284, 635.56950672645746]
 	}
 	Object {
-	  $ObjectID		  43
+	  $ObjectID		  47
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -673,7 +751,7 @@ Model {
 	  SceneRectInView	  [-102.43096234309624, -45.735355648535574, 419.86192468619248, 198.47071129707115]
 	}
 	Object {
-	  $ObjectID		  44
+	  $ObjectID		  48
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -684,7 +762,7 @@ Model {
 	  SceneRectInView	  [94.453536872384916, 283.74736543602262, 746.10855125523017, 352.6890298117155]
 	}
 	Object {
-	  $ObjectID		  45
+	  $ObjectID		  49
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -695,7 +773,7 @@ Model {
 	  SceneRectInView	  [-593.050012807377, -203.03278688524591, 1981.967213114754, 936.88524590163934]
 	}
 	Object {
-	  $ObjectID		  46
+	  $ObjectID		  50
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -706,7 +784,7 @@ Model {
 	  SceneRectInView	  [-610.49680397727275, -157.56060606060606, 1465.4545454545455, 692.72727272727275]
 	}
 	Object {
-	  $ObjectID		  47
+	  $ObjectID		  51
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -717,7 +795,7 @@ Model {
 	  SceneRectInView	  [-1443.06640625, -934.0, 4030.0, 1905.0]
 	}
 	Object {
-	  $ObjectID		  48
+	  $ObjectID		  52
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -728,7 +806,7 @@ Model {
 	  SceneRectInView	  [-844.96953125, -241.89999999999995, 1934.4, 914.4]
 	}
 	Object {
-	  $ObjectID		  49
+	  $ObjectID		  53
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -739,7 +817,7 @@ Model {
 	  SceneRectInView	  [-956.70403587443957, 138.36322869955154, 2873.4080717488791, 1358.2735426008969]
 	}
 	Object {
-	  $ObjectID		  50
+	  $ObjectID		  54
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -750,7 +828,7 @@ Model {
 	  SceneRectInView	  [239.11718750000006, -218.36724565756822, 888.99999999999989, 420.23449131513644]
 	}
 	Object {
-	  $ObjectID		  51
+	  $ObjectID		  55
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -761,7 +839,7 @@ Model {
 	  SceneRectInView	  [1068.2372555865923, 761.0055865921787, 1350.8379888268157, 638.54748603351959]
 	}
 	Object {
-	  $ObjectID		  52
+	  $ObjectID		  56
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -772,7 +850,7 @@ Model {
 	  SceneRectInView	  [-347.21293358242656, -576.82237507625382, 3022.5, 1428.75]
 	}
 	Object {
-	  $ObjectID		  53
+	  $ObjectID		  57
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -783,7 +861,7 @@ Model {
 	  SceneRectInView	  [707.21788709642783, -174.46723284578832, 2418.0, 1143.0]
 	}
 	Object {
-	  $ObjectID		  54
+	  $ObjectID		  58
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -794,7 +872,7 @@ Model {
 	  SceneRectInView	  [1355.1843362603306, 926.69972451790636, 666.11570247933889, 314.87603305785126]
 	}
 	Object {
-	  $ObjectID		  55
+	  $ObjectID		  59
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -805,7 +883,7 @@ Model {
 	  SceneRectInView	  [-421.43873355263145, -215.37188193809578, 1496.0526315789471, 707.19113229724417]
 	}
 	Object {
-	  $ObjectID		  56
+	  $ObjectID		  60
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -816,7 +894,7 @@ Model {
 	  SceneRectInView	  [-606.36261795864107, -915.63025474668746, 3022.5, 1428.75]
 	}
 	Object {
-	  $ObjectID		  57
+	  $ObjectID		  61
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -827,7 +905,7 @@ Model {
 	  SceneRectInView	  [422.72598472320715, -461.85510612318393, 2222.5, 1050.5862282878411]
 	}
 	Object {
-	  $ObjectID		  58
+	  $ObjectID		  62
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -838,7 +916,7 @@ Model {
 	  SceneRectInView	  [18.679814251474909, -177.54995900949365, 1895.0, 895.77543424317616]
 	}
 	Object {
-	  $ObjectID		  59
+	  $ObjectID		  63
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -849,7 +927,7 @@ Model {
 	  SceneRectInView	  [-376.1, -174.89999999999998, 967.2, 457.2]
 	}
 	Object {
-	  $ObjectID		  60
+	  $ObjectID		  64
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -860,7 +938,7 @@ Model {
 	  SceneRectInView	  [-451.2484375, -242.39999999999998, 967.2, 457.2]
 	}
 	Object {
-	  $ObjectID		  61
+	  $ObjectID		  65
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -871,7 +949,7 @@ Model {
 	  SceneRectInView	  [-669.68619109947667, 460.39357002617794, 2699.8098821989533, 1276.2128599476441]
 	}
 	Object {
-	  $ObjectID		  62
+	  $ObjectID		  66
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -882,7 +960,7 @@ Model {
 	  SceneRectInView	  [-313.52685238682682, -125.55173367130669, 2168.3734241908005, 1025.0003407155025]
 	}
 	Object {
-	  $ObjectID		  63
+	  $ObjectID		  67
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -893,7 +971,7 @@ Model {
 	  SceneRectInView	  [677.73831434272461, -338.96242832722783, 3022.5, 1428.75]
 	}
 	Object {
-	  $ObjectID		  64
+	  $ObjectID		  68
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -904,7 +982,7 @@ Model {
 	  SceneRectInView	  [-583.875, -339.0, 2418.0, 1143.0]
 	}
 	Object {
-	  $ObjectID		  65
+	  $ObjectID		  69
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -915,7 +993,7 @@ Model {
 	  SceneRectInView	  [-786.9296875, -286.5, 2418.0, 1143.0]
 	}
 	Object {
-	  $ObjectID		  66
+	  $ObjectID		  70
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -926,7 +1004,7 @@ Model {
 	  SceneRectInView	  [-593.5581232492998, -823.160085554665, 1760.9660714285717, 1714.4669673278174]
 	}
 	Object {
-	  $ObjectID		  67
+	  $ObjectID		  71
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -937,7 +1015,7 @@ Model {
 	  SceneRectInView	  [-771.4375, -376.0, 1174.0, 1143.0]
 	}
 	Object {
-	  $ObjectID		  68
+	  $ObjectID		  72
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -948,7 +1026,7 @@ Model {
 	  SceneRectInView	  [-110.45649834437086, -366.11946027054171, 1031.4754966887417, 1004.2389205410834]
 	}
 	Object {
-	  $ObjectID		  69
+	  $ObjectID		  73
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -959,7 +1037,7 @@ Model {
 	  SceneRectInView	  [-318.15736417863673, -962.17385490563652, 1421.25, 1383.7212521294721]
 	}
 	Object {
-	  $ObjectID		  70
+	  $ObjectID		  74
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -970,7 +1048,7 @@ Model {
 	  SceneRectInView	  [-91.958396195178238, -738.2467005995494, 1551.3586005830903, 1510.3942763768928]
 	}
 	Object {
-	  $ObjectID		  71
+	  $ObjectID		  75
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -981,7 +1059,7 @@ Model {
 	  SceneRectInView	  [-65.969599184782624, -103.42856200466645, 985.22780797101461, 959.21242292237628]
 	}
 	Object {
-	  $ObjectID		  72
+	  $ObjectID		  76
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -992,18 +1070,7 @@ Model {
 	  SceneRectInView	  [425.83298699099907, -215.49070952105271, 1052.8, 1025.0003407155025]
 	}
 	Object {
-	  $ObjectID		  73
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "490"
-	  Extents		  [1778.0, 903.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [7.774992368741664, -254.13266178266176]
-	  SceneRectInView	  [7.774992368741664, -254.13266178266176, 1422.4, 722.4]
-	}
-	Object {
-	  $ObjectID		  74
+	  $ObjectID		  77
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1014,7 +1081,7 @@ Model {
 	  SceneRectInView	  [124.99088541666657, 194.9666666666667, 877.33333333333337, 346.0]
 	}
 	Object {
-	  $ObjectID		  75
+	  $ObjectID		  78
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1025,7 +1092,7 @@ Model {
 	  SceneRectInView	  [-642.78165409482767, -72.068965517241338, 1532.7586206896553, 675.0]
 	}
 	Object {
-	  $ObjectID		  76
+	  $ObjectID		  79
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1036,7 +1103,7 @@ Model {
 	  SceneRectInView	  [521.56918121875833, 48.291633780583993, 758.0, 326.66666666666669]
 	}
 	Object {
-	  $ObjectID		  77
+	  $ObjectID		  80
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1047,7 +1114,7 @@ Model {
 	  SceneRectInView	  [-1329.2579993329748, -556.42477479724, 1895.0, 816.66666666666674]
 	}
 	Object {
-	  $ObjectID		  78
+	  $ObjectID		  81
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1058,7 +1125,7 @@ Model {
 	  SceneRectInView	  [-115.27003407813379, -92.750526981450264, 1920.0, 1080.0]
 	}
 	Object {
-	  $ObjectID		  79
+	  $ObjectID		  82
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1069,7 +1136,7 @@ Model {
 	  SceneRectInView	  [-409.453125, -815.5, 1920.0, 1080.0]
 	}
 	Object {
-	  $ObjectID		  80
+	  $ObjectID		  83
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1080,7 +1147,7 @@ Model {
 	  SceneRectInView	  [-504.9001736111112, -173.59375, 1537.2222222222224, 864.6875]
 	}
 	Object {
-	  $ObjectID		  81
+	  $ObjectID		  84
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1091,7 +1158,7 @@ Model {
 	  SceneRectInView	  [-124.57011552493805, -410.97467731570657, 1509.7475250947771, 849.23298286581212]
 	}
 	Object {
-	  $ObjectID		  82
+	  $ObjectID		  85
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1102,7 +1169,7 @@ Model {
 	  SceneRectInView	  [5.25802744708983, -85.508816964285757, 518.8546296296297, 291.85572916666672]
 	}
 	Object {
-	  $ObjectID		  83
+	  $ObjectID		  86
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1113,7 +1180,7 @@ Model {
 	  SceneRectInView	  [-479.54512345191267, -284.36993796585284, 2610.5590548473569, 1468.4394683516384]
 	}
 	Object {
-	  $ObjectID		  84
+	  $ObjectID		  87
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1124,7 +1191,7 @@ Model {
 	  SceneRectInView	  [491.75675828800826, 134.20767773892771, 628.65708365708372, 353.61960955710958]
 	}
 	Object {
-	  $ObjectID		  85
+	  $ObjectID		  88
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1135,7 +1202,7 @@ Model {
 	  SceneRectInView	  [558.29115247162588, 66.369076065010972, 758.0, 326.66666666666669]
 	}
 	Object {
-	  $ObjectID		  86
+	  $ObjectID		  89
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1146,7 +1213,7 @@ Model {
 	  SceneRectInView	  [-90.056707057823132, -99.455357142857167, 832.31292517006807, 468.17602040816331]
 	}
 	Object {
-	  $ObjectID		  87
+	  $ObjectID		  90
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1157,7 +1224,7 @@ Model {
 	  SceneRectInView	  [-373.77267279886928, 389.96972031845496, 3112.5, 1580.757874015748]
 	}
 	Object {
-	  $ObjectID		  88
+	  $ObjectID		  91
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1168,7 +1235,7 @@ Model {
 	  SceneRectInView	  [-757.5, -476.5, 1920.0, 1080.0]
 	}
 	Object {
-	  $ObjectID		  89
+	  $ObjectID		  92
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1179,7 +1246,7 @@ Model {
 	  SceneRectInView	  [-270.2797983004657, -25.792822052401732, 989.4855895196506, 556.58564410480346]
 	}
 	Object {
-	  $ObjectID		  90
+	  $ObjectID		  93
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1190,7 +1257,7 @@ Model {
 	  SceneRectInView	  [-31.100000000000023, -225.27968750000002, 611.75, 344.109375]
 	}
 	Object {
-	  $ObjectID		  91
+	  $ObjectID		  94
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1201,18 +1268,7 @@ Model {
 	  SceneRectInView	  [238.62890625, -894.25, 1778.0, 903.0]
 	}
 	Object {
-	  $ObjectID		  92
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "843"
-	  Extents		  [1778.0, 903.0]
-	  ZoomFactor		  [2.5]
-	  Offset		  [-63.239070664177177, -40.91522084343157]
-	  SceneRectInView	  [-63.239070664177177, -40.91522084343157, 711.2, 361.2]
-	}
-	Object {
-	  $ObjectID		  93
+	  $ObjectID		  95
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1223,7 +1279,7 @@ Model {
 	  SceneRectInView	  [1081.53828125, -113.89374999999998, 1422.4, 722.4]
 	}
 	Object {
-	  $ObjectID		  94
+	  $ObjectID		  96
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1234,7 +1290,7 @@ Model {
 	  SceneRectInView	  [-542.23046875, -205.0, 2447.0, 1145.0]
 	}
 	Object {
-	  $ObjectID		  95
+	  $ObjectID		  97
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1245,7 +1301,7 @@ Model {
 	  SceneRectInView	  [-55.288677376760575, -59.8617957746479, 446.96522887323948, 211.63534330985919]
 	}
 	Object {
-	  $ObjectID		  96
+	  $ObjectID		  98
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1256,7 +1312,7 @@ Model {
 	  SceneRectInView	  [-1120.8831580125329, -239.64335646075793, 2115.635416666667, 1001.740625]
 	}
 	Object {
-	  $ObjectID		  97
+	  $ObjectID		  99
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1267,7 +1323,7 @@ Model {
 	  SceneRectInView	  [-223.6155563949327, -352.57333187833706, 1581.1428571428571, 757.14285714285711]
 	}
 	Object {
-	  $ObjectID		  98
+	  $ObjectID		  100
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1278,7 +1334,7 @@ Model {
 	  SceneRectInView	  [-815.20072992700727, -378.01824817518246, 1786.1313868613138, 835.76642335766417]
 	}
 	Object {
-	  $ObjectID		  99
+	  $ObjectID		  101
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1289,7 +1345,7 @@ Model {
 	  SceneRectInView	  [-1020.5, -509.5, 2447.0, 1145.0]
 	}
 	Object {
-	  $ObjectID		  100
+	  $ObjectID		  102
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1300,7 +1356,7 @@ Model {
 	  SceneRectInView	  [-139.23437499999997, -51.833333333333343, 407.83333333333331, 190.83333333333334]
 	}
 	Object {
-	  $ObjectID		  101
+	  $ObjectID		  103
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1311,7 +1367,7 @@ Model {
 	  SceneRectInView	  [7.0484375000000057, 27.099999999999994, 489.4, 229.0]
 	}
 	Object {
-	  $ObjectID		  102
+	  $ObjectID		  104
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1322,7 +1378,7 @@ Model {
 	  SceneRectInView	  [-1015.28125, -510.0, 2447.0, 1145.0]
 	}
 	Object {
-	  $ObjectID		  103
+	  $ObjectID		  105
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1333,7 +1389,7 @@ Model {
 	  SceneRectInView	  [-1008.0, -518.5, 2447.0, 1145.0]
 	}
 	Object {
-	  $ObjectID		  104
+	  $ObjectID		  106
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1344,7 +1400,7 @@ Model {
 	  SceneRectInView	  [-56.929030987394952, -37.634453781512605, 411.26050420168065, 192.43697478991595]
 	}
 	Object {
-	  $ObjectID		  105
+	  $ObjectID		  107
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1355,7 +1411,7 @@ Model {
 	  SceneRectInView	  [-350.24515338638571, -430.72358780658169, 2447.0, 1145.0]
 	}
 	Object {
-	  $ObjectID		  106
+	  $ObjectID		  108
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1366,7 +1422,7 @@ Model {
 	  SceneRectInView	  [-348.0390625, -27.5, 1223.5, 572.5]
 	}
 	Object {
-	  $ObjectID		  107
+	  $ObjectID		  109
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1377,7 +1433,7 @@ Model {
 	  SceneRectInView	  [-259.198383826336, -185.96509024322097, 1204.6666666666667, 524.0]
 	}
 	Object {
-	  $ObjectID		  108
+	  $ObjectID		  110
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1388,7 +1444,7 @@ Model {
 	  SceneRectInView	  [464.92703001155883, 14.970937912813753, 925.0, 409.5]
 	}
 	Object {
-	  $ObjectID		  109
+	  $ObjectID		  111
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1399,7 +1455,7 @@ Model {
 	  SceneRectInView	  [-529.75000000000011, -230.99064899172313, 1480.0, 655.2]
 	}
 	Object {
-	  $ObjectID		  110
+	  $ObjectID		  112
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1410,7 +1466,7 @@ Model {
 	  SceneRectInView	  [-11.549844236760237, -79.222741433021724, 1850.0, 819.0]
 	}
 	Object {
-	  $ObjectID		  111
+	  $ObjectID		  113
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1421,7 +1477,7 @@ Model {
 	  SceneRectInView	  [-527.06640625, -144.5, 1850.0, 819.0]
 	}
 	Object {
-	  $ObjectID		  112
+	  $ObjectID		  114
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1432,7 +1488,7 @@ Model {
 	  SceneRectInView	  [-537.25546875, -211.98551351351352, 1445.6, 639.971027027027]
 	}
 	Object {
-	  $ObjectID		  113
+	  $ObjectID		  115
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1443,7 +1499,7 @@ Model {
 	  SceneRectInView	  [-81.868689903846132, -14.384615384615358, 1016.4835164835165, 450.0]
 	}
 	Object {
-	  $ObjectID		  114
+	  $ObjectID		  116
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1454,7 +1510,7 @@ Model {
 	  SceneRectInView	  [-166.85600082709402, -259.127221544759, 1406.6652773576357, 622.73452008427228]
 	}
 	Object {
-	  $ObjectID		  115
+	  $ObjectID		  117
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1465,7 +1521,7 @@ Model {
 	  SceneRectInView	  [-915.32489951521859, -194.28409425625927, 1204.6666666666667, 523.33333333333337]
 	}
 	Object {
-	  $ObjectID		  116
+	  $ObjectID		  118
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1476,7 +1532,7 @@ Model {
 	  SceneRectInView	  [-150.5533854166666, -80.24166666666666, 722.8, 314.0]
 	}
 	Object {
-	  $ObjectID		  117
+	  $ObjectID		  119
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1487,7 +1543,7 @@ Model {
 	  SceneRectInView	  [-537.25546875, -206.0, 1445.6, 628.0]
 	}
 	Object {
-	  $ObjectID		  118
+	  $ObjectID		  120
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1498,7 +1554,7 @@ Model {
 	  SceneRectInView	  [-537.25546875, -206.0, 1445.6, 628.0]
 	}
 	Object {
-	  $ObjectID		  119
+	  $ObjectID		  121
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1509,7 +1565,7 @@ Model {
 	  SceneRectInView	  [-728.55859375, -127.0, 1807.0, 785.0]
 	}
 	Object {
-	  $ObjectID		  120
+	  $ObjectID		  122
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1520,7 +1576,7 @@ Model {
 	  SceneRectInView	  [-537.25546875, -206.0, 1445.6, 628.0]
 	}
 	Object {
-	  $ObjectID		  121
+	  $ObjectID		  123
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -1536,7 +1592,7 @@ Model {
 	Type			"Simulink.DockComponentInfo"
 	Dimension		3
 	Object {
-	  $ObjectID		  122
+	  $ObjectID		  124
 	  Type			  "Simulink:Editor:ReferencedFiles"
 	  ID			  "Referenced Files"
 	  Visible		  [0]
@@ -1549,7 +1605,7 @@ Model {
 	  Minimized		  "Unset"
 	}
 	Object {
-	  $ObjectID		  123
+	  $ObjectID		  125
 	  Type			  "GLUE2:SpreadSheet"
 	  ID			  "ModelData"
 	  Visible		  [1]
@@ -1562,7 +1618,7 @@ Model {
 	  Minimized		  "On"
 	}
 	Object {
-	  $ObjectID		  124
+	  $ObjectID		  126
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1582,7 +1638,7 @@ Model {
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
       "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
       "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAABz8AAADb/AEAAAAB+wAAADYAR"
-      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAP///wAACZgAAAS0AAAAAQAAA"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAAf//wAACZgAAAS0AAAAAQAAA"
       "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
       "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
       "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
@@ -1604,9 +1660,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Mar 01 12:13:04 2022"
-  RTWModifiedTimeStamp	  568037579
-  ModelVersionFormat	  "%<AutoIncrement:3.68>"
+  LastModifiedDate	  "Tue Mar 01 19:41:23 2022"
+  RTWModifiedTimeStamp	  568061906
+  ModelVersionFormat	  "%<AutoIncrement:3.76>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -1664,7 +1720,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    125
+    $ObjectID		    127
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "momentumBasedFlight"
     overrideMode_	    [0.0]
@@ -1711,7 +1767,7 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      126
+      $ObjectID		      128
       Version		      "21.0.0"
       DisabledProps	      []
       Description	      ""
@@ -1719,7 +1775,7 @@ Model {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
-	  $ObjectID		  127
+	  $ObjectID		  129
 	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
@@ -1762,7 +1818,7 @@ Model {
 	  ODENIntegrationMethod	  "ode3"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  128
+	  $ObjectID		  130
 	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
@@ -1804,7 +1860,7 @@ Model {
 	  LoggingIntervals	  "[-inf, inf]"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  129
+	  $ObjectID		  131
 	  Version		  "21.0.0"
 	  Array {
 	    Type		    "Cell"
@@ -1879,7 +1935,7 @@ Model {
 	  EfficientTunableParamExpr off
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  130
+	  $ObjectID		  132
 	  Version		  "21.0.0"
 	  Array {
 	    Type		    "Cell"
@@ -2001,7 +2057,7 @@ Model {
 	  VariantConditionMismatch "none"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  131
+	  $ObjectID		  133
 	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
@@ -2051,7 +2107,7 @@ Model {
 	  HardwareBoardFeatureSet "EmbeddedCoderHSP"
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  132
+	  $ObjectID		  134
 	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
@@ -2071,7 +2127,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  133
+	  $ObjectID		  135
 	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
@@ -2120,7 +2176,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  134
+	  $ObjectID		  136
 	  Version		  "21.0.0"
 	  Array {
 	    Type		    "Cell"
@@ -2227,7 +2283,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      135
+	      $ObjectID		      137
 	      Version		      "21.0.0"
 	      Array {
 		Type			"Cell"
@@ -2317,7 +2373,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      136
+	      $ObjectID		      138
 	      Version		      "21.0.0"
 	      Array {
 		Type			"Cell"
@@ -2421,7 +2477,7 @@ Model {
 	  }
 	}
 	SlCovCC.ConfigComp {
-	  $ObjectID		  137
+	  $ObjectID		  139
 	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  "Simulink Coverage Configuration Component"
@@ -2470,11 +2526,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    126
+    $ObjectID		    128
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    138
+    $ObjectID		    140
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -2850,7 +2906,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "199"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "3542"
+    SIDHighWatermark	    "3543"
     SimulinkSubDomain	    "Simulink"
     Block {
       BlockType		      BusCreator
@@ -3129,12 +3185,12 @@ Model {
 	  ContentPreviewEnabled	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    139
+	    $ObjectID		    141
 	    $ClassName		    "Simulink.Mask"
 	    RunInitForIconRedraw    "off"
 	    Object {
 	      $PropName		      "Parameters"
-	      $ObjectID		      140
+	      $ObjectID		      142
 	      $ClassName	      "Simulink.MaskParameter"
 	      Type		      "edit"
 	      Name		      "Parameter1"
@@ -3145,33 +3201,33 @@ Model {
 	      Type		      "Simulink.dialog.Group"
 	      Dimension		      2
 	      Object {
-		$ObjectID		141
+		$ObjectID		143
 		Prompt			"Flight Controller RAL-HUMANOIDS"
 		Array {
 		  Type			  "Simulink.dialog.Control"
 		  Dimension		  4
 		  Object {
-		    $ObjectID		    142
+		    $ObjectID		    144
 		    $ClassName		    "Simulink.dialog.Text"
 		    Prompt		    "This block implements the momentum-based flight controller decribed in RAL 2018 and HUMANOIDS 2018 "
 		    "papers. "
 		    Name		    "DescTextVar"
 		  }
 		  Object {
-		    $ObjectID		    143
+		    $ObjectID		    145
 		    $ClassName		    "Simulink.dialog.Text"
 		    Prompt		    "References:"
 		    Name		    "Control3"
 		  }
 		  Object {
-		    $ObjectID		    144
+		    $ObjectID		    146
 		    $ClassName		    "Simulink.dialog.Hyperlink"
 		    Prompt		    "RAL 2018 paper"
 		    Callback		    "web https://ieeexplore.ieee.org/document/7997895"
 		    Name		    "Control5"
 		  }
 		  Object {
-		    $ObjectID		    145
+		    $ObjectID		    147
 		    $ClassName		    "Simulink.dialog.Hyperlink"
 		    Prompt		    "HUMANOIDS 2018 paper"
 		    Callback		    "web https://ieeexplore.ieee.org/document/8624985"
@@ -3182,11 +3238,11 @@ Model {
 		Name			"DescGroupVar"
 	      }
 	      Object {
-		$ObjectID		146
+		$ObjectID		148
 		Prompt			"Simulink:studio:ToolBarParametersMenu"
 		Object {
 		  $PropName		  "DialogControls"
-		  $ObjectID		  147
+		  $ObjectID		  149
 		  $ClassName		  "Simulink.dialog.parameter.Edit"
 		  PromptLocation	  "left"
 		  Name			  "Parameter1"
@@ -10440,21 +10496,21 @@ Model {
 	  ContentPreviewEnabled	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    148
+	    $ObjectID		    150
 	    $ClassName		    "Simulink.Mask"
 	    RunInitForIconRedraw    "off"
 	    Array {
 	      Type		      "Simulink.MaskParameter"
 	      Dimension		      2
 	      Object {
-		$ObjectID		149
+		$ObjectID		151
 		Type			"edit"
 		Name			"Parameter1"
 		Prompt			"Specify the parameters struct"
 		Value			"Config"
 	      }
 	      Object {
-		$ObjectID		150
+		$ObjectID		152
 		Type			"edit"
 		Name			"Parameter2"
 		Prompt			"Specify the frame names struct"
@@ -10466,11 +10522,11 @@ Model {
 	      Type		      "Simulink.dialog.Group"
 	      Dimension		      2
 	      Object {
-		$ObjectID		151
+		$ObjectID		153
 		Prompt			"Flight State Machine"
 		Object {
 		  $PropName		  "DialogControls"
-		  $ObjectID		  152
+		  $ObjectID		  154
 		  $ClassName		  "Simulink.dialog.Text"
 		  Prompt		  "Implements a state machine that allows iRonCub to take off, fly, and land. It also allows the user to p"
 		  "rovide reference trajectories to the robot via joypad or a control GUI."
@@ -10479,18 +10535,18 @@ Model {
 		Name			"DescGroupVar"
 	      }
 	      Object {
-		$ObjectID		153
+		$ObjectID		155
 		Prompt			"Simulink:studio:ToolBarParametersMenu"
 		Array {
 		  Type			  "Simulink.dialog.parameter.Edit"
 		  Dimension		  2
 		  Object {
-		    $ObjectID		    154
+		    $ObjectID		    156
 		    PromptLocation	    "left"
 		    Name		    "Parameter1"
 		  }
 		  Object {
-		    $ObjectID		    155
+		    $ObjectID		    157
 		    PromptLocation	    "left"
 		    Name		    "Parameter2"
 		  }
@@ -10520,7 +10576,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "323"
-	    SIDHighWatermark	    "917"
+	    SIDHighWatermark	    "924"
 	    SIDPrevWatermark	    "852"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
@@ -10689,7 +10745,7 @@ Model {
 		  }
 		  System {
 		    Name		    "Compute Gains"
-		    Location		    [67, 27, 1920, 1080]
+		    Location		    [1992, 27, 4480, 1440]
 		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 		    Open		    off
 		    PortBlocksUseCompactNotation off
@@ -10705,27 +10761,158 @@ Model {
 		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
-		    ZoomFactor		    "175"
+		    ZoomFactor		    "208"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
-		    BlockType		    Constant
-		    Name		    "Constant1"
-		    SID			    "3519:330"
-		    Position		    [-400, -115, -60, -95]
-		    ZOrder		    1010
-		    ShowName		    off
-		    HideAutomaticName	    off
-		    Value		    "[Config.gains.momentum.KP_linear, Config.gains.momentum.KP_angular]"
+		    BlockType		    SubSystem
+		    Name		    "Apply Gain Scheduling on Momentum Gains"
+		    SID			    "3519:920"
+		    Ports		    [2, 2]
+		    Position		    [-530, -127, -300, 2]
+		    ZOrder		    1226
+		    ErrorFcn		    "Stateflow.Translate.translate"
+		    PermitHierarchicalResolution "ExplicitOnly"
+		    TreatAsAtomicUnit	    on
+		    RequestExecContextInheritance off
+		    SFBlockType		    "MATLAB Function"
+		    ContentPreviewEnabled   on
+		    System {
+		    Name		    "Apply Gain Scheduling on Momentum Gains"
+		    Location		    [223, 338, 826, 833]
+		    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    SetExecutionDomain	    off
+		    ExecutionDomainType	    "Deduce"
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    SIDHighWatermark	    "24"
+		    SimulinkSubDomain	    "Simulink"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "posCoM"
+		    SID			    "3519:920::1"
+		    Position		    [20, 101, 40, 119]
+		    ZOrder		    -1
 		    }
 		    Block {
-		    BlockType		    Constant
-		    Name		    "Constant2"
-		    SID			    "3519:331"
-		    Position		    [-400, -50, -60, -30]
-		    ZOrder		    1011
-		    ShowName		    off
-		    HideAutomaticName	    off
-		    Value		    "[Config.gains.momentum.KD_linear, Config.gains.momentum.KD_angular]"
+		    BlockType		    Inport
+		    Name		    "posCoM_des"
+		    SID			    "3519:920::22"
+		    Position		    [20, 136, 40, 154]
+		    ZOrder		    13
+		    Port		    "2"
+		    }
+		    Block {
+		    BlockType		    Demux
+		    Name		    " Demux "
+		    SID			    "3519:920::20"
+		    Ports		    [1, 1]
+		    Position		    [270, 230, 320, 270]
+		    ZOrder		    11
+		    Outputs		    "1"
+		    }
+		    Block {
+		    BlockType		    S-Function
+		    Name		    " SFunction "
+		    SID			    "3519:920::19"
+		    Tag			    "Stateflow S-Function 26"
+		    Ports		    [2, 3]
+		    Position		    [180, 100, 230, 180]
+		    ZOrder		    10
+		    FunctionName	    "sf_sfun"
+		    Parameters		    "Config"
+		    PortCounts		    "[2 3]"
+		    SFunctionDeploymentMode off
+		    EnableBusSupport	    on
+		    SFcnIsStateOwnerBlock   off
+		    Port {
+		    PortNumber		    2
+		    Name		    "KP_momentum_vector"
+		    }
+		    Port {
+		    PortNumber		    3
+		    Name		    "KD_momentum_vector"
+		    }
+		    }
+		    Block {
+		    BlockType		    Terminator
+		    Name		    " Terminator "
+		    SID			    "3519:920::21"
+		    Position		    [460, 241, 480, 259]
+		    ZOrder		    12
+		    }
+		    Block {
+		    BlockType		    Outport
+		    Name		    "KP_momentum_vector"
+		    SID			    "3519:920::5"
+		    Position		    [460, 101, 480, 119]
+		    ZOrder		    -5
+		    }
+		    Block {
+		    BlockType		    Outport
+		    Name		    "KD_momentum_vector"
+		    SID			    "3519:920::24"
+		    Position		    [460, 136, 480, 154]
+		    ZOrder		    15
+		    Port		    "2"
+		    }
+		    Line {
+		    ZOrder		    27
+		    SrcBlock		    "posCoM"
+		    SrcPort		    1
+		    DstBlock		    " SFunction "
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    28
+		    SrcBlock		    "posCoM_des"
+		    SrcPort		    1
+		    DstBlock		    " SFunction "
+		    DstPort		    2
+		    }
+		    Line {
+		    Name		    "KP_momentum_vector"
+		    ZOrder		    29
+		    Labels		    [0, 0]
+		    SrcBlock		    " SFunction "
+		    SrcPort		    2
+		    DstBlock		    "KP_momentum_vector"
+		    DstPort		    1
+		    }
+		    Line {
+		    Name		    "KD_momentum_vector"
+		    ZOrder		    30
+		    Labels		    [0, 0]
+		    SrcBlock		    " SFunction "
+		    SrcPort		    3
+		    DstBlock		    "KD_momentum_vector"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    31
+		    SrcBlock		    " Demux "
+		    SrcPort		    1
+		    DstBlock		    " Terminator "
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    32
+		    SrcBlock		    " SFunction "
+		    SrcPort		    1
+		    DstBlock		    " Demux "
+		    DstPort		    1
+		    }
+		    }
 		    }
 		    Block {
 		    BlockType		    Constant
@@ -11348,6 +11535,27 @@ Model {
 		    }
 		    }
 		    Block {
+		    BlockType		    From
+		    Name		    "From1"
+		    SID			    "3519:918"
+		    Position		    [-655, -38, -580, -22]
+		    ZOrder		    1224
+		    ShowName		    off
+		    GotoTag		    "posCoM_des"
+		    TagVisibility	    "global"
+		    }
+		    Block {
+		    BlockType		    From
+		    Name		    "From5"
+		    SID			    "3519:919"
+		    Position		    [-650, -103, -590, -87]
+		    ZOrder		    1225
+		    ShowName		    off
+		    HideAutomaticName	    off
+		    GotoTag		    "posCoM"
+		    TagVisibility	    "global"
+		    }
+		    Block {
 		    BlockType		    Goto
 		    Name		    "Goto1"
 		    SID			    "3519:340"
@@ -11401,6 +11609,86 @@ Model {
 		    HideAutomaticName	    off
 		    GotoTag		    "KP_torqueControl"
 		    TagVisibility	    "global"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "MatchSignalSizes"
+		    SID			    "3519:923"
+		    Ports		    [2, 1]
+		    Position		    [-95, -131, -25, -84]
+		    ZOrder		    1229
+		    ShowName		    off
+		    HideAutomaticName	    off
+		    LibraryVersion	    "4.0"
+		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
+		    SourceType		    "MatchSignalSizes"
+		    SourceProductName	    "WholeBodyToolbox"
+		    RTWMemSecFuncInitTerm   "Inherit from model"
+		    RTWMemSecFuncExecute    "Inherit from model"
+		    RTWMemSecDataConstants  "Inherit from model"
+		    RTWMemSecDataInternal   "Inherit from model"
+		    RTWMemSecDataParameters "Inherit from model"
+		    ContentPreviewEnabled   off
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "MatchSignalSizes1"
+		    SID			    "3519:924"
+		    Ports		    [2, 1]
+		    Position		    [-95, -66, -25, -19]
+		    ZOrder		    1230
+		    ShowName		    off
+		    HideAutomaticName	    off
+		    LibraryVersion	    "4.0"
+		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
+		    SourceType		    "MatchSignalSizes"
+		    SourceProductName	    "WholeBodyToolbox"
+		    RTWMemSecFuncInitTerm   "Inherit from model"
+		    RTWMemSecFuncExecute    "Inherit from model"
+		    RTWMemSecDataConstants  "Inherit from model"
+		    RTWMemSecDataInternal   "Inherit from model"
+		    RTWMemSecDataParameters "Inherit from model"
+		    ContentPreviewEnabled   off
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "MinimumJerkTrajectoryGenerator"
+		    SID			    "3519:921"
+		    Ports		    [1, 1]
+		    Position		    [-240, -107, -135, -83]
+		    ZOrder		    1227
+		    LibraryVersion	    "4.0"
+		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
+		    SourceType		    "MinimumJerkTrajectoryGenerator"
+		    SourceProductName	    "WholeBodyToolbox"
+		    MultithreadedSim	    "auto"
+		    externalSettlingTime    off
+		    settlingTime	    "Config.settlingTime_gainScheduling"
+		    sampleTime		    "Config.tStep"
+		    resetOnSettlingTime	    off
+		    firstDerivatives	    off
+		    secondDerivatives	    off
+		    explicitInitialValue    off
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "MinimumJerkTrajectoryGenerator1"
+		    SID			    "3519:922"
+		    Ports		    [1, 1]
+		    Position		    [-240, -42, -135, -18]
+		    ZOrder		    1228
+		    LibraryVersion	    "4.0"
+		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
+		    SourceType		    "MinimumJerkTrajectoryGenerator"
+		    SourceProductName	    "WholeBodyToolbox"
+		    MultithreadedSim	    "auto"
+		    externalSettlingTime    off
+		    settlingTime	    "Config.settlingTime_gainScheduling"
+		    sampleTime		    "Config.tStep"
+		    resetOnSettlingTime	    off
+		    firstDerivatives	    off
+		    secondDerivatives	    off
+		    explicitInitialValue    off
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11498,10 +11786,10 @@ Model {
 		    }
 		    }
 		    Line {
-		    ZOrder		    10
-		    SrcBlock		    "Constant2"
+		    ZOrder		    32
+		    SrcBlock		    "MatchSignalSizes1"
 		    SrcPort		    1
-		    Points		    [58, 0]
+		    Points		    [23, 0]
 		    Branch {
 		    ZOrder		    11
 		    DstBlock		    "Diagonalize1"
@@ -11515,19 +11803,19 @@ Model {
 		    }
 		    }
 		    Line {
-		    ZOrder		    13
-		    SrcBlock		    "Constant1"
+		    ZOrder		    28
+		    SrcBlock		    "MatchSignalSizes"
 		    SrcPort		    1
-		    Points		    [57, 0]
+		    Points		    [22, 0]
 		    Branch {
-		    ZOrder		    14
-		    DstBlock		    "Diagonalize"
+		    ZOrder		    30
+		    Points		    [0, -30]
+		    DstBlock		    "Goto2"
 		    DstPort		    1
 		    }
 		    Branch {
-		    ZOrder		    15
-		    Points		    [0, -30]
-		    DstBlock		    "Goto2"
+		    ZOrder		    29
+		    DstBlock		    "Diagonalize"
 		    DstPort		    1
 		    }
 		    }
@@ -11565,6 +11853,68 @@ Model {
 		    SrcPort		    1
 		    DstBlock		    "KP_momentum"
 		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    21
+		    SrcBlock		    "From5"
+		    SrcPort		    1
+		    DstBlock		    "Apply Gain Scheduling on Momentum Gains"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    22
+		    SrcBlock		    "From1"
+		    SrcPort		    1
+		    DstBlock		    "Apply Gain Scheduling on Momentum Gains"
+		    DstPort		    2
+		    }
+		    Line {
+		    ZOrder		    26
+		    SrcBlock		    "Apply Gain Scheduling on Momentum Gains"
+		    SrcPort		    1
+		    Points		    [29, 0]
+		    Branch {
+		    ZOrder		    37
+		    Points		    [0, -25]
+		    DstBlock		    "MatchSignalSizes"
+		    DstPort		    1
+		    }
+		    Branch {
+		    ZOrder		    36
+		    DstBlock		    "MinimumJerkTrajectoryGenerator"
+		    DstPort		    1
+		    }
+		    }
+		    Line {
+		    ZOrder		    27
+		    SrcBlock		    "Apply Gain Scheduling on Momentum Gains"
+		    SrcPort		    2
+		    Points		    [32, 0]
+		    Branch {
+		    ZOrder		    35
+		    Points		    [0, -25]
+		    DstBlock		    "MatchSignalSizes1"
+		    DstPort		    1
+		    }
+		    Branch {
+		    ZOrder		    34
+		    DstBlock		    "MinimumJerkTrajectoryGenerator1"
+		    DstPort		    1
+		    }
+		    }
+		    Line {
+		    ZOrder		    31
+		    SrcBlock		    "MinimumJerkTrajectoryGenerator"
+		    SrcPort		    1
+		    DstBlock		    "MatchSignalSizes"
+		    DstPort		    2
+		    }
+		    Line {
+		    ZOrder		    33
+		    SrcBlock		    "MinimumJerkTrajectoryGenerator1"
+		    SrcPort		    1
+		    DstBlock		    "MatchSignalSizes1"
+		    DstPort		    2
 		    }
 		  }
 		}
@@ -11717,7 +12067,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "28"
+		    SIDHighWatermark	    "29"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -11752,6 +12102,7 @@ Model {
 		    Position		    [180, 100, 230, 180]
 		    ZOrder		    15
 		    FunctionName	    "sf_sfun"
+		    Parameters		    "Config"
 		    PortCounts		    "[2 3]"
 		    SFunctionDeploymentMode off
 		    EnableBusSupport	    on
@@ -11788,53 +12139,48 @@ Model {
 		    Port		    "2"
 		    }
 		    Line {
-		    ZOrder		    17
+		    ZOrder		    30
 		    SrcBlock		    "t"
 		    SrcPort		    1
-		    Points		    [86, 0; 0, 10]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    18
+		    ZOrder		    31
 		    SrcBlock		    "posCoM_init"
 		    SrcPort		    1
-		    Points		    [52, 0; 0, 15]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
 		    Name		    "pos_vel_acc_jerk_CoM_des"
-		    ZOrder		    19
+		    ZOrder		    32
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
-		    Points		    [56, 0; 0, -30]
 		    DstBlock		    "pos_vel_acc_jerk_CoM_des"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "turbo_mode_hs"
-		    ZOrder		    20
+		    ZOrder		    33
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
-		    Points		    [112, 0; 0, -20]
 		    DstBlock		    "turbo_mode_hs"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    21
+		    ZOrder		    34
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    22
+		    ZOrder		    35
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
-		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -15057,12 +15403,12 @@ Model {
 	  ContentPreviewEnabled	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    156
+	    $ObjectID		    158
 	    $ClassName		    "Simulink.Mask"
 	    RunInitForIconRedraw    "off"
 	    Object {
 	      $PropName		      "Parameters"
-	      $ObjectID		      157
+	      $ObjectID		      159
 	      $ClassName	      "Simulink.MaskParameter"
 	      Type		      "edit"
 	      Name		      "Parameter1"
@@ -15071,25 +15417,25 @@ Model {
 	    }
 	    Object {
 	      $PropName		      "DialogControls"
-	      $ObjectID		      158
+	      $ObjectID		      160
 	      $ClassName	      "Simulink.dialog.Group"
 	      Prompt		      "Get System State"
 	      Array {
 		Type			"Simulink.dialog.Control"
 		Dimension		2
 		Object {
-		  $ObjectID		  159
+		  $ObjectID		  161
 		  $ClassName		  "Simulink.dialog.Text"
 		  Prompt		  "Computes the iRonCub state vector while flying."
 		  Name			  "DescTextVar"
 		}
 		Object {
-		  $ObjectID		  160
+		  $ObjectID		  162
 		  $ClassName		  "Simulink.dialog.Group"
 		  Prompt		  "Parameters"
 		  Object {
 		    $PropName		    "DialogControls"
-		    $ObjectID		    161
+		    $ObjectID		    163
 		    $ClassName		    "Simulink.dialog.parameter.Edit"
 		    PromptLocation	    "left"
 		    Name		    "Parameter1"
@@ -16252,7 +16598,7 @@ Model {
       RequestExecContextInheritance off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		162
+	$ObjectID		164
 	$ClassName		"Simulink.Mask"
 	RunInitForIconRedraw	"off"
       }
@@ -16328,6 +16674,7 @@ Model {
 	  Ports			  [6]
 	  Position		  [845, 123, 1080, 427]
 	  ZOrder		  1124
+	  Commented		  "on"
 	  System		  "RobotVisualizer_iDynTree"
 	  MaskType		  "RobotVisualizer_iDynTree"
 	  MaskDisplay		  "disp(['Robot' char(10) 'Visualizer']);\nport_label('input',1,'world_H_base');\nport_label('input',2"
@@ -16344,7 +16691,6 @@ Model {
 	  Position		  [835, -91, 1090, 81]
 	  ZOrder		  1132
 	  BackgroundColor	  "[1.000000, 0.333333, 0.000000]"
-	  Commented		  "on"
 	  LibraryVersion	  "2.0"
 	  SourceBlock		  "iDynVisualizer/iDynTree Visualizer++"
 	  SourceType		  "iDynTree Visualizer ++"
@@ -16469,7 +16815,7 @@ Model {
       RequestExecContextInheritance off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		163
+	$ObjectID		165
 	$ClassName		"Simulink.Mask"
 	Display			"disp('VISUALIZER')"
 	RunInitForIconRedraw	"off"
@@ -16636,31 +16982,32 @@ Model {
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','posCoM_err_SCOPE','DataLogging',true,'DataLoggingSave"
 	      "Format','StructureWithTime'),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('Mi"
-	      "nYLimReal','-1.32674','MaxYLimReal','0.14742','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.32674','Le"
+	      "nYLimReal','-0.33014','MaxYLimReal','0.03754','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','0.33014','Le"
 	      "gendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6862"
 	      "74509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.6235"
 	      "29411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717"
 	      "647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Sign"
 	      "alLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'CoM_x'}},'ShowC"
-	      "ontent',true,'Placement',1),struct('MinYLimReal','-0.00059','MaxYLimReal','0.00121','YLabelReal','','MinYLimMag"
-	      "','0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
-	      "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666"
-	      "666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83"
-	      "1372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215"
-	      "686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumL"
-	      "ines',1,'LineNames',{{'CoM_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-0.07293','MaxYLimReal'"
-	      ",'0.32363','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',true"
-	      ",'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.68627450980392"
-	      "2],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.1607843137"
-	      "2549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.05882352941"
-	      "17647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefi"
-	      "nedChannelNames',{{}},'NumLines',1,'LineNames',{{'CoM_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyD"
-	      "efaults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.6862"
-	      "74509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.06"
-	      "66666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0"
-	      "588235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCac"
-	      "he',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr"
-	      ".Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[2337 244 627 551])"
+	      "ontent',true,'Placement',1),struct('MinYLimReal','-0.352','MaxYLimReal','0.03911','YLabelReal','','MinYLimMag',"
+	      "'0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesCo"
+	      "lor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666"
+	      "6666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
+	      "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803921568"
+	      "6 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLin"
+	      "es',1,'LineNames',{{'CoM_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-0.04559','MaxYLimReal','"
+	      "0.06019','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',true,'"
+	      "PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922]"
+	      ",'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160784313725"
+	      "49;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117"
+	      "647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefine"
+	      "dChannelNames',{{}},'NumLines',1,'LineNames',{{'CoM_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyDef"
+	      "aults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274"
+	      "509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666"
+	      "666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.058"
+	      "8235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache"
+	      "',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.C"
+	      "onfiguration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[1998 -239 2478 1321]"
+	      ")"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -17927,7 +18274,7 @@ Model {
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','thrusts_SCOPE','DataLogging',true,'DataLoggingSaveFor"
 	      "mat','StructureWithTime'),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('MinYL"
-	      "imReal','66.03567','MaxYLimReal','170.52941','YLabelReal','','MinYLimMag','66.03567','MaxYLimMag','170.52941','"
+	      "imReal','92.45136','MaxYLimReal','136.25236','YLabelReal','','MinYLimMag','92.45136','MaxYLimMag','136.25236','"
 	      "LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68"
 	      "6274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.62"
 	      "3529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.7"
@@ -17935,8 +18282,8 @@ Model {
 	      "gnalLabel>','LinePropertiesCache',{{struct('Visible','on'),struct('Visible','on'),struct('Visible','on'),struct"
 	      "('Visible','on'),struct('Visible','on'),struct('Visible','on')}},'UserDefinedChannelNames',{{}},'NumLines',4,'L"
 	      "ineNames',{{'thrusts:1','thrusts:2','thrusts:3','thrusts:4'}},'ShowContent',true,'Placement',1)},'DisplayProper"
-	      "tyDefaults',struct('MinYLimReal','66.03567','MaxYLimReal','170.52941','YLabelReal','','MinYLimMag','66.03567','"
-	      "MaxYLimMag','170.52941','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0"
+	      "tyDefaults',struct('MinYLimReal','92.45136','MaxYLimReal','136.25236','YLabelReal','','MinYLimMag','92.45136','"
+	      "MaxYLimMag','136.25236','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0"
 	      " 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666666666666"
 	      "7;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725490196"
 	      "08 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.65098"
@@ -19834,31 +20181,31 @@ Model {
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','angMom_err_SCOPE','DataLogging',true,'DataLoggingSave"
 	      "Format','StructureWithTime'),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('Mi"
-	      "nYLimReal','-0.0107','MaxYLimReal','0.01214','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','0.01214','Leg"
-	      "endVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627"
-	      "4509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.62352"
-	      "9411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.7176"
-	      "47058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Signa"
-	      "lLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'hw_x'}},'ShowCon"
-	      "tent',true,'Placement',1),struct('MinYLimReal','-0.37372','MaxYLimReal','0.52702','YLabelReal','','MinYLimMag',"
-	      "'0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesCo"
-	      "lor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666"
-	      "6666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
-	      "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803921568"
-	      "6 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLin"
-	      "es',1,'LineNames',{{'hw_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-0.01591','MaxYLimReal','0"
-	      ".01347','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',true,'P"
-	      "lotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],"
-	      "'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.1607843137254"
-	      "9;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.05882352941176"
-	      "47 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefined"
-	      "ChannelNames',{{}},'NumLines',1,'LineNames',{{'hw_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyDefau"
-	      "lts',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.68627450"
-	      "9803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.066666"
-	      "6666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.05882"
-	      "35294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache',"
-	      "[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Con"
-	      "figuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[2692 117 791 441])"
+	      "nYLimReal','-0.06273','MaxYLimReal','0.08003','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','0.08003','Le"
+	      "gendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6862"
+	      "74509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.6235"
+	      "29411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717"
+	      "647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Sign"
+	      "alLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'hw_x'}},'ShowCo"
+	      "ntent',true,'Placement',1),struct('MinYLimReal','-0.10648','MaxYLimReal','0.22496','YLabelReal','','MinYLimMag'"
+	      ",'0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
+	      "olor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
+	      "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831"
+	      "372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.07450980392156"
+	      "86 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLi"
+	      "nes',1,'LineNames',{{'hw_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-0.02884','MaxYLimReal','"
+	      "0.02847','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',true,'"
+	      "PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922]"
+	      ",'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160784313725"
+	      "49;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117"
+	      "647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefine"
+	      "dChannelNames',{{}},'NumLines',1,'LineNames',{{'hw_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyDefa"
+	      "ults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.6862745"
+	      "09803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.06666"
+	      "66666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588"
+	      "235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache'"
+	      ",[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Co"
+	      "nfiguration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[1993 -239 2488 1321])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -20448,31 +20795,31 @@ Model {
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','linMom_err_SCOPE','DataLogging',true,'DataLoggingSave"
 	      "Format','StructureWithTime'),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('Mi"
-	      "nYLimReal','-19.47202','MaxYLimReal','18.57692','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','19.47202',"
-	      "'LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6"
-	      "86274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.6"
-	      "23529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0."
-	      "717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<S"
-	      "ignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_x'}},'Sho"
-	      "wContent',true,'Placement',1),struct('MinYLimReal','-0.04463','MaxYLimReal','0.042','YLabelReal','','MinYLimMag"
-	      "','0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
-	      "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666"
-	      "666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83"
-	      "1372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215"
-	      "686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumL"
-	      "ines',1,'LineNames',{{'hl_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-4.12586','MaxYLimReal',"
-	      "'4.55668','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',true,"
-	      "'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922"
-	      "],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372"
-	      "549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.058823529411"
-	      "7647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefin"
-	      "edChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyDef"
-	      "aults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274"
-	      "509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666"
-	      "666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.058"
-	      "8235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache"
-	      "',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.C"
-	      "onfiguration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[2573 353 1171 480])"
+	      "nYLimReal','-4.24999','MaxYLimReal','3.05744','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','4.24999','Le"
+	      "gendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6862"
+	      "74509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.6235"
+	      "29411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717"
+	      "647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Sign"
+	      "alLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_x'}},'ShowCo"
+	      "ntent',true,'Placement',1),struct('MinYLimReal','-0.35898','MaxYLimReal','0.53739','YLabelReal','','MinYLimMag'"
+	      ",'0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
+	      "olor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
+	      "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831"
+	      "372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.07450980392156"
+	      "86 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLi"
+	      "nes',1,'LineNames',{{'hl_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-3.79017','MaxYLimReal','"
+	      "1.33128','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',true,'"
+	      "PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922]"
+	      ",'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160784313725"
+	      "49;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117"
+	      "647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefine"
+	      "dChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyDefa"
+	      "ults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.6862745"
+	      "09803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.06666"
+	      "66666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588"
+	      "235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache'"
+	      ",[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Co"
+	      "nfiguration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[1993 -239 2488 1321])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -21274,7 +21621,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Task and Base Frame Kinematics"
-	    Location		    [382, 247, 1768, 1036]
+	    Location		    [1992, 27, 4480, 1440]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
@@ -21290,7 +21637,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "125"
+	    ZoomFactor		    "158"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -21609,7 +21956,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Combine Rotations"
-		Location		[80, 35, 1928, 1208]
+		Location		[1992, 27, 4480, 1440]
 		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			off
 		PortBlocksUseCompactNotation off
@@ -21625,7 +21972,7 @@ Model {
 		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 		TiledPageScale		1
 		ShowPageBoundaries	off
-		ZoomFactor		"250"
+		ZoomFactor		"316"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -21741,8 +22088,8 @@ Model {
 		  ";1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.3921568627450"
 		  "98 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLa"
 		  "youtDimensions',[3 1],'DisplayContentCache',[]),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',f"
-		  "alse,'PreviousZoomMode','ZoomY'),extmgr.Configuration('Tools','Measurements',true,'Version','2020b')),'Version','2"
-		  "020b','Position',[204 117 1270 802])"
+		  "alse,'PreviousZoomMode','ZoomY'),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2"
+		  "021a','Position',[199 112 1280 795])"
 		  NumInputPorts		  "3"
 		  Floating		  off
 		}
@@ -24212,7 +24559,7 @@ Model {
 	  "78431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745"
 	  "098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Na"
 	  "vigation',true,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Vers"
-	  "ion','2021a','Position',[2837 310 630 371],'VisibleAtModelOpen','on')"
+	  "ion','2021a','Position',[2837 310 630 371])"
 	  NumInputPorts		  "1"
 	  Floating		  off
 	}
@@ -24396,8 +24743,20 @@ Model {
 	      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(ext"
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','ScopeData2'),extmgr.Configuration('Visuals','Time Dom"
-	      "ain',true),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',tru"
-	      "e)),'Version','2021a')"
+	      "ain',true,'SerializedDisplays',{struct('MinYLimReal','1.53464','MaxYLimReal','1.60944','YLabelReal','','MinYLim"
+	      "Mag','1.53464','MaxYLimMag','1.60944','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'"
+	      "AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0."
+	      "0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 "
+	      "0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803"
+	      "9215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'"
+	      "NumLines',1,'LineNames',{{'alpha'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLi"
+	      "mReal','1.53464','MaxYLimReal','1.60944','YLabelReal','','MinYLimMag','1.53464','MaxYLimMag','1.60944','LegendV"
+	      "isibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627450"
+	      "9803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705"
+	      "882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372"
+	      "549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configurat"
+	      "ion('Tools','Plot Navigation',true,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'"
+	      "Version','2021a')),'Version','2021a','Position',[2451 194 560 420])"
 	      NumInputPorts	      "1"
 	      Floating		      off
 	    }
@@ -24411,21 +24770,21 @@ Model {
 	      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(ext"
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Dom"
-	      "ain',true,'SerializedDisplays',{struct('MinYLimReal','-0.18038','MaxYLimReal','0.04316','YLabelReal','','MinYLi"
-	      "mMag','0.00000','MaxYLimMag','0.18038','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,"
-	      "'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0"
-	      ".0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098"
-	      " 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.07450980"
-	      "39215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},"
-	      "'NumLines',3,'LineNames',{{'aerodynamic_forces:1','aerodynamic_forces:2','aerodynamic_forces:3'}},'ShowContent'"
-	      ",true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.18038','MaxYLimReal','0.04316','YLabel"
-	      "Real','','MinYLimMag','0.00000','MaxYLimMag','0.18038','LegendVisibility','off','XGrid',true,'YGrid',true,'Plot"
-	      "MagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'Co"
-	      "lorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0"
-	      ".717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 "
-	      "1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',"
-	      "false,'PreviousZoomMode','ZoomY','PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Ve"
-	      "rsion','2021a')),'Version','2021a','Position',[1993 -239 2488 1321])"
+	      "ain',true,'SerializedDisplays',{struct('MinYLimReal','-26.85536','MaxYLimReal','7.72392','YLabelReal','','MinYL"
+	      "imMag','0.00000','MaxYLimMag','26.85536','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',fals"
+	      "e,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1"
+	      " 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921568627450"
+	      "98 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509"
+	      "8039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}"
+	      "},'NumLines',3,'LineNames',{{'aerodynamic_forces:1','aerodynamic_forces:2','aerodynamic_forces:3'}},'ShowConten"
+	      "t',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-26.85536','MaxYLimReal','7.72392','YLa"
+	      "belReal','','MinYLimMag','0.00000','MaxYLimMag','26.85536','LegendVisibility','off','XGrid',true,'YGrid',true,'"
+	      "PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922]"
+	      ",'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.06666666666666"
+	      "67;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117"
+	      "647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtSt"
+	      "op',false,'PreviousZoomMode','ZoomY','PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true"
+	      ",'Version','2021a')),'Version','2021a','Position',[1993 -239 2488 1321])"
 	      NumInputPorts	      "1"
 	      Floating		      off
 	    }
@@ -24439,8 +24798,20 @@ Model {
 	      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(ext"
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','ScopeData3'),extmgr.Configuration('Visuals','Time Dom"
-	      "ain',true),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',tru"
-	      "e)),'Version','2021a')"
+	      "ain',true,'SerializedDisplays',{struct('MinYLimReal','4.67457','MaxYLimReal','4.75215','YLabelReal','','MinYLim"
+	      "Mag','4.67457','MaxYLimMag','4.75215','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'"
+	      "AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0."
+	      "0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 "
+	      "0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803"
+	      "9215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'"
+	      "NumLines',1,'LineNames',{{'beta'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLim"
+	      "Real','4.67457','MaxYLimReal','4.75215','YLabelReal','','MinYLimMag','4.67457','MaxYLimMag','4.75215','LegendVi"
+	      "sibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509"
+	      "803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4117647058"
+	      "82353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.8313725"
+	      "49019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configurati"
+	      "on('Tools','Plot Navigation',true,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'V"
+	      "ersion','2021a')),'Version','2021a','Position',[2563 230 560 420])"
 	      NumInputPorts	      "1"
 	      Floating		      off
 	    }
@@ -24535,20 +24906,21 @@ Model {
 	      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(ext"
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','ScopeData4'),extmgr.Configuration('Visuals','Time Dom"
-	      "ain',true,'SerializedDisplays',{struct('MinYLimReal','-2.56355','MaxYLimReal','22.17519','YLabelReal','','MinYL"
-	      "imMag','0.00000','MaxYLimMag','22.17519','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false"
+	      "ain',true,'SerializedDisplays',{struct('MinYLimReal','-1.33778','MaxYLimReal','11.25321','YLabelReal','','MinYL"
+	      "imMag','0.00000','MaxYLimMag','11.25321','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false"
 	      ",'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 "
 	      "0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.39215686274509"
 	      "8 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098"
 	      "039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}}"
-	      ",'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimRe"
-	      "al','-2.56355','MaxYLimReal','22.17519','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','22.17519','LegendV"
-	      "isibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509"
-	      "803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4117647058"
-	      "82353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.8313725"
-	      "49019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configurati"
-	      "on('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Versio"
-	      "n','2021a','Position',[229 81 1259 620])"
+	      ",'NumLines',3,'LineNames',{{'relative_velocity:1','relative_velocity:2','relative_velocity:3'}},'ShowContent',t"
+	      "rue,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-1.33778','MaxYLimReal','11.25321','YLabelR"
+	      "eal','','MinYLimMag','0.00000','MaxYLimMag','11.25321','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotM"
+	      "agPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'Col"
+	      "orOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0."
+	      "717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1"
+	      " 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutos"
+	      "cale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',["
+	      "2803 149 1259 620])"
 	      NumInputPorts	      "1"
 	      Floating		      off
 	    }
@@ -25121,7 +25493,7 @@ Stateflow {
     id			    1
     name		    "momentumBasedFlight"
     sfVersion		    80000041
-    firstTarget		    327
+    firstTarget		    338
   }
   chart {
     id			    2
@@ -27017,9 +27389,6 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 102 0 0]
     viewObj		    101
-    visible		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    24
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -30864,7 +31233,7 @@ Stateflow {
     visible		    1
     subviewS {
     }
-    ssIdHighWaterMark	    9
+    ssIdHighWaterMark	    10
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     chartFileNumber	    23
@@ -30873,8 +31242,8 @@ Stateflow {
       name		      "high_speed_trajectory_designFCN"
     }
     firstData		    275
-    firstTransition	    280
-    firstJunction	    279
+    firstTransition	    281
+    firstJunction	    280
   }
   state {
     id			    274
@@ -30891,7 +31260,8 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function [pos_vel_acc_jerk_CoM_des, turbo_mode_hs] = high_speed_trajectory_designFCN(t, posCoM_in"
-      "it)\n\n[pos_vel_acc_jerk_CoM_des, turbo_mode_hs] = high_speed_trajectory_design(t, posCoM_init);\n\nend\n    \n\n"
+      "it, Config)\n\n[pos_vel_acc_jerk_CoM_des, turbo_mode_hs] = high_speed_trajectory_design(t, posCoM_init, Config);"
+      "\n\nend\n    \n\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -30988,10 +31358,35 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [273 277 0]
+    linkNode		    [273 277 279]
+  }
+  data {
+    id			    279
+    ssIdNumber		    10
+    name		    "Config"
+    scope		    PARAMETER_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [273 278 0]
   }
   junction {
-    id			    279
+    id			    280
     position		    [23.5747 49.5747 7]
     chart		    273
     subviewer		    273
@@ -31000,7 +31395,7 @@ Stateflow {
     linkNode		    [273 0 0]
   }
   transition {
-    id			    280
+    id			    281
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [28.125 13.875 102.544 14.964]
     fontSize		    12
@@ -31008,7 +31403,7 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      279
+      id		      280
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
@@ -31024,14 +31419,14 @@ Stateflow {
     linkNode		    [273 0 0]
   }
   instance {
-    id			    281
+    id			    282
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And References/High-speed Fligh"
     "t Trajectory Generator/Trajectory Design for High Speed Motion "
     chart		    273
   }
   chart {
-    id			    282
+    id			    283
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight Controller RAL-HUMANOIDS V3.0 - AERODYNAMICS/Momentum Contr"
     "ol for Flying/QP Solver and Integrate Contact Forces Derivative/QP momentumControl/Process QP Inputs Momentum Cont"
@@ -31039,8 +31434,8 @@ Stateflow {
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
-    treeNode		    [0 283 0 0]
-    viewObj		    282
+    treeNode		    [0 284 0 0]
+    viewObj		    283
     ssIdHighWaterMark	    15
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -31049,19 +31444,19 @@ Stateflow {
     eml {
       name		      "processQPinputMomentumControlFCN"
     }
-    firstData		    284
-    firstTransition	    297
-    firstJunction	    296
+    firstData		    285
+    firstTransition	    298
+    firstJunction	    297
   }
   state {
-    id			    283
+    id			    284
     labelString		    "eML_blk_kernel()"
     position		    [18 64.5 118 66]
     fontSize		    12
-    chart		    282
-    treeNode		    [282 0 0 0]
+    chart		    283
+    treeNode		    [283 0 0 0]
     superState		    SUBCHART
-    subviewer		    282
+    subviewer		    283
     ssIdNumber		    1
     type		    FUNC_STATE
     decomposition	    CLUSTER_STATE
@@ -31075,7 +31470,7 @@ Stateflow {
     }
   }
   data {
-    id			    284
+    id			    285
     ssIdNumber		    4
     name		    "HessianMatrixQP"
     scope		    INPUT_DATA
@@ -31094,10 +31489,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 0 285]
+    linkNode		    [283 0 286]
   }
   data {
-    id			    285
+    id			    286
     ssIdNumber		    5
     name		    "H_balancing"
     scope		    OUTPUT_DATA
@@ -31117,10 +31512,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 284 286]
+    linkNode		    [283 285 287]
   }
   data {
-    id			    286
+    id			    287
     ssIdNumber		    6
     name		    "gVectorQP"
     scope		    INPUT_DATA
@@ -31142,10 +31537,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 285 287]
+    linkNode		    [283 286 288]
   }
   data {
-    id			    287
+    id			    288
     ssIdNumber		    7
     name		    "lowerBoundQP"
     scope		    INPUT_DATA
@@ -31167,10 +31562,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 286 288]
+    linkNode		    [283 287 289]
   }
   data {
-    id			    288
+    id			    289
     ssIdNumber		    8
     name		    "upperBoundQP"
     scope		    INPUT_DATA
@@ -31192,10 +31587,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 287 289]
+    linkNode		    [283 288 290]
   }
   data {
-    id			    289
+    id			    290
     ssIdNumber		    9
     name		    "g_balancing"
     scope		    OUTPUT_DATA
@@ -31217,10 +31612,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 288 290]
+    linkNode		    [283 289 291]
   }
   data {
-    id			    290
+    id			    291
     ssIdNumber		    10
     name		    "ub_balancing"
     scope		    OUTPUT_DATA
@@ -31242,10 +31637,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 289 291]
+    linkNode		    [283 290 292]
   }
   data {
-    id			    291
+    id			    292
     ssIdNumber		    11
     name		    "lb_balancing"
     scope		    OUTPUT_DATA
@@ -31267,10 +31662,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 290 292]
+    linkNode		    [283 291 293]
   }
   data {
-    id			    292
+    id			    293
     ssIdNumber		    12
     name		    "H_flight"
     scope		    OUTPUT_DATA
@@ -31292,10 +31687,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 291 293]
+    linkNode		    [283 292 294]
   }
   data {
-    id			    293
+    id			    294
     ssIdNumber		    13
     name		    "g_flight"
     scope		    OUTPUT_DATA
@@ -31317,10 +31712,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 292 294]
+    linkNode		    [283 293 295]
   }
   data {
-    id			    294
+    id			    295
     ssIdNumber		    14
     name		    "ub_flight"
     scope		    OUTPUT_DATA
@@ -31342,10 +31737,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 293 295]
+    linkNode		    [283 294 296]
   }
   data {
-    id			    295
+    id			    296
     ssIdNumber		    15
     name		    "lb_flight"
     scope		    OUTPUT_DATA
@@ -31367,19 +31762,19 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [282 294 0]
+    linkNode		    [283 295 0]
   }
   junction {
-    id			    296
+    id			    297
     position		    [23.5747 49.5747 7]
-    chart		    282
-    subviewer		    282
+    chart		    283
+    subviewer		    283
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
-    linkNode		    [282 0 0]
+    linkNode		    [283 0 0]
   }
   transition {
-    id			    297
+    id			    298
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [28.125 13.875 102.544 14.964]
     fontSize		    12
@@ -31387,39 +31782,39 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      296
+      id		      297
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
-    chart		    282
+    chart		    283
     dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    282
+    subviewer		    283
     drawStyle		    SMART
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
     ssIdNumber		    2
-    linkNode		    [282 0 0]
+    linkNode		    [283 0 0]
   }
   instance {
-    id			    298
+    id			    299
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight Controller RAL-HUMANOIDS V3.0 - AERODYNAMICS/Momentum Contr"
     "ol for Flying/QP Solver and Integrate Contact Forces Derivative/QP momentumControl/Process QP Inputs Momentum Cont"
     "rol"
-    chart		    282
+    chart		    283
   }
   chart {
-    id			    299
+    id			    300
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Get System State/Change Contact Forces Representation/Change Conta"
     "ct Forces Representation"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
-    treeNode		    [0 300 0 0]
-    viewObj		    299
+    treeNode		    [0 301 0 0]
+    viewObj		    300
     ssIdHighWaterMark	    8
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -31428,19 +31823,19 @@ Stateflow {
     eml {
       name		      "fromBodyFrameToMixed_contactForcesFCN"
     }
-    firstData		    301
-    firstTransition	    307
-    firstJunction	    306
+    firstData		    302
+    firstTransition	    308
+    firstJunction	    307
   }
   state {
-    id			    300
+    id			    301
     labelString		    "eML_blk_kernel()"
     position		    [18 64.5 118 66]
     fontSize		    12
-    chart		    299
-    treeNode		    [299 0 0 0]
+    chart		    300
+    treeNode		    [300 0 0 0]
     superState		    SUBCHART
-    subviewer		    299
+    subviewer		    300
     ssIdNumber		    1
     type		    FUNC_STATE
     decomposition	    CLUSTER_STATE
@@ -31453,7 +31848,7 @@ Stateflow {
     }
   }
   data {
-    id			    301
+    id			    302
     ssIdNumber		    4
     name		    "contactForces_WBD"
     scope		    INPUT_DATA
@@ -31472,10 +31867,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [299 0 302]
+    linkNode		    [300 0 303]
   }
   data {
-    id			    302
+    id			    303
     ssIdNumber		    5
     name		    "mixed_f_l_sole"
     scope		    OUTPUT_DATA
@@ -31495,10 +31890,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [299 301 303]
+    linkNode		    [300 302 304]
   }
   data {
-    id			    303
+    id			    304
     ssIdNumber		    6
     name		    "w_R_l_sole"
     scope		    INPUT_DATA
@@ -31520,10 +31915,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [299 302 304]
+    linkNode		    [300 303 305]
   }
   data {
-    id			    304
+    id			    305
     ssIdNumber		    7
     name		    "w_R_r_sole"
     scope		    INPUT_DATA
@@ -31545,10 +31940,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [299 303 305]
+    linkNode		    [300 304 306]
   }
   data {
-    id			    305
+    id			    306
     ssIdNumber		    8
     name		    "mixed_f_r_sole"
     scope		    OUTPUT_DATA
@@ -31570,19 +31965,19 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [299 304 0]
+    linkNode		    [300 305 0]
   }
   junction {
-    id			    306
+    id			    307
     position		    [23.5747 49.5747 7]
-    chart		    299
-    subviewer		    299
+    chart		    300
+    subviewer		    300
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
-    linkNode		    [299 0 0]
+    linkNode		    [300 0 0]
   }
   transition {
-    id			    307
+    id			    308
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [28.125 13.875 102.544 14.964]
     fontSize		    12
@@ -31590,30 +31985,232 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      306
+      id		      307
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
-    chart		    299
+    chart		    300
     dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    299
+    subviewer		    300
     drawStyle		    SMART
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
     ssIdNumber		    2
-    linkNode		    [299 0 0]
+    linkNode		    [300 0 0]
   }
   instance {
-    id			    308
+    id			    309
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Get System State/Change Contact Forces Representation/Change Conta"
     "ct Forces Representation"
-    chart		    299
+    chart		    300
   }
   chart {
-    id			    309
+    id			    310
+    machine		    1
+    name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And References/Compute Gains/Ap"
+    "ply Gain Scheduling on Momentum Gains"
+    windowPosition	    [422 539.941 189 413]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 3600 1200 1.180555555555556]
+    treeNode		    [0 311 0 0]
+    viewObj		    310
+    ssIdHighWaterMark	    8
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    chartFileNumber	    26
+    disableImplicitCasting  1
+    eml {
+      name		      "gain_scheduling_linear_momentumFCN"
+    }
+    firstData		    312
+    firstTransition	    318
+    firstJunction	    317
+  }
+  state {
+    id			    311
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    310
+    treeNode		    [310 0 0 0]
+    superState		    SUBCHART
+    subviewer		    310
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [KP_momentum_vector, KD_momentum_vector] = gain_scheduling_linear_momentumFCN(posCoM, po"
+      "sCoM_des, Config)\n\n[KP_momentum_vector, KD_momentum_vector] = gain_scheduling_linear_momentum(posCoM, posCoM_d"
+      "es, Config);\nend\n"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    312
+    ssIdNumber		    4
+    name		    "posCoM"
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [310 0 313]
+  }
+  data {
+    id			    313
+    ssIdNumber		    5
+    name		    "KP_momentum_vector"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [310 312 314]
+  }
+  data {
+    id			    314
+    ssIdNumber		    6
+    name		    "posCoM_des"
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [310 313 315]
+  }
+  data {
+    id			    315
+    ssIdNumber		    8
+    name		    "KD_momentum_vector"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [310 314 316]
+  }
+  data {
+    id			    316
+    ssIdNumber		    7
+    name		    "Config"
+    scope		    PARAMETER_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [310 315 0]
+  }
+  junction {
+    id			    317
+    position		    [23.5747 49.5747 7]
+    chart		    310
+    subviewer		    310
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+    linkNode		    [310 0 0]
+  }
+  transition {
+    id			    318
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [28.125 13.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      317
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    310
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    310
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+    linkNode		    [310 0 0]
+  }
+  instance {
+    id			    319
+    machine		    1
+    name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And References/Compute Gains/Ap"
+    "ply Gain Scheduling on Momentum Gains"
+    chart		    310
+  }
+  chart {
+    id			    320
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight Controller RAL-HUMANOIDS V3.0 - AERODYNAMICS/Momentum Contr"
     "ol for Flying/QP Solver and Integrate Contact Forces Derivative/Integrate the Contact Forces Derivative/Select Int"
@@ -31621,8 +32218,8 @@ Stateflow {
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
-    treeNode		    [0 310 0 0]
-    viewObj		    309
+    treeNode		    [0 321 0 0]
+    viewObj		    320
     ssIdHighWaterMark	    6
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -31631,19 +32228,19 @@ Stateflow {
     eml {
       name		      "selectInitContactForcesFCN"
     }
-    firstData		    311
-    firstTransition	    315
-    firstJunction	    314
+    firstData		    322
+    firstTransition	    326
+    firstJunction	    325
   }
   state {
-    id			    310
+    id			    321
     labelString		    "eML_blk_kernel()"
     position		    [18 64.5 118 66]
     fontSize		    12
-    chart		    309
-    treeNode		    [309 0 0 0]
+    chart		    320
+    treeNode		    [320 0 0 0]
     superState		    SUBCHART
-    subviewer		    309
+    subviewer		    320
     ssIdNumber		    1
     type		    FUNC_STATE
     decomposition	    CLUSTER_STATE
@@ -31655,7 +32252,7 @@ Stateflow {
     }
   }
   data {
-    id			    311
+    id			    322
     ssIdNumber		    6
     name		    "feetContactIsActive"
     scope		    INPUT_DATA
@@ -31677,10 +32274,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [309 0 312]
+    linkNode		    [320 0 323]
   }
   data {
-    id			    312
+    id			    323
     ssIdNumber		    4
     name		    "contactForces"
     scope		    INPUT_DATA
@@ -31699,10 +32296,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [309 311 313]
+    linkNode		    [320 322 324]
   }
   data {
-    id			    313
+    id			    324
     ssIdNumber		    5
     name		    "contactForces_0"
     scope		    OUTPUT_DATA
@@ -31722,19 +32319,19 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [309 312 0]
+    linkNode		    [320 323 0]
   }
   junction {
-    id			    314
+    id			    325
     position		    [23.5747 49.5747 7]
-    chart		    309
-    subviewer		    309
+    chart		    320
+    subviewer		    320
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
-    linkNode		    [309 0 0]
+    linkNode		    [320 0 0]
   }
   transition {
-    id			    315
+    id			    326
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [28.125 13.875 102.544 14.964]
     fontSize		    12
@@ -31742,39 +32339,39 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      314
+      id		      325
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
-    chart		    309
+    chart		    320
     dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    309
+    subviewer		    320
     drawStyle		    SMART
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
     ssIdNumber		    2
-    linkNode		    [309 0 0]
+    linkNode		    [320 0 0]
   }
   instance {
-    id			    316
+    id			    327
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight Controller RAL-HUMANOIDS V3.0 - AERODYNAMICS/Momentum Contr"
     "ol for Flying/QP Solver and Integrate Contact Forces Derivative/Integrate the Contact Forces Derivative/Select Int"
     "egrator Initial Condition"
-    chart		    309
+    chart		    320
   }
   chart {
-    id			    317
+    id			    328
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And References/Smooth CoM and B"
     "ase References/Smooth Reference Orientations/Rotational PID Controller/Compute Rotation Matrix Derivative"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
-    treeNode		    [0 318 0 0]
-    viewObj		    317
+    treeNode		    [0 329 0 0]
+    viewObj		    328
     ssIdHighWaterMark	    32
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -31783,19 +32380,19 @@ Stateflow {
     eml {
       name		      "rotationDerivativeFromAngVelFCN"
     }
-    firstData		    319
-    firstTransition	    325
-    firstJunction	    324
+    firstData		    330
+    firstTransition	    336
+    firstJunction	    335
   }
   state {
-    id			    318
+    id			    329
     labelString		    "eML_blk_kernel()"
     position		    [18 64.5 118 66]
     fontSize		    12
-    chart		    317
-    treeNode		    [317 0 0 0]
+    chart		    328
+    treeNode		    [328 0 0 0]
     superState		    SUBCHART
-    subviewer		    317
+    subviewer		    328
     ssIdNumber		    1
     type		    FUNC_STATE
     decomposition	    CLUSTER_STATE
@@ -31815,7 +32412,7 @@ Stateflow {
     }
   }
   data {
-    id			    319
+    id			    330
     ssIdNumber		    32
     name		    "gainSmoothingBaseRot"
     scope		    INPUT_DATA
@@ -31837,10 +32434,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [317 0 320]
+    linkNode		    [328 0 331]
   }
   data {
-    id			    320
+    id			    331
     ssIdNumber		    22
     name		    "w_R_b_des"
     scope		    INPUT_DATA
@@ -31862,10 +32459,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [317 319 321]
+    linkNode		    [328 330 332]
   }
   data {
-    id			    321
+    id			    332
     ssIdNumber		    23
     name		    "w_R_b"
     scope		    INPUT_DATA
@@ -31887,10 +32484,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [317 320 322]
+    linkNode		    [328 331 333]
   }
   data {
-    id			    322
+    id			    333
     ssIdNumber		    30
     name		    "b_omega_b"
     scope		    OUTPUT_DATA
@@ -31912,10 +32509,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [317 321 323]
+    linkNode		    [328 332 334]
   }
   data {
-    id			    323
+    id			    334
     ssIdNumber		    5
     name		    "RDot"
     scope		    OUTPUT_DATA
@@ -31935,19 +32532,19 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [317 322 0]
+    linkNode		    [328 333 0]
   }
   junction {
-    id			    324
+    id			    335
     position		    [23.5747 49.5747 7]
-    chart		    317
-    subviewer		    317
+    chart		    328
+    subviewer		    328
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
-    linkNode		    [317 0 0]
+    linkNode		    [328 0 0]
   }
   transition {
-    id			    325
+    id			    336
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [28.125 13.875 102.544 14.964]
     fontSize		    12
@@ -31955,30 +32552,30 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      324
+      id		      335
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
-    chart		    317
+    chart		    328
     dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    317
+    subviewer		    328
     drawStyle		    SMART
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
     ssIdNumber		    2
-    linkNode		    [317 0 0]
+    linkNode		    [328 0 0]
   }
   instance {
-    id			    326
+    id			    337
     machine		    1
     name		    "FLIGHT CONTROLLER (CORE) V2.5 - AERO/Flight State Machine/Compute Gains And References/Smooth CoM and B"
     "ase References/Smooth Reference Orientations/Rotational PID Controller/Compute Rotation Matrix Derivative"
-    chart		    317
+    chart		    328
   }
   target {
-    id			    327
+    id			    338
     machine		    1
     name		    "sfun"
     description		    "Default Simulink S-Function Target."

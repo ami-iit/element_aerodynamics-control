@@ -25,12 +25,39 @@ import wbc.*
 addpath(genpath('./src/'));
 addpath('../controlAndDataGui/');
 
-% Set to true to generate a wind profile during the simulation
-Config.constant_wind = true;
-Config.wind_gust     = true;
+% Settings to generate a wind profile during the simulation
+Config.wind_direction      = [-1; 0; 0]; % [x y z]
+Config.constant_wind       = 3; % [m/s]
+
+% generate a wind gust with ramp function
+Config.wind_gust_ramp      = 7; % [m/s]
+Config.t_init_wind_ramp    = 10; % [s]
+Config.t_slope_wind_ramp   = 5;  % [s]
+Config.t_plateau_wind_ramp = 2.5; % [s]
+totalTimeRamp              = Config.t_init_wind_ramp + 2*Config.t_slope_wind_ramp + Config.t_plateau_wind_ramp;
+
+% generate a wind gust with cosine function
+wind_gust_cosine_after_ramp = true;
+Config.wind_gust_cosine     = 7; % [m/s]
+Config.t_init_wind_cosine   = 10 + totalTimeRamp * wind_gust_cosine_after_ramp; % [s]
+Config.delta_t_wind_cosine  = 5; % [s]
 
 % If true, the aerodynamic force is used as feedforward in the controller
 Config.use_aerodynamics_forces_feedback = true;
+
+% If true, gain scheduling is used to enforce controller robustness under 
+% the presence of wind. Applied on CoM position and velocity gains
+Config.use_gain_scheduling         = false;
+Config.settlingTime_gainScheduling = 0.25;
+Config.gains_scaling_factor        = 2.15;
+
+% Parameters for high speed trajectory planner
+Config.A_p1     = 0.6;    % acc_max for going up
+Config.A_p2     = 3;      % acc_max for going forward along +x axis
+Config.f_p1     = 1/5;    % frequency of going up
+Config.f_p2     = 1/10;   % frequency of going forward while accelerating
+Config.f_p3     = 1/10;   % frequency of going forward while decelerating
+Config.Ts_const = 40;     % constant velocity flying time
 
 % Select the trajectory type and simulation time
 chosenSim = menu_customized('Select trajectory type','iRonCub Control GUI','Scenario 1: Hovering','Scenario 2: High-speed Flight');
@@ -43,12 +70,13 @@ if chosenSim==1
 elseif chosenSim==2
     
     Config.high_speed_trajectory = false;
-    Config.simulationTime        = 35;
+    Config.simulationTime        = 50;
     
 elseif chosenSim==3
     
     Config.high_speed_trajectory = true;
-    Config.simulationTime        = 35;
+    Config.simulationTime        = 50;
+    Config.wind_direction        = [0; -1; 0]; % overwrite wind direction
 end
 
 Config.tStep                     = 0.01;

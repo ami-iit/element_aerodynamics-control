@@ -1,4 +1,4 @@
-function [pos_vel_acc_jerk_CoM_des, turbo_mode_hs] = high_speed_trajectory_design(t, posCoM_init)
+function [pos_vel_acc_jerk_CoM_des, turbo_mode_hs] = high_speed_trajectory_design(t, posCoM_init, Config)
 
 % a trajectory is designed for doing stability test, the trajectory is
 % combined by 5 parts:
@@ -30,16 +30,16 @@ end
 
 pos_vel_acc_jerk_CoM_des = zeros(3,4);
 
-A_p1     = 0.8;    % acc_max for going up
-A_p2     = 3.5;    % acc_max for going forward along +x axis
-f_p1     = 0.5;    % frequency of going up
-f_p2     = 1/10;   % frequency of going forward while accelerating
-f_p3     = 1/10;   % frequency of going forward while decelerating
-Ts       = 1/f_p1; % period time for one complete circle
+A_p1     = Config.A_p1;     % acc_max for going up
+A_p2     = Config.A_p2;     % acc_max for going forward along +x axis
+f_p1     = Config.f_p1;     % frequency of going up
+f_p2     = Config.f_p2;     % frequency of going forward while accelerating
+f_p3     = Config.f_p3;     % frequency of going forward while decelerating
+Ts       = 1/f_p1;          % period time for one complete circle
 Ts2      = 1/f_p2;
 Ts3      = 1/f_p3;
-A_p3     = A_p2/f_p2*f_p3; % to make sure the max velocity is the same during accelerating and decelerating
-Ts_const = 2;              % constant velocity flying time
+A_p3     = A_p2/f_p2*f_p3;  % to make sure the max velocity is the same during accelerating and decelerating
+Ts_const = Config.Ts_const; % constant velocity flying time
 
 % desired CoM position at the end of part one
 posCoM_1 = posCoM_0 + [0;0;A_p1/(2*pi*f_p1)*Ts-A_p1/(2*pi*f_p1)^2*sin(2*pi*f_p1*Ts)];
