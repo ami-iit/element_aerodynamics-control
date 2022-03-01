@@ -35,11 +35,11 @@ classdef Robot < handle
             % ROBOT Sets up the object. Takes as input a config file
             % loading the model
             obj.KinDynModel = iDynTreeWrappers.loadReducedModel(config.jointOrder, 'root_link', ...
-                config.modelPath, config.fileName, false);
+                                                                config.modelPath, config.fileName, false);
 
             %initialize robot state
             obj.set_robot_state(config.initialConditions.w_H_b, config.initialConditions.s, ...
-                config.initialConditions.base_pose_dot, config.initialConditions.s_dot);
+                                config.initialConditions.base_pose_dot, config.initialConditions.s_dot);
 
             % initialize general quantites and iDynTree objects
             obj.J_LFoot_iDyntree = iDynTree.MatrixDynSize(6, obj.KinDynModel.NDOF + 6);
@@ -59,7 +59,7 @@ classdef Robot < handle
             %        - base_pose_dot = [6,1] linear and angular velocity of the base
             %        - s_dot = [NDOF, 1] Joints velocity vector
             iDynTreeWrappers.setRobotState(obj.KinDynModel, w_H_b, s, ...
-                base_pose_dot, s_dot, obj.g);
+                                           base_pose_dot, s_dot, obj.g);
         end
 
         function M = get_mass_matrix(obj)
@@ -70,7 +70,6 @@ classdef Robot < handle
             end
 
             M = obj.M_iDyn.toMatlab;
-
         end
 
         function h = get_bias_forces(obj)
@@ -163,7 +162,5 @@ classdef Robot < handle
             base_pose_ddot = ddot(1:6);
             s_ddot = ddot(7:end);
         end
-
     end
-
 end

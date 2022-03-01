@@ -17,99 +17,94 @@ close all
 clc
 
 %% GENERAL SIMULATION INFO
-Config.robotName = 'iRonCub-Mk1_1';
-setenv('YARP_ROBOT_NAME', Config.robotName)
+robotName = 'iRonCub-Mk1_1';
+setenv('YARP_ROBOT_NAME', robotName)
 
 % Set path to the utility functions and to WBC library
 import wbc.*
 addpath(genpath('./src/'));
 addpath('../controlAndDataGui/');
-% Simulation time and delta_t [s]
 
-%select the trajectory type and simulation time
-choice=menu_customized('Select trajectory type','iRonCub Control Gui','Scenario 1: Hovering','Scenario 2: High-speed Flight');
+% Set to true to generate a wind profile during the simulation
+Config.constant_wind = true;
+Config.wind_gust     = true;
 
+% If true, the aerodynamic force is used as feedforward in the controller
+Config.use_aerodynamics_forces_feedback = true;
 
-if choice==1 
-    Config.high_speed_trajectory            = false;
-    Config.simulationTime                   = inf;
-    Config.pitch_down                       = false;
-elseif choice==2
-    Config.high_speed_trajectory            = false;
-    Config.simulationTime                   = 35;% regarding to the scenario designed for paper submission
-    Config.pitch_down                       = false;
-elseif choice==3
+% Select the trajectory type and simulation time
+chosenSim = menu_customized('Select trajectory type','iRonCub Control GUI','Scenario 1: Hovering','Scenario 2: High-speed Flight');
+
+if chosenSim==1 
+
+    Config.high_speed_trajectory = false;
+    Config.simulationTime        = inf;
     
-    Config.high_speed_trajectory            = true;
-    Config.simulationTime                   = 35;% regarding to the scenario designed for paper submission
-    Config.pitch_down                       = true;
+elseif chosenSim==2
+    
+    Config.high_speed_trajectory = false;
+    Config.simulationTime        = 35;
+    
+elseif chosenSim==3
+    
+    Config.high_speed_trajectory = true;
+    Config.simulationTime        = 35;
 end
-Config.tStep                            = 0.01;%0.005;
-jets_config.use_jet_dyn                 = false;
+
+Config.tStep                     = 0.01;
+jets_config.use_jet_dyn          = false;
 
 %% SIMULATION SETTINGS
 
 % Controller type: native GUI or joystick
-Config.USE_NATIVE_GUI                   = true;
-Config.USE_FLIGHT_DATA_GUI              = false;
+Config.USE_NATIVE_GUI            = true;
+Config.USE_FLIGHT_DATA_GUI       = false;
 
 % Visualizer
-confVisualizer.visualizeRobot = true;
-confVisualizer.visualizeJets  = false;
+confVisualizer.visualizeRobot    = true;
+confVisualizer.visualizeJets     = false;
+
 % Control type:
 %
 % Default controller => MOMENTUM BASED CONTROL WITH LYAPUNOV STABILITY (IEEE-RAL)
 % If USE_ATTITUDE_CONTROL = true => LINEAR MOMENTUM AND ATTITUDE CONTROL (IEEE-HUMANOIDS)
 %
-Config.USE_ATTITUDE_CONTROL             = true;
-Config.Gain_scheduling                  = false;
+Config.USE_ATTITUDE_CONTROL      = true;
+Config.Gain_scheduling           = false;
 
 % If Config.INCLUDE_THRUST_LIMITS and/or Config.INCLUDE_JOINTS_LIMITS are
 % set to true, the thrusts limits and/or the joints limits are included in
 % the control algorithm (as QP constraints)
-Config.INCLUDE_THRUST_LIMITS            = true;
-Config.INCLUDE_JOINTS_LIMITS            = true;
+Config.INCLUDE_THRUST_LIMITS         = true;
+Config.INCLUDE_JOINTS_LIMITS         = true;
 
 % Activate visualization and data collection
-Config.SCOPE_JOINTS                     = true;
-Config.SCOPE_QP                         = true;
-Config.SCOPE_COM                        = true;
-Config.SCOPE_BASE                       = true;
-Config.SCOPE_MOMENTUM                   = true;
-Config.SCOPE_JETS                       = true;
-Config.SCOPES_WRENCHES                  = true;
-Config.SCOPE_GAINS_AND_STATE_MACHINE    = true;
+Config.SCOPE_JOINTS                  = true;
+Config.SCOPE_QP                      = true;
+Config.SCOPE_COM                     = true;
+Config.SCOPE_BASE                    = true;
+Config.SCOPE_MOMENTUM                = true;
+Config.SCOPE_JETS                    = true;
+Config.SCOPES_WRENCHES               = true;
+Config.SCOPE_GAINS_AND_STATE_MACHINE = true;
 
 % Save data on the workspace after the simulation
-Config.SAVE_WORKSPACE                   = false;
-
-
-component_path = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
-
-
-
-Config.fileName = 'model_stl.urdf';
-
-Config.modelPath = [component_path '/models/' Config.robotName '/iRonCub/robots/' Config.robotName '/'];
+Config.SAVE_WORKSPACE                = false;
 
 %% ADD CONFIGURATION FILES
 
 % Run robot-specific and controller-specific configuration parameters
-run(strcat('app/robots/',Config.robotName,'/configRobot.m')); 
-run(strcat('app/robots/',Config.robotName,'/gainsAndParameters.m'));
-run(strcat('app/robots/',Config.robotName,'/configJets.m'));
-run(strcat('app/robots/',Config.robotName,'/initVisualizer.m'));
-run(strcat('app/robots/',Config.robotName,'/aerodynamic_config.m'));
+run(strcat('app/robots/',robotName,'/configRobot.m')); 
+run(strcat('app/robots/',robotName,'/gainsAndParameters.m'));
+run(strcat('app/robots/',robotName,'/configJets.m'));
+run(strcat('app/robots/',robotName,'/initVisualizer.m'));
+run(strcat('app/robots/',robotName,'/configAerodynamics.m'));
+
 % open the native GUI for control (if no joystick is present)
 if Config.USE_NATIVE_GUI
     ironcubControlGui;
 end
-% Open flight data GUI
-if Config.USE_FLIGHT_DATA_GUI
-    flightGui = flightDataGui;
-end
-
 
 %% Init simulator core physics paramaters
 physics_config.GRAVITY_ACC = [0;0;9.81];
-physics_config.TIME_STEP = Config.tStep;
+physics_config.TIME_STEP   = Config.tStep;

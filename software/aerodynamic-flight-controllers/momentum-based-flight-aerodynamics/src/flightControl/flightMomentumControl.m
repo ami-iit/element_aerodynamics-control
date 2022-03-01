@@ -1,8 +1,8 @@
 function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_estimated, verifyAngMomAndInertia] = ...
-             flyingMomentumControl(jointPos, w_baseTwist, jetsIntensities, J_jets, J_CoM, J_LFoot, J_RFoot, posCoM, w_R_b, w_H_LFoot, ...
+             flightMomentumControl(jointPos, w_baseTwist, jetsIntensities, J_jets, J_CoM, J_LFoot, J_RFoot, posCoM, w_R_b, w_H_LFoot, ...
                                    w_H_RFoot, matrixOfJetsAxes, matrixOfJetsArms, w_I_c, L, M, CMM, pos_vel_acc_jerk_CoM_des, ....
                                    rot_vel_acc_jerk_base_des, jointPos_des, KP_momentum, KD_momentum, KP_postural, feetContactIsActive, ...
-                                   decreaseMaxFootVerticalForce, increaseMinFootVerticalForce, robotIsLanded, contactForces_hat, Config, aerodynamic_force)
+                                   decreaseMaxFootVerticalForce, increaseMinFootVerticalForce, robotIsLanded, contactForces_hat, aerodynamic_force, Config)
                                
     % FLYINGMOMENTUMCONTROL implements a momentum-based flying controller.
     %                       Two different control algorithms are implemented.
@@ -40,8 +40,8 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     verifyAngMomAndInertia = zeros(4,2);
         
     % compute momentum references and demux jet axes and arms
-    [LDDot_des, LDot_des, L_des, intL_des]               = computeMomentumReferences(pos_vel_acc_jerk_CoM_des, m);
-    [r_J1, r_J2, r_J3, r_J4, ax_J1, ax_J2, ax_J3, ax_J4] = demuxJetAxesAndArms(matrixOfJetsAxes, matrixOfJetsArms);
+    [LDDot_des, LDot_des, L_des, intL_des]               = iRonCubLib.computeMomentumReferences(pos_vel_acc_jerk_CoM_des, m);
+    [r_J1, r_J2, r_J3, r_J4, ax_J1, ax_J2, ax_J3, ax_J4] = iRonCubLib.demuxJetAxesAndArms(matrixOfJetsAxes, matrixOfJetsArms);
     
     %% %%%%%%%%%%%%%%% COMPUTE THE MOMENTUM ACCELERATION %%%%%%%%%%%%%%% %%
     %
@@ -156,7 +156,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     g_angMomentum   = [zeros(4,1); zeros(12,1); zeros(ndof,1)];  
     
     % compute the momentum error derivative/integral
-    LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive - f_grav + [aerodynamic_force; zeros(3,1)];
+    LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive - f_grav + [Config.use_aerodynamics_forces_feedback*aerodynamic_force; zeros(3,1)];
     LDot_tilde      = LDot_estimated - LDot_des;
     intL_tilde      = [(m * posCoM - intL_des(1:3)); zeros(3,1)];
     
@@ -208,8 +208,8 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
        
         % compute the angular part (attitude control)
         [H_angMomentum, g_angMomentum, ATilde_angular, BTilde_angular, deltaTilde_angular, verifyAngMomAndInertia, w_L_angMom_des] = ...
-            flyingAttitudeControl(w_R_b, w_I_c, w_baseTwist, CMM, rot_vel_acc_jerk_base_des, Ac, Aj, Lambda_cb, Lambda_cs, Lambda_jb, ...
-                                  Lambda_js, L, LDot_estimated, feetContactIsActive, c0, c1);
+            iRonCubLib.flyingAttitudeControl(w_R_b, w_I_c, w_baseTwist, CMM, rot_vel_acc_jerk_base_des, Ac, Aj, Lambda_cb, Lambda_cs, Lambda_jb, ...
+                                             Lambda_js, L, LDot_estimated, feetContactIsActive, c0, c1);
         % for visualization
         L_des(4:6)        = w_L_angMom_des;
         

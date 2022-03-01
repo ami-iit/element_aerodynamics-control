@@ -1,5 +1,5 @@
 classdef Contacts < handle
-    %CONTACTS The Contact class handles the computation of the contact forces and the impact.
+    % CONTACTS The Contact class handles the computation of the contact forces and the impact.
     %
     % Contacts Methods:
     %   compute_contact - computes the wrench and the state velocity after a (possible) impact
@@ -21,7 +21,7 @@ classdef Contacts < handle
             % Arguments
             %   foot_print - the coordinates of every vertex in xyz
             %   robot - the robot model
-            %   frinction coefficient - the coefficient that defines the (simplified) friction cone
+            %   friction coefficient - the coefficient that defines the (simplified) friction cone
             if (~isequal(size(foot_print), [3, 4]))
                 error('The foot print is represented with a matrix composed by 4 columns in which every column is the set of xyz coordinates')
             end
@@ -63,7 +63,6 @@ classdef Contacts < handle
             % update the contact log
             obj.was_in_contact = obj.is_in_contact;
         end
-
     end
 
     methods (Access = private)
@@ -120,7 +119,6 @@ classdef Contacts < handle
                 obj.is_in_contact(ii) = left_z_foot_print(ii) <= 0;
                 obj.is_in_contact(ii + 4) = right_z_foot_print(ii) <= 0;
             end
-
             contact_points = [left_z_foot_print; right_z_foot_print];
         end
 
@@ -142,7 +140,6 @@ classdef Contacts < handle
                     J = vertcat(J, J_feet(j:j + 2, :));
                     new_contact = true;
                 end
-
             end
 
             % if a new contact is detected we should prevent that the velocity of the vertices that previusly were in contact is nonzero.
@@ -155,9 +152,7 @@ classdef Contacts < handle
                         % stack the jacobian of the vertices that WERE in contact
                         J = vertcat(J, J_feet(j:j + 2, :));
                     end
-
                 end
-
             end
 
             % compute the projection in the null space of the scaled Jacobian of the vertices if a new contact is detected
@@ -225,7 +220,6 @@ classdef Contacts < handle
                 wrench_right_foot(1:3) = wrench_right_foot(1:3) + R_RFOOT' * contact_forces_right(j:j + 2);
                 wrench_right_foot(4:6) = wrench_right_foot(4:6) - skew(obj.foot_print(:, i)) * (R_RFOOT' * contact_forces_right(j:j + 2));
             end
-
         end
 
         function prepare_optimization_matrix(obj)
@@ -241,10 +235,10 @@ classdef Contacts < handle
             obj.beq = zeros(total_num_vertices, 1);
 
             constr_matrix = [1, 0, -obj.mu; ...% first 4 rows: simplified friction cone
-                        0, 1, -obj.mu; ...
+                             0, 1, -obj.mu; ...
                             -1, 0, -obj.mu; ...
-                            0, -1, -obj.mu; ...
-                            0, 0, -1]; ...% non negativity of vertical force
+                             0, -1, -obj.mu; ...
+                             0, 0, -1]; ...% non negativity of vertical force
 
             % fill a block diagonal matrix with all the constraints
             Ar = repmat(constr_matrix, 1, total_num_vertices); % Repeat Matrix for every vertex
@@ -252,7 +246,5 @@ classdef Contacts < handle
             obj.A = blkdiag(Ac{:});
 
         end
-
     end
-
 end

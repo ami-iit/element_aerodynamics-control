@@ -1,4 +1,5 @@
 function H = Rp2Hom(R, p)
+   
     % Takes position p and rotation matrix R.
     % Returns the corresponding homogeneous transformation matrix T
 
@@ -12,7 +13,8 @@ function H = Rp2Hom(R, p)
 %     end
 
     if abs(det(R) - 1) > 0.01
-    %     error('The rotation matrix is not a anymore a rotation matrix');
+    
+        % error('The rotation matrix is not a anymore a rotation matrix');
         disp('Making the matrix a rotation one using SVD');
         [U,~,V] = svd(R);
         R = U*V';

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %  
-%                 PARAMETERS FOR THE FLYING CONTROLLER                    %
+%                 PARAMETERS FOR THE FLIGHT CONTROLLER                    %
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                       
@@ -83,34 +83,25 @@ Config.minVerticalForces                = 3.5;
 
 %% CONTROLLER GAINS
 
-% Linear momentum gains 
-% Config.gains.momentum.KP_linear = [15, 15, 15];         
-Config.gains.momentum.KP_linear = [15, 15, 15];
-%if Config.high_speed_trajectory
-Config.gains.momentum.KP2_linear = [30, 30, 30];
-
-
+% Linear momentum gains    
+Config.gains.momentum.KP_linear = [15, 15, 15];         
 Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 
 % Attitude controller gains
-Config.gains.momentum.KP_angular = 50 .* ones(1,3);
-Config.gains.momentum.KP2_angular = 2*50 .* ones(1,3);
-
-
-% Config.gains.momentum.KD_angular = 125 .* ones(1,3); 
-Config.gains.momentum.KD_angular = 2*sqrt(Config.gains.momentum.KP_angular); 
+Config.gains.momentum.KP_angular = 50 .* ones(1,3)/3;                            
+Config.gains.momentum.KD_angular = 2*sqrt(Config.gains.momentum.KP_angular); % 125 .* ones(1,3); 
 
 % Postural task gains              % torso    % left arm      % right arm      % left leg           % right leg
-Config.gains.postural.KP         = [30 30 30   10 10 10 10     10 10 10 10   30 30 30 30 30 30    30 30 30 30 30 30];
-%20 20 20 20    10 10 10 10                        
+Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
+                             
 % Torque control gains
 Config.gains.torqueControl.KI    = 250/5;                            
 Config.gains.torqueControl.KP    = 2 * sqrt(Config.gains.torqueControl.KI);
 
 %% QP WEIGHTS AND THRESHOLDS
 
-% QP FLYING CONTROLLER
+% QP FLIGHT CONTROLLER
 
 % thrusts symmetry tasks
 Config.weights.symChestThrusts               = false;
@@ -125,7 +116,7 @@ Config.weights.minChestThrustDot             = 0.01;
 Config.weights.minContactForcesDot           = 0.001;
 Config.weights.minJointVel                   = 10;
 Config.weights.symmetryThrust                = 0.1;
-Config.weights.postural                      = 2.5*5;
+Config.weights.postural                      = 2.5;
 Config.weights.eqConstraints_momentumControl = 150;
 Config.weights.momentum                      = 10;
 Config.weights.angMomentumConstraint         = 150;
@@ -153,7 +144,7 @@ Config.sat.jointTorquesDotMax                = 300;
 Config.sat.deadZoneThreshold                 = 0.00001;
 
 % QP boundaries
-Config.sat.maxJetsIntVar                     = [100; 100; 100; 100]*1.2;
+Config.sat.maxJetsIntVar                     = [100; 100; 100; 100];
 Config.sat.maxJetsInt                        = [160; 160; 220; 220];
 Config.sat.maxJointVelDes                    = 45 .* pi/180 .* ones(Config.N_DOF,1);
 Config.sat.maxContactForcesVar               = 100 .* ones(12,1);
