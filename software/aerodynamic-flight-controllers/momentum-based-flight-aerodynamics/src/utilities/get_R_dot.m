@@ -1,4 +1,5 @@
 function dot_R = get_R_dot(R, omega)
+
     % get_R_dot Takes the rotation matrix R and the
     % angular velocity omega to compute the
     % time derivative of R
@@ -7,8 +8,7 @@ function dot_R = get_R_dot(R, omega)
     % dot_R = wbc.skew(omega)*R;
 
     % apply Baumgardte stabilization
-    gain = 0.001;
-    A = gain * ((R' * R)' - eye(3));
-
+    gain  = 0.001;
+    A     = gain * ((R' * R)' - eye(3));
     dot_R = (wbc.skew(omega) + A) * R;
 end

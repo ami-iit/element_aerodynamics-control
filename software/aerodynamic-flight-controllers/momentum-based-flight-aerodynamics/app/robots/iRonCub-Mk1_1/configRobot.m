@@ -61,36 +61,29 @@ armsJointsLimit        = scaleArmsJointsLimits * [-90, 10; 0, 160; -35, 80; 15, 
 legsJointsLimit        = scaleLegsJointsLimits *[-35, 80; -15, 90; -70, 70; -100, 0; -30, 30; -20, 20];
 
 Config.sat.jointPositionLimits = [torsoJointsLimit;          % torso
-    armsJointsLimit;           % larm
-    armsJointsLimit;           % rarm
-    legsJointsLimit;           % lleg
-    legsJointsLimit] * pi/180; % rleg
+                                  armsJointsLimit;           % larm
+                                  armsJointsLimit;           % rarm
+                                  legsJointsLimit;           % lleg
+                                  legsJointsLimit] * pi/180; % rleg
 
 % Added for the Gazebo-free environment.
+
 % Initial condition of iRonCub and for the integrators.
-Config.initialConditions.base_position = [0;0;0.63];
-Config.initialConditions.orientation = diag([-1,-1,1]);
-Config.initialConditions.world_H_base = Rp2Hom(Config.initialConditions.orientation, Config.initialConditions.base_position);
-Config.initialConditions.joints = [0.1744; 0.0007; 0.0001; -0.1745; ...
-    0.4363; 0.6981; 0.2618; -0.1745; ...
-    0.4363; 0.6981; 0.2618; 0.0003; ...
-    0.0000; -0.0001; 0.0004; -0.0004; ...
-    0.0003; 0.0002; 0.0001; -0.0002; ...
-    0.0004; -0.0005; 0.0003];
+Config.initialConditions.base_position = [0;0;0.65];
+Config.initialConditions.orientation   = diag([-1,-1,1]);
+Config.initialConditions.world_H_base  = Rp2Hom(Config.initialConditions.orientation, Config.initialConditions.base_position);
+Config.initialConditions.joints        = [0.1744;  0.0007; 0.0001; -0.1745; ...
+                                          0.4363;  0.6981; 0.2618; -0.1745; ...
+                                          0.4363;  0.6981; 0.2618;  0.0003; ...
+                                          0.0000; -0.0001; 0.0004; -0.0004; ...
+                                          0.0003;  0.0002; 0.0001; -0.0002; ...
+                                          0.0004; -0.0005; 0.0003];
 
-Config.initialConditions.joints = [0.1744; 0.0007; 0.0001; -0.1745; ...
-                                   0.4363; 0.6981; 0.2618; -0.1745; ...
-                                   0.4363; 0.6981; 0.2618; 0.0003; ...
-                                   0.0000; -0.0001; 0.0004; -0.0004; ...
-                                   0.0003; 0.0002; 0.0001; -0.0002; ...
-                                   0.0004; -0.0005; 0.0003];
-
-
-Config.initialConditions.base_linear_velocity = [0;0;0];
+Config.initialConditions.base_linear_velocity  = [0;0;0];
 Config.initialConditions.base_angular_velocity = [0;0;0];
-Config.initialConditions.base_velocity = [Config.initialConditions.base_linear_velocity; Config.initialConditions.base_angular_velocity];
-Config.initialConditions.joints_velocity = zeros(Config.N_DOF,1);
-Config.initialConditions.jets_thrust = [98;98;113;113];
+Config.initialConditions.base_velocity         = [Config.initialConditions.base_linear_velocity; Config.initialConditions.base_angular_velocity];
+Config.initialConditions.joints_velocity       = zeros(Config.N_DOF,1);
+Config.initialConditions.jets_thrust           = [98; 98; 113; 113];
 
 % foot print of the feet (iCub)
 vertex = zeros(3, 4);
@@ -104,6 +97,7 @@ contact_config.total_num_vertices = size(vertex,2)*2;
 
 % friction coefficient for the feet
 Config.friction_coefficient = 0.1;
+
 % structure used to configure the Contacts class
 contact_config.foot_print = vertex;
 contact_config.friction_coefficient = Config.friction_coefficient;
@@ -115,12 +109,19 @@ robot_config.initialConditions.w_H_b = Config.initialConditions.world_H_base;
 robot_config.initialConditions.s = Config.initialConditions.joints;
 robot_config.initialConditions.base_pose_dot = Config.initialConditions.base_velocity;
 robot_config.initialConditions.s_dot = Config.initialConditions.joints_velocity;
+
+% Set model path for step_block
+component_path         = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
+robot_config.fileName  = 'model_stl.urdf';
+robot_config.modelPath = [component_path '/models/' robotName '/iRonCub/robots/' robotName '/'];
+
 % Reflected inertia
 robot_config.SIMULATE_MOTOR_REFLECTED_INERTIA = false;
 
 % structure used to configure the Contacts class
 contact_config.foot_print = vertex;
 contact_config.friction_coefficient = Config.friction_coefficient;
+
 % Robot frames list
 Frames.BASE_LINK        = 'root_link';
 Frames.JET1_FRAME       = 'l_arm_jet_turbine';
@@ -130,10 +131,11 @@ Frames.JET4_FRAME       = 'chest_r_jet_turbine';
 Frames.COM_FRAME        = 'com';
 Frames.LFOOT_FRAME      = 'l_sole';
 Frames.RFOOT_FRAME      = 'r_sole';
+
 % Robot frames list - repeated in the simulator 
-Frames.BASE = 'root_link';
-Frames.COM = 'com';
-Frames.LEFT_FOOT = 'l_sole';
+Frames.BASE       = 'root_link';
+Frames.COM        = 'com';
+Frames.LEFT_FOOT  = 'l_sole';
 Frames.RIGHT_FOOT = 'r_sole';
 
 
