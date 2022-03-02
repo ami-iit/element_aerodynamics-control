@@ -30,6 +30,15 @@ else
     v_ramp = 0;
 end
 
+% % parametrized ramp profile (using heaviside functions)
+% 
+% v_ramp = v_ramp_max * ((t-t_init_ramp)/t_slope_ramp) * ...
+%                             heaviside(t - t_init_ramp) * heaviside((t_init_ramp + t_slope_ramp) - t) + ...
+%          v_ramp_max * ...
+%                             heaviside(t - (t_init_ramp + t_slope_ramp)) * heaviside((t_init_ramp + t_slope_ramp + t_plateau_ramp) - t) + ...
+%          v_ramp_max * (1-(t-(t_init_ramp + t_slope_ramp + t_plateau_ramp))/t_slope_ramp) * ...
+%                             heaviside(t - (t_init_ramp + t_slope_ramp + t_plateau_ramp)) * heaviside((t_init_ramp + 2*t_slope_ramp + t_plateau_ramp) - t);
+
 % parametrized cosine profile
 if t > t_init_cosine && t <= (t_init_cosine + t_delta_cosine)
     
@@ -38,6 +47,11 @@ if t > t_init_cosine && t <= (t_init_cosine + t_delta_cosine)
 else
     v_cosine = 0;
 end
+
+% % parametrized cosine profile (using heaviside functions)
+% 
+% v_cosine = 0.5*v_cosine_max*(1 - cos((t - t_init_cosine)/t_delta_cosine*2*pi)) * heaviside(t - t_init_cosine) * heaviside((t_init_cosine + t_delta_cosine) - t);
+
 
 % total wind profile
 v_wind = (v_const + v_ramp + v_cosine) * wind_direction;

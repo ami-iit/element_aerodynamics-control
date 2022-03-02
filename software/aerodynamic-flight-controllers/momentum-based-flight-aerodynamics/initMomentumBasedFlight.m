@@ -30,20 +30,26 @@ Config.wind_direction      = [-1; 0; 0]; % [x y z]
 Config.constant_wind       = 3; % [m/s]
 
 % generate a wind gust with ramp function
-Config.wind_gust_ramp      = 7; % [m/s]
+Config.wind_gust_ramp      = 20; % [m/s]
 Config.t_init_wind_ramp    = 10; % [s]
 Config.t_slope_wind_ramp   = 5;  % [s]
 Config.t_plateau_wind_ramp = 2.5; % [s]
 totalTimeRamp              = Config.t_init_wind_ramp + 2*Config.t_slope_wind_ramp + Config.t_plateau_wind_ramp;
 
 % generate a wind gust with cosine function
-wind_gust_cosine_after_ramp = true;
-Config.wind_gust_cosine     = 7; % [m/s]
+wind_gust_cosine_after_ramp = false;
+Config.wind_gust_cosine     = 20; % [m/s]
 Config.t_init_wind_cosine   = 10 + totalTimeRamp * wind_gust_cosine_after_ramp; % [s]
 Config.delta_t_wind_cosine  = 5; % [s]
 
 % If true, the aerodynamic force is used as feedforward in the controller
-Config.use_aerodynamics_forces_feedback = true;
+% with a different model of the aerodynamics if selected, accounting for 
+% the errors in the sensors data
+Config.use_aerodynamics_forces_feedback = false;
+Config.controller_uses_real_aerodynamics = false;
+
+Config.controller_sensors_calib_error = -0.20;
+Config.controller_sensors_noise       =  0.05;  
 
 % If true, gain scheduling is used to enforce controller robustness under 
 % the presence of wind. Applied on CoM position and velocity gains

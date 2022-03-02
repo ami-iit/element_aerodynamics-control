@@ -176,29 +176,68 @@ classdef Aerodynamics_force < handle
         end
         
         function [Fa_total, Fa_drag, Fa_side, Fa_normal] = compute_aerodynamic_force(obj, k_axis_cfd, i_axis_cfd, x_axis_va, y_axis_va, z_axis_va, relative_velocity)
-           
-           % calculate total aerodynamic force which is decomposed into three
-           % elements: drag force, normal force, side force in relative velocity
-           % frame
-           % 
-           alpha      = obj.compute_alpha(k_axis_cfd, relative_velocity);
-           beta       = obj.compute_beta(k_axis_cfd, i_axis_cfd, relative_velocity);
-           [C_D, C_N] = obj.get_coeff(alpha, beta); % get coefficients of total aerodynamic force
-          
-           % aerodynamic force is decomposed into three components: drag (+Ya),
-           % sideforce (+Xa), normal force (+Za), relative velocity is along -Ya
-           % |Fd|=Ka*C_D*|Va|^2, |Fn|=Ka*C_N*|Va|^2, |Fs|=Ka*C_S*|Va|^2
-          
-           % drag force +Ya
-           Fa_drag = obj.Ka*(norm(relative_velocity)^2)*C_D*y_axis_va; 
-           
-           % side force +Xa , assumed to be zero
-           Fa_side = 0*x_axis_va; % C_S = 0
-           
-           % normal force +Za
-           Fa_normal = obj.Ka*(norm(relative_velocity)^2)*C_N*z_axis_va;
-           
-           Fa_total = Fa_drag + Fa_side + Fa_normal;
+
+            % calculate total aerodynamic force which is decomposed into three
+            % elements: drag force, normal force, side force in relative velocity
+            % frame
+            %
+            alpha      = obj.compute_alpha(k_axis_cfd, relative_velocity);
+            beta       = obj.compute_beta(k_axis_cfd, i_axis_cfd, relative_velocity);
+            [C_D, C_N] = obj.get_coeff(alpha, beta); % get coefficients of total aerodynamic force
+
+            % aerodynamic force is decomposed into three components: drag (+Ya),
+            % sideforce (+Xa), normal force (+Za), relative velocity is along -Ya
+            % |Fd|=Ka*C_D*|Va|^2, |Fn|=Ka*C_N*|Va|^2, |Fs|=Ka*C_S*|Va|^2
+
+            % drag force +Ya
+            Fa_drag = obj.Ka*(norm(relative_velocity)^2)*C_D*y_axis_va;
+
+            % side force +Xa , assumed to be zero
+            Fa_side = 0*x_axis_va; % C_S = 0
+
+            % normal force +Za
+            Fa_normal = obj.Ka*(norm(relative_velocity)^2)*C_N*z_axis_va;
+
+            Fa_total = Fa_drag + Fa_side + Fa_normal;
+        end
+
+        function controller_aerodynamic_forces = compute_controller_aerodynamic_force(obj, x_axis_va, y_axis_va, z_axis_va, relative_velocity, beta, alpha, config)
+
+            % calculate the total aerodynamic force used by the controller
+            % in the simulations, accounting for errors (both noise and
+            % calibration) on the measures of alpha, beta and the module of
+            % relative velocity
+            
+            % Apply calibration error on aerodynamics measures
+            alpha_meas             = (1 + config.controller_sensors_calib_error) * alpha;
+            beta_meas              = (1 + config.controller_sensors_calib_error) * beta;
+            relative_velocity_meas = (1 + config.controller_sensors_calib_error) * relative_velocity;
+
+            % Apply relative errors on aerodynamics measures
+            alpha_meas             = (1 + config.controller_sensors_noise*(rand(1) - 0.5)) * alpha_meas;
+            beta_meas              = (1 + config.controller_sensors_noise*(rand(1) - 0.5)) * beta_meas;
+            relative_velocity_meas = (1 + config.controller_sensors_noise*(rand(1) - 0.5)) * relative_velocity_meas;
+
+            
+
+            % Get aerodynamic coefficients from the model
+            [C_D, C_N] = obj.get_coeff(alpha_meas, beta_meas); % get coefficients of total aerodynamic force
+
+            % aerodynamic force is decomposed into three components: drag (+Ya),
+            % sideforce (+Xa), normal force (+Za), relative velocity is along -Ya
+            % |Fd|=Ka*C_D*|Va|^2, |Fn|=Ka*C_N*|Va|^2, |Fs|=Ka*C_S*|Va|^2
+
+            % drag force +Ya
+            Fa_drag = obj.Ka*(norm(relative_velocity_meas)^2)*C_D*y_axis_va;
+
+            % side force +Xa , assumed to be zero
+            Fa_side = 0*x_axis_va; % C_S = 0
+
+            % normal force +Za
+            Fa_normal = obj.Ka*(norm(relative_velocity_meas)^2)*C_N*z_axis_va;
+
+            controller_aerodynamic_forces = Fa_drag + Fa_side + Fa_normal;
+
         end
     end
 end
