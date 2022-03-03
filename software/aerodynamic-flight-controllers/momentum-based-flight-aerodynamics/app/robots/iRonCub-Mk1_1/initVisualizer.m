@@ -23,5 +23,6 @@ confVisualizer.world_H_base           = eye(4, 4);
 confVisualizer.world_H_base(1:3, 1:3) = Config.initialConditions.orientation;
 confVisualizer.world_H_base(1:3, 4)   = Config.initialConditions.base_position;
 
-confVisualizer.aroundRobot = 1; % square you see around the robot
-confVisualizer.tStep       = 0.01;
+confVisualizer.aroundRobot      = 1; % square you see around the robot
+confVisualizer.tStep            = 0.01;
+confVisualizer.printVizToFrames = true;

@@ -23,6 +23,7 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
             'r_elbow_1_aero_frame','l_elbow_1_aero_frame','r_upper_leg','l_upper_leg','r_lower_leg','l_lower_leg','r_foot','l_foot'};
         scaling_factor = 0.1;
         cfd_axis = {'k','i','j'};
+        cont = 0;
     end
     
     methods (Access = protected)
@@ -60,6 +61,16 @@ classdef RobotVisualizer_iDynTree < matlab.System & matlab.system.mixin.CustomIc
                     
                     % obj.updateCFD_body_frame();
                     obj.viz.draw()
+                    
+                    % save visualizer window as figures
+                    if obj.config.printVizToFrames
+                        obj.cont = obj.cont + 1;    
+                        if ~exist('MEDIA_TEMP','dir')
+                        
+                            mkdir('MEDIA_TEMP');
+                        end
+                        obj.viz.drawToFile(['MEDIA_TEMP/frame_',num2str(obj.cont,'%04.f'),'.png'])
+                    end
                 else
                     error('Closing visualizer.')
                 end
