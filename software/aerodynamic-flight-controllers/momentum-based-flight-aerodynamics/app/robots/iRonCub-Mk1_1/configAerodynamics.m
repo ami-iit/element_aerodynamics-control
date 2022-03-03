@@ -18,9 +18,9 @@ aerodynamics_config.Ka = 1;
 % cd = c0 + c1*sin(a)^2*cos(b)^3 + c2*cos(b)^3+c3*cos(b)^2  drag coefficient
 % cn = c4 + c5*sin(2a)*cos(b)^2                             lift coefficient
 %
-aerodynamics_config.C_0 =  0.1327; 
-aerodynamics_config.C_1 = -0.0858;
-aerodynamics_config.C_2 =  0.0679;
-aerodynamics_config.C_3 =  0.0949;
-aerodynamics_config.C_4 =  0.0042;
-aerodynamics_config.C_5 =  0.0598;
+aerodynamics_config.C_0 =  0.1274; 
+aerodynamics_config.C_1 =  0.0903;
+aerodynamics_config.C_2 =  0.0141;
+aerodynamics_config.C_3 =  0.0147;
+aerodynamics_config.C_4 =  0.0007;
+aerodynamics_config.C_5 =  0.0938;

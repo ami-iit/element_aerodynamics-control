@@ -57,9 +57,9 @@ classdef Aerodynamics_force < handle
             
             % get drag and normal force coefficients C_D and C_L
             
-            % aerodynamic coefficients model
-            C_D = obj.C_0 + obj.C_1*(sin(alpha)^2)*(cos(beta)^3) + obj.C_2*(cos(beta)^3) + obj.C_3*(cos(beta)^2); % drag force coefficient
-            C_N = obj.C_4 + obj.C_5*sin(2*alpha)*(cos(beta)^2); % normal force coefficient
+            % aerodynamic coefficients models
+            C_D = obj.C_0 + obj.C_1*(sin(alpha)^2)*(sin(beta)^2) + obj.C_2*(sin(alpha)^2) + obj.C_3*(sin(beta)^2);  % drag force coefficient
+            C_N = obj.C_4 + obj.C_5*sin(2*alpha)*sin(alpha)^2*(cos(beta)^2);  % normal force coefficient
         end
         
         function relative_velocity = get_com_v_rel(obj, robot, base_pose_dot, s_dot, v_wind) 
@@ -131,8 +131,8 @@ classdef Aerodynamics_force < handle
              % projection on the plane that is normal to vector k_axis_cfd
              d_lchest_rchest_ij = (w_o_lchest-w_o_rchest)-dot((w_o_lchest-w_o_rchest), k_axis_cfd)/(norm(k_axis_cfd)^2)*(k_axis_cfd);
              
-             j_axis_cfd = d_lchest_rchest_ij/norm(d_lchest_rchest_ij); % j axis is defined
-             i_axis_cfd = cross(j_axis_cfd, k_axis_cfd);               % i axis is defined according to right hand rule
+             i_axis_cfd = d_lchest_rchest_ij/norm(d_lchest_rchest_ij); % j axis is defined
+             j_axis_cfd = cross(k_axis_cfd, i_axis_cfd);               % i axis is defined according to right hand rule
         end
       
         function [x_axis_va, y_axis_va, z_axis_va] = compute_velocity_frame(obj, k_axis_cfd, i_axis_cfd, j_axis_cfd, beta, alpha)
