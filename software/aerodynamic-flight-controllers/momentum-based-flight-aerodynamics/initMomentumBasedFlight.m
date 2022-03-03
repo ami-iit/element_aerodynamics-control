@@ -25,37 +25,64 @@ import wbc.*
 addpath(genpath('./src/'));
 addpath('../controlAndDataGui/');
 
+% Select the trajectory type and simulation time
+chosenSim = menu_customized('Select trajectory type','iRonCub Control GUI','Scenario 1: Hovering','Scenario 2: High-speed Flight');
+
+if chosenSim==1 
+
+    Config.high_speed_trajectory = false;
+    Config.simulationTime        = inf;
+    Config.wind_gust_ramp        = 10; % [m/s]
+    Config.wind_gust_cosine      = 10; % [m/s]
+    Config.t_init_wind_ramp      = 5; % [s]
+    Config.wind_direction        = [-1; 0; 0]; % [x y z]
+    
+elseif chosenSim==2
+    
+    Config.high_speed_trajectory = false;
+    Config.simulationTime        = 30;
+    Config.wind_gust_ramp        = 10; % [m/s]
+    Config.wind_gust_cosine      = 10; % [m/s]
+    Config.t_init_wind_ramp      = 5; % [s]
+    Config.wind_direction        = [-1; 0; 0]; % [x y z]
+    
+elseif chosenSim==3
+    
+    Config.high_speed_trajectory = true;
+    Config.simulationTime        = 45;
+    Config.wind_gust_ramp        = 15; % [m/s]
+    Config.wind_gust_cosine      = 15; % [m/s]
+    Config.t_init_wind_ramp      = 10; % [s]
+    Config.wind_direction        = [0; -1; 0]; % overwrite wind direction
+end
+
 % Settings to generate a wind profile during the simulation
-Config.wind_direction      = [-1; 0; 0]; % [x y z]
 Config.constant_wind       = 3; % [m/s]
 
 % generate a wind gust with ramp function
-Config.wind_gust_ramp      = 20; % [m/s]
-Config.t_init_wind_ramp    = 10; % [s]
 Config.t_slope_wind_ramp   = 5;  % [s]
 Config.t_plateau_wind_ramp = 2.5; % [s]
 totalTimeRamp              = Config.t_init_wind_ramp + 2*Config.t_slope_wind_ramp + Config.t_plateau_wind_ramp;
 
 % generate a wind gust with cosine function
-wind_gust_cosine_after_ramp = false;
-Config.wind_gust_cosine     = 20; % [m/s]
-Config.t_init_wind_cosine   = 10 + totalTimeRamp * wind_gust_cosine_after_ramp; % [s]
+wind_gust_cosine_after_ramp = true;
+Config.t_init_wind_cosine   = 5 + totalTimeRamp * wind_gust_cosine_after_ramp; % [s]
 Config.delta_t_wind_cosine  = 5; % [s]
 
 % If true, the aerodynamic force is used as feedforward in the controller
 % with a different model of the aerodynamics if selected, accounting for 
 % the errors in the sensors data
-Config.use_aerodynamics_forces_feedback = false;
+Config.use_aerodynamics_forces_feedback  = false;
 Config.controller_uses_real_aerodynamics = false;
 
-Config.controller_sensors_calib_error = -0.20;
+Config.controller_sensors_calib_error = -0.10;
 Config.controller_sensors_noise       =  0.05;  
 
 % If true, gain scheduling is used to enforce controller robustness under 
 % the presence of wind. Applied on CoM position and velocity gains
 Config.use_gain_scheduling         = false;
 Config.settlingTime_gainScheduling = 0.25;
-Config.gains_scaling_factor        = 2.15;
+Config.gains_scaling_factor        = 2.0;
 
 % Parameters for high speed trajectory planner
 Config.A_p1     = 0.6;    % acc_max for going up
@@ -65,28 +92,8 @@ Config.f_p2     = 1/10;   % frequency of going forward while accelerating
 Config.f_p3     = 1/10;   % frequency of going forward while decelerating
 Config.Ts_const = 40;     % constant velocity flying time
 
-% Select the trajectory type and simulation time
-chosenSim = menu_customized('Select trajectory type','iRonCub Control GUI','Scenario 1: Hovering','Scenario 2: High-speed Flight');
-
-if chosenSim==1 
-
-    Config.high_speed_trajectory = false;
-    Config.simulationTime        = inf;
-    
-elseif chosenSim==2
-    
-    Config.high_speed_trajectory = false;
-    Config.simulationTime        = 50;
-    
-elseif chosenSim==3
-    
-    Config.high_speed_trajectory = true;
-    Config.simulationTime        = 50;
-    Config.wind_direction        = [0; -1; 0]; % overwrite wind direction
-end
-
-Config.tStep                     = 0.01;
-jets_config.use_jet_dyn          = false;
+Config.tStep            = 0.01;
+jets_config.use_jet_dyn = false;
 
 %% SIMULATION SETTINGS
 
@@ -123,7 +130,7 @@ Config.SCOPES_WRENCHES               = true;
 Config.SCOPE_GAINS_AND_STATE_MACHINE = true;
 
 % Save data on the workspace after the simulation
-Config.SAVE_WORKSPACE                = false;
+Config.SAVE_WORKSPACE                = true;
 
 %% ADD CONFIGURATION FILES
 
