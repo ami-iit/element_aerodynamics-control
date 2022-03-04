@@ -15,7 +15,7 @@
 
 % TRUE if one wants to run the runSimulationsICRA script for ICRA 2022
 % simulations for the paper
-Config_ICRA.RUN_SIMULATIONS_ICRA_2022 = false;
+Config_ICRA.RUN_SIMULATIONS_ICRA_2022 = true;
 
 if ~Config_ICRA.RUN_SIMULATIONS_ICRA_2022
     
