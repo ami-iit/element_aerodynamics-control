@@ -1,13 +1,13 @@
 Model {
   Name			  "momentumBasedFlight"
-  Version		  10.2
-  SavedCharacterEncoding  "windows-1252"
+  Version		  10.3
+  SavedCharacterEncoding  "UTF-8"
   ModelUUID		  "22e1c223-5ec7-4aa3-8a88-de6fe195e823"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "4.1"
+    ComputedModelVersion    "3.1"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -17,6 +17,7 @@ Model {
     HasTerminateEvent	    0
     PreCompExecutionDomainType "Unset"
     IsExportFunctionModel   0
+    SimulinkSubDomainType   "Simulink"
     NumParameterArguments   0
     NumExternalFileReferences 28
     ExternalFileReference {
@@ -218,6 +219,15 @@ Model {
     }
     OrderedModelArguments   1
   }
+  AnimationPlugin	  "on"
+  LogicAnalyzerPlugin	  "on"
+  SLCCPlugin		  "on"
+  WebScopes_FoundationPlugin "on"
+  DiagnosticSuppressor	  "on"
+  slcheck_filter_plugin	  "on"
+  SimscapeDaeAutoSolver	  "ode23t"
+  SimscapeModelParametersPlugin	"on"
+  NotesPlugin		  "on"
   EnableAccessToBaseWorkspace on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
@@ -230,7 +240,7 @@ Model {
   MaxMDLFileLineLength	  120
   InitFcn		  "cd(fileparts(which(bdroot)));\ninitMomentumBasedFlight;"
   StopFcn		  "cd(fileparts(which(bdroot)));\nstopMomentumBasedFlight;"
-  LastSavedArchitecture	  "win64"
+  LastSavedArchitecture	  "glnxa64"
   Object {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
@@ -240,7 +250,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 2576.0, 1416.0]
+      Location		      [2169.0, 94.0, 1866.0, 1059.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -267,13 +277,35 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [2490.0, 1145.0]
-	  ZoomFactor		  [1.9638687972593261]
-	  Offset		  [-825.93079456278019, -259.75262094741674]
-	  SceneRectInView	  [-825.93079456278019, -259.75262094741674, 1267.9054748845317, 583.03283885252563]
+	  Extents		  [1796.0, 789.0]
+	  ZoomFactor		  [1.3532685423909243]
+	  Offset		  [-855.55662402744463, -259.75262094741674]
+	  SceneRectInView	  [-855.55662402744463, -259.75262094741674, 1327.1571338138606, 583.03283885252563]
 	}
 	Object {
 	  $ObjectID		  6
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "514"
+	  Extents		  [1796.0, 789.0]
+	  ZoomFactor		  [1.2191709501669783]
+	  Offset		  [-427.59284566635358, -368.75551086846758]
+	  SceneRectInView	  [-427.59284566635358, -368.75551086846758, 1473.132213127305, 647.16108917452323]
+	}
+	Object {
+	  $ObjectID		  7
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "87"
+	  Extents		  [2506.0, 1146.0]
+	  ZoomFactor		  [1.2170413939221454]
+	  Offset		  [-1009.5163490449676, -748.994585025916]
+	  SceneRectInView	  [-1009.5163490449676, -748.994585025916, 2059.0918373975287, 941.62779156327531]
+	}
+	Object {
+	  $ObjectID		  8
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -284,7 +316,7 @@ Model {
 	  SceneRectInView	  [294.63543687638582, -99.303769401330385, 1434.179600886918, 677.9434589800444]
 	}
 	Object {
-	  $ObjectID		  7
+	  $ObjectID		  9
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -295,7 +327,7 @@ Model {
 	  SceneRectInView	  [67.50744416873448, -27.749689826302728, 430.5, 203.49937965260546]
 	}
 	Object {
-	  $ObjectID		  8
+	  $ObjectID		  10
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -306,7 +338,7 @@ Model {
 	  SceneRectInView	  [-278.0128987970711, -15.282127680439316, 1054.7054850941422, 498.56425536087863]
 	}
 	Object {
-	  $ObjectID		  9
+	  $ObjectID		  11
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -317,7 +349,7 @@ Model {
 	  SceneRectInView	  [-89.695763577563014, -40.91522084343157, 764.11338582677172, 361.2]
 	}
 	Object {
-	  $ObjectID		  10
+	  $ObjectID		  12
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -328,7 +360,7 @@ Model {
 	  SceneRectInView	  [46.272711398138767, 263.32431950004462, 1660.0, 784.68982630272956]
 	}
 	Object {
-	  $ObjectID		  11
+	  $ObjectID		  13
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -339,7 +371,7 @@ Model {
 	  SceneRectInView	  [-1086.6763059701493, -236.1194029850746, 1804.4776119402984, 852.98507462686564]
 	}
 	Object {
-	  $ObjectID		  12
+	  $ObjectID		  14
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -350,7 +382,7 @@ Model {
 	  SceneRectInView	  [332.19971234309622, 177.86152752353556, 749.46776281380755, 354.27694495292889]
 	}
 	Object {
-	  $ObjectID		  13
+	  $ObjectID		  15
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -361,7 +393,7 @@ Model {
 	  SceneRectInView	  [-661.74024581589958, -250.14646312761505, 1164.1367416317992, 550.2929262552301]
 	}
 	Object {
-	  $ObjectID		  14
+	  $ObjectID		  16
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -372,7 +404,7 @@ Model {
 	  SceneRectInView	  [-208.86203019644097, -130.39674994055309, 1992.0, 941.62779156327542]
 	}
 	Object {
-	  $ObjectID		  15
+	  $ObjectID		  17
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -381,28 +413,6 @@ Model {
 	  ZoomFactor		  [1.539163297709109]
 	  Offset		  [-66.516710688026819, -264.23829312835505]
 	  SceneRectInView	  [-66.516710688026819, -264.23829312835505, 1570.9834061135371, 742.61126269138663]
-	}
-	Object {
-	  $ObjectID		  16
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "87"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.213855421686747]
-	  Offset		  [-975.97043034620322, -748.994585025916]
-	  SceneRectInView	  [-975.97043034620322, -748.994585025916, 1992.0, 941.62779156327542]
-	}
-	Object {
-	  $ObjectID		  17
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "514"
-	  Extents		  [2418.0, 1143.0]
-	  ZoomFactor		  [1.2159794031770124]
-	  Offset		  [-394.105522458766, -368.75551086846764]
-	  SceneRectInView	  [-394.105522458766, -368.75551086846764, 1988.5205240174676, 939.983026861855]
 	}
 	Object {
 	  $ObjectID		  18
@@ -1610,19 +1620,6 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  127
-	  Type			  "GLUE2:SpreadSheet"
-	  ID			  "ModelData"
-	  Visible		  [1]
-	  CreateCallback	  "DataView.createSpreadSheetComponent"
-	  UserData		  ""
-	  Floating		  [0]
-	  DockPosition		  "Bottom"
-	  Width			  [2556]
-	  Height		  [215]
-	  Minimized		  "On"
-	}
-	Object {
-	  $ObjectID		  128
 	  Type			  "GLUE2:PropertyInspector"
 	  ID			  "Property Inspector"
 	  Visible		  [1]
@@ -1632,6 +1629,19 @@ Model {
 	  DockPosition		  "Right"
 	  Width			  [640]
 	  Height		  [480]
+	  Minimized		  "On"
+	}
+	Object {
+	  $ObjectID		  128
+	  Type			  "GLUE2:SpreadSheet"
+	  ID			  "ModelData"
+	  Visible		  [1]
+	  CreateCallback	  "DataView.createSpreadSheetComponent"
+	  UserData		  ""
+	  Floating		  [0]
+	  DockPosition		  "Bottom"
+	  Width			  [1862]
+	  Height		  [218]
 	  Minimized		  "On"
 	}
 	Object {
@@ -1651,15 +1661,15 @@ Model {
       }
       WindowState	      "AAAA/wAAAAD9AAAAAwAAAAAAAAC9AAAB+PwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
-      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABjAP////sAAABgAFMAaQBtAHUAb"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABiAP////sAAABgAFMAaQBtAHUAb"
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
-      "QBzAAAAAAD/////AAAAjAD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
-      "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAACeAAAADb/AEAAAAC+/////8AA"
-      "AAAAP////8AAAFZAP////sAAAA2AEcATABVAEUAMgA6AFMAcAByAGUAYQBkAFMAaABlAGUAdAAvAE0AbwBkAGUAbABEAGEAdABhAAAAAAD/////A"
-      "AABGgAH//8AAAngAAAEtgAAAAEAAAACAAAAAQAAAAL8AAAABAAAAAAAAAABAAAANgBjAG8AbABsAGEAcABzAGkAYgBsAGUAUABhAG4AZQBsAFQAb"
-      "wBvAGwAQgBhAHIATABlAGYAdAIAAAAA/////wAAAAAAAAAAAAAAAQAAAAEAAAA4AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvA"
-      "G8AbABCAGEAcgBSAGkAZwBoAHQDAAAAAP////8AAAAAAAAAAAAAAAIAAAAAAAAAAwAAAAEAAAA6AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAb"
-      "gBlAGwAVABvAG8AbABCAGEAcgBCAG8AdAB0AG8AbQEAAAAA/////wAAAAAAAAAA"
+      "QBzAAAAAAD/////AAAAiQD///8AAAABAAAAAAAAA3D8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
+      "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAAAwAACeAAAADb/AEAAAAB+wAAADYAR"
+      "wBMAFUARQAyADoAUwBwAHIAZQBhAGQAUwBoAGUAZQB0AC8ATQBvAGQAZQBsAEQAYQB0AGEAAAAAAP////8AAAEWAP///wAAByoAAANSAAAAAQAAA"
+      "AIAAAABAAAAAvwAAAAEAAAAAAAAAAEAAAA2AGMAbwBsAGwAYQBwAHMAaQBiAGwAZQBQAGEAbgBlAGwAVABvAG8AbABCAGEAcgBMAGUAZgB0AgAAA"
+      "AD/////AAAAAAAAAAAAAAABAAAAAQAAADgAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAFIAaQBnAGgAdAMAA"
+      "AAA/////wAAAAAAAAAAAAAAAgAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAb"
+      "wB0AHQAbwBtAQAAAAD/////AAAAAAAAAAA="
       Array {
 	Type			"Cell"
 	Dimension		0
@@ -1667,7 +1677,7 @@ Model {
       }
       WindowUuid	      "c4f6b7aa-a2eb-4804-8bef-f10f750dcd77"
     }
-    BDUuid		    "b2c88931-e2d0-4d73-85e7-252fcbba1595"
+    BDUuid		    "83ce5db8-fd8a-4086-82cd-6d384f00c0de"
   }
   HideAutomaticNames	  on
   SequenceViewerTimePrecision 3
@@ -1675,11 +1685,11 @@ Model {
   Created		  "Fri May 25 14:35:31 2018"
   Creator		  "gnava"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "apaolino"
+  LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 03 22:33:04 2022"
-  RTWModifiedTimeStamp	  568247584
-  ModelVersionFormat	  "%<AutoIncrement:2.0>"
+  LastModifiedDate	  "Fri Mar 04 02:32:49 2022"
+  RTWModifiedTimeStamp	  568250766
+  ModelVersionFormat	  "%<AutoIncrement:3.1>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -1711,8 +1721,9 @@ Model {
   StatusBar		  on
   BrowserShowLibraryLinks off
   FunctionConnectors	  off
+  ScheduleConnectors	  off
   BrowserLookUnderMasks	  off
-  MultiThreadCoSim	  "on"
+  MultithreadedSim	  "on"
   SimulationMode	  "normal"
   SILPILModeSetting	  "automated"
   SILPILSystemUnderTest	  "topmodel"
@@ -1784,7 +1795,7 @@ Model {
     Dimension		    1
     Simulink.ConfigSet {
       $ObjectID		      131
-      Version		      "20.1.0"
+      Version		      "21.0.0"
       DisabledProps	      []
       Description	      ""
       Array {
@@ -1792,7 +1803,7 @@ Model {
 	Dimension		9
 	Simulink.SolverCC {
 	  $ObjectID		  132
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -1816,6 +1827,7 @@ Model {
 	  ConcurrentTasks	  off
 	  SolverName		  "FixedStepAuto"
 	  SolverJacobianMethodControl "auto"
+	  DaesscMode		  "auto"
 	  ShapePreserveControl	  "DisableAll"
 	  ZeroCrossControl	  "UseLocalSettings"
 	  ZeroCrossAlgorithm	  "Nonadaptive"
@@ -1834,7 +1846,7 @@ Model {
 	}
 	Simulink.DataIOCC {
 	  $ObjectID		  133
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -1876,7 +1888,7 @@ Model {
 	}
 	Simulink.OptimizationCC {
 	  $ObjectID		  134
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    9
@@ -1900,6 +1912,7 @@ Model {
 	  UseDivisionForNetSlopeComputation "off"
 	  GainParamInheritBuiltInType off
 	  UseFloatMulNetSlope	  off
+	  InheritOutputTypeSmallerThanSingle off
 	  DefaultUnderspecifiedDataType	"double"
 	  UseSpecifiedMinMax	  off
 	  InlineInvariantSignals  off
@@ -1950,7 +1963,7 @@ Model {
 	}
 	Simulink.DebuggingCC {
 	  $ObjectID		  135
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    1
@@ -2072,7 +2085,7 @@ Model {
 	}
 	Simulink.HardwareCC {
 	  $ObjectID		  136
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -2122,7 +2135,7 @@ Model {
 	}
 	Simulink.ModelReferenceCC {
 	  $ObjectID		  137
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -2142,7 +2155,7 @@ Model {
 	}
 	Simulink.SFSimCC {
 	  $ObjectID		  138
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -2159,7 +2172,7 @@ Model {
 	  SimCustomLinkerFlags	  ""
 	  SFSimEcho		  on
 	  SimCtrlC		  on
-	  SimIntegrity		  on
+	  SimIntegrity		  "on"
 	  SimUseLocalCustomCode	  off
 	  SimParseCustomCode	  on
 	  SimAnalyzeCustomCode	  off
@@ -2170,10 +2183,14 @@ Model {
 	  EnableRuntimeRecursion  on
 	  MATLABDynamicMemAlloc	  on
 	  MATLABDynamicMemAllocThreshold 65536
+	  LegacyBehaviorForPersistentVarInContinuousTime off
 	  CustomCodeFunctionArrayLayout	[]
 	  DefaultCustomCodeFunctionArrayLayout "NotSpecified"
 	  CustomCodeUndefinedFunction "UseInterfaceOnly"
 	  CustomCodeGlobalsAsFunctionIO	off
+	  DefaultCustomCodeDeterministicFunctions "None"
+	  CustomCodeDeterministicFunctions ""
+	  SimHardwareAcceleration "generic"
 	  SimTargetLang		  "C"
 	  GPUAcceleration	  off
 	  SimGPUMallocThreshold	  200
@@ -2187,7 +2204,7 @@ Model {
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
 	  $ObjectID		  139
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    17
@@ -2285,6 +2302,7 @@ Model {
 	  GPUComputeCapability	  "3.5"
 	  GPUCustomComputeCapability ""
 	  GPUCompilerFlags	  ""
+	  GPUMaximumBlocksPerKernel 0
 	  DLTargetLibrary	  "none"
 	  DLAutoTuning		  on
 	  DLArmComputeVersion	  "19.05"
@@ -2294,7 +2312,7 @@ Model {
 	    Dimension		    2
 	    Simulink.CodeAppCC {
 	      $ObjectID		      140
-	      Version		      "20.1.0"
+	      Version		      "21.0.0"
 	      Array {
 		Type			"Cell"
 		Dimension		28
@@ -2384,7 +2402,7 @@ Model {
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
 	      $ObjectID		      141
-	      Version		      "20.1.0"
+	      Version		      "21.0.0"
 	      Array {
 		Type			"Cell"
 		Dimension		19
@@ -2491,7 +2509,7 @@ Model {
 	}
 	SlCovCC.ConfigComp {
 	  $ObjectID		  142
-	  Version		  "20.1.0"
+	  Version		  "21.0.0"
 	  DisabledProps		  []
 	  Description		  "Simulink Coverage Configuration Component"
 	  Components		  []
@@ -2532,7 +2550,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition    [ 72, 71, 1852, 1011 ]
+      ConfigPrmDlgPosition    [ 70, 71, 1850, 1011 ]
       ExtraOptions	      ""
     }
     PropName		    "ConfigurationSets"
@@ -2774,6 +2792,7 @@ Model {
       BlockType		      Outport
       Port		      "1"
       IconDisplay	      "Port number"
+      OutputFunctionCall      off
       OutMin		      "[]"
       OutMax		      "[]"
       OutDataTypeStr	      "Inherit: auto"
@@ -2799,7 +2818,7 @@ Model {
       FunctionName	      "system"
       SFunctionModules	      "''"
       PortCounts	      "[]"
-      MultiThreadCoSim	      "auto"
+      MultithreadedSim	      "auto"
     }
     Block {
       BlockType		      Scope
@@ -2900,9 +2919,9 @@ Model {
   }
   System {
     Name		    "momentumBasedFlight"
-    Location		    [-8, -8, 2568, 1408]
+    Location		    [2169, 94, 4035, 1153]
     SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
-    Open		    off
+    Open		    on
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
     ExecutionDomainType	    "Deduce"
@@ -2916,7 +2935,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "196"
+    ZoomFactor		    "135"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "3558"
     SimulinkSubDomain	    "Simulink"
@@ -2999,7 +3018,7 @@ Model {
       ZOrder		      1122
       ShowName		      off
       HideAutomaticName	      off
-      LibraryVersion	      "5.0"
+      LibraryVersion	      "4.0"
       SourceBlock	      "WBToolboxLibrary/Utilities/Configuration"
       SourceType	      ""
       SourceProductName	      "WholeBodyToolbox"
@@ -3011,12 +3030,6 @@ Model {
       ContentPreviewEnabled   off
       ConfigSource	      "Workspace"
       ConfigObject	      "'WBTConfigRobot'"
-      RobotName		      "'icubSim'"
-      UrdfFile		      "'model.urdf'"
-      ControlledJoints	      "{'l_elbow','l_shoulder_pitch','torso_roll'}"
-      ControlBoardsNames      "{'left_arm','right_arm','torso'}"
-      LocalName		      "'WBT'"
-      GravityVector	      "[0,0,-9.81]"
     }
     Block {
       BlockType		      Constant
@@ -3883,7 +3896,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "75"
+		    SIDHighWatermark	    "78"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -3927,20 +3940,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:533::74"
+		    SID			    "3537:533::77"
 		    Ports		    [1, 1]
 		    Position		    [270, 530, 320, 570]
-		    ZOrder		    65
+		    ZOrder		    68
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:533::73"
+		    SID			    "3537:533::76"
 		    Tag			    "Stateflow S-Function 9"
 		    Ports		    [5, 12]
 		    Position		    [180, 95, 230, 355]
-		    ZOrder		    64
+		    ZOrder		    67
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[5 12]"
@@ -3995,9 +4008,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:533::75"
+		    SID			    "3537:533::78"
 		    Position		    [460, 541, 480, 559]
-		    ZOrder		    66
+		    ZOrder		    69
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -4087,150 +4100,167 @@ Model {
 		    Port		    "11"
 		    }
 		    Line {
-		    ZOrder		    73
+		    ZOrder		    91
 		    SrcBlock		    "HessianMatrixQP"
 		    SrcPort		    1
+		    Points		    [79, 0; 0, 15]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    74
+		    ZOrder		    92
 		    SrcBlock		    "gVectorQP"
 		    SrcPort		    1
+		    Points		    [72, 0; 0, 30]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    75
+		    ZOrder		    93
 		    SrcBlock		    "InequalityConstrMatrix"
 		    SrcPort		    1
+		    Points		    [58, 0; 0, 45]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    76
+		    ZOrder		    94
 		    SrcBlock		    "biasVectorInequalityConstr"
 		    SrcPort		    1
+		    Points		    [51, 0; 0, 60]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
-		    ZOrder		    77
+		    ZOrder		    95
 		    SrcBlock		    "jointTorquesSaturation"
 		    SrcPort		    1
+		    Points		    [42, 0; 0, 70]
 		    DstBlock		    " SFunction "
 		    DstPort		    5
 		    }
 		    Line {
 		    Name		    "H_balancing"
-		    ZOrder		    78
+		    ZOrder		    96
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [93, 0; 0, -25]
 		    DstBlock		    "H_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "g_balancing"
-		    ZOrder		    79
+		    ZOrder		    97
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [102, 0; 0, -10]
 		    DstBlock		    "g_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ub_balancing"
-		    ZOrder		    80
+		    ZOrder		    98
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
+		    Points		    [164, 0; 0, 5]
 		    DstBlock		    "ub_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "lb_balancing"
-		    ZOrder		    81
+		    ZOrder		    99
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    5
+		    Points		    [147, 0; 0, 20]
 		    DstBlock		    "lb_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "Aeq_balancing"
-		    ZOrder		    82
+		    ZOrder		    100
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    6
+		    Points		    [131, 0; 0, 40]
 		    DstBlock		    "Aeq_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "lbEq_balancing"
-		    ZOrder		    83
+		    ZOrder		    101
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    7
+		    Points		    [114, 0; 0, 55]
 		    DstBlock		    "lbEq_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ubEq_balancing"
-		    ZOrder		    84
+		    ZOrder		    102
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    8
+		    Points		    [98, 0; 0, 70]
 		    DstBlock		    "ubEq_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "H_flight"
-		    ZOrder		    85
+		    ZOrder		    103
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    9
+		    Points		    [81, 0; 0, 85]
 		    DstBlock		    "H_flight"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "g_flight"
-		    ZOrder		    86
+		    ZOrder		    104
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    10
+		    Points		    [64, 0; 0, 100]
 		    DstBlock		    "g_flight"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ub_flight"
-		    ZOrder		    87
+		    ZOrder		    105
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    11
+		    Points		    [48, 0; 0, 120]
 		    DstBlock		    "ub_flight"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "lb_flight"
-		    ZOrder		    88
+		    ZOrder		    106
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    12
+		    Points		    [31, 0; 0, 135]
 		    DstBlock		    "lb_flight"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    89
+		    ZOrder		    107
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    90
+		    ZOrder		    108
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [14, 0; 0, 435]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -4363,7 +4393,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "66"
+		    SIDHighWatermark	    "69"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -4407,20 +4437,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:543::65"
+		    SID			    "3537:543::68"
 		    Ports		    [1, 1]
 		    Position		    [270, 245, 320, 285]
-		    ZOrder		    56
+		    ZOrder		    59
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:543::64"
+		    SID			    "3537:543::67"
 		    Tag			    "Stateflow S-Function 14"
 		    Ports		    [5, 4]
 		    Position		    [180, 100, 230, 220]
-		    ZOrder		    55
+		    ZOrder		    58
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[5 4]"
 		    SFunctionDeploymentMode off
@@ -4442,9 +4472,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:543::66"
+		    SID			    "3537:543::69"
 		    Position		    [460, 256, 480, 274]
-		    ZOrder		    57
+		    ZOrder		    60
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -4470,78 +4500,86 @@ Model {
 		    Port		    "3"
 		    }
 		    Line {
-		    ZOrder		    41
+		    ZOrder		    51
 		    SrcBlock		    "AEq"
 		    SrcPort		    1
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    42
+		    ZOrder		    52
 		    SrcBlock		    "lbEq"
 		    SrcPort		    1
+		    Points		    [39, 0; 0, -10]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    43
+		    ZOrder		    53
 		    SrcBlock		    "ubEq"
 		    SrcPort		    1
+		    Points		    [59, 0; 0, -20]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    44
+		    ZOrder		    54
 		    SrcBlock		    "lb"
 		    SrcPort		    1
+		    Points		    [78, 0; 0, -30]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
-		    ZOrder		    45
+		    ZOrder		    55
 		    SrcBlock		    "ub"
 		    SrcPort		    1
+		    Points		    [100, 0; 0, -45]
 		    DstBlock		    " SFunction "
 		    DstPort		    5
 		    }
 		    Line {
 		    Name		    "AEq_combined"
-		    ZOrder		    46
+		    ZOrder		    56
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [49, 0; 0, -35]
 		    DstBlock		    "AEq_combined"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "lbEq_combined"
-		    ZOrder		    47
+		    ZOrder		    57
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [98, 0; 0, -30]
 		    DstBlock		    "lbEq_combined"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ubEq_combined"
-		    ZOrder		    48
+		    ZOrder		    58
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
+		    Points		    [146, 0; 0, -25]
 		    DstBlock		    "ubEq_combined"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    49
+		    ZOrder		    59
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    50
+		    ZOrder		    60
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 150]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -4556,7 +4594,7 @@ Model {
 		    ZOrder		    757
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
 		    SourceType		    "MatchSignalSizes"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -4574,11 +4612,11 @@ Model {
 		    Ports		    [5, 2]
 		    Position		    [1750, 958, 1850, 1282]
 		    ZOrder		    766
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/QP"
 		    SourceType		    "QP"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    lbA			    on
 		    ubA			    on
 		    lb			    off
@@ -4785,7 +4823,7 @@ Model {
 		    ZOrder		    757
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
 		    SourceType		    "MatchSignalSizes"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -4803,11 +4841,11 @@ Model {
 		    Ports		    [4, 2]
 		    Position		    [1560, 1016, 1665, 1134]
 		    ZOrder		    767
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/QP"
 		    SourceType		    "QP"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    lbA			    off
 		    ubA			    off
 		    lb			    on
@@ -5383,7 +5421,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "134"
+		    SIDHighWatermark	    "137"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -5419,20 +5457,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:249::133"
+		    SID			    "3537:249::136"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    122
+		    ZOrder		    125
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:249::132"
+		    SID			    "3537:249::135"
 		    Tag			    "Stateflow S-Function 15"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
-		    ZOrder		    121
+		    ZOrder		    124
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[4 2]"
 		    SFunctionDeploymentMode off
@@ -5446,9 +5484,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:249::134"
+		    SID			    "3537:249::137"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    123
+		    ZOrder		    126
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -5459,53 +5497,59 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    29
+		    ZOrder		    36
 		    SrcBlock		    "u"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, 5]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    30
+		    ZOrder		    37
 		    SrcBlock		    "u_0"
 		    SrcPort		    1
+		    Points		    [35, 0; 0, -5]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    31
+		    ZOrder		    38
 		    SrcBlock		    "tStep"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -15]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    32
+		    ZOrder		    39
 		    SrcBlock		    "uDotMax"
 		    SrcPort		    1
+		    Points		    [85, 0; 0, -25]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
 		    Name		    "uSat"
-		    ZOrder		    33
+		    ZOrder		    40
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [120, 0; 0, -70]
 		    DstBlock		    "uSat"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    34
+		    ZOrder		    41
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    35
+		    ZOrder		    42
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 120]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -5521,7 +5565,7 @@ Model {
 		    BackgroundColor	    "[0.537255, 0.721569, 1.000000]"
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/holder\n"
 		    SourceType		    "Holder"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -5620,7 +5664,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "1635"
+		    SIDHighWatermark	    "1638"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -5816,20 +5860,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:252::1634"
+		    SID			    "3537:252::1637"
 		    Ports		    [1, 1]
 		    Position		    [270, 315, 320, 355]
-		    ZOrder		    121
+		    ZOrder		    124
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:252::1633"
+		    SID			    "3537:252::1636"
 		    Tag			    "Stateflow S-Function 16"
 		    Ports		    [24, 6]
 		    Position		    [180, 65, 230, 565]
-		    ZOrder		    120
+		    ZOrder		    123
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[24 6]"
@@ -5860,9 +5904,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:252::1635"
+		    SID			    "3537:252::1638"
 		    Position		    [460, 326, 480, 344]
-		    ZOrder		    122
+		    ZOrder		    125
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -5909,229 +5953,259 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    213
+		    ZOrder		    244
 		    SrcBlock		    "M"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -25]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    214
+		    ZOrder		    245
 		    SrcBlock		    "h"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -40]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    215
+		    ZOrder		    246
 		    SrcBlock		    "J_jets"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -55]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    216
+		    ZOrder		    247
 		    SrcBlock		    "J_LFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -70]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
-		    ZOrder		    217
+		    ZOrder		    248
 		    SrcBlock		    "J_RFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -90]
 		    DstBlock		    " SFunction "
 		    DstPort		    5
 		    }
 		    Line {
-		    ZOrder		    218
+		    ZOrder		    249
 		    SrcBlock		    "JDot_LFoot_nu"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -105]
 		    DstBlock		    " SFunction "
 		    DstPort		    6
 		    }
 		    Line {
-		    ZOrder		    219
+		    ZOrder		    250
 		    SrcBlock		    "JDot_RFoot_nu"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -120]
 		    DstBlock		    " SFunction "
 		    DstPort		    7
 		    }
 		    Line {
-		    ZOrder		    220
+		    ZOrder		    251
 		    SrcBlock		    "J_com"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -135]
 		    DstBlock		    " SFunction "
 		    DstPort		    8
 		    }
 		    Line {
-		    ZOrder		    221
+		    ZOrder		    252
 		    SrcBlock		    "w_H_LFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -150]
 		    DstBlock		    " SFunction "
 		    DstPort		    9
 		    }
 		    Line {
-		    ZOrder		    222
+		    ZOrder		    253
 		    SrcBlock		    "w_H_RFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -170]
 		    DstBlock		    " SFunction "
 		    DstPort		    10
 		    }
 		    Line {
-		    ZOrder		    223
+		    ZOrder		    254
 		    SrcBlock		    "matrixOfJetsAxes"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -185]
 		    DstBlock		    " SFunction "
 		    DstPort		    11
 		    }
 		    Line {
-		    ZOrder		    224
+		    ZOrder		    255
 		    SrcBlock		    "ConstraintsMatrix_feet"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -200]
 		    DstBlock		    " SFunction "
 		    DstPort		    12
 		    }
 		    Line {
-		    ZOrder		    225
+		    ZOrder		    256
 		    SrcBlock		    "biasVectorConstraint_feet"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -215]
 		    DstBlock		    " SFunction "
 		    DstPort		    13
 		    }
 		    Line {
-		    ZOrder		    226
+		    ZOrder		    257
 		    SrcBlock		    "jetsIntensities"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -230]
 		    DstBlock		    " SFunction "
 		    DstPort		    14
 		    }
 		    Line {
-		    ZOrder		    227
+		    ZOrder		    258
 		    SrcBlock		    "stateVel"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -250]
 		    DstBlock		    " SFunction "
 		    DstPort		    15
 		    }
 		    Line {
-		    ZOrder		    228
+		    ZOrder		    259
 		    SrcBlock		    "jointVel_star"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -265]
 		    DstBlock		    " SFunction "
 		    DstPort		    16
 		    }
 		    Line {
-		    ZOrder		    229
+		    ZOrder		    260
 		    SrcBlock		    "contactForces_star"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -280]
 		    DstBlock		    " SFunction "
 		    DstPort		    17
 		    }
 		    Line {
-		    ZOrder		    230
+		    ZOrder		    261
 		    SrcBlock		    "KI_torqueControl"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -295]
 		    DstBlock		    " SFunction "
 		    DstPort		    18
 		    }
 		    Line {
-		    ZOrder		    231
+		    ZOrder		    262
 		    SrcBlock		    "KP_torqueControl"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -310]
 		    DstBlock		    " SFunction "
 		    DstPort		    19
 		    }
 		    Line {
-		    ZOrder		    232
+		    ZOrder		    263
 		    SrcBlock		    "feetContactIsActive"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -330]
 		    DstBlock		    " SFunction "
 		    DstPort		    20
 		    }
 		    Line {
-		    ZOrder		    233
+		    ZOrder		    264
 		    SrcBlock		    "activateEqConstrTorqueControl"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -345]
 		    DstBlock		    " SFunction "
 		    DstPort		    21
 		    }
 		    Line {
-		    ZOrder		    234
+		    ZOrder		    265
 		    SrcBlock		    "robotIsLanded"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -360]
 		    DstBlock		    " SFunction "
 		    DstPort		    22
 		    }
 		    Line {
-		    ZOrder		    235
+		    ZOrder		    266
 		    SrcBlock		    "jointPos_err"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -375]
 		    DstBlock		    " SFunction "
 		    DstPort		    23
 		    }
 		    Line {
-		    ZOrder		    236
+		    ZOrder		    267
 		    SrcBlock		    "aerodynamic_force"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -390]
 		    DstBlock		    " SFunction "
 		    DstPort		    24
 		    }
 		    Line {
 		    Name		    "Hessian"
-		    ZOrder		    237
+		    ZOrder		    268
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [5, 0; 0, -80]
 		    DstBlock		    "Hessian"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "gradient"
-		    ZOrder		    238
+		    ZOrder		    269
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [10, 0; 0, -130]
 		    DstBlock		    "gradient"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ConstraintMatrix_inequality"
-		    ZOrder		    239
+		    ZOrder		    270
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
+		    Points		    [16, 0; 0, -180]
 		    DstBlock		    "ConstraintMatrix_inequality"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "biasVectorConstraint_inequality"
-		    ZOrder		    240
+		    ZOrder		    271
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    5
+		    Points		    [21, 0; 0, -230]
 		    DstBlock		    "biasVectorConstraint_inequality"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "jointVel_err"
-		    ZOrder		    241
+		    ZOrder		    272
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    6
+		    Points		    [26, 0; 0, -275]
 		    DstBlock		    "jointVel_err"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    242
+		    ZOrder		    273
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    243
+		    ZOrder		    274
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [10, 0; 0, 230]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -6963,7 +7037,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "1655"
+		    SIDHighWatermark	    "1658"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -7199,20 +7273,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:272::1654"
+		    SID			    "3537:272::1657"
 		    Ports		    [1, 1]
 		    Position		    [270, 390, 320, 430]
-		    ZOrder		    133
+		    ZOrder		    136
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:272::1653"
+		    SID			    "3537:272::1656"
 		    Tag			    "Stateflow S-Function 19"
 		    Ports		    [29, 8]
 		    Position		    [180, 50, 230, 650]
-		    ZOrder		    132
+		    ZOrder		    135
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[29 8]"
@@ -7251,9 +7325,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:272::1655"
+		    SID			    "3537:272::1658"
 		    Position		    [460, 401, 480, 419]
-		    ZOrder		    134
+		    ZOrder		    137
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -7318,282 +7392,319 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    265
+		    ZOrder		    303
 		    SrcBlock		    "jointPos"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -40]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    266
+		    ZOrder		    304
 		    SrcBlock		    "w_baseTwist"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -55]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    267
+		    ZOrder		    305
 		    SrcBlock		    "jetsIntensities"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -70]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    268
+		    ZOrder		    306
 		    SrcBlock		    "J_jets"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -85]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
-		    ZOrder		    269
+		    ZOrder		    307
 		    SrcBlock		    "J_CoM"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -105]
 		    DstBlock		    " SFunction "
 		    DstPort		    5
 		    }
 		    Line {
-		    ZOrder		    270
+		    ZOrder		    308
 		    SrcBlock		    "J_LFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -120]
 		    DstBlock		    " SFunction "
 		    DstPort		    6
 		    }
 		    Line {
-		    ZOrder		    271
+		    ZOrder		    309
 		    SrcBlock		    "J_RFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -135]
 		    DstBlock		    " SFunction "
 		    DstPort		    7
 		    }
 		    Line {
-		    ZOrder		    272
+		    ZOrder		    310
 		    SrcBlock		    "posCoM"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -150]
 		    DstBlock		    " SFunction "
 		    DstPort		    8
 		    }
 		    Line {
-		    ZOrder		    273
+		    ZOrder		    311
 		    SrcBlock		    "w_R_b"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -165]
 		    DstBlock		    " SFunction "
 		    DstPort		    9
 		    }
 		    Line {
-		    ZOrder		    274
+		    ZOrder		    312
 		    SrcBlock		    "w_H_LFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -185]
 		    DstBlock		    " SFunction "
 		    DstPort		    10
 		    }
 		    Line {
-		    ZOrder		    275
+		    ZOrder		    313
 		    SrcBlock		    "w_H_RFoot"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -200]
 		    DstBlock		    " SFunction "
 		    DstPort		    11
 		    }
 		    Line {
-		    ZOrder		    276
+		    ZOrder		    314
 		    SrcBlock		    "matrixOfJetsAxes"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -215]
 		    DstBlock		    " SFunction "
 		    DstPort		    12
 		    }
 		    Line {
-		    ZOrder		    277
+		    ZOrder		    315
 		    SrcBlock		    "matrixOfJetsArms"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -230]
 		    DstBlock		    " SFunction "
 		    DstPort		    13
 		    }
 		    Line {
-		    ZOrder		    278
+		    ZOrder		    316
 		    SrcBlock		    "w_I_c"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -245]
 		    DstBlock		    " SFunction "
 		    DstPort		    14
 		    }
 		    Line {
-		    ZOrder		    279
+		    ZOrder		    317
 		    SrcBlock		    "L"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -265]
 		    DstBlock		    " SFunction "
 		    DstPort		    15
 		    }
 		    Line {
-		    ZOrder		    280
+		    ZOrder		    318
 		    SrcBlock		    "M"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -280]
 		    DstBlock		    " SFunction "
 		    DstPort		    16
 		    }
 		    Line {
-		    ZOrder		    281
+		    ZOrder		    319
 		    SrcBlock		    "CMM"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -295]
 		    DstBlock		    " SFunction "
 		    DstPort		    17
 		    }
 		    Line {
-		    ZOrder		    282
+		    ZOrder		    320
 		    SrcBlock		    "pos_vel_acc_jerk_CoM_des"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -310]
 		    DstBlock		    " SFunction "
 		    DstPort		    18
 		    }
 		    Line {
-		    ZOrder		    283
+		    ZOrder		    321
 		    SrcBlock		    "rot_vel_acc_jerk_base_des"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -325]
 		    DstBlock		    " SFunction "
 		    DstPort		    19
 		    }
 		    Line {
-		    ZOrder		    284
+		    ZOrder		    322
 		    SrcBlock		    "jointPos_des"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -345]
 		    DstBlock		    " SFunction "
 		    DstPort		    20
 		    }
 		    Line {
-		    ZOrder		    285
+		    ZOrder		    323
 		    SrcBlock		    "KP_momentum"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -360]
 		    DstBlock		    " SFunction "
 		    DstPort		    21
 		    }
 		    Line {
-		    ZOrder		    286
+		    ZOrder		    324
 		    SrcBlock		    "KD_momentum"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -375]
 		    DstBlock		    " SFunction "
 		    DstPort		    22
 		    }
 		    Line {
-		    ZOrder		    287
+		    ZOrder		    325
 		    SrcBlock		    "KP_postural"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -390]
 		    DstBlock		    " SFunction "
 		    DstPort		    23
 		    }
 		    Line {
-		    ZOrder		    288
+		    ZOrder		    326
 		    SrcBlock		    "feetContactIsActive"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -405]
 		    DstBlock		    " SFunction "
 		    DstPort		    24
 		    }
 		    Line {
-		    ZOrder		    289
+		    ZOrder		    327
 		    SrcBlock		    "decreaseMaxFootVerticalForce"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -425]
 		    DstBlock		    " SFunction "
 		    DstPort		    25
 		    }
 		    Line {
-		    ZOrder		    290
+		    ZOrder		    328
 		    SrcBlock		    "increaseMinFootVerticalForce"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -440]
 		    DstBlock		    " SFunction "
 		    DstPort		    26
 		    }
 		    Line {
-		    ZOrder		    291
+		    ZOrder		    329
 		    SrcBlock		    "robotIsLanded"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -455]
 		    DstBlock		    " SFunction "
 		    DstPort		    27
 		    }
 		    Line {
-		    ZOrder		    292
+		    ZOrder		    330
 		    SrcBlock		    "contactForces_hat"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -470]
 		    DstBlock		    " SFunction "
 		    DstPort		    28
 		    }
 		    Line {
-		    ZOrder		    293
+		    ZOrder		    331
 		    SrcBlock		    "aerodynamic_force"
 		    SrcPort		    1
+		    Points		    [60, 0; 0, -485]
 		    DstBlock		    " SFunction "
 		    DstPort		    29
 		    }
 		    Line {
 		    Name		    "HessianMatrixQP"
-		    ZOrder		    294
+		    ZOrder		    332
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [5, 0; 0, -55]
 		    DstBlock		    "HessianMatrixQP"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "gVectorQP"
-		    ZOrder		    295
+		    ZOrder		    333
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [10, 0; 0, -95]
 		    DstBlock		    "gVectorQP"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "lowerBoundQP"
-		    ZOrder		    296
+		    ZOrder		    334
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
+		    Points		    [16, 0; 0, -135]
 		    DstBlock		    "lowerBoundQP"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "upperBoundQP"
-		    ZOrder		    297
+		    ZOrder		    335
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    5
+		    Points		    [21, 0; 0, -175]
 		    DstBlock		    "upperBoundQP"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "L_des"
-		    ZOrder		    298
+		    ZOrder		    336
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    6
+		    Points		    [26, 0; 0, -210]
 		    DstBlock		    "L_des"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "LDot_estimated"
-		    ZOrder		    299
+		    ZOrder		    337
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    7
+		    Points		    [119, 0; 0, -250]
 		    DstBlock		    "LDot_estimated"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "verifyAngMomAndInertia"
-		    ZOrder		    300
+		    ZOrder		    338
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    8
+		    Points		    [148, 0; 0, -290]
 		    DstBlock		    "verifyAngMomAndInertia"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    301
+		    ZOrder		    339
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    302
+		    ZOrder		    340
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [10, 0; 0, 320]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -8269,7 +8380,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "70"
+		    SIDHighWatermark	    "73"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -8289,20 +8400,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:300::69"
+		    SID			    "3537:300::72"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    60
+		    ZOrder		    63
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:300::68"
+		    SID			    "3537:300::71"
 		    Tag			    "Stateflow S-Function 31"
 		    Ports		    [2, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    59
+		    ZOrder		    62
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[2 2]"
 		    SFunctionDeploymentMode off
@@ -8316,9 +8427,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:300::70"
+		    SID			    "3537:300::73"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    61
+		    ZOrder		    64
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -8329,15 +8440,15 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    21
+		    ZOrder		    26
 		    SrcBlock		    "feetContactIsActive"
 		    SrcPort		    1
-		    Points		    [120, 0]
+		    Points		    [91, 0; 0, 5]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    22
+		    ZOrder		    27
 		    SrcBlock		    "contactForces"
 		    SrcPort		    1
 		    DstBlock		    " SFunction "
@@ -8345,24 +8456,26 @@ Model {
 		    }
 		    Line {
 		    Name		    "contactForces_0"
-		    ZOrder		    23
+		    ZOrder		    28
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [108, 0; 0, -35]
 		    DstBlock		    "contactForces_0"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    24
+		    ZOrder		    29
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    25
+		    ZOrder		    30
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -8445,7 +8558,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "70"
+		    SIDHighWatermark	    "73"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -8465,20 +8578,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:304::69"
+		    SID			    "3537:304::72"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    60
+		    ZOrder		    63
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:304::68"
+		    SID			    "3537:304::71"
 		    Tag			    "Stateflow S-Function 21"
 		    Ports		    [2, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    59
+		    ZOrder		    62
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[2 2]"
 		    SFunctionDeploymentMode off
@@ -8492,9 +8605,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:304::70"
+		    SID			    "3537:304::73"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    61
+		    ZOrder		    64
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -8505,15 +8618,15 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    21
+		    ZOrder		    26
 		    SrcBlock		    "u"
 		    SrcPort		    1
-		    Points		    [120, 0]
+		    Points		    [80, 0; 0, 5]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    22
+		    ZOrder		    27
 		    SrcBlock		    "thr"
 		    SrcPort		    1
 		    DstBlock		    " SFunction "
@@ -8521,24 +8634,26 @@ Model {
 		    }
 		    Line {
 		    Name		    "y"
-		    ZOrder		    23
+		    ZOrder		    28
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [121, 0; 0, -35]
 		    DstBlock		    "y"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    24
+		    ZOrder		    29
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    25
+		    ZOrder		    30
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -8762,7 +8877,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "70"
+		    SIDHighWatermark	    "73"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -8798,20 +8913,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3537:483::69"
+		    SID			    "3537:483::72"
 		    Ports		    [1, 1]
 		    Position		    [270, 425, 320, 465]
-		    ZOrder		    60
+		    ZOrder		    63
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3537:483::68"
+		    SID			    "3537:483::71"
 		    Tag			    "Stateflow S-Function 24"
 		    Ports		    [4, 9]
 		    Position		    [180, 100, 230, 300]
-		    ZOrder		    59
+		    ZOrder		    62
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[4 9]"
 		    SFunctionDeploymentMode off
@@ -8853,9 +8968,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3537:483::70"
+		    SID			    "3537:483::73"
 		    Position		    [460, 436, 480, 454]
-		    ZOrder		    61
+		    ZOrder		    64
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -8921,54 +9036,60 @@ Model {
 		    Port		    "8"
 		    }
 		    Line {
-		    ZOrder		    57
+		    ZOrder		    71
 		    SrcBlock		    "HessianMatrixQP"
 		    SrcPort		    1
+		    Points		    [79, 0; 0, 15]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    58
+		    ZOrder		    72
 		    SrcBlock		    "gVectorQP"
 		    SrcPort		    1
+		    Points		    [72, 0; 0, 30]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    59
+		    ZOrder		    73
 		    SrcBlock		    "lowerBoundQP"
 		    SrcPort		    1
+		    Points		    [45, 0; 0, 45]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    60
+		    ZOrder		    74
 		    SrcBlock		    "upperBoundQP"
 		    SrcPort		    1
+		    Points		    [32, 0; 0, 60]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
 		    Name		    "H_balancing"
-		    ZOrder		    61
+		    ZOrder		    75
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [92, 0; 0, -30]
 		    DstBlock		    "H_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "g_balancing"
-		    ZOrder		    62
+		    ZOrder		    76
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [111, 0; 0, -15]
 		    DstBlock		    "g_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ub_balancing"
-		    ZOrder		    63
+		    ZOrder		    77
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
@@ -8977,61 +9098,66 @@ Model {
 		    }
 		    Line {
 		    Name		    "lb_balancing"
-		    ZOrder		    64
+		    ZOrder		    78
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    5
+		    Points		    [149, 0; 0, 15]
 		    DstBlock		    "lb_balancing"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "H_flight"
-		    ZOrder		    65
+		    ZOrder		    79
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    6
+		    Points		    [125, 0; 0, 35]
 		    DstBlock		    "H_flight"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "g_flight"
-		    ZOrder		    66
+		    ZOrder		    80
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    7
+		    Points		    [101, 0; 0, 50]
 		    DstBlock		    "g_flight"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "ub_flight"
-		    ZOrder		    67
+		    ZOrder		    81
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    8
+		    Points		    [77, 0; 0, 65]
 		    DstBlock		    "ub_flight"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "lb_flight"
-		    ZOrder		    68
+		    ZOrder		    82
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    9
+		    Points		    [53, 0; 0, 80]
 		    DstBlock		    "lb_flight"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    69
+		    ZOrder		    83
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    70
+		    ZOrder		    84
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
-		    Points		    [20, 0]
+		    Points		    [16, 0; 0, 325]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -9117,7 +9243,7 @@ Model {
 		    ZOrder		    757
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
 		    SourceType		    "MatchSignalSizes"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -9135,11 +9261,11 @@ Model {
 		    Ports		    [4, 2]
 		    Position		    [1560, 1016, 1665, 1134]
 		    ZOrder		    762
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/QP"
 		    SourceType		    "QP"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    lbA			    off
 		    ubA			    off
 		    lb			    on
@@ -9304,7 +9430,7 @@ Model {
 		    ZOrder		    757
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
 		    SourceType		    "MatchSignalSizes"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -9322,11 +9448,11 @@ Model {
 		    Ports		    [4, 2]
 		    Position		    [1560, 1016, 1665, 1134]
 		    ZOrder		    763
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/QP"
 		    SourceType		    "QP"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    lbA			    off
 		    ubA			    off
 		    lb			    on
@@ -10776,7 +10902,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "33"
+		    SIDHighWatermark	    "36"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -10796,20 +10922,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:920::32"
+		    SID			    "3519:920::35"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    23
+		    ZOrder		    26
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:920::31"
+		    SID			    "3519:920::34"
 		    Tag			    "Stateflow S-Function 26"
 		    Ports		    [2, 3]
 		    Position		    [180, 100, 230, 180]
-		    ZOrder		    22
+		    ZOrder		    25
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[2 3]"
@@ -10828,9 +10954,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:920::33"
+		    SID			    "3519:920::36"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    24
+		    ZOrder		    27
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -10848,49 +10974,53 @@ Model {
 		    Port		    "2"
 		    }
 		    Line {
-		    ZOrder		    45
+		    ZOrder		    51
 		    SrcBlock		    "posCoM"
 		    SrcPort		    1
-		    Points		    [120, 0]
+		    Points		    [86, 0; 0, 10]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    46
+		    ZOrder		    52
 		    SrcBlock		    "posCoM_des"
 		    SrcPort		    1
+		    Points		    [52, 0; 0, 15]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
 		    Name		    "KP_momentum_vector"
-		    ZOrder		    47
+		    ZOrder		    53
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [60, 0; 0, -30]
 		    DstBlock		    "KP_momentum_vector"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "KD_momentum_vector"
-		    ZOrder		    48
+		    ZOrder		    54
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [120, 0; 0, -20]
 		    DstBlock		    "KD_momentum_vector"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    49
+		    ZOrder		    55
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    50
+		    ZOrder		    56
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -10958,7 +11088,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "69"
+		    SIDHighWatermark	    "72"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -10970,20 +11100,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:335::68"
+		    SID			    "3519:335::71"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    59
+		    ZOrder		    62
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:335::67"
+		    SID			    "3519:335::70"
 		    Tag			    "Stateflow S-Function 2"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    58
+		    ZOrder		    61
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
@@ -10997,9 +11127,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:335::69"
+		    SID			    "3519:335::72"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    60
+		    ZOrder		    63
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11010,32 +11140,35 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    17
+		    ZOrder		    21
 		    SrcBlock		    "k"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 20]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "K"
-		    ZOrder		    18
+		    ZOrder		    22
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [121, 0; 0, -35]
 		    DstBlock		    "K"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    19
+		    ZOrder		    23
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    20
+		    ZOrder		    24
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -11073,7 +11206,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "69"
+		    SIDHighWatermark	    "72"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -11085,20 +11218,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:336::68"
+		    SID			    "3519:336::71"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    59
+		    ZOrder		    62
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:336::67"
+		    SID			    "3519:336::70"
 		    Tag			    "Stateflow S-Function 5"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    58
+		    ZOrder		    61
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
@@ -11112,9 +11245,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:336::69"
+		    SID			    "3519:336::72"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    60
+		    ZOrder		    63
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11125,32 +11258,35 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    17
+		    ZOrder		    21
 		    SrcBlock		    "k"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 20]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "K"
-		    ZOrder		    18
+		    ZOrder		    22
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [121, 0; 0, -35]
 		    DstBlock		    "K"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    19
+		    ZOrder		    23
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    20
+		    ZOrder		    24
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -11188,7 +11324,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "69"
+		    SIDHighWatermark	    "72"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -11200,20 +11336,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:337::68"
+		    SID			    "3519:337::71"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    59
+		    ZOrder		    62
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:337::67"
+		    SID			    "3519:337::70"
 		    Tag			    "Stateflow S-Function 8"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    58
+		    ZOrder		    61
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
@@ -11227,9 +11363,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:337::69"
+		    SID			    "3519:337::72"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    60
+		    ZOrder		    63
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11240,32 +11376,35 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    17
+		    ZOrder		    21
 		    SrcBlock		    "k"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 20]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "K"
-		    ZOrder		    18
+		    ZOrder		    22
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [121, 0; 0, -35]
 		    DstBlock		    "K"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    19
+		    ZOrder		    23
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    20
+		    ZOrder		    24
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -11303,7 +11442,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "69"
+		    SIDHighWatermark	    "72"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -11315,20 +11454,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:338::68"
+		    SID			    "3519:338::71"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    59
+		    ZOrder		    62
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:338::67"
+		    SID			    "3519:338::70"
 		    Tag			    "Stateflow S-Function 11"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    58
+		    ZOrder		    61
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
@@ -11342,9 +11481,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:338::69"
+		    SID			    "3519:338::72"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    60
+		    ZOrder		    63
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11355,32 +11494,35 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    17
+		    ZOrder		    21
 		    SrcBlock		    "k"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 20]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "K"
-		    ZOrder		    18
+		    ZOrder		    22
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [121, 0; 0, -35]
 		    DstBlock		    "K"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    19
+		    ZOrder		    23
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    20
+		    ZOrder		    24
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -11418,7 +11560,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "69"
+		    SIDHighWatermark	    "72"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -11430,20 +11572,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:339::68"
+		    SID			    "3519:339::71"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    59
+		    ZOrder		    62
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:339::67"
+		    SID			    "3519:339::70"
 		    Tag			    "Stateflow S-Function 12"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    58
+		    ZOrder		    61
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
@@ -11457,9 +11599,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:339::69"
+		    SID			    "3519:339::72"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    60
+		    ZOrder		    63
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11470,32 +11612,35 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    17
+		    ZOrder		    21
 		    SrcBlock		    "k"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 20]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "K"
-		    ZOrder		    18
+		    ZOrder		    22
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [121, 0; 0, -35]
 		    DstBlock		    "K"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    19
+		    ZOrder		    23
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    20
+		    ZOrder		    24
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -11586,7 +11731,7 @@ Model {
 		    ZOrder		    1229
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
 		    SourceType		    "MatchSignalSizes"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -11606,7 +11751,7 @@ Model {
 		    ZOrder		    1230
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MatchSignalSizes"
 		    SourceType		    "MatchSignalSizes"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -11624,11 +11769,11 @@ Model {
 		    Ports		    [1, 1]
 		    Position		    [-240, -107, -135, -83]
 		    ZOrder		    1227
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
 		    SourceType		    "MinimumJerkTrajectoryGenerator"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    externalSettlingTime    off
 		    settlingTime	    "Config.settlingTime_gainScheduling"
 		    sampleTime		    "Config.tStep"
@@ -11644,11 +11789,11 @@ Model {
 		    Ports		    [1, 1]
 		    Position		    [-240, -42, -135, -18]
 		    ZOrder		    1228
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
 		    SourceType		    "MinimumJerkTrajectoryGenerator"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    externalSettlingTime    off
 		    settlingTime	    "Config.settlingTime_gainScheduling"
 		    sampleTime		    "Config.tStep"
@@ -12034,7 +12179,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "38"
+		    SIDHighWatermark	    "41"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -12054,20 +12199,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:859::37"
+		    SID			    "3519:859::40"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    26
+		    ZOrder		    29
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:859::36"
+		    SID			    "3519:859::39"
 		    Tag			    "Stateflow S-Function 23"
 		    Ports		    [2, 3]
 		    Position		    [180, 100, 230, 180]
-		    ZOrder		    25
+		    ZOrder		    28
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[2 3]"
@@ -12086,9 +12231,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:859::38"
+		    SID			    "3519:859::41"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    27
+		    ZOrder		    30
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -12106,49 +12251,53 @@ Model {
 		    Port		    "2"
 		    }
 		    Line {
-		    ZOrder		    48
+		    ZOrder		    54
 		    SrcBlock		    "t"
 		    SrcPort		    1
-		    Points		    [120, 0]
+		    Points		    [86, 0; 0, 10]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    49
+		    ZOrder		    55
 		    SrcBlock		    "posCoM_init"
 		    SrcPort		    1
+		    Points		    [52, 0; 0, 15]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
 		    Name		    "pos_vel_acc_jerk_CoM_des"
-		    ZOrder		    50
+		    ZOrder		    56
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [56, 0; 0, -30]
 		    DstBlock		    "pos_vel_acc_jerk_CoM_des"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "turbo_mode_hs"
-		    ZOrder		    51
+		    ZOrder		    57
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [112, 0; 0, -20]
 		    DstBlock		    "turbo_mode_hs"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    52
+		    ZOrder		    58
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    53
+		    ZOrder		    59
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -12447,11 +12596,11 @@ Model {
 		    Position		    [1035, 222, 1165, 258]
 		    ZOrder		    738
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
 		    SourceType		    "MinimumJerkTrajectoryGenerator"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    externalSettlingTime    off
 		    settlingTime	    "Config.references.com.tSmoothingCoMAcc"
 		    sampleTime		    "Config.tStep"
@@ -12481,11 +12630,11 @@ Model {
 		    Position		    [730, 124, 920, 236]
 		    ZOrder		    706
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
 		    SourceType		    "MinimumJerkTrajectoryGenerator"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    externalSettlingTime    on
 		    settlingTime	    "3"
 		    sampleTime		    "Config.tStep"
@@ -12651,11 +12800,11 @@ Model {
 		    Position		    [895, 830, 1055, 900]
 		    ZOrder		    799
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/MinimumJerkTrajectoryGenerator"
 		    SourceType		    "MinimumJerkTrajectoryGenerator"
 		    SourceProductName	    "WholeBodyToolbox"
-		    MultiThreadCoSim	    "auto"
+		    MultithreadedSim	    "auto"
 		    externalSettlingTime    off
 		    settlingTime	    "Config.references.orientation.tSmoothingAngVel"
 		    sampleTime		    "Config.tStep"
@@ -12738,7 +12887,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "147"
+		    SIDHighWatermark	    "150"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -12766,20 +12915,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:379::146"
+		    SID			    "3519:379::149"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    134
+		    ZOrder		    137
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:379::145"
+		    SID			    "3519:379::148"
 		    Tag			    "Stateflow S-Function 43"
 		    Ports		    [3, 3]
 		    Position		    [180, 100, 230, 180]
-		    ZOrder		    133
+		    ZOrder		    136
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[3 3]"
 		    SFunctionDeploymentMode off
@@ -12797,9 +12946,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:379::147"
+		    SID			    "3519:379::150"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    135
+		    ZOrder		    138
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -12819,55 +12968,61 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    29
+		    ZOrder		    36
 		    SrcBlock		    "gainSmoothingBaseRot"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 5]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    30
+		    ZOrder		    37
 		    SrcBlock		    "w_R_b_des"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, -5]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    31
+		    ZOrder		    38
 		    SrcBlock		    "w_R_b"
 		    SrcPort		    1
+		    Points		    [73, 0; 0, -15]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
 		    Name		    "b_omega_b"
-		    ZOrder		    32
+		    ZOrder		    39
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [68, 0; 0, -30]
 		    DstBlock		    "b_omega_b"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "RDot"
-		    ZOrder		    33
+		    ZOrder		    40
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [137, 0; 0, -20]
 		    DstBlock		    "RDot"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    34
+		    ZOrder		    41
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    35
+		    ZOrder		    42
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -12899,7 +13054,7 @@ Model {
 		    BackgroundColor	    "[0.537255, 0.721569, 1.000000]"
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/holder\n"
 		    SourceType		    "Holder"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -13367,7 +13522,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "88"
+		    SIDHighWatermark	    "91"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -13475,20 +13630,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:398::87"
+		    SID			    "3519:398::90"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    76
+		    ZOrder		    79
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:398::86"
+		    SID			    "3519:398::89"
 		    Tag			    "Stateflow S-Function 13"
 		    Ports		    [13, 3]
 		    Position		    [180, 90, 230, 370]
-		    ZOrder		    75
+		    ZOrder		    78
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[13 3]"
@@ -13507,9 +13662,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:398::88"
+		    SID			    "3519:398::91"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    77
+		    ZOrder		    80
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -13529,125 +13684,140 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    69
+		    ZOrder		    86
 		    SrcBlock		    "posCoM_init"
 		    SrcPort		    1
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    70
+		    ZOrder		    87
 		    SrcBlock		    "w_R_b_init"
 		    SrcPort		    1
+		    Points		    [74, 0; 0, -15]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    71
+		    ZOrder		    88
 		    SrcBlock		    "moveFront"
 		    SrcPort		    1
+		    Points		    [72, 0; 0, -30]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
-		    ZOrder		    72
+		    ZOrder		    89
 		    SrcBlock		    "moveLateral"
 		    SrcPort		    1
+		    Points		    [104, 0; 0, -45]
 		    DstBlock		    " SFunction "
 		    DstPort		    4
 		    }
 		    Line {
-		    ZOrder		    73
+		    ZOrder		    90
 		    SrcBlock		    "moveUpDown"
 		    SrcPort		    1
+		    Points		    [59, 0; 0, -65]
 		    DstBlock		    " SFunction "
 		    DstPort		    5
 		    }
 		    Line {
-		    ZOrder		    74
+		    ZOrder		    91
 		    SrcBlock		    "rotateRoll"
 		    SrcPort		    1
+		    Points		    [120, 0]
 		    DstBlock		    " SFunction "
 		    DstPort		    6
 		    }
 		    Line {
-		    ZOrder		    75
+		    ZOrder		    92
 		    SrcBlock		    "rotatePitch"
 		    SrcPort		    1
+		    Points		    [38, 0; 0, -95]
 		    DstBlock		    " SFunction "
 		    DstPort		    7
 		    }
 		    Line {
-		    ZOrder		    76
+		    ZOrder		    93
 		    SrcBlock		    "rotateYaw"
 		    SrcPort		    1
+		    Points		    [90, 0; 0, -110]
 		    DstBlock		    " SFunction "
 		    DstPort		    8
 		    }
 		    Line {
-		    ZOrder		    77
+		    ZOrder		    94
 		    SrcBlock		    "turbo_mode"
 		    SrcPort		    1
+		    Points		    [105, 0; 0, -125]
 		    DstBlock		    " SFunction "
 		    DstPort		    9
 		    }
 		    Line {
-		    ZOrder		    78
+		    ZOrder		    95
 		    SrcBlock		    "goLandingPos"
 		    SrcPort		    1
+		    Points		    [113, 0; 0, -145]
 		    DstBlock		    " SFunction "
 		    DstPort		    10
 		    }
 		    Line {
-		    ZOrder		    79
+		    ZOrder		    96
 		    SrcBlock		    "feetContactIsActive"
 		    SrcPort		    1
+		    Points		    [27, 0; 0, -160]
 		    DstBlock		    " SFunction "
 		    DstPort		    11
 		    }
 		    Line {
-		    ZOrder		    80
+		    ZOrder		    97
 		    SrcBlock		    "oneFootIsInContact"
 		    SrcPort		    1
+		    Points		    [59, 0; 0, -175]
 		    DstBlock		    " SFunction "
 		    DstPort		    12
 		    }
 		    Line {
-		    ZOrder		    81
+		    ZOrder		    98
 		    SrcBlock		    "t"
 		    SrcPort		    1
+		    Points		    [98, 0; 0, -190]
 		    DstBlock		    " SFunction "
 		    DstPort		    13
 		    }
 		    Line {
 		    Name		    "pos_vel_acc_jerk_CoM_des"
-		    ZOrder		    82
+		    ZOrder		    99
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [10, 0; 0, -120]
 		    DstBlock		    "pos_vel_acc_jerk_CoM_des"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "rot_vel_acc_jerk_base_des"
-		    ZOrder		    83
+		    ZOrder		    100
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [20, 0; 0, -180]
 		    DstBlock		    "rot_vel_acc_jerk_base_des"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    84
+		    ZOrder		    101
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    85
+		    ZOrder		    102
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [3, 0; 0, 115]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -13685,7 +13855,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "77"
+		    SIDHighWatermark	    "80"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -13705,20 +13875,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:399::76"
+		    SID			    "3519:399::79"
 		    Ports		    [1, 1]
 		    Position		    [270, 425, 320, 465]
-		    ZOrder		    67
+		    ZOrder		    70
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:399::75"
+		    SID			    "3519:399::78"
 		    Tag			    "Stateflow S-Function 17"
 		    Ports		    [2, 9]
 		    Position		    [180, 100, 230, 300]
-		    ZOrder		    66
+		    ZOrder		    69
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[2 9]"
 		    SFunctionDeploymentMode off
@@ -13760,9 +13930,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:399::77"
+		    SID			    "3519:399::80"
 		    Position		    [460, 436, 480, 454]
-		    ZOrder		    68
+		    ZOrder		    71
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -13836,41 +14006,44 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    49
+		    ZOrder		    61
 		    SrcBlock		    "joyAxes"
 		    SrcPort		    1
-		    Points		    [120, 0]
+		    Points		    [92, 0; 0, 40]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    50
+		    ZOrder		    62
 		    SrcBlock		    "joyButtons"
 		    SrcPort		    1
+		    Points		    [52, 0; 0, 105]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
 		    Name		    "moveFront"
-		    ZOrder		    51
+		    ZOrder		    63
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [90, 0; 0, -30]
 		    DstBlock		    "moveFront"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "moveLateral"
-		    ZOrder		    52
+		    ZOrder		    64
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [110, 0; 0, -15]
 		    DstBlock		    "moveLateral"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "moveUpDown"
-		    ZOrder		    53
+		    ZOrder		    65
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
@@ -13879,61 +14052,66 @@ Model {
 		    }
 		    Line {
 		    Name		    "rotateRoll"
-		    ZOrder		    54
+		    ZOrder		    66
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    5
+		    Points		    [148, 0; 0, 15]
 		    DstBlock		    "rotateRoll"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "rotatePitch"
-		    ZOrder		    55
+		    ZOrder		    67
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    6
+		    Points		    [124, 0; 0, 35]
 		    DstBlock		    "rotatePitch"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "rotateYaw"
-		    ZOrder		    56
+		    ZOrder		    68
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    7
+		    Points		    [100, 0; 0, 50]
 		    DstBlock		    "rotateYaw"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "turbo_mode"
-		    ZOrder		    57
+		    ZOrder		    69
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    8
+		    Points		    [76, 0; 0, 65]
 		    DstBlock		    "turbo_mode"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "goLandingPos"
-		    ZOrder		    58
+		    ZOrder		    70
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    9
+		    Points		    [52, 0; 0, 80]
 		    DstBlock		    "goLandingPos"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    59
+		    ZOrder		    71
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    60
+		    ZOrder		    72
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
-		    Points		    [20, 0]
+		    Points		    [16, 0; 0, 325]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -13948,7 +14126,7 @@ Model {
 		    ZOrder		    1131
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Model/Kinematics/ForwardKinematics"
 		    SourceType		    "ForwardKinematics"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -14107,7 +14285,7 @@ Model {
 		    BackgroundColor	    "[0.537255, 0.721569, 1.000000]"
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/holder\n"
 		    SourceType		    "Holder"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -14128,7 +14306,7 @@ Model {
 		    BackgroundColor	    "[0.537255, 0.721569, 1.000000]"
 		    ShowName		    off
 		    HideAutomaticName	    off
-		    LibraryVersion	    "5.0"
+		    LibraryVersion	    "4.0"
 		    SourceBlock		    "WBToolboxLibrary/Utilities/holder\n"
 		    SourceType		    "Holder"
 		    SourceProductName	    "WholeBodyToolbox"
@@ -14382,7 +14560,7 @@ Model {
 		  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
 		  ShowName		  off
 		  HideAutomaticName	  off
-		  LibraryVersion	  "5.0"
+		  LibraryVersion	  "4.0"
 		  SourceBlock		  "WBToolboxLibrary/Utilities/holder\n"
 		  SourceType		  "Holder"
 		  SourceProductName	  "WholeBodyToolbox"
@@ -14781,7 +14959,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "76"
+		    SIDHighWatermark	    "79"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -14801,20 +14979,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:416::75"
+		    SID			    "3519:416::78"
 		    Ports		    [1, 1]
 		    Position		    [270, 245, 320, 285]
-		    ZOrder		    65
+		    ZOrder		    68
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:416::74"
+		    SID			    "3519:416::77"
 		    Tag			    "Stateflow S-Function 18"
 		    Ports		    [2, 4]
 		    Position		    [180, 102, 230, 203]
-		    ZOrder		    64
+		    ZOrder		    67
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "Config"
 		    PortCounts		    "[2 4]"
@@ -14837,9 +15015,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:416::76"
+		    SID			    "3519:416::79"
 		    Position		    [460, 256, 480, 274]
-		    ZOrder		    66
+		    ZOrder		    69
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -14868,58 +15046,63 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    29
+		    ZOrder		    36
 		    SrcBlock		    "wrench_l"
 		    SrcPort		    1
-		    Points		    [120, 0]
+		    Points		    [83, 0; 0, 20]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    30
+		    ZOrder		    37
 		    SrcBlock		    "wrench_r"
 		    SrcPort		    1
+		    Points		    [47, 0; 0, 35]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
 		    Name		    "feetContactIsActive"
-		    ZOrder		    31
+		    ZOrder		    38
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [47, 0; 0, -30]
 		    DstBlock		    "feetContactIsActive"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "robotIsLanded"
-		    ZOrder		    32
+		    ZOrder		    39
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [94, 0; 0, -20]
 		    DstBlock		    "robotIsLanded"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "oneFootIsInContact"
-		    ZOrder		    33
+		    ZOrder		    40
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
+		    Points		    [141, 0; 0, -10]
 		    DstBlock		    "oneFootIsInContact"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    34
+		    ZOrder		    41
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    35
+		    ZOrder		    42
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 150]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -14970,7 +15153,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "71"
+		    SIDHighWatermark	    "74"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -14982,20 +15165,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3519:417::70"
+		    SID			    "3519:417::73"
 		    Ports		    [1, 1]
 		    Position		    [270, 245, 320, 285]
-		    ZOrder		    61
+		    ZOrder		    64
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3519:417::69"
+		    SID			    "3519:417::72"
 		    Tag			    "Stateflow S-Function 20"
 		    Ports		    [1, 4]
 		    Position		    [180, 102, 230, 203]
-		    ZOrder		    60
+		    ZOrder		    63
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 4]"
 		    SFunctionDeploymentMode off
@@ -15017,9 +15200,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3519:417::71"
+		    SID			    "3519:417::74"
 		    Position		    [460, 256, 480, 274]
-		    ZOrder		    62
+		    ZOrder		    65
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -15048,50 +15231,55 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    25
+		    ZOrder		    31
 		    SrcBlock		    "joyButtons"
 		    SrcPort		    1
+		    Points		    [72, 0; 0, 45]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "decreaseMaxFootVerticalForce"
-		    ZOrder		    26
+		    ZOrder		    32
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [41, 0; 0, -30]
 		    DstBlock		    "decreaseMaxFootVerticalForce"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "increaseMinFootVerticalForce"
-		    ZOrder		    27
+		    ZOrder		    33
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [81, 0; 0, -20]
 		    DstBlock		    "increaseMinFootVerticalForce"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "activateEqConstrTorqueControl"
-		    ZOrder		    28
+		    ZOrder		    34
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    4
+		    Points		    [122, 0; 0, -10]
 		    DstBlock		    "activateEqConstrTorqueControl"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    29
+		    ZOrder		    35
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    30
+		    ZOrder		    36
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 150]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -15589,7 +15777,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "75"
+		    SIDHighWatermark	    "78"
 		    SimulinkSubDomain	    "Simulink"
 		    Block {
 		    BlockType		    Inport
@@ -15617,20 +15805,20 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3518:834::74"
+		    SID			    "3518:834::77"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    65
+		    ZOrder		    68
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3518:834::73"
+		    SID			    "3518:834::76"
 		    Tag			    "Stateflow S-Function 25"
 		    Ports		    [3, 3]
 		    Position		    [180, 100, 230, 180]
-		    ZOrder		    64
+		    ZOrder		    67
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[3 3]"
 		    SFunctionDeploymentMode off
@@ -15648,9 +15836,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3518:834::75"
+		    SID			    "3518:834::78"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    66
+		    ZOrder		    69
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -15670,55 +15858,61 @@ Model {
 		    VectorParamsAs1DForOutWhenUnconnected off
 		    }
 		    Line {
-		    ZOrder		    29
+		    ZOrder		    36
 		    SrcBlock		    "contactForces_WBD"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, 5]
 		    DstBlock		    " SFunction "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    30
+		    ZOrder		    37
 		    SrcBlock		    "w_R_l_sole"
 		    SrcPort		    1
+		    Points		    [65, 0; 0, -5]
 		    DstBlock		    " SFunction "
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    31
+		    ZOrder		    38
 		    SrcBlock		    "w_R_r_sole"
 		    SrcPort		    1
+		    Points		    [73, 0; 0, -15]
 		    DstBlock		    " SFunction "
 		    DstPort		    3
 		    }
 		    Line {
 		    Name		    "mixed_f_l_sole"
-		    ZOrder		    32
+		    ZOrder		    39
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    2
+		    Points		    [66, 0; 0, -30]
 		    DstBlock		    "mixed_f_l_sole"
 		    DstPort		    1
 		    }
 		    Line {
 		    Name		    "mixed_f_r_sole"
-		    ZOrder		    33
+		    ZOrder		    40
 		    Labels		    [0, 0]
 		    SrcBlock		    " SFunction "
 		    SrcPort		    3
+		    Points		    [132, 0; 0, -20]
 		    DstBlock		    "mixed_f_r_sole"
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    34
+		    ZOrder		    41
 		    SrcBlock		    " Demux "
 		    SrcPort		    1
 		    DstBlock		    " Terminator "
 		    DstPort		    1
 		    }
 		    Line {
-		    ZOrder		    35
+		    ZOrder		    42
 		    SrcBlock		    " SFunction "
 		    SrcPort		    1
+		    Points		    [16, 0; 0, 135]
 		    DstBlock		    " Demux "
 		    DstPort		    1
 		    }
@@ -15781,7 +15975,7 @@ Model {
 		  Ports			  [2, 1]
 		  Position		  [-55, -99, 140, -46]
 		  ZOrder		  999
-		  LibraryVersion	  "5.0"
+		  LibraryVersion	  "4.0"
 		  SourceBlock		  "WBToolboxLibrary/Model/Kinematics/ForwardKinematics"
 		  SourceType		  "ForwardKinematics"
 		  SourceProductName	  "WholeBodyToolbox"
@@ -15811,7 +16005,7 @@ Model {
 		  Ports			  [2, 1]
 		  Position		  [-55, -29, 140, 24]
 		  ZOrder		  997
-		  LibraryVersion	  "5.0"
+		  LibraryVersion	  "4.0"
 		  SourceBlock		  "WBToolboxLibrary/Model/Kinematics/ForwardKinematics"
 		  SourceType		  "ForwardKinematics"
 		  SourceProductName	  "WholeBodyToolbox"
@@ -16710,7 +16904,7 @@ Model {
 	  SourceBlock		  "iDynVisualizer/iDynTree Visualizer++"
 	  SourceType		  "iDynTree Visualizer ++"
 	  SourceProductName	  "iRonCub Library"
-	  MultiThreadCoSim	  "auto"
+	  MultithreadedSim	  "auto"
 	  configFile		  "'iRonCubVisualizer.ini'"
 	}
 	Line {
@@ -16837,7 +17031,7 @@ Model {
       }
       System {
 	Name			"Visualizer"
-	Location		[1992, 27, 4480, 1440]
+	Location		[1928, 35, 4504, 1451]
 	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			off
 	PortBlocksUseCompactNotation off
@@ -16853,7 +17047,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"121"
+	ZoomFactor		"122"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  SubSystem
@@ -18988,7 +19182,7 @@ Model {
 	      ZOrder		      810
 	      BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
 	      Commented		      "on"
-	      LibraryVersion	      "5.0"
+	      LibraryVersion	      "4.0"
 	      SourceBlock	      "WBToolboxLibrary/States/GetMeasurement"
 	      SourceType	      "GetMeasurement"
 	      SourceProductName	      "WholeBodyToolbox"
@@ -20055,7 +20249,7 @@ Model {
 	    Annotation {
 	      SID		      "2625"
 	      Name		      "TODO:Correct the GOTOs"
-	      Position		      [765, 616, 884, 630]
+	      Position		      [765, 616, 884, 631]
 	      InternalMargins	      [0, 0, 0, 0]
 	      ZOrder		      -1
 	    }
@@ -20071,7 +20265,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Momentum Task"
-	    Location		    [1992, 27, 4480, 1440]
+	    Location		    [2169, 94, 4035, 1153]
 	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
@@ -20242,7 +20436,7 @@ Model {
 	      "66666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588"
 	      "235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache'"
 	      ",[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Co"
-	      "nfiguration('Tools','Measurements',true,'Version','2021a')),'Version','2021b','Position',[1993 -239 2488 1321])"
+	      "nfiguration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[1993 -239 2488 1321])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -20754,31 +20948,31 @@ Model {
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','linearMom_SCOPE','DataLogging',true,'DataLoggingSaveF"
 	      "ormat','StructureWithTime'),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('Min"
-	      "YLimReal','-47.00139','MaxYLimReal','10.71372','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','47.00139','"
-	      "LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68"
-	      "6274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.62"
-	      "3529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.7"
-	      "17647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Si"
-	      "gnalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_x'}},'Show"
-	      "Content',true,'Placement',1),struct('MinYLimReal','-2.91106','MaxYLimReal','3.28585','YLabelReal','','MinYLimMa"
-	      "g','0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axe"
-	      "sColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066"
-	      "6666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8"
-	      "31372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803921"
-	      "5686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'Num"
-	      "Lines',1,'LineNames',{{'hl_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-3.59159','MaxYLimReal'"
-	      ",'12.47862','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',tru"
-	      "e,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.6862745098039"
-	      "22],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160784313"
-	      "72549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294"
-	      "117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDef"
-	      "inedChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_z'}},'ShowContent',true,'Placement',3)},'DisplayPropertyD"
-	      "efaults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.6862"
-	      "74509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.06"
-	      "66666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0"
-	      "588235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCac"
-	      "he',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr"
-	      ".Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2021b','Position',[770 147 751 418])"
+	      "YLimReal','-57.69101','MaxYLimReal','483.36385','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','483.36385'"
+	      ",'LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0."
+	      "686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0."
+	      "623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0"
+	      ".717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<"
+	      "SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_x'}},'Sh"
+	      "owContent',true,'Placement',1),struct('MinYLimReal','-1.56945','MaxYLimReal','2.55671','YLabelReal','','MinYLim"
+	      "Mag','0.00000','MaxYLimMag','0.92459','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'A"
+	      "xesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0"
+	      "666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0"
+	      ".831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039"
+	      "215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'N"
+	      "umLines',1,'LineNames',{{'hl_y'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-8.6376','MaxYLimReal"
+	      "','48.93524','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibility','On','XGrid',true,'YGrid',tr"
+	      "ue,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803"
+	      "922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431"
+	      "372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.058823529"
+	      "4117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDe"
+	      "finedChannelNames',{{}},'NumLines',1,'LineNames',{{'hl_z'}},'ShowContent',true,'Placement',3)},'DisplayProperty"
+	      "Defaults',struct('YLabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686"
+	      "274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0"
+	      "666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0."
+	      "0588235294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCa"
+	      "che',[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmg"
+	      "r.Configuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[770 147 751 418])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -20856,7 +21050,7 @@ Model {
 	      "6666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.05882"
 	      "35294117647 1 1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 1],'DisplayContentCache',"
 	      "[]),extmgr.Configuration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Con"
-	      "figuration('Tools','Measurements',true,'Version','2021a')),'Version','2021b','Position',[1993 -239 2488 1321])"
+	      "figuration('Tools','Measurements',true,'Version','2021a')),'Version','2021a','Position',[1993 -239 2488 1321])"
 	      NumInputPorts	      "3"
 	      Floating		      off
 	    }
@@ -22399,7 +22593,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"48"
+		SIDHighWatermark	"51"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -22411,20 +22605,20 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "816::47"
+		  SID			  "816::50"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  38
+		  ZOrder		  41
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "816::46"
+		  SID			  "816::49"
 		  Tag			  "Stateflow S-Function 7"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  37
+		  ZOrder		  40
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
@@ -22438,9 +22632,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "816::48"
+		  SID			  "816::51"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  39
+		  ZOrder		  42
 		}
 		Block {
 		  BlockType		  Outport
@@ -22451,32 +22645,35 @@ Model {
 		  VectorParamsAs1DForOutWhenUnconnected	off
 		}
 		Line {
-		  ZOrder		  25
+		  ZOrder		  29
 		  SrcBlock		  "rot_err"
 		  SrcPort		  1
+		  Points		  [67, 0; 0, 20]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "rotErr_norm"
-		  ZOrder		  26
+		  ZOrder		  30
 		  Labels		  [0, 0]
 		  SrcBlock		  " SFunction "
 		  SrcPort		  2
+		  Points		  [113, 0; 0, -35]
 		  DstBlock		  "rotErr_norm"
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  27
+		  ZOrder		  31
 		  SrcBlock		  " Demux "
 		  SrcPort		  1
 		  DstBlock		  " Terminator "
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  28
+		  ZOrder		  32
 		  SrcBlock		  " SFunction "
 		  SrcPort		  1
+		  Points		  [16, 0; 0, 135]
 		  DstBlock		  " Demux "
 		  DstPort		  1
 		}
@@ -22513,7 +22710,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"48"
+		SIDHighWatermark	"51"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -22525,20 +22722,20 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "800::47"
+		  SID			  "800::50"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  38
+		  ZOrder		  41
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "800::46"
+		  SID			  "800::49"
 		  Tag			  "Stateflow S-Function 6"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  37
+		  ZOrder		  40
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
@@ -22552,9 +22749,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "800::48"
+		  SID			  "800::51"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  39
+		  ZOrder		  42
 		}
 		Block {
 		  BlockType		  Outport
@@ -22565,32 +22762,35 @@ Model {
 		  VectorParamsAs1DForOutWhenUnconnected	off
 		}
 		Line {
-		  ZOrder		  25
+		  ZOrder		  29
 		  SrcBlock		  "w_R_b"
 		  SrcPort		  1
+		  Points		  [68, 0; 0, 20]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "rollPitchYaw"
-		  ZOrder		  26
+		  ZOrder		  30
 		  Labels		  [0, 0]
 		  SrcBlock		  " SFunction "
 		  SrcPort		  2
+		  Points		  [113, 0; 0, -35]
 		  DstBlock		  "rollPitchYaw"
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  27
+		  ZOrder		  31
 		  SrcBlock		  " Demux "
 		  SrcPort		  1
 		  DstBlock		  " Terminator "
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  28
+		  ZOrder		  32
 		  SrcBlock		  " SFunction "
 		  SrcPort		  1
+		  Points		  [16, 0; 0, 135]
 		  DstBlock		  " Demux "
 		  DstPort		  1
 		}
@@ -22627,7 +22827,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"48"
+		SIDHighWatermark	"51"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -22639,20 +22839,20 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "529::47"
+		  SID			  "529::50"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  38
+		  ZOrder		  41
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "529::46"
+		  SID			  "529::49"
 		  Tag			  "Stateflow S-Function 4"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  37
+		  ZOrder		  40
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
@@ -22666,9 +22866,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "529::48"
+		  SID			  "529::51"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  39
+		  ZOrder		  42
 		}
 		Block {
 		  BlockType		  Outport
@@ -22679,32 +22879,35 @@ Model {
 		  VectorParamsAs1DForOutWhenUnconnected	off
 		}
 		Line {
-		  ZOrder		  25
+		  ZOrder		  29
 		  SrcBlock		  "w_R_b"
 		  SrcPort		  1
+		  Points		  [68, 0; 0, 20]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "rollPitchYaw"
-		  ZOrder		  26
+		  ZOrder		  30
 		  Labels		  [0, 0]
 		  SrcBlock		  " SFunction "
 		  SrcPort		  2
+		  Points		  [113, 0; 0, -35]
 		  DstBlock		  "rollPitchYaw"
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  27
+		  ZOrder		  31
 		  SrcBlock		  " Demux "
 		  SrcPort		  1
 		  DstBlock		  " Terminator "
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  28
+		  ZOrder		  32
 		  SrcBlock		  " SFunction "
 		  SrcPort		  1
+		  Points		  [16, 0; 0, 135]
 		  DstBlock		  " Demux "
 		  DstPort		  1
 		}
@@ -22743,7 +22946,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"50"
+		SIDHighWatermark	"53"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -22755,20 +22958,20 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "912::49"
+		  SID			  "912::52"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  40
+		  ZOrder		  43
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "912::48"
+		  SID			  "912::51"
 		  Tag			  "Stateflow S-Function 1"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  39
+		  ZOrder		  42
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
@@ -22782,9 +22985,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "912::50"
+		  SID			  "912::53"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  41
+		  ZOrder		  44
 		}
 		Block {
 		  BlockType		  Outport
@@ -22795,32 +22998,35 @@ Model {
 		  VectorParamsAs1DForOutWhenUnconnected	off
 		}
 		Line {
-		  ZOrder		  25
+		  ZOrder		  29
 		  SrcBlock		  "rollPitchYaw"
 		  SrcPort		  1
+		  Points		  [73, 0; 0, 20]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "RPY_Corr"
-		  ZOrder		  26
+		  ZOrder		  30
 		  Labels		  [0, 0]
 		  SrcBlock		  " SFunction "
 		  SrcPort		  2
+		  Points		  [114, 0; 0, -35]
 		  DstBlock		  "RPY_Corr"
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  27
+		  ZOrder		  31
 		  SrcBlock		  " Demux "
 		  SrcPort		  1
 		  DstBlock		  " Terminator "
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  28
+		  ZOrder		  32
 		  SrcBlock		  " SFunction "
 		  SrcPort		  1
+		  Points		  [16, 0; 0, 135]
 		  DstBlock		  " Demux "
 		  DstPort		  1
 		}
@@ -22859,7 +23065,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"50"
+		SIDHighWatermark	"53"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -22871,20 +23077,20 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "820::49"
+		  SID			  "820::52"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  40
+		  ZOrder		  43
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "820::48"
+		  SID			  "820::51"
 		  Tag			  "Stateflow S-Function 10"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  39
+		  ZOrder		  42
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
@@ -22898,9 +23104,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "820::50"
+		  SID			  "820::53"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  41
+		  ZOrder		  44
 		}
 		Block {
 		  BlockType		  Outport
@@ -22911,32 +23117,35 @@ Model {
 		  VectorParamsAs1DForOutWhenUnconnected	off
 		}
 		Line {
-		  ZOrder		  25
+		  ZOrder		  29
 		  SrcBlock		  "rollPitchYaw"
 		  SrcPort		  1
+		  Points		  [73, 0; 0, 20]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "RPY_Corr"
-		  ZOrder		  26
+		  ZOrder		  30
 		  Labels		  [0, 0]
 		  SrcBlock		  " SFunction "
 		  SrcPort		  2
+		  Points		  [114, 0; 0, -35]
 		  DstBlock		  "RPY_Corr"
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  27
+		  ZOrder		  31
 		  SrcBlock		  " Demux "
 		  SrcPort		  1
 		  DstBlock		  " Terminator "
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  28
+		  ZOrder		  32
 		  SrcBlock		  " SFunction "
 		  SrcPort		  1
+		  Points		  [16, 0; 0, 135]
 		  DstBlock		  " Demux "
 		  DstPort		  1
 		}
@@ -22975,7 +23184,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"50"
+		SIDHighWatermark	"53"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -22987,20 +23196,20 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "913::49"
+		  SID			  "913::52"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  40
+		  ZOrder		  43
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "913::48"
+		  SID			  "913::51"
 		  Tag			  "Stateflow S-Function 3"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  39
+		  ZOrder		  42
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
@@ -23014,9 +23223,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "913::50"
+		  SID			  "913::53"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  41
+		  ZOrder		  44
 		}
 		Block {
 		  BlockType		  Outport
@@ -23027,32 +23236,35 @@ Model {
 		  VectorParamsAs1DForOutWhenUnconnected	off
 		}
 		Line {
-		  ZOrder		  25
+		  ZOrder		  29
 		  SrcBlock		  "rollPitchYaw"
 		  SrcPort		  1
+		  Points		  [73, 0; 0, 20]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
 		Line {
 		  Name			  "RPY_Corr"
-		  ZOrder		  26
+		  ZOrder		  30
 		  Labels		  [0, 0]
 		  SrcBlock		  " SFunction "
 		  SrcPort		  2
+		  Points		  [114, 0; 0, -35]
 		  DstBlock		  "RPY_Corr"
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  27
+		  ZOrder		  31
 		  SrcBlock		  " Demux "
 		  SrcPort		  1
 		  DstBlock		  " Terminator "
 		  DstPort		  1
 		}
 		Line {
-		  ZOrder		  28
+		  ZOrder		  32
 		  SrcBlock		  " SFunction "
 		  SrcPort		  1
+		  Points		  [16, 0; 0, 135]
 		  DstBlock		  " Demux "
 		  DstPort		  1
 		}
@@ -24483,7 +24695,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "34"
+	    SIDHighWatermark	    "37"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -24495,20 +24707,20 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "3191::33"
+	      SID		      "3191::36"
 	      Ports		      [1, 1]
 	      Position		      [270, 230, 320, 270]
-	      ZOrder		      23
+	      ZOrder		      26
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "3191::32"
+	      SID		      "3191::35"
 	      Tag		      "Stateflow S-Function 22"
 	      Ports		      [1, 2]
 	      Position		      [180, 100, 230, 160]
-	      ZOrder		      22
+	      ZOrder		      25
 	      FunctionName	      "sf_sfun"
 	      Parameters	      "Config"
 	      PortCounts	      "[1 2]"
@@ -24523,9 +24735,9 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "3191::34"
+	      SID		      "3191::37"
 	      Position		      [460, 241, 480, 259]
-	      ZOrder		      24
+	      ZOrder		      27
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -24535,32 +24747,35 @@ Model {
 	      ZOrder		      -5
 	    }
 	    Line {
-	      ZOrder		      30
+	      ZOrder		      34
 	      SrcBlock		      "t"
 	      SrcPort		      1
+	      Points		      [65, 0; 0, 20]
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
 	      Name		      "v_wind"
-	      ZOrder		      31
+	      ZOrder		      35
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
+	      Points		      [118, 0; 0, -35]
 	      DstBlock		      "v_wind"
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      32
+	      ZOrder		      36
 	      SrcBlock		      " Demux "
 	      SrcPort		      1
 	      DstBlock		      " Terminator "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      33
+	      ZOrder		      37
 	      SrcBlock		      " SFunction "
 	      SrcPort		      1
+	      Points		      [16, 0; 0, 135]
 	      DstBlock		      " Demux "
 	      DstPort		      1
 	    }
@@ -25598,14 +25813,14 @@ Model {
 }
 #Finite State Machines
 #
-#   Stateflow 80000046
+#   Stateflow 80000041
 #
 #
 Stateflow {
   machine {
     id			    1
     name		    "momentumBasedFlight"
-    sfVersion		    80000036
+    sfVersion		    80000041
     firstTarget		    338
   }
   chart {
