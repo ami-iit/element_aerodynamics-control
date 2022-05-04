@@ -84,10 +84,7 @@ Config.SCOPE_GAINS_AND_STATE_MACHINE    = true;
 % Save data on the workspace after the simulation
 Config.SAVE_WORKSPACE                   = false;
 
-
-component_path = [getenv('COMPONENT_IRONCUB_PREFIX') '/component_ironcub'];
-
-
+component_path = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
 
 Config.fileName = 'model_stl.urdf';
 
