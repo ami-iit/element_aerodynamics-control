@@ -13,16 +13,7 @@
 
     \item ${}^{\mathcal{I}}\boldsymbol{v}_a \in \mathbb{R}^3$ indicates the relative velocity between the wind and the robot CoM expressed in the inertial frame, i.e. ${}^{\mathcal{I}}\boldsymbol{v}_a={}^{\mathcal{I}}\boldsymbol{v}_{CoM}-{}^{\mathcal{I}}\boldsymbol{v}_w$, with ${}^{\mathcal{I}}\boldsymbol{v}_w \in \mathbb{R}^3$ the absolute wind velocity\footnote{In the remainder of the paper, we omit the superscript $\mathcal{I}$ unless it is necessary to explicitly write it for the sake of clarity, and we write ${}^{\mathcal{I}}\boldsymbol{v}_a=\boldsymbol{v}_a$.};
     
-    %\item $\mathcal{D}=\{{}^{\mathcal{I}}o_{\mathcal{G}};\boldsymbol{i},\boldsymbol{j},\boldsymbol{k}\}$ represents the \emph{body frame}.The $\boldsymbol{k}$ axis's direction lies along the line connecting the \emph{base frame} $\mathcal{B}$ origin and the origin of a frame attached to the robot head. The $\boldsymbol{j}$ axis's direction lies on the line that connects the origin of two frames attached to the right and left chest turbines. frame towards the origin of the left chest turbine frame on the plane that is perpendicular to the defined axis $\boldsymbol{k}$. The direction of $\boldsymbol{i}$ axis is defined by the right-hand rule;
-    
-    \item $\mathcal{D}=\{{}^{\mathcal{I}}o_{\mathcal{G}};\boldsymbol{i},\boldsymbol{j},\boldsymbol{k}\}$ represents the \emph{body frame}. The $\boldsymbol{k}$ axis direction is parallel to the chest cylinder principal axis, pointing towards the legs. The $\boldsymbol{i}$ axis is normal to the robot symmetry plane, pointing towards left arm. The $\boldsymbol{j}$ axis is defined by the right-hand rule. %\antonellosays{(corrected i and j definitions according to [14])};
-    
-%    \item $\mathcal{A}=\{{}^{\mathcal{I}}o_{\mathcal{G}};\boldsymbol{X}_a,\boldsymbol{Y}_a,\boldsymbol{Z}_a\}$ is the \emph{relative velocity} frame \antonellosays{defined in the CFD simulations (where it's always $|\boldsymbol{v}_a|\neq 0$)  to map the aerodynamic forces values as functions of $\alpha$ and $\beta$ angles. The axes are defined starting from $\mathcal{D}$, with a \textit{ZXZ} frame rotation of $\left\{\beta - \frac{\pi}{2};\ \alpha + \frac{\pi}{2};\ 0\right\}$ with $\alpha$ and $\beta$ defined as in \ref{sec:af}. The $\boldsymbol{Y}_a$ axis is therefore aligned to the opposite direction of ${}^{\mathcal{I}}\boldsymbol{v}_a$.}
-
-    %\item $\boldsymbol{I}_n \in \mathbb{R}^{n \times n}$ is the identity matrix of size $n$; $0_{m \times n} \in \mathbb{R}^{m \times n}$ is the zero matrix of size $m\times n$ and $0_n=0_{n \times 1}$; 
-    
-    %\item $S(x) \in \mathbb{R}^{3 \times 3}$ is the skew-symmetric matrix such that $S(x)y=x \times y$, with $\times$ the cross product operator in $\mathbb{R}^3$;
-    
+    \item $\mathcal{D}=\{{}^{\mathcal{I}}o_{\mathcal{G}};\boldsymbol{i},\boldsymbol{j},\boldsymbol{k}\}$ represents the \emph{body frame}. The $\boldsymbol{k}$ axis direction is parallel to the chest cylinder principal axis, pointing towards the legs. The $\boldsymbol{i}$ axis is normal to the robot symmetry plane, pointing towards left arm. The $\boldsymbol{j}$ axis is defined by the right-hand rule.    
 \end{itemize}
 
 \subsection{Robot Modeling}
@@ -73,10 +64,8 @@ The robot total momentum corresponds to the summation of all the links momenta $
 %\begin{equation}
 	${}^{\mathcal{G}[\mathcal{I}]}\boldsymbol{h} = \sum_i {}_{{}^{\mathcal{G}[\mathcal{I}]}} \boldsymbol{X}^B {}_B\boldsymbol{h}^i,$
 %\end{equation}
-with ${}_{{}^{\mathcal{G}[\mathcal{I}]}} \boldsymbol{X}^B \in \mathbb{R}^{6\times6}$ the \emph{adjoint matrix}  transforming a wrench expressed in $B$ into one expressed in ${\mathcal{G}[\mathcal{I}]}$. 
-%They are the dual of the adjoint matrices presented in Sec. \ref{sec:trivializatons}. In particular ${}_P\bm{X}^C := {}^C\bm{X}_P^\top$.
+with ${}_{{}^{\mathcal{G}[\mathcal{I}]}} \boldsymbol{X}^B \in \mathbb{R}^{6\times6}$ the \emph{adjoint matrix}  transforming a wrench expressed in $B$ into one expressed in ${\mathcal{G}[\mathcal{I}]}$.
 Then: 
-%We can expand all the momenta:
 \begin{equation}\label{eq:momentumExpanded}
 	{}^{\mathcal{G}[\mathcal{I}]} \boldsymbol{h} = {}_{{}^{\mathcal{G}[\mathcal{I}]}} \boldsymbol{X}^B \sum_i {}_{B}\boldsymbol{X}^i \boldsymbol{I}_i {}^i \boldsymbol{V}_{A,i},
 \end{equation}
@@ -96,52 +85,6 @@ The rate of change of the centroidal momentum balances the external wrenches app
 		\end{bmatrix} {}_k\textbf{f} + m \bar{\boldsymbol{g}}, 
 	\end{split}
 \end{equation}
-where ${}_{{}^{\mathcal{G}[\mathcal{I}]}}\boldsymbol{X}^k \in \mathbb{R}^{6 \times 6}$ is the adjoint matrix that transforms an external wrench from the application frame (located in ${}^{\mathcal{I}}o_k$ with orientation ${}^{\mathcal{I}}R_k$) to ${\mathcal{G}[\mathcal{I}]}$. Finally, $\bar{\boldsymbol{g}}$
-%= \left[\begin{smallmatrix} 0 & 0 & -g & 0 & 0 & 0\end{smallmatrix}\right]^\top$
-is the 6D gravity acceleration vector.
+where ${}_{{}^{\mathcal{G}[\mathcal{I}]}}\boldsymbol{X}^k \in \mathbb{R}^{6 \times 6}$ is the adjoint matrix that transforms an external wrench from the application frame (located in ${}^{\mathcal{I}}o_k$ with orientation ${}^{\mathcal{I}}R_k$) to ${\mathcal{G}[\mathcal{I}]}$. Finally, $\bar{\boldsymbol{g}}$ is the 6D gravity acceleration vector.
 
 In the sequel, we consider the \emph{overall} aerodynamic effects that can be described as an external force $\boldsymbol{F_a} \in \mathbb{R}^3$ applied at the robot center of mass, thus acting on both  \eqref{eq:centroidal_momentum_dynamics} and \eqref{eq_motion}.
-%Alternatively, the centroidal momentum dynamics can be obtained by differentiating Eq. \eqref{eq:cmm_intro}\modtextDani{, which writes:}
-%\begin{equation}\label{eq:momentum_derivative_cmm}
-%	{}_{\bar{G}} \dot{\bm{h}} = \bm{J}_\text{CMM}\dot{\bm{\nu}} +  \dot{\bm{J}}_\text{CMM}\bm{\nu},
-%\end{equation}
-%thus highlighting \modtextDani{the dependency of  ${}_{\bar{G}} \dot{\bm{h}}$ on $\dot{\bm{\nu}}$}.
-
-
-\begin{comment}
-\subsection{Modeling of Aerodynamic Forces}
-\label{sec:af}
-% The aerodynamic forces acting on the robot during flight can be modeled in different ways. For example, one could: 1) consider separately the aerodynamic forces acting at the Center of Pressure (CoP) of each robot link; or, 2) evaluate the \emph{total} aerodynamic force acting on the robot, i.e., the sum of all forces on the bodies composing the robot. We chose to follow the second route, because the simplified geometry of the robot model we used for CFD analysis allows to achieve more reliable results when looking at the global forces acting on the system, while the geometry approximation has a bigger impact in calculating the correct forces locally on each single body.
-%\tongsays{due to the less of pages, this part may be shorten a bit, Tong is working on it}
- We prefer to model the \emph{global} aerodynamic force acting on the robot, because evaluating aerodynamic effects distributed on several parts of the body requires to design a more complex robot model for the CFD analysis, which becomes very time consuming. \fabioDsays{Probably here we can justify the use of the simplified model saying that the main goal is to validate the procedure} The global aerodynamic effects at the robot CoM are composed of the aerodynamic force ${F}_a \in \mathbb{R}^3$, and the moment ${M}_a:={\mathcal{G}P}\times {F}_a \in \mathbb{R}^3$, where ${\mathcal{G}P}$ is the distance between the CoM $\mathcal{G}$ and the Center of Pressure (CoP) $P$. 
-
-Consider any pair of angles $(\alpha, \beta)$ characterizing the relative orientation of $\boldsymbol{v}_a$ w.r.t. the body frame $\mathcal{D}$, chosen as in  Fig.~\ref{fig:notation}. $\alpha \in [0,\pi]$ is defined as the angle between $\boldsymbol{v}_a$ and the negative $\boldsymbol{k}$ axis of the body frame $\mathcal{D}$, while $\beta \in [0,2\pi]$ is defined as the angle between the projection of $\boldsymbol{v}_a$ on plane $(\boldsymbol{i},\boldsymbol{j})$ and the positive $\boldsymbol{i}$ axis of frame $\mathcal{D}$ (see also \cite{c3}).
-
-\antonellosays{From here on probably we should rewrite the modeling to take into account for the [14] notation.}
-
-The aerodynamic force can be decomposed w.r.t. the relative velocity frame $\mathcal{A}$ as:
-\begin{equation}
-\label{eq:af_total_control}
-{F}_a={F}_D+{F}_S+{F}_N ,
-\end{equation}
-where:
-\begin{itemize}
-    \item ${F}_D$, the drag force, aligns with $\boldsymbol{Y}_a$ axis;
-    \item ${F}_S$, the defined sideforce, aligns with $\boldsymbol{X}_a$ axis;
-    \item ${F}_N$, the defined normal force, aligns with $\boldsymbol{Z}_a$ axis.
-\end{itemize}
-The intensity of the steady aerodynamic force varies approximately with $|\boldsymbol{v}_a|^2$, hence there exist three dimensionless functions $C_D$, $C_S$, $C_N$ depending on the Reynolds number $Re$, the Mach number $\mathcal{M}$ and $(\alpha, \beta)$, such that \cite{c3}\cite{c5}:
-\begin{subequations}
-\begin{align}
-    {F}_D & :=\mathcal{K}_a|\boldsymbol{v}_a|^2C_D(Re, \mathcal{M}, \alpha, \beta)\boldsymbol{j}_a,\\
-    {F}_S & :=\mathcal{K}_a|\boldsymbol{v}_a|^2C_S(Re, \mathcal{M}, \alpha, \beta)\boldsymbol{i}_a,\\
-    {F}_N & :=\mathcal{K}_a|\boldsymbol{v}_a|^2C_N(Re, \mathcal{M}, \alpha, \beta)\boldsymbol{k}_a,
-\end{align}
-\label{eq:af_coe}
-\end{subequations}
- where $\mathcal{K}_a:=\frac{A_{ref}\rho}{2}$ with $\rho$ the air density and $A_{ref}$ the reference frontal area;  $\boldsymbol{i}_a$, $\boldsymbol{j}_a$, $\boldsymbol{k}_a$ are the unit vectors of frame $\mathcal{A}$ along $\boldsymbol{X}_a$, $\boldsymbol{Y}_a$, $\boldsymbol{Z}_a$ axes.
-In particular, $\boldsymbol{j}_a$ has the opposite direction of $\boldsymbol{v}_a$ by definition. Identifying the numerical relation among the dimensionless coefficients $C_D$, $C_S$, $C_N$ and their variables is fundamental for the design of analytical models of the aerodynamic forces to be in the system modeling and control design. 
-
-\fabioDsays{The AC model should be changed according to the new axes references, as also Antonello said.}
-
-\end{comment}

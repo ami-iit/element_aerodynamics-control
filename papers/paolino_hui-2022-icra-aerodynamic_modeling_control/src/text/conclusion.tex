@@ -1,14 +1,10 @@
 \section{Conclusions}
 \label{conclusion}
 
-%In this paper, we proposed a modeling and control framework to handle aerodynamic forces with a complex-shaped VTOL system, the jet-powered humanoid robot iRonCub.  First, a simplified robot model is designed to generate a dataset of aerodynamic forces for a given flight envelope, using CFD simulations. Then, an identification procedure is applied to identify the Aerodynamics Characteristics of the system, and the coefficients are used to design a model of the aerodynamic forces acting on the robot. 
-
-
-We proposed a strategy to model and control a flying multibody robot in presence of non-negligible aerodynamic effects. The model of aerodynamic forces is identified based on the data provided by CFD simulations. These forces are then used to design appropriate controllers for the robot flying in a given flight envelope. %Gain-scheduling and feedback linearization techniques are applied to improve the current controller towards aerodynamic effects in critical outdoor environment which have been tested in simulations showing better performances in tracking of a desired CoM position and guaranteeing stabilization of a reference trajectory.
+We proposed a strategy to model and control a flying multibody robot in presence of non-negligible aerodynamic effects. The model of aerodynamic forces is identified based on the data provided by CFD simulations. These forces are then used to design appropriate controllers for the robot flying in a given flight envelope.
 Two techniques, \emph{gain-scheduling} and \emph{feedback linearization}, are applied to improve the flight controller performances in presence of aerodynamic effects, and all controllers were tested successfully in simulations.
 
 Nevertheless, the proposed framework requires several assumptions, both for performing the CFD analysis and in the controller design. Future work may consider to relax these assumptions, for example by replacing the robot model for CFD analysis with a more accurate one, closer to the actual shape of iRonCub. Another future work will involve running CFD simulations with the robot in different joints configurations.
 Finally, further effort in control design is required to improve the robustness of the controller for different flight envelopes.\looseness=-1
 
-%Future work may consider to distribute the aerodynamic forces all over the major links to be close to the reality and overcome the limits of using a more complex iRonCub model in CFD simulations. Finally, further effort in control design is desired to improve the robustness of the controller for a practical implementation and experiments on the real robotic platform iRonCub with aerodynamic effects considered.
 
