@@ -1,0 +1,58 @@
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RUN THIS SCRIPT TO REMOVE LOCAL PATHS ADDED WHEN RUNNING THE CONTROLLER.
+%
+% In the Simulink model, this script is run every time the user presses
+% the terminate button.
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% close the native control GUI (if present) and reset the GUI input to zero
+close all
+
+try
+    close(ironcubControlGui);
+    set_param('momentumBasedFlight/JoyStick Commands/Input_GUI','Value','0')
+catch ME
+    warning(ME.message)
+end
+
+% remove local paths
+rmpath(genpath('./src/'))
+
+% Try to remove chache files and folders
+try
+    rmdir('./slprj','s')
+    delete('momentumBasedFlight.slxc')
+catch ME
+    warning(ME.message)
+end
+
+% Create a folder for collecting data
+if Config.SAVE_WORKSPACE
+    
+    if (~exist(['experiments',date],'dir'))
+        
+        mkdir(['experiments',date]);
+    end
+    
+    matFileList = dir(['./experiments',date,'/*.mat']);
+    c           = clock;
+    
+    if ~Config_ICRA.RUN_SIMULATIONS_ICRA_2022
+        
+        save(['./experiments',date,'/exp_',num2str(c(4)),'-',num2str(c(5)),'.mat'])
+    else
+        save(['./experiments',date,'/exp_',num2str(c(4)),'-',num2str(c(5)),'_',Config_ICRA.folderName,'.mat'])
+    end
+end
+
+% Create a folder for the pics saved from the iDynTree visualizer
+if confVisualizer.printVizToFrames && exist('MEDIA_TEMP','dir')
+    
+    if ~Config_ICRA.RUN_SIMULATIONS_ICRA_2022
+        
+        movefile('MEDIA_TEMP',['./experiments',date,'/exp_',num2str(c(4)),'-',num2str(c(5))])
+    else
+        movefile('MEDIA_TEMP',['./experiments',date,'/exp_',num2str(c(4)),'-',num2str(c(5)),'_',Config_ICRA.folderName])
+    end
+end
