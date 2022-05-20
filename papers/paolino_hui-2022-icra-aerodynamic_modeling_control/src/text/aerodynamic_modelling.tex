@@ -25,7 +25,7 @@ The $\boldsymbol{j}_a$ axis therefore aligns to the opposite direction of $\bold
 
 \begin{figure}[t]
       \centering
-      \includegraphics[width=60mm]{./imagines/CFD_Reference_System_3.png}
+      \includegraphics[width=60mm]{./figures/CFD_Reference_System_3.png}
       \caption{CFD Model with the relative velocity frame.}
       \label{figureRelativeVelocityFrameCFD}
    \end{figure}
@@ -41,7 +41,7 @@ where:
     \item $\boldsymbol{{F}_S}$, the defined sideforce, aligns to $\boldsymbol{i}_a$ axis;
     \item $\boldsymbol{{F}_N}$, the defined normal force, aligns to $\boldsymbol{k}_a$ axis.
 \end{itemize}
-The intensity of the steady aerodynamic force varies approximately with $|\boldsymbol{v}_a|^2$, hence there exist three dimensionless functions $C_D$, $C_S$, $C_N$ depending on the Reynolds number $Re$, the Mach number $\mathcal{M}$ and $(\alpha, \beta)$, such that \cite{c3}\cite{c5}:
+The intensity of the steady aerodynamic force varies approximately with $|\boldsymbol{v}_a|^2$, hence there exist three dimensionless functions $C_D$, $C_S$, $C_N$ depending on the Reynolds number $Re$, the Mach number $\mathcal{M}$ and $(\alpha, \beta)$, such that \cite{pucci2015nonlinear}\cite{stengel2015flight}:
 \begin{subequations}
 \begin{align}
     \boldsymbol{{F}_D} & :=\mathcal{K}_a|\boldsymbol{v}_a|^2C_D(Re, \mathcal{M}, \alpha, \beta)\boldsymbol{j}_a,\\
@@ -50,7 +50,7 @@ The intensity of the steady aerodynamic force varies approximately with $|\bolds
 \end{align}
 \label{eq:af_coe}
 \end{subequations}
-\noindent with the angles $(\alpha, \beta)$ characterizing the relative orientation of $\boldsymbol{v}_a$ w.r.t. the body frame $\mathcal{D}$, chosen as in  Fig.~\ref{fig:notation}. So, $\alpha \in [0,\pi]$ is defined as the angle between $\boldsymbol{v}_a$ and the negative $\boldsymbol{k}$ axis of the body frame $\mathcal{D}$, while $\beta \in [0,2\pi]$ is defined as the angle between the projection of $\boldsymbol{v}_a$ on plane $(\boldsymbol{i},\boldsymbol{j})$ and the positive $\boldsymbol{i}$ axis of frame $\mathcal{D}$ (see also \cite{c3}). The constant $\mathcal{K}_a:=\frac{A_{ref}\rho}{2}$ with $\rho$ the air density and $A_{ref}$ the reference frontal area, moreover, $A_{ref}$ has been defined to obtain $\mathcal{K}_a = 1$ to simplify the calculation. Furthermore, we hereafter assume that the dependency upon the Mach and Reynolds numbers is negligible, and thus omitting these dependencies in the arguments of the aerodynamic coefficients.
+\noindent with the angles $(\alpha, \beta)$ characterizing the relative orientation of $\boldsymbol{v}_a$ w.r.t. the body frame $\mathcal{D}$, chosen as in  Fig.~\ref{fig:notation}. So, $\alpha \in [0,\pi]$ is defined as the angle between $\boldsymbol{v}_a$ and the negative $\boldsymbol{k}$ axis of the body frame $\mathcal{D}$, while $\beta \in [0,2\pi]$ is defined as the angle between the projection of $\boldsymbol{v}_a$ on plane $(\boldsymbol{i},\boldsymbol{j})$ and the positive $\boldsymbol{i}$ axis of frame $\mathcal{D}$ (see also \cite{pucci2015nonlinear}). The constant $\mathcal{K}_a:=\frac{A_{ref}\rho}{2}$ with $\rho$ the air density and $A_{ref}$ the reference frontal area, moreover, $A_{ref}$ has been defined to obtain $\mathcal{K}_a = 1$ to simplify the calculation. Furthermore, we hereafter assume that the dependency upon the Mach and Reynolds numbers is negligible, and thus omitting these dependencies in the arguments of the aerodynamic coefficients.
 
 \subsection{CFD results and simplified aerodynamic model}\label{sec:aeroModel}
 
@@ -79,15 +79,15 @@ As introduced in Sec. \ref{sec:cfd}, the three dimensionless functions $C_D$, $C
 \item from CFD results, the sideforce effect is neglected due to its small magnitude compared with the other two aerodynamic force components, and with other forces acting on the robot;
 \item the AC dependence from Mach number $\mathcal{M}$ is considered negligible since the relative velocity intensity of the robot is much smaller than the sound speed (i.e. the density can be assumed as constant);
 \item the AC dependence from Reynolds number $Re$ is not considered since the AC evaluated from CFD for different values of relative velocity doesn't show a significant dependence from it;
-\item the effects of rotational and unsteady motions of the vehicle on its surrounding airflow are negligible~\cite{c5}.
+\item the effects of rotational and unsteady motions of the vehicle on its surrounding airflow are negligible~\cite{stengel2015flight}.
 \end{enumerate}
 
-As a consequence, the AC depend only on the flight configuration $(\alpha,\beta)$ and can be written as~\cite{c3}:
+As a consequence, the AC depend only on the flight configuration $(\alpha,\beta)$ and can be written as~\cite{pucci2015nonlinear}:
 \begin{equation*}
     C_D(\cdot) =C_D(\alpha, \beta), \quad  C_N(\cdot) =C_N(\alpha, \beta) .
 \end{equation*}
 
-Considering that the aerodynamic coefficients are naturally $2\pi$-periodic \cite{c12}, $\sin{(\cdot)}$ functions are used to design the mathematical models of AC: %, which are hereafter displayed:
+Considering that the aerodynamic coefficients are naturally $2\pi$-periodic \cite{didyk2012whole}, $\sin{(\cdot)}$ functions are used to design the mathematical models of AC: %, which are hereafter displayed:
 \begin{equation}
     \resizebox{.88 \columnwidth}{!}{$ 
         C_D(\alpha,\beta)= c_0 + c_1 \sin{^2 \alpha} \sin{^2\beta} + c_2 \sin{^2\alpha}  + c_3 \sin{^2\beta}
@@ -107,7 +107,7 @@ The coefficients characterizing the expressions of $C_D(\cdot)$ and $C_N(\cdot)$
 are obtained using linear regression. \\
 In fluid dynamics, drag force is a type of friction that acts in the opposite direction of the relative motion of any object moving in a fluid. Therefore the estimated drag coefficient $C_D$ should remain positive in the whole range of $\alpha$ and $\beta$. This property is verified by the identified model in Eq.~\eqref{eq:drag}, as Fig.~\ref{fig:drag model} shows.
 
-As previously mentioned, the zero sideforce assumption allows the identification of the lift force with the normal force, as demonstrated in~\cite{c3} for axisymmetric bodies, since the normal component of the aerodynamic force lies on the $\boldsymbol{v}_a-\boldsymbol{k}_a$ plane. The aerodynamic forces acting on the robot CoM rewrite as:
+As previously mentioned, the zero sideforce assumption allows the identification of the lift force with the normal force, as demonstrated in~\cite{pucci2015nonlinear} for axisymmetric bodies, since the normal component of the aerodynamic force lies on the $\boldsymbol{v}_a-\boldsymbol{k}_a$ plane. The aerodynamic forces acting on the robot CoM rewrite as:
 
 \begin{equation}
 \label{eq:aerodyModelSymmetricBodies}
@@ -121,8 +121,8 @@ where  $\label{eq:aerodynamicsAuxiliaryVector}
 
  \begin{figure}[t]
 \centering
-\subfigure[\label{fig:drag model}]{\includegraphics[width=0.97\columnwidth]{imagines/Cd_alpha.eps}}\\
-\subfigure[\label{fig:normal model}]{\includegraphics[width=0.97\columnwidth]{imagines/Cn_alpha.eps}} \\
+\subfigure[\label{fig:drag model}]{\includegraphics[width=0.97\columnwidth]{figures/Cd_alpha.eps}}\\
+\subfigure[\label{fig:normal model}]{\includegraphics[width=0.97\columnwidth]{figures/Cn_alpha.eps}} \\
 \caption{AC models identified from CFD simulations data. Dashed lines represent the collected CFD data, solid lines represent the identified models.}
 \label{fig:subfig}
 \end{figure}
@@ -132,7 +132,7 @@ where  $\label{eq:aerodynamicsAuxiliaryVector}
 
 \subsection{Flight Control Without Aerodynamics Awareness}
 \label{subsec:Flight-Control-no-aerodyn-forces}
-The iRonCub flight controller~\cite{c1, c2} is a \emph{task-based} control strategy, composed of several control objectives (tasks), with different priorities. The so-called \emph{primary task}, i.e. the task with the higher priority, is the stabilization of the robot's \emph{centroidal momentum}\footnote{The centroidal momentum is the robot total momentum expressed w.r.t. the frame $\mathcal{G}[\mathcal{I}]$  defined in Sec. \ref{background}.} dynamics, which equals the summation of all external forces acting on the robot:
+The iRonCub flight controller~\cite{pucci2017momentum, nava2018position} is a \emph{task-based} control strategy, composed of several control objectives (tasks), with different priorities. The so-called \emph{primary task}, i.e. the task with the higher priority, is the stabilization of the robot's \emph{centroidal momentum}\footnote{The centroidal momentum is the robot total momentum expressed w.r.t. the frame $\mathcal{G}[\mathcal{I}]$  defined in Sec. \ref{background}.} dynamics, which equals the summation of all external forces acting on the robot:
 %
 \begin{equation}
 \label{eq:hdot}
@@ -147,7 +147,7 @@ where $m$ is the robot's total mass, $\boldsymbol{A}(q) \in \mathbb{R}^{6 \times
    {}^{\mathcal{G}[\mathcal{I}]}\ddot{\boldsymbol{h}}=\dot{\boldsymbol{A}}(q)T+\boldsymbol{A}(q)\dot{T} = f_h(q, T, v, \dot{T}).
 \end{equation}
 %
-As demonstrated in our previous works \cite{c1,c2}, it is possible to find a smooth control input $u^*$ that renders the closed-loop equilibrium point $(\dot{\tilde{\boldsymbol{h}}}, \tilde{\boldsymbol{h}}, \boldsymbol{I}) = (\boldsymbol{0},\boldsymbol{0},\boldsymbol{0})$ globally asymptotically stable, where $\tilde{\boldsymbol{h}} = \boldsymbol{h}-\boldsymbol{h}^d$, $\boldsymbol{h}^d$ is the reference momentum trajectory and $\boldsymbol{I} := \int_0^t \tilde{\boldsymbol{h}}$. 
+As demonstrated in our previous works \cite{pucci2017momentum, nava2018position}, it is possible to find a smooth control input $u^*$ that renders the closed-loop equilibrium point $(\dot{\tilde{\boldsymbol{h}}}, \tilde{\boldsymbol{h}}, \boldsymbol{I}) = (\boldsymbol{0},\boldsymbol{0},\boldsymbol{0})$ globally asymptotically stable, where $\tilde{\boldsymbol{h}} = \boldsymbol{h}-\boldsymbol{h}^d$, $\boldsymbol{h}^d$ is the reference momentum trajectory and $\boldsymbol{I} := \int_0^t \tilde{\boldsymbol{h}}$. 
 
 We also define a \emph{postural task} to resolve the redundancy in the control input $u$ and maintain the robot configuration close to a desired shape:
 %
@@ -163,7 +163,7 @@ with $s^d$ the desired robot posture and $K_P^s \in \mathbb{R}^{n \times n}$ a p
    u^{**} &=& \text{argmin}_{u} (w_1|u-u^*|^2 + w_2|\dot{s}-\dot{s}^*|^2) \\
      & s.t. & \qquad u_{min} \leq u \leq u_{max}, \nonumber
 \end{IEEEeqnarray}
-where \emph{soft} task priorities are assigned to the two tasks via proper weights $w_1, w_2 >0$. Framing the problem as an optimization procedure allows to include input boundaries $u_{min}, u_{max}$ in the control design. It is also possible to include the integral of input boundaries (namely, the joint position and thrust limits) in the QP design. For more details on these aspects of the flight control design, which are not relevant for this paper, we refer to previous works \cite{c1,c2}.
+where \emph{soft} task priorities are assigned to the two tasks via proper weights $w_1, w_2 >0$. Framing the problem as an optimization procedure allows to include input boundaries $u_{min}, u_{max}$ in the control design. It is also possible to include the integral of input boundaries (namely, the joint position and thrust limits) in the QP design. For more details on these aspects of the flight control design, which are not relevant for this paper, we refer to previous works \cite{pucci2017momentum, nava2018position}.
 
 \subsection{Flight Control with Aerodynamics Awareness}
 

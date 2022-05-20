@@ -14,19 +14,20 @@ We designed a flight envelope composed as follows:
   \item \textit{Scenario 2}: the robot hovers and climbs to gain altitude, then moves forward at around $\SI{11}{m/s}$, in presence of a lateral wind with the profile of Fig. \ref{fig:high_speed_wind}.
 \end{enumerate}
 %
-The wind profiles are composed of a constant wind of $\SI{3}{m/s}$, and wind gusts of different shapes with magnitude of $\SI{10}{m/s}$ and $\SI{15}{m/s}$ \cite{aero,wind,KAI2019108491}.
+The wind profiles are composed of a constant wind of $\SI{3}{m/s}$, and wind gusts of different shapes with magnitude of $\SI{10}{m/s}$ and $\SI{15}{m/s}$ \cite{ghoreyshi2018simulation,gu2019design,hamel2019unified}.
 
 \subsection{Control Results for the Hovering Scenario}
 
 \begin{figure}[t]
     \centering
-        \subfigure{\label{fig:hovering_wind} \includegraphics[width=0.97\columnwidth]{./imagines/wind_hov.eps}}
+        \subfigure{\label{fig:hovering_wind}
+        \includegraphics[width=0.97\columnwidth]{./figures/wind_hov.eps}}
         \subfigure{\label{fig:hovering_angMom}
-        \includegraphics[width=0.97\columnwidth]{./imagines/angMom_hov.eps}}
+        \includegraphics[width=0.97\columnwidth]{./figures/angMom_hov.eps}}
         \subfigure{\label{fig:hovering_linMom}
-        \includegraphics[width=0.97\columnwidth]{./imagines/linMom_hov.eps}}
+        \includegraphics[width=0.97\columnwidth]{./figures/linMom_hov.eps}}
         \subfigure{\label{fig:hovering_com}
-        \includegraphics[width=0.97\columnwidth]{./imagines/posX_hov.eps}}        
+        \includegraphics[width=0.97\columnwidth]{./figures/posX_hov.eps}}        
         \caption[]{Hovering scenario. From top to bottom: a) wind profile; b) angular momentum error norm; c) linear momentum error norm; d) center of mass position error in the wind direction.}
         \label{fig:hovering_plots}
 \end{figure}
@@ -34,18 +35,18 @@ The wind profiles are composed of a constant wind of $\SI{3}{m/s}$, and wind gus
 \begin{figure}[t]
     \centering
         \subfigure{\label{fig:high_speed_wind}
-        \includegraphics[width=0.97\columnwidth]{./imagines/wind_hspe.eps}}
+        \includegraphics[width=0.97\columnwidth]{./figures/wind_hspe.eps}}
         \subfigure{\label{fig:high_speed_angMom}
-        \includegraphics[width=0.97\columnwidth]{./imagines/angMom_hspe.eps}}
+        \includegraphics[width=0.97\columnwidth]{./figures/angMom_hspe.eps}}
         \subfigure{\label{fig:high_speed_linMom}
-        \includegraphics[width=0.97\columnwidth]{./imagines/linMom_hspe.eps}}
+        \includegraphics[width=0.97\columnwidth]{./figures/linMom_hspe.eps}}
         \subfigure{\label{fig:high_speed_com}
-        \includegraphics[width=0.97\columnwidth]{./imagines/posY_hspe.eps}}        
+        \includegraphics[width=0.97\columnwidth]{./figures/posY_hspe.eps}}        
         \caption[]{High speed flight scenario. From top to bottom: a) wind profile; b) angular momentum error norm; c) linear momentum error norm; d) center of mass position error in the wind direction.}
         \label{fig:high_speed_plots}
 \end{figure}
 
-We evaluate the performances of three control strategies: the \emph{baseline} controller of \cite{c1}\cite{c2}, the \emph{feedback linearization} control designed in Sec. \ref{sec:control}, and a third controller that uses \emph{gain scheduling} as described in Sec. \ref{sec:control}. To test the robustness of feedback linearization controller, the aerodynamic force $F_a$ in the control model is computed assuming random noise of $\SI{5}{\%}$ and a calibration error of $\SI{10}{\%}$ on both $\alpha$ and $\beta$ angles.
+We evaluate the performances of three control strategies: the \emph{baseline} controller of \cite{pucci2017momentum}\cite{nava2018position}, the \emph{feedback linearization} control designed in Sec. \ref{sec:control}, and a third controller that uses \emph{gain scheduling} as described in Sec. \ref{sec:control}. To test the robustness of feedback linearization controller, the aerodynamic force $F_a$ in the control model is computed assuming random noise of $\SI{5}{\%}$ and a calibration error of $\SI{10}{\%}$ on both $\alpha$ and $\beta$ angles.
 
 Simulation results for the hovering scenario are presented in Fig.~\ref{fig:hovering_plots}, where we focused on the linear and angular momentum error norm and center of mass position error. With baseline controller, the center of mass error along the wind direction has peaks of $\SI{50}{cm}$ and $\SI{35}{cm}$ in correspondence of the wind gusts (shaded area), which are reduced by $\SI{33}{\%}$ when the gain scheduling control is used and by $\SI{71}{\%}$ for the feedback linearization control. The linear momentum error also reduces accordingly, while the angular momentum error remains comparable in all three simulations.
 
