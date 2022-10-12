@@ -55,7 +55,7 @@ Cd_90_ar = Cd_90*ar_coeff;
 % Cd at alpha=0 with AR and Reynolds number correction coefficients
 Cd_0     = interp1(AR_exp_ax,Cd_AR_ax_factor,aspectRatio,'pchip');
 Cd_0     = Cd_0 * (pi/4) / aspectRatio; % correction for the ref. areas
-Re_ref   = 10^5;
+Re_ref   = 10^5;    % Re at which the experiment has been performed
 Cd_ref   = interp1(Re_exp,Cd_exp,Re_ref);
 Re_coeff = Cd_90/Cd_ref;
 Cd_0_Re  = Cd_0 * Re_coeff;
@@ -82,6 +82,7 @@ CD = Cd_0_Re + (Cd_90_ar - Cd_0_Re) * abs(sind(angleOfAttack))^3;
 % Analytical expression suggested by [Hoerner, 1965]
 CN = Cd_90_ar * sind(angleOfAttack)^2 * cosd(angleOfAttack);
 
+% Corrected coefficient accounting for the cross product normalization term
 CN_bar = Cd_90_ar * sind(angleOfAttack) * cosd(angleOfAttack);
 
 end

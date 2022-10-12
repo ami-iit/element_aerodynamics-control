@@ -23,13 +23,22 @@ Cd_exp = [0.438, 0.498, 0.517, 0.513, 0.433, 0.367, 0.295, 0.231, 0.187, ...
 
 % Sphere drag coefficient
 if reynoldsNumber >= 0 && reynoldsNumber < 10
-    CD = 4.1275;
+    % limiting the min Cd for very small Reynolds numbers
+    CD = 4.1275;    
+
 elseif reynoldsNumber >= 10 && reynoldsNumber <= 2e4
-    CD = 24/reynoldsNumber * (1 + 0.150*reynoldsNumber^0.681) + 0.407/(1 + 8710/reynoldsNumber);
+    % [Brown, 2003] analytical formula from experiments
+    CD = 24/reynoldsNumber * (1 + 0.150*reynoldsNumber^0.681) + ...
+         0.407/(1 + 8710/reynoldsNumber);   
+
 elseif reynoldsNumber > 2e4 && reynoldsNumber < 6e6
-    CD  = interp1(Re_exp,Cd_exp,reynoldsNumber,'pchip');
+    % [Achenbach, 1972] experimental tests
+    CD  = interp1(Re_exp,Cd_exp,reynoldsNumber,'pchip');    %
+
 elseif reynoldsNumber >= 6e6
+    % [Achenbach, 1972] experimental tests
     CD  = 0.188;
+
 end
 
 %% LIFT COEFFICIENT STEADY ZERO VALUE
