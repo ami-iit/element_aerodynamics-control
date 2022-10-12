@@ -1,9 +1,19 @@
-function [CD, CL, CL_bar] = cylinderAerodynamicForces(angleOfAttack, reynoldsNumber, aspectRatio)
+function [CD, CN, CN_bar] = cylinderAerodynamicForces(angleOfAttack, reynoldsNumber, aspectRatio)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Description: This function calculates the 3D aerodynamic Drag and Normal
+%              force coefficients (CD and CN) and the corrected Normal 
+%              force coefficient (CN_bar) for a cylindrical isolated link
+%              as functions of the angle of attack between the link axis
+%              and the relative wind velocity, the Reynolds number of the
+%              flow based on the airspeed and link diameter, the link
+%              aspect ratio defined as length over diameter of the link
+%              itself.
 %
 % Author: Antonello Paolino
 %
 % September 2022
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% EXPERIMENTAL DATA 
@@ -33,7 +43,7 @@ Cd_AR_ax  = [1.17, 1.17, 1.16, 1.13, 1.12, 1.07, 1.02, 0.971, 0.911, ...
              0.818, 0.817, 0.817, 0.815, 0.814, 0.814];
 Cd_AR_ax_factor = Cd_AR_ax/max(Cd_AR_ax);
 
-%% DRAG ANALYTICAL MODEL
+%% DRAG COEFFICIENT ANALYTICAL MODEL
 
 % Infinite cylinder drag coefficient
 Cd_90  = interp1(Re_exp,Cd_exp,reynoldsNumber,'pchip');
@@ -68,10 +78,10 @@ Cd_0_Re  = Cd_0 * Re_coeff;
 CD = Cd_0_Re + (Cd_90_ar - Cd_0_Re) * abs(sind(angleOfAttack))^3;
 
 
-%% LIFT ANALYTICAL MODEL
+%% NORMAL FORCE COEFFICIENT ANALYTICAL MODEL
 % Analytical expression suggested by [Hoerner, 1965]
-CL = Cd_90_ar * sind(angleOfAttack)^2 * cosd(angleOfAttack);
+CN = Cd_90_ar * sind(angleOfAttack)^2 * cosd(angleOfAttack);
 
-CL_bar = Cd_90_ar * sind(angleOfAttack) * cosd(angleOfAttack);
+CN_bar = Cd_90_ar * sind(angleOfAttack) * cosd(angleOfAttack);
 
 end
