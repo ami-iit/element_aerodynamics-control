@@ -91,7 +91,8 @@ for j = 1:Npoints
     w_barAxisVersor = R_bar * [-1; 0; 0];
 
     % data for using iDynTreeWrappers functions
-    jointVel = zeros(23,1);
+    Njoints  = length(jointNames);
+    jointVel = zeros(Njoints,1);
     baseVel  = zeros(6,1);
     gravAcc  = [0; 0; 9.81];
 
