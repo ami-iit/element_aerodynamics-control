@@ -75,6 +75,7 @@ run(strcat('app/robots/',robotName,'/configRobot.m'));
 run(strcat('app/robots/',robotName,'/gainsAndParameters.m'));
 configJetControlParams;
 run(strcat('app/robots/',robotName,'/configJets.m'));
+run(strcat('app/robots/',robotName,'/configAero.m'));
 
 % open the native GUI for control (if no joystick is present)
 if Config.USE_NATIVE_GUI
