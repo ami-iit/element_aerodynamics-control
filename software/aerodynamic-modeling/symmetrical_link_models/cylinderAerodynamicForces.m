@@ -86,3 +86,4 @@ CN = Cd_90_ar * sind(angleOfAttack)^2 * cosd(angleOfAttack);
 CN_bar = Cd_90_ar * sind(angleOfAttack) * cosd(angleOfAttack);
 
 end
+

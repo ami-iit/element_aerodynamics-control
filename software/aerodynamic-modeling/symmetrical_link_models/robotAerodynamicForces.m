@@ -244,3 +244,4 @@ ylabel('$C_S A\,[m^2]$','Interpreter','latex')
 xlabel(angleName,'Interpreter','latex')
 legend('Interpreter','latex','Location','best')
 legend show
+
