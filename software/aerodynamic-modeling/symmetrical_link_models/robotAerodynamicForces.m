@@ -11,9 +11,10 @@ frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
     'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
     'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
 
-modelPath  = 'C:\Users\apaolino\code\component_ironcub\models\iRonCub-Mk1_1\iRonCub\robots\iRonCub-Mk1_1_Gazebo\';
-fileName   = 'model_stl.urdf';
-meshFilePrefix = 'C:\Users\apaolino\code\component_ironcub\models';
+componentPath  = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
+modelPath      = [componentPath,'\models\iRonCub-Mk1\iRonCub\robots\iRonCub-Mk1_Gazebo\'];
+fileName       = 'model_stl.urdf';
+meshFilePrefix = [componentPath,'\models'];
 
 %% ANALYSIS TYPE
 TEST = 'hovering'; % | hovering | flight30 | flight50 | flight60 |
@@ -137,7 +138,7 @@ for j = 1:Npoints
         end
     end
 
-    %% aerodynamic forces calculation without support-bar
+    %% aerodynamic force components calculation without support-bar
     
     % initialize variables
     linkDragForce   = nan(3,Nlinks);
@@ -169,7 +170,7 @@ for j = 1:Npoints
     robotSideArea  = robotSideForce(2) / (0.5 * airDensity * airSpeed^2); % [m^2]
 
 
-    %% aerodynamic forces calculation with support-bar
+    %% aerodynamic force components calculation with support-bar
 
     % bar geometry values
     barDiameter     = 0.0547; % [m]
@@ -217,7 +218,7 @@ elseif contains(TEST,'flight')
     angleName  = '$\alpha\,[^\circ]$';
 end
 
-figure()
+fig1 = figure();
 plot(plotAngles,totalCdA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
 plot(plotAngles,robotCdA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
 grid on;
@@ -226,7 +227,7 @@ xlabel(angleName,'Interpreter','latex')
 legend('Interpreter','latex','Location','best')
 legend show
 
-figure()
+fig2 = figure();
 plot(plotAngles,totalClA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
 plot(plotAngles,robotClA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
 grid on;
@@ -235,7 +236,7 @@ xlabel(angleName,'Interpreter','latex')
 legend('Interpreter','latex','Location','best')
 legend show
 
-figure()
+fig3 = figure();
 plot(plotAngles,totalCsA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
 plot(plotAngles,robotCsA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
 grid on;
