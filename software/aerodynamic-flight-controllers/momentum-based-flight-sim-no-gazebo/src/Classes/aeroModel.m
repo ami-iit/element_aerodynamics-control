@@ -3,7 +3,7 @@ classdef aeroModel < handle
     % characteristics
 
     properties
-        sphereModel; cylinderModel;
+        frameNames; sphereModel; cylinderModel;
         C_D_sphere; C_N_sphere; 
         C_D_cylinder; C_N_cylinder; C_N_bar_cylinder; 
     end
@@ -13,6 +13,7 @@ classdef aeroModel < handle
         function obj = aeroModel(model_config)
             %JET Construct an instance of this class
             %   Detailed explanation goes here
+            obj.frameNames    = model_config.framenames;
             obj.sphereModel   = model_config.sphereModel;
             obj.cylinderModel = model_config.cylinderModel;
         end
@@ -37,7 +38,7 @@ classdef aeroModel < handle
             obj.CL_sphere = C_L_sphere;
         end
         
-        function [C_D_cylinder, C_N_cylinder, C_N_bar_cylinder] = get_cylinder_force_coefficients(obj, reynoldsNumber, aspectRatio)
+        function [C_D_cylinder, C_N_cylinder, C_N_bar_cylinder] = get_cylinder_force_coefficients(obj, reynoldsNumber, aspectRatio, angleOfAttack)
             % returns the cylindrical link aerodynamic drag coefficient
             
             Cd_90    = interp1(obj.cylinderModel.Re_exp, obj.cylinderModel.Cd_exp, reynoldsNumber, 'pchip');

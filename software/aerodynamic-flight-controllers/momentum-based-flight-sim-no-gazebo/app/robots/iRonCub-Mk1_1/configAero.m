@@ -4,6 +4,29 @@
 %                                                                         %
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Robot parameters
+aero_config.frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
+                          'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
+                          'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
+for frameAxisIndex = 1 : length(aero_config.frameNames)
+    if matches(aero_config.frameNames{frameAxisIndex},{'head','chest','root_link'})
+        aero_config.frameAxis(:,frameAxisIndex) = [0; 0; 1];
+    else
+        aero_config.frameAxis(:,frameAxisIndex) = [0; 1; 0];
+    end
+end
+
+aero_config.linkDiameters = [0.1929, 0.2467, 0.102, 0.102, ...
+                            0.0864, 0.0845, 0.0864, 0.0845, ...
+                            0.1476, 0.1256, 0.1197, 0.1256, 0.1197];
+aero_config.linkLengths   = [0.1929, 0.1734, 0.2955, 0.2955, ...
+                            0.135, 0.223, 0.135, 0.223, ...
+                            0.2282, 0.1573, 0.2351, 0.1573, 0.2351];
+
+
+aero_config.linkReferenceArea    = aero_config.linkLengths .* aero_config.linkDiameters;
+aero_config.linkReferenceArea(1) = (pi/4) * aero_config.linkReferenceArea(1);
+
 %% Cylinder model parameters
 
 % Cd = Cd(Re) [NASA report N.121, Wieselsberger, 1922], ref area = d*l
@@ -20,7 +43,7 @@ aero_config.cylinderModel.Cd_exp = [54.1, 54.1, 30.5, 13.2, 4.87, 2.94, 2.12, 1.
 % Cd = Cd(1/AR) [NASA report N.121, Wieselsberger, 1922], ref area = d*l
 aero_config.cylinderModel.AR_exp       = [0, 0.0237, 0.0490, 0.0998, 0.200, 0.341, 0.498, 0.998, 10.0];
 aero_config.cylinderModel.Cd_AR        = [1.19, 0.986, 0.926, 0.820, 0.737, 0.744, 0.687, 0.614, 0.614];
-aero_config.cylinderModel.Cd_AR_factor = Cd_AR/max(Cd_AR);
+aero_config.cylinderModel.Cd_AR_factor = aero_config.cylinderModel.Cd_AR/max(aero_config.cylinderModel.Cd_AR);
 
 % Cd0 = Cd0(AR) [Kritzinger, 2004], ref area = (pi*d^2)/4
 aero_config.cylinderModel.AR_exp_ax       = [0, 0.0957, 0.192, 0.357, 0.432, 0.595, 0.747, 0.882, 1.06, ...
@@ -29,7 +52,7 @@ aero_config.cylinderModel.AR_exp_ax       = [0, 0.0957, 0.192, 0.357, 0.432, 0.5
 aero_config.cylinderModel.Cd_AR_ax        = [1.17, 1.17, 1.16, 1.13, 1.12, 1.07, 1.02, 0.971, 0.911, ...
                                              0.856, 0.830, 0.820, 0.820, 0.819, 0.819, 0.818, 0.818, ...
                                              0.818, 0.817, 0.817, 0.815, 0.814, 0.814];
-aero_config.cylinderModel.Cd_AR_ax_factor = Cd_AR_ax/max(Cd_AR_ax);
+aero_config.cylinderModel.Cd_AR_ax_factor = aero_config.cylinderModel.Cd_AR_ax/max(aero_config.cylinderModel.Cd_AR_ax);
 
 
 %% Sphere model parameters

@@ -5,6 +5,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
     % Public, tunable properties
     properties (Nontunable)
         aero_config;
+        robot_config;
     end
     
     properties (DiscreteState)
@@ -18,62 +19,83 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
     methods (Access = protected)
         
         function setupImpl(obj)
-            obj.aeroCoeff = aeroModel(obj.aero_config);
+            obj.models = aeroModel(obj.aero_config);
+            obj.robot  = Robot(obj.robot_config);
         end
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % SONO ARRIVATO QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-        function [aerodynamic_forces, generalized_aerodynamic_wrench] = stepImpl(obj, jet_input, basePose, jointPosition)
+        
+        function [aerodynamicForces, generalizedAerodynamicWrench] = stepImpl(obj, basePose, baseVelocity, windSpeed)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
-            [jet_intensitiy, generalized_jet_wrench] = obj.compute_jet_intensities_and_generalized_jet_wrench(jet_input, basePose, jointPosition);
+            obj.conditions = set_global_aerodynamic_conditions(obj, windSpeed, baseVelocity);
+            [aerodynamicForces, generalizedAerodynamicWrench] = obj.compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(jet_input, basePose);
         end
         
-        function [jet_intensity, generalized_jet_wrench] = compute_jet_intensities_and_generalized_jet_wrench(obj, u, basePose, jointPosition)
+        function [aerodynamicForces, generalizedAerodynamicWrench] = compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(obj, baseVelocity, jointVelocities, basePose)
+            aerodynamicForces = obj.compute_aerodynamic_forces_in_wrld_frame(baseVelocity, jointVelocities);
+            aerodynamicWrenches = [aerodynamicForces; zeros(3, length(obj.models.frameNames))];
+            generalizedAerodynamicWrench = obj.compute_generalized_aerodynamic_wrench(obj, aerodynamicWrenches);        
+        end
+        
+        function aerodynamic_forces = compute_aerodynamic_forces_in_wrld_frame(obj, baseVelocity, jointVelocities)
+                aerodynamic_forces = nan(3,length(obj.models.frameNames));
+            for i = 1 : length(obj.models.frameNames)
+                linkRelativeWindVelocity  = obj.compute_link_relative_wind_velocity(obj.models.frameNames{i}, baseVelocity, jointVelocities, obj.conditions.windSpeed);
+                aerodynamic_forces(1:3,:) = obj.compute_link_aerodynamic_force_in_world_frame(obj.models.frameNames{i}, obj.models.frameAxis(:,i), obj.models.linkDiameter(i), ...
+                                                                                              obj.models.linkLength(i), obj.models.linkReferenceArea(i), linkRelativeWindVelocity);
+            end
+        end
 
-            if obj.jets_config.use_jet_dyn
-                jet_intensity = obj.jet.get_thrust(u);
+        function  link_aerodynamic_force = compute_link_aerodynamic_force_in_world_frame(obj, frameName, frameAxis, linkDiameter, linkLength, linkReferenceArea, linkRelativeWindVelocity)          
+            linkAspectRatio    = linkLength/linkDiameter;
+            linkAxisVersor     = obj.get_link_aerodynamic_axis_in_world_frame(obj, frameName, frameAxis);
+            linkAngleOfAttack  = acosd(abs((transpose(linkAxisVersor * linkRelativeWindVelocity)) / (norm(linkRelativeWindVelocity) + 1e-8))); % [deg]
+            linkReynoldsNumber = (obj.conditions.airDensity * norm(linkRelativeWindVelocity) * linkDiameter) / airDynamicViscosity;
+            if matches(frameName,'head')
+                [Cd, Cn] = obj.models.get_sphere_force_coefficients(linkReynoldsNumber);
+                linkNormalForce = 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn * ...
+                                  sign(transpose(linkAxisVersor) * linkRelativeWindVelocity) * ...
+                                  cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
             else
-                jet_intensity = obj.jet.get_thrust_from_dot_T(u);
+                [Cd, ~, Cn_sin] = obj.models.get_cylinder_force_coefficients(linkReynoldsNumber, linkAspectRatio, linkAngleOfAttack);
+                linkNormalForce = 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn_sin * ...
+                                  sign(transpose(linkAxisVersor) * linkRelativeWindVelocity) * ...
+                                  cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
             end
-            f = obj.compute_jet_force_in_wrld_frame(jet_intensity, obj.idx, basePose, jointPosition);
-            generalized_jet_wrench = obj.compute_generalized_wrench([f; zeros(3,1)], obj.idx, basePose, jointPosition);
-            
+            linkDragForce = - 0.5 * obj.conditions.airDensity * linkReferenceArea * norm(linkRelativeWindVelocity) * Cd * linkRelativeWindVelocity;
+            link_aerodynamic_force = linkNormalForce + linkDragForce;
         end
         
-        function f = compute_jet_force_in_wrld_frame(obj, t, frame, basePose, jointPosition)
-            %compute_jet_force_in_world_frame returns the jet force in the
-            % world frame
-            switch frame
-                case 1
-                    H = simFunc_getWorldTransformJet1Frame(basePose,jointPosition);
-                case 2
-                    H = simFunc_getWorldTransformJet2Frame(basePose,jointPosition);
-                case 3
-                    H = simFunc_getWorldTransformJet3Frame(basePose,jointPosition);
-                case 4
-                    H = simFunc_getWorldTransformJet4Frame(basePose,jointPosition);
-            end
-            % represent the (pure) z force in the world
-            f = -H(1:3, 3) * t;
+
+
+        function linkRelativeWindVelocity  = obj.compute_link_relative_wind_velocity(frameName, baseVelocity, jointVelocities, windSpeed)
+            J_link = obj.robot.get_frame_jacobian(frameName);
+            linkVelocity = J_link * [baseVelocity; jointVelocities];
+            linkRelativeWindVelocity = windSpeed - linkVelocity(1:3);
+        end
+
+        function linkAxisVersor = get_link_aerodynamic_axis_in_world_frame(obj, frameName, frameAxis)
+            w_H_l          = obj.robot.get_frame_H(frameName);
+            linkAxisVersor = w_H_l(1:3,1:3) * frameAxis;
+        end
+
+        function set_global_aerodynamic_conditions(obj, windSpeed, airDensity, baseVelocity)
+            obj.conditions.windSpeed            = windSpeed;
+            obj.conditions.relativeWindVelocity = windSpeed - baseVelocity(1:3);
+            obj.conditions.airDensity           = airDensity;
         end
         
-        function f = compute_generalized_wrench(obj, wrench, frame, basePose, jointPosition)
-            
-            switch frame
-                case 1
-                    J = simFunc_getFrameFreeFloatingJacobianJet1Frame(basePose,jointPosition);
-                case 2
-                    J = simFunc_getFrameFreeFloatingJacobianJet2Frame(basePose,jointPosition);
-                case 3
-                    J = simFunc_getFrameFreeFloatingJacobianJet3Frame(basePose,jointPosition);
-                case 4
-                    J = simFunc_getFrameFreeFloatingJacobianJet4Frame(basePose,jointPosition);
+        function generalizedAerodynamicWrench = compute_generalized_aerodynamic_wrench(obj, aerodynamicWrenches)
+            generalizedAerodynamicWrench = zeros(29,1);
+            for i = 1 : length(obj.models.frameNames)
+                linkGenAeroWrench = obj.compute_link_generalized_aerodynamic_wrench(obj.models.frameNames{i}, aerodynamicWrenches(:, i));
+                generalizedAerodynamicWrench = generalizedAerodynamicWrench + linkGenAeroWrench;
             end
-            f = J' * wrench;
         end
-        
+
+        function linkGenAeroWrench = compute_link_generalized_aerodynamic_wrench(obj, frameName, aerodynamicWrench)
+            J_link = obj.robot.get_frame_jacobian(frameName);
+            linkGenAeroWrench = J_link' * aerodynamicWrench;
+        end
         
         function resetImpl(obj)
             
@@ -81,8 +103,8 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         
         function [out, out2] = getOutputSizeImpl(~)
             % Return size for each output port
-            out = [1 1]; % jets intensities
-            out2 = [29 1]; % jeneralized jet wrench
+            out = [3 length(obj.models.frameNames)]; % aerodynamic forces
+            out2 = [29 length(obj.models.frameNames)]; % generalized aerodynamic wrenches
         end
         
         function [out, out2] = getOutputDataTypeImpl(~)
@@ -103,17 +125,6 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             out2 = true;
         end
         
-        function names = getSimulinkFunctionNamesImpl(~)
-            names = {...
-                'simFunc_getFrameFreeFloatingJacobianJet1Frame', ...
-                'simFunc_getFrameFreeFloatingJacobianJet2Frame', ...
-                'simFunc_getFrameFreeFloatingJacobianJet3Frame', ...
-                'simFunc_getFrameFreeFloatingJacobianJet4Frame', ...
-                'simFunc_getWorldTransformJet1Frame', ...
-                'simFunc_getWorldTransformJet2Frame', ...
-                'simFunc_getWorldTransformJet3Frame', ...
-                'simFunc_getWorldTransformJet4Frame'};
-        end
         
     end
     
