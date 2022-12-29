@@ -1,8 +1,9 @@
 # element_aerodynamics-control
 ## Responsible:
-|                          Hui Tong                     | 
-:-----------------------------------------------------:|
-<img src="https://avatars.githubusercontent.com/u/74595921?v=4" width="180">|
+
+| Antonello Paolino     |
+:-------------------------:|
+<img src="https://user-images.githubusercontent.com/75119799/102009876-b3456880-3d3a-11eb-9504-b17b59327a81.jpg" width="180"> | 
 
 ## Background
 
