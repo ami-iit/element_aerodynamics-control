@@ -116,7 +116,7 @@ robot_config.SIMULATE_MOTOR_REFLECTED_INERTIA = false;
 % robot name and path
 robot_config.robotName = robotName;
 component_path         = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
-robot_config.fileName  = 'model_stl.urdf';
+robot_config.fileName  = 'model.urdf';
 robot_config.modelPath = [component_path '/models/' robot_config.robotName '/iRonCub/robots/' robot_config.robotName '/'];
 
 % structure used to configure the Contacts class

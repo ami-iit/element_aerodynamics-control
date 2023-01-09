@@ -3,7 +3,10 @@ classdef aeroModel < handle
     % characteristics
 
     properties
-        frameNames; sphereModel; cylinderModel;
+        airDensity; 
+        frameNames; frameAxis; linkFrame_X_linkCoM; linkFrame_T_linkCoM;
+        linkDiameters; linkLengths; linkReferenceAreas;
+        sphereModel; cylinderModel;
         C_D_sphere; C_N_sphere; 
         C_D_cylinder; C_N_cylinder; C_N_bar_cylinder; 
     end
@@ -13,9 +16,16 @@ classdef aeroModel < handle
         function obj = aeroModel(model_config)
             %JET Construct an instance of this class
             %   Detailed explanation goes here
-            obj.frameNames    = model_config.framenames;
-            obj.sphereModel   = model_config.sphereModel;
-            obj.cylinderModel = model_config.cylinderModel;
+            obj.airDensity          = model_config.airDensity;
+            obj.frameNames          = model_config.frameNames;
+            obj.frameAxis           = model_config.frameAxis;
+            obj.linkFrame_X_linkCoM = model_config.linkFrame_X_linkCoM;
+            obj.linkFrame_T_linkCoM = model_config.linkFrame_T_linkCoM;
+            obj.linkDiameters       = model_config.linkDiameters;
+            obj.linkLengths         = model_config.linkLengths;
+            obj.linkReferenceAreas  = model_config.linkReferenceAreas;
+            obj.sphereModel         = model_config.sphereModel;
+            obj.cylinderModel       = model_config.cylinderModel;
         end
 
         function [C_D_sphere, C_N_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
@@ -27,15 +37,15 @@ classdef aeroModel < handle
                 C_D_sphere = 24/reynoldsNumber * (1 + 0.150*reynoldsNumber^0.681) + ...
                     0.407/(1 + 8710/reynoldsNumber);
             elseif reynoldsNumber > 2e4 && reynoldsNumber < 6e6
-                C_D_sphere  = interp1(Re_exp,Cd_exp,reynoldsNumber,'pchip');    %
+                C_D_sphere  = interp1(obj.sphereModel.Re_exp,obj.sphereModel.Cd_exp,reynoldsNumber,'pchip');    %
             elseif reynoldsNumber >= 6e6
                 C_D_sphere  = 0.188;
             end
             
             C_N_sphere = 0;
 
-            obj.CD_sphere = C_D_sphere;
-            obj.CL_sphere = C_L_sphere;
+            obj.C_D_sphere = C_D_sphere;
+            obj.C_N_sphere = C_N_sphere;
         end
         
         function [C_D_cylinder, C_N_cylinder, C_N_bar_cylinder] = get_cylinder_force_coefficients(obj, reynoldsNumber, aspectRatio, angleOfAttack)

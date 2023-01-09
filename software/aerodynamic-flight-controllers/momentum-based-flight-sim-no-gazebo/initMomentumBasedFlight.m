@@ -31,6 +31,7 @@ addpath(genpath('../matlab-functions-lib/'));
 Config.simulationTime                   = inf;
 Config.tStep                            = 0.01;
 jets_config.use_jet_dyn                 = false;
+aero_config.use_wind_speed              = true;
 
 %% SIMULATION SETTINGS
 
@@ -71,11 +72,12 @@ Config.SAVE_WORKSPACE                   = false;
 %% ADD CONFIGURATION FILES
 
 % Run robot-specific and controller-specific configuration parameters
+run(strcat('app/robots/',robotName,'/configAero.m'));
 run(strcat('app/robots/',robotName,'/configRobot.m')); 
 run(strcat('app/robots/',robotName,'/gainsAndParameters.m'));
 configJetControlParams;
 run(strcat('app/robots/',robotName,'/configJets.m'));
-run(strcat('app/robots/',robotName,'/configAero.m'));
+% run(strcat('app/robots/',robotName,'/configAero.m'));
 
 % open the native GUI for control (if no joystick is present)
 if Config.USE_NATIVE_GUI
