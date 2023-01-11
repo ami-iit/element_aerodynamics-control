@@ -72,8 +72,8 @@ Config.SAVE_WORKSPACE                   = false;
 %% ADD CONFIGURATION FILES
 
 % Run robot-specific and controller-specific configuration parameters
+run(strcat('app/robots/',robotName,'/configRobot.m'));
 run(strcat('app/robots/',robotName,'/configAero.m'));
-run(strcat('app/robots/',robotName,'/configRobot.m')); 
 run(strcat('app/robots/',robotName,'/gainsAndParameters.m'));
 configJetControlParams;
 run(strcat('app/robots/',robotName,'/configJets.m'));
