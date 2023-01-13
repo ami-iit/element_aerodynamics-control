@@ -50,17 +50,15 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         function  link_aerodynamic_force = compute_link_aerodynamic_force_in_world_frame(obj, frameName, frameAxis, linkDiameter, linkLength, linkReferenceArea, linkRelativeWindVelocity)          
             linkAspectRatio    = linkLength/linkDiameter;
             linkAxisVersor     = obj.get_link_aerodynamic_axis_in_world_frame(frameName, frameAxis);
-            linkAngleOfAttack  = acosd(abs((transpose(linkAxisVersor) * linkRelativeWindVelocity)) / (norm(linkRelativeWindVelocity) + 1e-9)); % [deg]
+            linkAngleOfAttack  = acosd((transpose(linkAxisVersor) * linkRelativeWindVelocity) / (norm(linkRelativeWindVelocity) + 1e-9)); % [deg]
             linkReynoldsNumber = (obj.conditions.airDensity * norm(linkRelativeWindVelocity) * linkDiameter) / obj.conditions.airDynamicViscosity;
             if matches(frameName,'head')
                 [Cd, Cn] = obj.models.get_sphere_force_coefficients(linkReynoldsNumber);
-                linkNormalForce = - 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn * ...
-                                  sign(transpose(linkAxisVersor) * linkRelativeWindVelocity) * ...
+                linkNormalForce = - 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn * ...                                  
                                   cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
             else
                 [Cd, ~, Cn_sin] = obj.models.get_cylinder_force_coefficients(linkReynoldsNumber, linkAspectRatio, linkAngleOfAttack);
                 linkNormalForce = - 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn_sin * ...
-                                  sign(transpose(linkAxisVersor) * linkRelativeWindVelocity) * ...
                                   cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
             end
             linkDragForce = 0.5 * obj.conditions.airDensity * linkReferenceArea * norm(linkRelativeWindVelocity) * Cd * linkRelativeWindVelocity;
