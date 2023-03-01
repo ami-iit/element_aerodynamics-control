@@ -17,15 +17,15 @@ fileName       = 'model_stl.urdf';
 meshFilePrefix = [componentPath,'\models'];
 
 %% ANALYSIS TYPE
-TEST = 'hovering'; % | hovering | flight30 | flight50 | flight60 |
+TEST = 'flight30'; % | hovering | flight30 | flight50 | flight60 |
 
 if matches(TEST,'hovering')
     pitchAngle  = 90;
-    yawAngles   = 0:5:90;
+    yawAngles   = 0:10:90;
     Npoints     = length(yawAngles);
     jointPos    = [0,0,0,-10,25,40,15,-10,25,40,15,0,10,7,0,0,0,0,10,7,0,0,0]* pi/180;
 elseif matches(TEST,'flight30')
-    pitchAngles = 25:5:65;
+    pitchAngles = 25:1:65;
     yawAngle    = 0;
     Npoints     = length(pitchAngles);
     jointPos    = [0,0,0,-40.7,11.3,26.5,58.3,-40.7,11.3,26.5,58.3,0,10,7,0,0,0,0,10,7,0,0,0]* pi/180;
@@ -65,7 +65,7 @@ for j = 1:Npoints
     airDynamicViscosity    = 1.8e-5;        % [N s/m^2] at T = 18 C
     
     % wind tunnel frame relative velocity
-    w_relativeVelocity     = [-1; 0; 0] *airSpeed;
+    w_relativeVelocity     = [1; 0; 0] *airSpeed;
 
     %% robot simplified model data (sphere and cylinders links)
     linkDiameters    = [0.1929, 0.2467, 0.102, 0.102, ...
@@ -101,8 +101,8 @@ for j = 1:Npoints
     iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPos, baseVel, jointVel, gravAcc);
 
     %% robot visualization
-    % iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.9,0.9,0.9], 'material', 'metal', ...
-    %                                                      'transparency', 0.7, 'debug', true, 'view', [-45 20]);
+%     iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.9,0.9,0.9], 'material', 'metal', ...
+%                                                          'transparency', 0.7, 'debug', true, 'view', [-45 20]);
 
     %% local axis versor evaluation
     Nlinks       = length(frameNames);
@@ -110,7 +110,7 @@ for j = 1:Npoints
     w_axisVersor = nan(3,Nlinks);
 
     for i = 1:Nlinks
-        if matches(frameNames{i},{'head','chest','root_link'})
+        if matches(frameNames{i},{'head','chest','root_link','chest_l_jet_turbine','chest_r_jet_turbine','l_arm_jet_turbine','r_arm_jet_turbine'})
             w_H_l = iDynTreeWrappers.getWorldTransform(KinDynModel,frameNames{i});
             w_axisVersor(:,i) = w_H_l(1:3,1:3) * [0; 1; 0];
         else
@@ -130,7 +130,7 @@ for j = 1:Npoints
     
     % Evaluate Cd and Cn in local coordinate frames
     for i = 1:Nlinks
-        angleOfAttack(i)  = acosd(abs((transpose(w_axisVersor(:,i))*w_relativeVelocity))/airSpeed); % [deg]
+        angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i))*w_relativeVelocity)/airSpeed); % [deg]
         reynoldsNumber(i) = (airDensity*airSpeed*linkDiameters(i))/airDynamicViscosity;
         if matches(frameNames{i},'head')
             [Cd(i), Cn(i)]        = sphereAerodynamicForces(reynoldsNumber(i));
@@ -147,15 +147,13 @@ for j = 1:Npoints
     
     % assign forces according to coefficients
     for i = 1:Nlinks
-        linkDragForce(:, i) = - 0.5 * airDensity * linkRefAreas(i) * airSpeed * Cd(i) * w_relativeVelocity;
+        linkDragForce(:, i) = 0.5 * airDensity * linkRefAreas(i) * airSpeed * Cd(i) * w_relativeVelocity;
 
         if matches(frameNames{i},'head')
-            linkNormalForce(:, i) = 0.5 * airDensity * linkRefAreas(i) * Cn(i) * ...
-                                  sign(transpose(w_axisVersor(:,i))*w_relativeVelocity) * ...
+            linkNormalForce(:, i) = - 0.5 * airDensity * linkRefAreas(i) * Cn(i) * ...
                                   cross(cross(w_relativeVelocity,w_axisVersor(:,i)),w_relativeVelocity) ;
         else
-            linkNormalForce(:, i) = 0.5 * airDensity * linkRefAreas(i) * Cn_sin(i) * ...
-                                  sign(transpose(w_axisVersor(:,i))*w_relativeVelocity) * ...
+            linkNormalForce(:, i) = - 0.5 * airDensity * linkRefAreas(i) * Cn_sin(i) * ...
                                   cross(cross(w_relativeVelocity,w_axisVersor(:,i)),w_relativeVelocity) ;
         end
     end
@@ -183,9 +181,8 @@ for j = 1:Npoints
     barReynoldsNumber       = (airDensity*airSpeed*barDiameter)/airDynamicViscosity;
     [Cd_bar, ~, Cn_bar_sin] = cylinderAerodynamicForces(barAoA,barReynoldsNumber,barAspectRatio);
 
-    barDragForce   = - 0.5 * airDensity * barRefArea * airSpeed * Cd_bar * w_relativeVelocity; % [N]
-    barNormalForce = 0.5 * airDensity * barRefArea * Cn_bar_sin * ...
-                     sign(transpose(w_barAxisVersor)*w_relativeVelocity) * ...
+    barDragForce   = 0.5 * airDensity * barRefArea * airSpeed * Cd_bar * w_relativeVelocity; % [N]
+    barNormalForce = - 0.5 * airDensity * barRefArea * Cn_bar_sin * ...
                      cross(cross(w_relativeVelocity,w_barAxisVersor),w_relativeVelocity); % [N]
 
     barLiftForce = [0; 0; barNormalForce(3)]; % [N]

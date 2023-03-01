@@ -2,9 +2,6 @@ close all;
 clear all; 
 clc;
 
-%% ADD SOURCE PATH
-addpath(genpath('./'));            % Adding the main folder path
-
 %% INPUT DATA
 
 % cylinder geometry
@@ -21,51 +18,49 @@ airSpeed               = 10;      % [m/s]
 angleOfAttack          = 30;      % [deg]
 airDensity             = 1.225;   % [kg/m^3]
 airDynamicViscosity    = 1.8e-5;  % [N s/m^2] at T = 18 C
+relativeWindVelocity   = airSpeed * [1; 0; 0];
 
 cylinderReynoldsNumber = (airDensity*airSpeed*cylinderDiameter)/airDynamicViscosity;
 sphereReynoldsNumber   = (airDensity*airSpeed*sphereDiameter)/airDynamicViscosity;
 
-%% Aerodynamic force coefficients 
-re_v = [1e5];
-alpha_v = linspace(-180,180,1801);
-% Cd = 0*alpha_v;
-% Cl = 0*alpha_v;
-for ii = 1:length(re_v)
-    for i = 1:length(alpha_v)
-        [Cd(i,ii), ~, Cl(i,ii)] = cylinderAerodynamicForces(alpha_v(i),re_v(ii),cylinderAspectRatio);
-    end
-end
+%% Aerodynamic force 
+
+k_vector = [1; -1; 0];
+
+cylinderAxisVersor = k_vector/norm(k_vector);
+
+cylinderAngleOfAttack  = acosd((transpose(cylinderAxisVersor) * relativeWindVelocity) / (norm(relativeWindVelocity) + 1e-9)); % [deg]
+
+[Cd, ~, Cn_sin] = cylinderAerodynamicForces(cylinderAngleOfAttack, cylinderReynoldsNumber, cylinderAspectRatio);
+
+auxiliaryVector = cross(cross(relativeWindVelocity,cylinderAxisVersor),relativeWindVelocity);
+
+cylinderNormalForce = - 0.5 * airDensity * cylinderReferenceArea * Cn_sin * ...
+                      cross(cross(relativeWindVelocity,cylinderAxisVersor),relativeWindVelocity);
+
+cylinderDragForce = 0.5 * airDensity * cylinderReferenceArea * norm(relativeWindVelocity) * Cd * relativeWindVelocity;
+
+cylinderAerodynamicForce = cylinderNormalForce + cylinderDragForce;
 
 
-%% Plots
-
-figure()
-for i = 1:length(re_v)
-plot(alpha_v,Cd(:,i),'LineWidth',1.5,'DisplayName',['$Re = $',num2str(re_v(i),3),', $\lambda = $',num2str(cylinderAspectRatio,3)]); hold on;
-end
-grid on;
-ylabel('$C_D$','Interpreter','latex')
-xlabel('$\alpha$ [$^\circ$]','Interpreter','latex')
-legend('Location','best','Interpreter','latex')
-
-figure()
-for i = 1:length(re_v)
-plot(alpha_v,Cl(:,i),'LineWidth',1.5,'DisplayName',['$Re = $',num2str(re_v(i),3),', $\lambda = $',num2str(cylinderAspectRatio,3)]); hold on;
-end
-grid on;
-ylabel('$C_L$','Interpreter','latex')
-xlabel('$\alpha$ [$^\circ$]','Interpreter','latex')
-legend('Location','best','Interpreter','latex')
+%% Plot
 
 figure()
-for i = 1:length(re_v)
-plot(alpha_v,sqrt(Cl(:,i).^2+Cd(:,i).^2),'LineWidth',1.5,'DisplayName',['$Re = $',num2str(re_v(i),3),', $\lambda = $',num2str(cylinderAspectRatio,3)]); hold on;
-end
+hold on
+quiver(0,0,cylinderAxisVersor(1),cylinderAxisVersor(2),'k--');
+quiver(0,0,cylinderDragForce(1)/norm(cylinderAerodynamicForce), ...
+           cylinderDragForce(2)/norm(cylinderAerodynamicForce),'r-');
+quiver(0,0,cylinderNormalForce(1)/norm(cylinderAerodynamicForce), ...
+       cylinderNormalForce(2)/norm(cylinderAerodynamicForce),'b-');
+quiver(0,0,cylinderAerodynamicForce(1)/norm(cylinderAerodynamicForce), ...
+       cylinderAerodynamicForce(2)/norm(cylinderAerodynamicForce),'y-');
+quiver(-1,0,1,0,'g-');
+
+% cylinderPlot = plot([-cylinderDiameter/2 cylinderDiameter/2 cylinderDiameter/2 -cylinderDiameter/2 -cylinderDiameter/2], ...
+%                     [-cylinderLength/2 -cylinderLength/2 cylinderLength/2 cylinderLength/2 -cylinderLength/2],'k--');
+% rotate(cylinderPlot,[0 0 1],cylinderAngleOfAttack-90);
+
+axis equal;
 grid on;
-ylabel('$C_F$','Interpreter','latex')
-xlabel('$\alpha$ [$^\circ$]','Interpreter','latex')
-legend('Location','best','Interpreter','latex')
 
-%% REMOVE PATH
 
-rmpath(genpath('./'));            % Removing the main folder path
