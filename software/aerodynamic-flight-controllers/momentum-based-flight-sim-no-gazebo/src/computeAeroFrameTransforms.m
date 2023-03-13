@@ -21,16 +21,17 @@ for frameIndex = 1 : length(aero_config.frameNames)
     linkSpatialInertia   = link.getInertia();
     spatialInertiaVector = linkSpatialInertia.asVector().toMatlab();
     linkCoMPos = spatialInertiaVector(2:4)/spatialInertiaVector(1);
+    
+    S = wbc.skew(linkCoMPos);
+    I = eye(3);
+    O = zeros(3);
 
-    SkewMat = [0 -linkCoMPos(3) linkCoMPos(2);
-               linkCoMPos(3) 0 -linkCoMPos(1);
-               -linkCoMPos(2) linkCoMPos(1) 0];
+    linkFrame_X_linkCoM(:,:,frameIndex) = [I, O;
+                                           S, I];
 
-    linkFrame_X_linkCoM(:,:,frameIndex) = [ eye(3) zeros(3);
-                                                       SkewMat   eye(3)];
-
-    linkFrame_T_linkCoM(:,:,frameIndex) = [ eye(3) linkCoMPos;
-                                                       zeros(1,3)      1];
+    linkFrame_T_linkCoM(:,:,frameIndex) = [         I, linkCoMPos;
+                                           zeros(1,3),          1];
+    
 end
 
-save(['./app/robots/',robotName,'/aeroFrameTransforms.mat'], 'linkFrame_T_linkCoM', 'linkFrame_X_linkCoM');
+% save(['./app/robots/',robotName,'/aeroFrameTransforms.mat'], 'linkFrame_T_linkCoM', 'linkFrame_X_linkCoM');
