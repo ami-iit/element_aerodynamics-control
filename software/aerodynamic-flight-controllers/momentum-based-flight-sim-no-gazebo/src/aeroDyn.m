@@ -41,9 +41,9 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         function aerodynamic_forces = compute_aerodynamic_forces_in_wrld_frame(obj, base_velocity, joints_velocity)
                 aerodynamic_forces = nan(3,length(obj.models.frameNames));
             for i = 1 : length(obj.models.frameNames)
-                linkRelativeWindVelocity  = obj.compute_link_relative_wind_velocity(obj.models.frameNames{i}, base_velocity, joints_velocity, obj.conditions.windSpeed);
+                linkCoMRelativeWindVelocity  = obj.compute_link_CoM_relative_wind_velocity(obj.models.frameNames{i}, obj.models.linkFrame_T_linkCoM(:,:,i), base_velocity, joints_velocity, obj.conditions.windSpeed);
                 aerodynamic_forces(1:3,i) = obj.compute_link_aerodynamic_force_in_world_frame(obj.models.frameNames{i}, obj.models.frameAxis(:,i), obj.models.linkDiameters(i), ...
-                                                                                              obj.models.linkLengths(i), obj.models.linkReferenceAreas(i), linkRelativeWindVelocity);
+                                                                                              obj.models.linkLengths(i), obj.models.linkReferenceAreas(i), linkCoMRelativeWindVelocity);
             end
         end
 
@@ -67,14 +67,23 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         
 
 
-        function linkRelativeWindVelocity  = compute_link_relative_wind_velocity(obj, frameName, base_velocity, joints_velocity, windSpeed)
-            J_link = obj.robot.get_frame_jacobian(frameName);
-            linkVelocity = J_link * [base_velocity; joints_velocity];
+        function linkRelativeWindVelocity  = compute_link_CoM_relative_wind_velocity(obj, frameName, linkFrame_T_linkCoM, base_velocity, joints_velocity, windSpeed)
+            J_link_frame   = obj.robot.get_frame_jacobian(frameName);
+
+            % computing the jacobian relative to the link CoM from the link
+            % frame one
+            Link_CoM_pos   = linkFrame_T_linkCoM(1:3,4);
+            J_link_CoM_lin = J_link_frame(1:3,:) - wbc.skew(Link_CoM_pos)*J_link_frame(4:6,:);
+            J_link_CoM_ang = J_link_frame(4:6,:);
+            J_link_CoM     = [J_link_CoM_lin; J_link_CoM_ang];
+            
+            % computng the link CoM velocity and relative wind velocity
+            linkVelocity   = J_link_CoM * [base_velocity; joints_velocity];
             linkRelativeWindVelocity = windSpeed - linkVelocity(1:3);
         end
 
         function link_axis_versor = get_link_aerodynamic_axis_in_world_frame(obj, frameName, frameAxis)
-            w_H_l          = obj.robot.get_frame_H(frameName);
+            w_H_l            = obj.robot.get_frame_H(frameName);
             link_axis_versor = w_H_l(1:3,1:3) * frameAxis;
         end
 
@@ -97,7 +106,6 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             J_link = obj.robot.get_frame_jacobian(frameName);
             linkFrame_aerodynamic_wrench = linkFrame_X_linkCoM * aerodynamic_wrench;
             link_gen_aero_wrench = J_link' * linkFrame_aerodynamic_wrench;
-%             link_gen_aero_wrench = J_link' * aerodynamic_wrench;
         end
         
 
