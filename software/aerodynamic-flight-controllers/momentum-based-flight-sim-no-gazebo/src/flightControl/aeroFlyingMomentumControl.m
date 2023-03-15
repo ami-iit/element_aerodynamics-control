@@ -142,7 +142,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     Aa_angular = zeros(3,3*n_aero_links);
 
     % Cycle to build the Aa matrix angular block
-    for i = n_aero_links
+    for i = 1 : n_aero_links
 
         % Extract the robot CoM to link CoM distance vector from the
         % horizontally concatenated matrix 
@@ -162,12 +162,12 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     SJ_aero_matrix = zeros(3*n_aero_links,6+ndof);
     
     % Cycle to build SJ matrix
-    for i = 1 : length(n_aero_links)
+    for i = 1 : n_aero_links
         
         % Extract single link CoM linear jacobian from the vertically
         % concatenated matrix
         J_ext_aero = repmat([J_CoM; zeros(3,ndof+6)], n_aero_links, 1);
-        J_linkCoM  = J_aeroForces(6*i-5:6*i-3,:) - J_ext_aero;
+        J_linkCoM  = J_aeroForces(6*i-5:6*i-3,:) - J_ext_aero(6*i-5:6*i-3,:);
 
         % Build the -Skew(fa)*J_link blocks of dim. [3x(6+ndof)] inside SJ
         SJ_aero_matrix((3*i-2):(3*i),:) = - wbc.skew(aerodynamic_forces(:,i)) * J_linkCoM;
@@ -233,7 +233,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     % CONTROL # 1: momentum-based control with Lyapunov stability (IEEE-RAL 2018)
     KTilde     = KP_momentum + inv(Config.gains.momentum.KO) + KD_momentum;    
     ATilde     = [Aj, Ac .* feetContactIsActive];
-    BTilde     = Lambda_js + KTilde * JL_s + Lambda_cs .* feetContactIsActive;
+    BTilde     = Lambda_js + KTilde * JL_s + Lambda_cs .* feetContactIsActive + Lambda_as;
     deltaTilde = (Lambda_jb + Lambda_cb .* feetContactIsActive + Lambda_ab + KTilde * JL_b) * w_baseTwist - KTilde * L_des - LDDot_des + ...
                  (KD_momentum + eye(6)) * LDot_tilde + KP_momentum * intL_tilde; 
     

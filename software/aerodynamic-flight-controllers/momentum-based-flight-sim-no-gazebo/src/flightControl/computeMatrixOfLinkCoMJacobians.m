@@ -10,7 +10,7 @@ function J_aeroForces = computeMatrixOfLinkCoMJacobians(w_H_b, linkFrameJacobian
         w_R_b        = w_H_b(1:3,1:3);
         b_R_Link     = aero_config.linkFrame_T_linkCoM(1:3,1:3,i);
         w_R_Link     = w_R_b*b_R_Link;
-        Link_CoM_pos = linkFrame_T_linkCoM(1:3,4,i);
+        Link_CoM_pos = aero_config.linkFrame_T_linkCoM(1:3,4,i);
     
         % build skew matrix
         S = wbc.skew(w_R_Link*Link_CoM_pos);

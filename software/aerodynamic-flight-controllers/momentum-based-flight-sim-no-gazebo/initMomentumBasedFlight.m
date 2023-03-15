@@ -65,6 +65,7 @@ Config.SCOPE_MOMENTUM                   = true;
 Config.SCOPE_JETS                       = true;
 Config.SCOPES_WRENCHES                  = true;
 Config.SCOPE_GAINS_AND_STATE_MACHINE    = true;
+Config.SCOPES_AERODYNAMICS              = true;
 
 % Save data on the workspace after the simulation
 Config.SAVE_WORKSPACE                   = false;

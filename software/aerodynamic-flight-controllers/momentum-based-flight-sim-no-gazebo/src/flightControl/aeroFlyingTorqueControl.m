@@ -1,7 +1,7 @@
 function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_inequality, jointVel_err] =  ... 
              aeroFlyingTorqueControl(M, h, J_jets, J_LFoot, J_RFoot, JDot_LFoot_nu, JDot_RFoot_nu, J_aeroForces, w_H_LFoot, w_H_RFoot, matrixOfJetsAxes, ...
                                      ConstraintsMatrix_feet, biasVectorConstraint_feet, jetsIntensities, stateVel, jointVel_star, contactForces_star, ...
-                                     KI_torqueControl, KP_torqueControl, feetContactIsActive, activateEqConstrTorqueControl, robotIsLanded, aerodynamic_forces, jointPos_err, Config)
+                                     KI_torqueControl, KP_torqueControl, feetContactIsActive, activateEqConstrTorqueControl, robotIsLanded, aerodynamic_forces, jointPos_err, aero_config, Config)
                                                                                                          
     % FLYINGTORQUECONTROL joint torque control for balancing on two feet 
     %                     and flying. 
@@ -40,7 +40,7 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
     n_aero_links = length(aero_config.frameNames);
     J_a          = zeros(3*n_aero_links,6+ndof);
     for i = 1 : n_aero_links
-        J_a(3*i-2:3*i,:) = J_aeroForces(6*i-5:6*i-3);
+        J_a(3*i-2:3*i,:) = J_aeroForces(6*i-5:6*i-3,:);
     end
     
     
