@@ -89,14 +89,14 @@ Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 
 % Attitude controller gains
-Config.gains.momentum.KP_angular = 50 .* ones(1,3);                            
-Config.gains.momentum.KD_angular = 2*sqrt(Config.gains.momentum.KP_angular); % 125 .* ones(1,3); 
+Config.gains.momentum.KP_angular = 50 .* ones(1,3) / 2;                            
+Config.gains.momentum.KD_angular =  125 .* ones(1,3) * 2; % 2*sqrt(Config.gains.momentum.KP_angular);
 
 % Postural task gains              % torso    % left arm      % right arm      % left leg           % right leg
 Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
                              
 % Torque control gains
-Config.gains.torqueControl.KI    = 250/5;                            
+Config.gains.torqueControl.KI    = 250;                            
 Config.gains.torqueControl.KP    = 2 * sqrt(Config.gains.torqueControl.KI);
 
 %% QP WEIGHTS AND THRESHOLDS
@@ -123,7 +123,7 @@ Config.weights.angMomentumConstraint         = 150;
 
 % QP TORQUE CONTROLLER
 
-% WARNING! Equality constraint is activated with a separate joysytick
+% WARNING! Equality constraint is activated with a separate joystick
 % button. This bacause the addition of equality constraints generate a
 % peak in the legs torques that destabilizes the robot after landing. This
 % is still to be investigated.
