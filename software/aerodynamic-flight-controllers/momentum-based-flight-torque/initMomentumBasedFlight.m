@@ -29,6 +29,8 @@ Config.simulationTime                   = inf;
 Config.tStep                            = 0.01;
 
 %% SIMULATION SETTINGS
+% Put zero if testing with jets off
+Config.USE_JETS = 0; % Used in torque control
 
 % If TRUE, jet dynamics is included in the controller. WARNING: if the
 % controller is interfaced with Gazebo simulator, also Gazebo needs 
