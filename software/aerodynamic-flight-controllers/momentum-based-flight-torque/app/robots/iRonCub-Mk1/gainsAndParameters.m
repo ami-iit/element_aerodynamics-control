@@ -91,7 +91,7 @@ Config.minVerticalForces                = 3.5;
 %% CONTROLLER GAINS
 
 % Linear momentum gains 
-Config.gains.momentum.KP_linear = [15, 15, 15]*0;                               
+Config.gains.momentum.KP_linear = [15, 15, 15];                               
 Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 
@@ -103,7 +103,7 @@ Config.gains.momentum.KD_angular = 125 .* ones(1,3);
 Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
                              
 % Torque control gains
-Config.gains.torqueControl.KI    = 250/10 * 0;                            
+Config.gains.torqueControl.KI    = 250/10 *0;                            
 Config.gains.torqueControl.KP    = 10; %2 * sqrt(Config.gains.torqueControl.KI);
 
 %% QP WEIGHTS AND THRESHOLDS
@@ -152,7 +152,7 @@ Config.sat.deadZoneThreshold                 = 0.00001;
 
 % QP boundaries
 Config.sat.maxJetsIntVar                     = [100; 100; 100; 100];
-Config.sat.maxJetsInt                        = [220; 220; 220; 220];
+Config.sat.maxJetsInt                        = [100; 100; 220; 220];
 Config.sat.maxJointVelDes                    = 45 .* pi/180 .* ones(Config.N_DOF,1);
 Config.sat.maxContactForcesVar               = 100 .* ones(12,1);
 Config.sat.jointTorquesSaturation            = 50 .* ones(Config.N_DOF,1);
