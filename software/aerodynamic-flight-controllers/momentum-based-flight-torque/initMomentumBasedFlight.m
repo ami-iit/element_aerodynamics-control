@@ -32,6 +32,9 @@ Config.tStep                            = 0.01;
 % Put zero if testing with jets off
 Config.USE_JETS = 0; % Used in torque control
 
+% Put 1 if testing with aerodynamic force
+aero_config.use_wind_speed              = true;
+
 % If TRUE, jet dynamics is included in the controller. WARNING: if the
 % controller is interfaced with Gazebo simulator, also Gazebo needs 
 % to model the jet dynamics. Set also the cmake option 
@@ -84,6 +87,7 @@ Config.SAVE_WORKSPACE                   = true;
 % Run robot-specific and controller-specific configuration parameters
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/configRobot.m')); 
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/configJets.m')); 
+run(strcat('app/robots/',robotName,'/configAero.m'));
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gainsAndParameters.m'));
 
 % open the native GUI for control (if no joystick is present)
