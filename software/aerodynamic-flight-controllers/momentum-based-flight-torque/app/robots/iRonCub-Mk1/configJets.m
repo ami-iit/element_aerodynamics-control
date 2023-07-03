@@ -43,7 +43,7 @@ jets_config.coefficients = [Config.jetC_P100; ...
 jets_config.init_thrust              = zeros(4,1);
 Config.initT                         = 10.0;
 Config.initTdot                      = 0.0;
-Config.initialConditions.jets_thrust = [98; 98; 113; 113];
+Config.initialConditions.jets_thrust = [0; 0; 0; 0];
 
 % If TRUE, the thrust rate of change for jet control is estimated by
 % relying on a dedicated EKF, and not taken from the momentum-based 
