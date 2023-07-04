@@ -8,11 +8,14 @@
 aero_config.airDensity = 1.225;
 
 %% Robot parameters
-aero_config.frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
-                          'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
-                          'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
-for frameAxisIndex = 1 : length(aero_config.frameNames)
-    if matches(aero_config.frameNames{frameAxisIndex}, {'head','chest','root_link'})
+frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
+              'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
+              'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
+
+aero_config.nAeroLinks = length(frameNames);
+
+for frameAxisIndex = 1 : aero_config.nAeroLinks
+    if matches(frameNames{frameAxisIndex}, {'head','chest','root_link'})
         aero_config.frameAxis(:,frameAxisIndex) = [0; 1; 0];
     else
         aero_config.frameAxis(:,frameAxisIndex) = [0; 0; 1];
@@ -71,3 +74,7 @@ aero_config.sphereModel.Re_exp   = [2e4, 7.36e4, 1.54e5, 2.07e5, 3.31e5, 3.42e5,
                                     3.66e5, 3.74e5, 3.84e5, 4.44e5, 6.94e5, 1.26e6, 3.05e6, 6e6];
 aero_config.sphereModel.Cd_exp   = [0.438, 0.498, 0.517, 0.513, 0.433, 0.367, 0.295, 0.231, 0.187, ...
                                     0.144, 0.101, 0.0628, 0.0845, 0.123, 0.171, 0.188];
+
+
+aero_config_with_frames = aero_config;
+aero_config_with_frames.frameNames = frameNames;

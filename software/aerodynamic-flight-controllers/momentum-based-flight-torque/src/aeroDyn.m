@@ -5,7 +5,6 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
     % Public, tunable properties
     properties (Nontunable)
         aero_config;
-        robot_config;
     end
     
     properties (DiscreteState)
@@ -14,21 +13,21 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
     
     properties (Access = private)
         models;
-        robot;
         conditions;
+        kinematics;
     end
     
     methods (Access = protected)
         
         function setupImpl(obj)
             obj.models = aeroModel(obj.aero_config);
-            obj.robot  = Robot(obj.robot_config);
         end
         
-        function [aerodynamic_forces, generalized_aerodynamic_wrench] = stepImpl(obj, base_velocity, joints_velocity, wind_speed)
+        function [aerodynamic_forces, generalized_aerodynamic_wrench] = stepImpl(obj, base_velocity, joints_velocity, wind_speed, J_aeroForce, matrixOfAeroTransform)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             obj.set_global_aerodynamic_conditions(wind_speed, base_velocity);
+            obj.set_kinematics(J_aeroForce, matrixOfAeroTransform);
             [aerodynamic_forces, generalized_aerodynamic_wrench] = obj.compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(base_velocity, joints_velocity);
         end
         
@@ -72,7 +71,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
 
 
         function linkRelativeWindVelocity  = compute_link_CoM_relative_wind_velocity(obj, frameName, linkFrame_T_linkCoM, base_velocity, joints_velocity, windSpeed)
-            J_link_frame   = obj.robot.get_frame_jacobian(frameName);
+            J_link_frame   = obj.get_frame_jacobian(frameName);
 
             % computing the jacobian relative to the link CoM from the link
             % frame one
@@ -87,7 +86,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         end
 
         function link_axis_versor = get_link_aerodynamic_axis_in_world_frame(obj, frameName, frameAxis)
-            w_H_l            = obj.robot.get_frame_H(frameName);
+            w_H_l            = obj.get_frame_transform(frameName);
             link_axis_versor = w_H_l(1:3,1:3) * frameAxis;
         end
 
@@ -107,9 +106,31 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         end
 
         function link_gen_aero_wrench = compute_link_generalized_aerodynamic_wrench(obj, frameName, linkFrame_X_linkCoM, aerodynamic_wrench)
-            J_link = obj.robot.get_frame_jacobian(frameName);
+            J_link = obj.get_frame_jacobian(frameName);
             linkFrame_aerodynamic_wrench = linkFrame_X_linkCoM * aerodynamic_wrench;
             link_gen_aero_wrench = J_link' * linkFrame_aerodynamic_wrench;
+        end
+
+        function set_kinematics(obj, J_aeroForce, matrixOfAeroTransform)
+            obj.kinematics.J_aeroForce            = J_aeroForce;
+            obj.kinematics.matrixOfAeroTransform  = matrixOfAeroTransform;
+        end
+
+        function J_link_frame = get_frame_jacobian(obj, frameName)
+            frameIndex   = obj.get_frame_index(frameName);
+            J_link_frame = obj.kinematics.J_aeroForce(6*frameIndex-5:6*frameIndex,:);
+        end
+
+        function J_link_frame = get_frame_transform(obj, frameName)
+            frameIndex   = obj.get_frame_index(frameName);
+            J_link_frame = obj.kinematics.matrixOfAeroTransform(4*frameIndex-3:4*frameIndex,:);
+        end
+
+        function frameIndex = get_frame_index(obj, frameName)
+            frameIndex = 1;
+            while ~matches(obj.models.frameNames,frameName)
+                frameIndex = frameIndex + 1;
+            end
         end
         
 

@@ -1,6 +1,6 @@
 function J_aeroForces = computeMatrixOfLinkCoMJacobians(w_H_b, linkFrameJacobians, aero_config)
     
-    n_link_aero  = length(aero_config.frameNames);  % number of aerodynamic links
+    n_link_aero  = aero_config.nAeroLinks;          % number of aerodynamic links
     J_aeroForces = linkFrameJacobians;              % initialize output
 
     for i = 1 : n_link_aero

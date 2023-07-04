@@ -126,7 +126,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     %% %%%%%%%%%%%%% AERODYNAMIC FEEDBACK LINEARIZATION %%%%%%%%%%%%%%%%%%%
       
     % number of links considered for aerodynamic forces application
-    n_aero_links = length(aero_config.frameNames);                  
+    n_aero_links = aero_config.nAeroLinks;                  
 
     % generate a unique aerodynamic forces vertical vector 
     aerodynamic_force_vector = reshape(aerodynamic_forces,[],1);

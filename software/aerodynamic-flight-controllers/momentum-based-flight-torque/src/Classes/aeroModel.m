@@ -14,7 +14,7 @@ classdef aeroModel < handle
     methods
 
         function obj = aeroModel(model_config)
-            %JET Construct an instance of this class
+            %   Construct an instance of this class
             %   Detailed explanation goes here
             obj.airDensity          = model_config.airDensity;
             obj.frameNames          = model_config.frameNames;

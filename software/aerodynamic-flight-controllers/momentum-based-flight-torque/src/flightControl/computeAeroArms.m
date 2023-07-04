@@ -2,7 +2,7 @@ function matrixOfAeroArms = computeAeroArms(w_H_LinkFrames, posCoM, aero_config,
 
     % Distances between the aerodynamic force applied in the link CoM locations 
     % and the robot global CoM position
-    n_link_aero      = length(aero_config.frameNames);  % number of aerodynamic links
+    n_link_aero      = aero_config.nAeroLinks; % number of aerodynamic links
     matrixOfAeroArms = zeros(3,length(aero_config.linkDiameters));
 
     for i = 1 : n_link_aero

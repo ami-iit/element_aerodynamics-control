@@ -37,7 +37,7 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
     f_a          = reshape(aerodynamic_forces,[],1);
     
     % define aerodynamic forces jacobian
-    n_aero_links = length(aero_config.frameNames);
+    n_aero_links = aero_config.nAeroLinks;
     J_a          = zeros(3*n_aero_links,6+ndof);
     for i = 1 : n_aero_links
         J_a(3*i-2:3*i,:) = J_aeroForces(6*i-5:6*i-3,:);
