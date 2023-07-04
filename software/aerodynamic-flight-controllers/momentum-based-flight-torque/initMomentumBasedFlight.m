@@ -18,6 +18,9 @@ clc
 
 %% GENERAL SIMULATION INFO
 
+robotName = 'iRonCub-Mk1';
+setenv('YARP_ROBOT_NAME', robotName)
+
 % Set path to the utility functions and to WBC library
 import wbc.*
 addpath(genpath('./src/'));
@@ -31,6 +34,10 @@ Config.tStep                            = 0.01;
 %% SIMULATION SETTINGS
 % Put zero if testing with jets off
 Config.USE_JETS = 0; % Used in torque control
+
+% Put 1 if testing with aerodynamic forces
+aero_config.USE_AERODYNAMICS            = false;
+aero_config.USE_WIND_SPEED              = false;
 
 % If TRUE, jet dynamics is included in the controller. WARNING: if the
 % controller is interfaced with Gazebo simulator, also Gazebo needs 
@@ -82,9 +89,10 @@ Config.SAVE_WORKSPACE                   = true;
 %% ADD CONFIGURATION FILES
 
 % Run robot-specific and controller-specific configuration parameters
-run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/configRobot.m')); 
-run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/configJets.m')); 
-run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gainsAndParameters.m'));
+run(strcat('app/robots/',robotName,'/configRobot.m')); 
+run(strcat('app/robots/',robotName,'/configJets.m')); 
+run(strcat('app/robots/',robotName,'/configAero.m'));
+run(strcat('app/robots/',robotName,'/gainsAndParameters.m'));
 
 % open the native GUI for control (if no joystick is present)
 if Config.USE_NATIVE_GUI

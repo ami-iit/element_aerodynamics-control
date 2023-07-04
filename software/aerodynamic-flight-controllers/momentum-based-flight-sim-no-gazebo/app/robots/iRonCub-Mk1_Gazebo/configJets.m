@@ -37,8 +37,8 @@ Config.ekf.measurement_noise = 10e2 * 1e-3; %% in simulation there's no noise
 % If the noise is not zero you should tune the EKF parameters above
 Config.thrust_noise = 0.0;
 
-Config.fl.KP = [1, 1, 1, 1] * 50 ;
-Config.fl.KD = 2 * sqrt(Config.fl.KP);
+Config.fl.KP = [1, 1, 1, 1] * 150 ;
+Config.fl.KD = 2 * sqrt(Config.fl.KP)/10;
 Config.fl.KI = [1, 1, 1, 1] * 0;
 
 % Saturation on throttle
