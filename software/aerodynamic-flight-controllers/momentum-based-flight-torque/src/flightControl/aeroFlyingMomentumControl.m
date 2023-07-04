@@ -222,7 +222,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     g_angMomentum   = [zeros(4,1); zeros(12,1); zeros(ndof,1)];  
     
     % compute the momentum error derivative/integral
-    LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa * aerodynamic_force_vector - f_grav;
+    LDot_estimated  = Aj * jetsIntensities * Config.USE_JETS + Ac * contactForces_hat .* feetContactIsActive + Aa * aerodynamic_force_vector * aero_config.USE_AERODYNAMICS - f_grav;
     LDot_tilde      = LDot_estimated - LDot_des;
     intL_tilde      = [(m * posCoM - intL_des(1:3)); zeros(3,1)];
     
@@ -232,9 +232,9 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     
     % CONTROL # 1: momentum-based control with Lyapunov stability (IEEE-RAL 2018)
     KTilde     = KP_momentum + inv(Config.gains.momentum.KO) + KD_momentum;    
-    ATilde     = [Aj, Ac .* feetContactIsActive];
-    BTilde     = Lambda_js + KTilde * JL_s + Lambda_cs .* feetContactIsActive + Lambda_as;
-    deltaTilde = (Lambda_jb + Lambda_cb .* feetContactIsActive + Lambda_ab + KTilde * JL_b) * w_baseTwist - KTilde * L_des - LDDot_des + ...
+    ATilde     = [Aj * Config.USE_JETS, Ac .* feetContactIsActive];
+    BTilde     = Lambda_js * Config.USE_JETS + KTilde * JL_s + Lambda_cs .* feetContactIsActive + Lambda_as * aero_config.USE_AERODYNAMICS;
+    deltaTilde = (Lambda_jb * Config.USE_JETS + Lambda_cb .* feetContactIsActive + Lambda_ab * aero_config.USE_AERODYNAMICS + KTilde * JL_b) * w_baseTwist - KTilde * L_des - LDDot_des + ...
                  (KD_momentum + eye(6)) * LDot_tilde + KP_momentum * intL_tilde; 
     
     % CONTROL # 2: linear momentum and attitude control (IEEE-HUMANOIDS 2018)
@@ -275,7 +275,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
         % compute the angular part (attitude control)
         [H_angMomentum, g_angMomentum, ATilde_angular, BTilde_angular, deltaTilde_angular, verifyAngMomAndInertia, w_L_angMom_des] = ...
             aeroFlyingAttitudeControl(w_R_b, w_I_c, w_baseTwist, CMM, rot_vel_acc_jerk_base_des, Ac, Aj, Lambda_cb, Lambda_cs, Lambda_jb, ...
-                                      Lambda_js, Lambda_ab, Lambda_as, L, LDot_estimated, feetContactIsActive, c0, c1);
+                                      Lambda_js, Lambda_ab, Lambda_as, L, LDot_estimated, feetContactIsActive, c0, c1, aero_config, Config);
         % for visualization
         L_des(4:6)        = w_L_angMom_des;
         

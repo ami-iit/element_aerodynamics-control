@@ -59,7 +59,7 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
     St             = transpose(S);
     invM           = eye(ndof + 6)/M;
     St_invM_B      = St * invM * B;
-    St_invM_bias   = St * invM * (transpose(J_j) * f_j + transpose(J_a) * f_a - h);
+    St_invM_bias   = St * invM * (transpose(J_j) * f_j * Config.USE_JETS + transpose(J_a) * f_a * aero_config.USE_AERODYNAMICS - h);
     
     %% QP formulation 
     
@@ -83,7 +83,7 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
     %  Jc_invM_B * u = - Jc_invM_bias - JDot_c_nu
     %
     Jc_invM_B      = J_c * invM * B;
-    Jc_invM_bias   = J_c * invM * (transpose(J_j) * f_j + transpose(J_a) * f_a - h);
+    Jc_invM_bias   = J_c * invM * (transpose(J_j) * f_j * Config.USE_JETS + transpose(J_a) * f_a * aero_config.USE_AERODYNAMICS - h);
     
     % equality constraints task
     H_feetConstr   = transpose(Jc_invM_B) * Jc_invM_B;

@@ -34,4 +34,4 @@ for frameIndex = 1 : length(aero_config.frameNames)
     
 end
 
-% save(['./app/robots/',robotName,'/aeroFrameTransforms.mat'], 'linkFrame_T_linkCoM', 'linkFrame_X_linkCoM');
+save(['./app/robots/',robotName,'/aeroFrameTransforms.mat'], 'linkFrame_T_linkCoM', 'linkFrame_X_linkCoM');

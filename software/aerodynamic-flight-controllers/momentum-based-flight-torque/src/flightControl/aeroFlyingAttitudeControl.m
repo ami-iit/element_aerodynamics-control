@@ -1,6 +1,6 @@
 function [H_angMomentum, g_angMomentum, ATilde_angular, BTilde_angular, deltaTilde_angular, verifyAngMomAndInertia, w_L_angMom_des] = ...
             aeroFlyingAttitudeControl(w_R_b, w_I_c, w_baseTwist, CMM, rot_vel_acc_jerk_base_des, Ac, Aj, Lambda_cb, Lambda_cs, Lambda_jb, ...
-                                      Lambda_js, Lambda_ab, Lambda_as, L, LDot_estimated, feetContactIsActive, c0, c1)
+                                      Lambda_js, Lambda_ab, Lambda_as, L, LDot_estimated, feetContactIsActive, c0, c1, aero_config, Config)
              
     % persistent variables definition
     persistent b_I_c_0;
@@ -198,9 +198,9 @@ function [H_angMomentum, g_angMomentum, ATilde_angular, BTilde_angular, deltaTil
     % now, compute the terms of Eq. (10). Note that we included b_R_w in
     % the definition of ATilde_angular, etc, ... and also note that
     % deltaTilde_angular now contains sigma
-    ATilde_angular         = b_R_w * [Aj(4:6,:), Ac(4:6,:) .* feetContactIsActive];
-    BTilde_angular         = b_R_w * (Lambda_js(4:6,:) + Lambda_cs(4:6,:) .* feetContactIsActive + Lambda_as(4:6,:));
-    deltaTilde_angular     = b_R_w * ((Lambda_jb(4:6,:) + Lambda_cb(4:6,:) .* feetContactIsActive + Lambda_ab(4:6,:)) * w_baseTwist - sigma) - b_LDDot_angMom_star;     
+    ATilde_angular         = b_R_w * [Aj(4:6,:) * Config.USE_JETS, Ac(4:6,:) .* feetContactIsActive];
+    BTilde_angular         = b_R_w * (Lambda_js(4:6,:) * Config.USE_JETS + Lambda_cs(4:6,:) .* feetContactIsActive + Lambda_as(4:6,:) * aero_config.USE_AERODYNAMICS);
+    deltaTilde_angular     = b_R_w * ((Lambda_jb(4:6,:) * Config.USE_JETS + Lambda_cb(4:6,:) .* feetContactIsActive + Lambda_ab(4:6,:) * aero_config.USE_AERODYNAMICS) * w_baseTwist - sigma) - b_LDDot_angMom_star;     
        
     % debug: verify that the constraint on the angular momentum in body coordinates
     % is respected (i.e. b_L_angMom = b_I_c0 * b_omega_b and b_I_c = b_I_c0)
