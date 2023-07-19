@@ -70,49 +70,6 @@ Config.turbines.cons_turbineArm_max   = 0.39/60;  % lt/s
 Config.turbines.cons_turbineChest_idl = 0.13/60;  % lt/s
 Config.turbines.cons_turbineArm_idl   = 0.08/60;  % lt/s
 
-%% structure used to configure the Robot class %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% added from matlab aerodynamic simulator 
-
-jointOrder = {'torso_pitch', 'torso_roll', 'torso_yaw', ...
-            'l_shoulder_pitch', 'l_shoulder_roll', 'l_shoulder_yaw', 'l_elbow', ...
-            'r_shoulder_pitch', 'r_shoulder_roll', 'r_shoulder_yaw', 'r_elbow', ...
-            'l_hip_pitch', 'l_hip_roll', 'l_hip_yaw', 'l_knee', 'l_ankle_pitch', 'l_ankle_roll', ...
-            'r_hip_pitch', 'r_hip_roll', 'r_hip_yaw', 'r_knee', 'r_ankle_pitch', 'r_ankle_roll'};
-
-% Initial condition of iRonCub and for the integrators.
-Config.initialConditions.base_position = [0;0;0.8];
-Config.initialConditions.orientation   = diag([-1,-1,1]);
-Config.initialConditions.world_H_base  = Rp2Hom(Config.initialConditions.orientation, Config.initialConditions.base_position);
-Config.initialConditions.joints        = [0.1744;  0.0007; 0.0001; -0.1745; ...
-                                          0.4363;  0.6981; 0.2618; -0.1745; ...
-                                          0.4363;  0.6981; 0.2618;  0.0003; ...
-                                          0.0000; -0.0001; 0.0004; -0.0004; ...
-                                          0.0003;  0.0002; 0.0001; -0.0002; ...
-                                          0.0004; -0.0005; 0.0003];
-
-Config.initialConditions.base_linear_velocity  = [0;0;0];
-Config.initialConditions.base_angular_velocity = [0;0;0];
-Config.initialConditions.base_velocity         = [Config.initialConditions.base_linear_velocity; Config.initialConditions.base_angular_velocity];
-Config.initialConditions.joints_velocity       = zeros(Config.N_DOF,1);
-Config.initialConditions.jets_thrust           = [0; 0; 0; 0];
-
-robot_config = Config;
-robot_config.jointOrder = jointOrder;
-robot_config.initialConditions.w_H_b = Config.initialConditions.world_H_base;
-robot_config.initialConditions.s = Config.initialConditions.joints;
-robot_config.initialConditions.base_pose_dot = Config.initialConditions.base_velocity;
-robot_config.initialConditions.s_dot = Config.initialConditions.joints_velocity;
-
-% Reflected inertia
-robot_config.SIMULATE_MOTOR_REFLECTED_INERTIA = false;
-
-% robot name and path
-robot_config.robotName = robotName;
-component_path         = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
-robot_config.fileName  = 'model.urdf';
-robot_config.modelPath = [component_path '/models/' robot_config.robotName '/iRonCub/robots/' robot_config.robotName '/'];
-
-
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Robot frames list
@@ -137,3 +94,17 @@ Ports.WRENCH_LEFT_FOOT  = '/wholeBodyDynamics/left_foot/cartesianEndEffectorWren
 Ports.WRENCH_RIGHT_FOOT = '/wholeBodyDynamics/right_foot/cartesianEndEffectorWrench:o';
 Ports.JOYSTICK_AXIS     = '/joypadDevice/xbox/axis:o';
 Ports.JOYSTICK_BUTTONS  = '/joypadDevice/xbox/buttons:o';
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+Frames.IMU                       = 'imu_frame';
+Config.USE_IMU4EST_BASE          = false;
+Config.FILTER_IMU_YAW            = true;
+Config.CORRECT_NECK_IMU          = false;
+Ports.IMU                        = ['/' WBTConfigRobot.RobotName '/inertial'];
+Ports.NECK_POS                   = ['/' WBTConfigRobot.RobotName '/head/state:o'];
+Ports.NECK_POS_PORT_SIZE         = 6;
+Ports.IMU_PORT_SIZE              = 12;
+Ports.IMU_PORT_ORIENTATION_INDEX = [1,2,3];
+Reg.pinvDamp                     = 0.07;
+Reg.pinvDamp_baseVel             = 1e-7;

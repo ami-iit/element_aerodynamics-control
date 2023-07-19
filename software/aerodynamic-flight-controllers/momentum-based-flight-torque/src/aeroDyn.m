@@ -61,11 +61,8 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
                                   cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
             end
             linkDragForce = 0.5 * obj.conditions.airDensity * linkReferenceArea * norm(linkRelativeWindVelocity) * Cd * linkRelativeWindVelocity;
-            if matches(frameName,{'l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'}) 
-                link_aerodynamic_force = linkNormalForce + linkDragForce;
-            else 
-                link_aerodynamic_force = zeros(3,1);
-            end
+            link_aerodynamic_force = linkNormalForce + linkDragForce;
+            
         end
         
 
