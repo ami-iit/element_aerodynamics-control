@@ -296,28 +296,66 @@ end
 %                  ones(length(alpha_v(:,9)),1), sind(alpha_v(:,9)).^3, sind(alpha_v(:,9)).^2.*cosd(alpha_v(:,9))];
 
 X = @(alpha_2, alpha_3, alpha_4, alpha_5, alpha_6, alpha_7, alpha_8, alpha_9) ...
-               [ ones(length(alpha_2),1), sind(alpha_2).^3, sind(alpha_3).^3, sind(alpha_4).^3, sind(alpha_5).^3, sind(alpha_6).^3, sind(alpha_7).^3, sind(alpha_8).^3, sind(alpha_9).^3];
+               [ ones(length(alpha_2),1), sind(alpha_2).^3, ones(length(alpha_2),1), sind(alpha_3).^3, ...
+                 ones(length(alpha_2),1), sind(alpha_4).^3, ones(length(alpha_2),1), sind(alpha_5).^3, ...
+                 ones(length(alpha_2),1), sind(alpha_6).^3, ones(length(alpha_2),1), sind(alpha_7).^3, ...
+                 ones(length(alpha_2),1), sind(alpha_8).^3, ones(length(alpha_2),1), sind(alpha_9).^3];
 
 alpha_model = transpose(linspace(0,180,1801));
 
 Y1 = ironcubCd_partial;
+Y2 = linkCdAs_matrix(:,2);
+Y3 = linkCdAs_matrix(:,3);
+Y4 = linkCdAs_matrix(:,4);
+Y5 = linkCdAs_matrix(:,5);
+Y6 = linkCdAs_matrix(:,6);
+Y7 = linkCdAs_matrix(:,7);
+Y8 = linkCdAs_matrix(:,8);
+Y9 = linkCdAs_matrix(:,9);
+
+Y_full = [Y1; Y2; Y3; Y4; Y5; Y6; Y7; Y8; Y9];
+
 X1 = X(linkAoAs_matrix(:,2),linkAoAs_matrix(:,3),linkAoAs_matrix(:,4), ...
        linkAoAs_matrix(:,5),linkAoAs_matrix(:,6),linkAoAs_matrix(:,7), ...
        linkAoAs_matrix(:,8),linkAoAs_matrix(:,9));
 
+X2 = [ ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,2)).^3, zeros(length(linkAoAs_matrix(:,2)),14)];
+
+X3 = [ zeros(length(linkAoAs_matrix(:,2)),2), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,3)).^3, zeros(length(linkAoAs_matrix(:,2)),12) ];
+
+X4 = [ zeros(length(linkAoAs_matrix(:,2)),4), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,4)).^3, zeros(length(linkAoAs_matrix(:,2)),10) ];
+
+X5 = [ zeros(length(linkAoAs_matrix(:,2)),6), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,5)).^3, zeros(length(linkAoAs_matrix(:,2)),8) ];
+
+X6 = [ zeros(length(linkAoAs_matrix(:,2)),8), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,6)).^3, zeros(length(linkAoAs_matrix(:,2)),6) ];
+
+X7 = [ zeros(length(linkAoAs_matrix(:,2)),10), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,7)).^3, zeros(length(linkAoAs_matrix(:,2)),4) ];
+
+X8 = [ zeros(length(linkAoAs_matrix(:,2)),12), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,8)).^3, zeros(length(linkAoAs_matrix(:,2)),2) ];
+
+X9 = [ zeros(length(linkAoAs_matrix(:,2)),14), ones(length(linkAoAs_matrix(:,2)),1), sind(linkAoAs_matrix(:,9)).^3 ];
+
+X_full = [X1; X2; X3; X4; X5; X6; X7; X8; X9];
+
+
+
+
 % equality constraints
-Aeq = zeros(3,length(X1(1,:)));
-Aeq(1,3) = 1; Aeq(1,4) = -1; %   I constraint: same coef for back turbines
-Aeq(2,5) = 1; Aeq(2,7) = -1; %  II constraint: same coef for arms
-Aeq(3,6) = 1; Aeq(3,8) = -1; % III constraint: same coef for arm turbines
-beq = zeros(3,1);
+Aeq = zeros(3,length(X_full(1,:)));
+Aeq(1,3) = 1; Aeq(1,5) = -1;    %   I constraint: same c0 for back turbines
+Aeq(2,4) = 1; Aeq(2,6) = -1;    %  II constraint: same c1 for back turbines
+Aeq(3,7) = 1; Aeq(3,11) = -1;   % III constraint: same c0 for arms
+Aeq(4,8) = 1; Aeq(4,12) = -1;   %  IV constraint: same c1 for arms
+Aeq(5,9) = 1; Aeq(5,13) = -1;   %   V constraint: same c0 for arm turbines
+Aeq(6,10) = 1; Aeq(6,14) = -1;  %  VI constraint: same c1 for arm turbines
+
+beq = zeros(6,1);
 
 % least square linear optimization
-Cd_coefs_lsqlin = lsqlin(X1,Y1,[],[],Aeq,beq,zeros(length(X1(1,:)),1));
+Cd_coefs_lsqlin = lsqlin(X_full,Y_full,[],[],Aeq,beq,zeros(length(X_full(1,:)),1));
 
-% scaling the Cd_0 coefs
-Cd_0 = Cd_0_coefs * (Cd_coefs_lsqlin(1)/sum(Cd_0_coefs));
-Cd_1 = Cd_coefs_lsqlin;
+Cd_0 = Cd_coefs_lsqlin(1:2:15);
+Cd_1 = Cd_coefs_lsqlin(2:2:16);
 
 % Cd_model    = X(alpha_model)*Cd_coefs;
 
