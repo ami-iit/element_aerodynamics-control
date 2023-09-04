@@ -71,3 +71,44 @@ aero_config.sphereModel.Re_exp   = [2e4, 7.36e4, 1.54e5, 2.07e5, 3.31e5, 3.42e5,
                                     3.66e5, 3.74e5, 3.84e5, 4.44e5, 6.94e5, 1.26e6, 3.05e6, 6e6];
 aero_config.sphereModel.Cd_exp   = [0.438, 0.498, 0.517, 0.513, 0.433, 0.367, 0.295, 0.231, 0.187, ...
                                     0.144, 0.101, 0.0628, 0.0845, 0.123, 0.171, 0.188];
+
+%% CFD-regression parameters
+
+% CdA
+aero_config.cfdModel.head.CdA                = [0; 0.0188; 0.0310; -0.0136; -0.0172];
+aero_config.cfdModel.torso.CdA               = [0.0399; 0; -0.00817; 0; 0];
+aero_config.cfdModel.chest_l_jet_turbine.CdA = [0.00956; -0.00319; 0.00302; 0; 0.00461];
+aero_config.cfdModel.chest_r_jet_turbine.CdA = [0.00956; -0.00319; 0.00302; 0; 0.00461];
+aero_config.cfdModel.l_upper_arm.CdA         = [0.00172; 0.00167; 0.00575; 0; 0];
+aero_config.cfdModel.l_arm_jet_turbine.CdA   = [0.00559; 0.00150; 0.00769; 0; 0.00136];
+aero_config.cfdModel.r_upper_arm.CdA         = [0.00172; 0.00167; 0.00575; 0; 0];
+aero_config.cfdModel.r_arm_jet_turbine.CdA   = [0.00559; 0.00150; 0.00769; 0; 0.00136];
+aero_config.cfdModel.root_link.CdA           = [0.0156; 0; 0.0362; -0.0353; 0];
+aero_config.cfdModel.l_upper_leg.CdA         = [0; -0.00219; 0.0152; 0; 0];
+aero_config.cfdModel.l_lower_leg.CdA         = [0.00920; -0.00712; 0.0428; -0.0276; 0.00242];
+aero_config.cfdModel.r_upper_leg.CdA         = [0; -0.00219; 0.0152; 0; 0];
+aero_config.cfdModel.r_lower_leg.CdA         = [0.00920; -0.00712; 0.0428; -0.0276; 0.00242];
+
+% CnA
+
+aero_config.cfdModel.head.CnA                = 0.0578;
+aero_config.cfdModel.torso.CnA               = 0.0511;
+aero_config.cfdModel.chest_l_jet_turbine.CnA = 0.0325;
+aero_config.cfdModel.chest_r_jet_turbine.CnA = 0.0325;
+aero_config.cfdModel.l_upper_arm.CnA         = 0.0108;
+aero_config.cfdModel.l_arm_jet_turbine.CnA   = 0.0146;
+aero_config.cfdModel.r_upper_arm.CnA         = 0.0108;
+aero_config.cfdModel.r_arm_jet_turbine.CnA   = 0.0146;
+aero_config.cfdModel.root_link.CnA           = 0.0289;
+aero_config.cfdModel.l_upper_leg.CnA         = 0.0224;
+aero_config.cfdModel.l_lower_leg.CnA         = 0.0324;
+aero_config.cfdModel.r_upper_leg.CnA         = 0.0224;
+aero_config.cfdModel.r_lower_leg.CnA         = 0.0324;
+
+
+
+
+
+
+
+
