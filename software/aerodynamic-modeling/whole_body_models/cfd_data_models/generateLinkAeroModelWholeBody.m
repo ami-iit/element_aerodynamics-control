@@ -24,322 +24,213 @@ cfdLinkNames   = {'head', 'torso', 'left_back_turbine', 'right_back_turbine', ..
                   'left_arm','left_arm_turbine','right_arm','right_arm_turbine',...
                   'root_link','left_leg_upper','left_leg_lower','right_leg_upper','right_leg_lower'};
 
-load('./src/aeroFrameTransforms.mat');
-
-
-%% data for iDynTreeWrappers
-componentPath  = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
-modelPath      = [componentPath,'/models/iRonCub-Mk1/iRonCub/robots/iRonCub-Mk1_Gazebo/'];
-fileName       = 'model_stl.urdf';
-meshFilePrefix = [componentPath,'/models'];
-jointNames     = {'torso_pitch','torso_roll','torso_yaw', 'l_shoulder_pitch', 'l_shoulder_roll','l_shoulder_yaw', ...
-                  'l_elbow', 'r_shoulder_pitch', 'r_shoulder_roll','r_shoulder_yaw','r_elbow', ...
-                  'l_hip_pitch', 'l_hip_roll', 'l_hip_yaw','l_knee','r_hip_pitch','r_hip_roll','r_hip_yaw','r_knee'};
-
-jointVel = zeros(23,1);
-baseVel  = zeros(6,1);
-gravAcc  = [0; 0; 9.81];
-basePose = eye(4);  % alpha=90 and beta=0
-
-linkAoAs_matrix = [];
-linkSsAs_matrix = [];
-linkCdAs_matrix = [];
-linkClAs_matrix = [];
-linkCsAs_matrix = [];
-linkCnAs_matrix = [];
-linkCfAs_matrix = [];
-
-yawAngles_full   = [];
-pitchAngles_full = [];
-ironcubCdAs_full = [];
-ironcubClAs_full = [];
-ironcubCsAs_full = [];
-
-for linkIndex = 1 : length(cfdLinkNames)
-
-    linkAoAs_full = [];
-    linkSsAs_full = [];
-    linkCdAs_full = [];
-    linkClAs_full = [];
-    linkCsAs_full = [];
-    linkCnAs_full = [];
-    linkCfAs_full = [];
-
-    cfdLinkName = cfdLinkNames{linkIndex};
-    aeroFrameName = aeroFrameNames{linkIndex};
-
-    if matches(aeroFrameName, {'head','chest','root_link'})
-        frameAxis  = [0; 1; 0];
-        normalAxis = [1; 0; 0];
-    else
-        frameAxis  = [0; 0; 1];
-        normalAxis = [1; 0; 0];
-    end
-
-
-
-    for jointConfigIndex = 1 : length(fieldnames(data))
-
-        jointConfigName = jointConfigNames{jointConfigIndex};
-        jointPos        = data.(jointConfigName).jointConfig * pi/180;
-
-        % idyntree model initialization
-        KinDynModel = iDynTreeWrappers.loadReducedModel(jointNames, 'root_link', modelPath, fileName, false);
-        iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPos, baseVel, jointVel, gravAcc);
-
-        % robot visualization
-        %             iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.96,0.96,0.96], ...
-        %                                                 'material', 'dull', 'transparency', 0.5, 'debug', true, 'view', [-45 5]);
-
-        dummyVector = nan(length(data.(jointConfigName).yawAngle(:)), 1);
-        linkAoAs = dummyVector;
-        linkSsAs = dummyVector;
-        linkCdAs = dummyVector;
-        linkClAs = dummyVector;
-        linkCsAs = dummyVector;
-
-        yawAngles   = dummyVector;
-        pitchAngles = dummyVector;
-        ironcubCdAs = dummyVector;
-        ironcubClAs = dummyVector;
-        ironcubCsAs = dummyVector;
-
-        for simIndex = 1 : length(data.(jointConfigName).yawAngle(:))
-
-            % adjust robot pose
-            yawAngle   = data.(jointConfigName).yawAngle(simIndex);
-            pitchAngle = data.(jointConfigName).pitchAngle(simIndex);
-            R_yaw      = rotz(yawAngle);
-            R_pitch    = roty(pitchAngle - 90);
-            w_H_base   = [R_yaw * R_pitch, zeros(3,1);
-                zeros(1,3),         1];
-            % Compute link alpha (angle of attack)
-            base_H_link       = iDynTreeWrappers.getRelativeTransform(KinDynModel,'root_link',aeroFrameName);
-            w_H_link          = w_H_base * base_H_link;
-            linkAxisVector    = w_H_link(1:3,1:3) * frameAxis;
-            linkAxisVersor    = linkAxisVector/(norm(linkAxisVector) + 1e-6);
-            linkAngleOfAttack = acosd(transpose(linkAxisVersor) * [-1; 0; 0]); % [deg]
-            % Compute link beta (sideslip angle)
-            linkNormalVector  = w_H_link(1:3,1:3) * normalAxis;
-            linkNormalVersor  = linkNormalVector/(norm(linkNormalVector) + 1e-6);
-            auxVector         = cross([0; -1; 0],linkAxisVersor);
-            auxVersor         = auxVector/(norm(auxVector) + 1e-6);
-            if norm(auxVersor)>=1 || norm(linkNormalVersor)>=1
-                disp(['problem at iter ', num2str(simIndex)])
-            end
-            linkSideslipAngle = acosd(transpose(linkNormalVersor) * auxVersor); % [deg]
-            % Store data
-            linkAoAs(simIndex) = linkAngleOfAttack;
-            linkSsAs(simIndex) = linkSideslipAngle;
-
-%             if linkIndex == 2
-%                 linkCdAs(simIndex) = data.(jointConfigName).([cfdLinkName,'_cd'])(simIndex) + ...
-%                     data.(jointConfigName).([cfdLinkNames{3},'_cd'])(simIndex) + ...
-%                     data.(jointConfigName).([cfdLinkNames{4},'_cd'])(simIndex);
-%                 linkClAs(simIndex) = data.(jointConfigName).([cfdLinkName,'_cl'])(simIndex) + ...
-%                     data.(jointConfigName).([cfdLinkNames{3},'_cl'])(simIndex) + ...
-%                     data.(jointConfigName).([cfdLinkNames{4},'_cl'])(simIndex);
-%                 linkCsAs(simIndex) = data.(jointConfigName).([cfdLinkName,'_cs'])(simIndex) + ...
-%                     data.(jointConfigName).([cfdLinkNames{3},'_cs'])(simIndex) + ...
-%                     data.(jointConfigName).([cfdLinkNames{4},'_cs'])(simIndex);
-%             else
-                linkCdAs(simIndex) = data.(jointConfigName).([cfdLinkName,'_cd'])(simIndex);
-                linkClAs(simIndex) = data.(jointConfigName).([cfdLinkName,'_cl'])(simIndex);
-                linkCsAs(simIndex) = data.(jointConfigName).([cfdLinkName,'_cs'])(simIndex);
-%             end
-
-
-            if linkIndex == 1
-                yawAngles(simIndex)   = yawAngle;
-                pitchAngles(simIndex) = pitchAngle;
-                ironcubCdAs(simIndex) = data.(jointConfigName).ironcub_cd(simIndex);
-                ironcubClAs(simIndex) = data.(jointConfigName).ironcub_cl(simIndex);
-                ironcubCsAs(simIndex) = data.(jointConfigName).ironcub_cs(simIndex);
-            end
-
-        end
-
-        linkCnAs = sqrt(linkClAs.^2 + linkCsAs.^2);
-        linkCfAs = sqrt(linkClAs.^2 + linkCsAs.^2 + linkCdAs.^2);
-
-        % Build link dataset
-        linkAoAs_full = [linkAoAs_full; linkAoAs];
-        linkSsAs_full = [linkSsAs_full; linkSsAs];
-        linkCdAs_full = [linkCdAs_full; linkCdAs];
-        linkClAs_full = [linkClAs_full; linkClAs];
-        linkCsAs_full = [linkCsAs_full; linkCsAs];
-        linkCnAs_full = [linkCnAs_full; linkCnAs];
-        linkCfAs_full = [linkCfAs_full; linkCfAs];
-        
-        if linkIndex == 1
-            yawAngles_full   = [yawAngles_full; yawAngles];
-            pitchAngles_full = [pitchAngles_full; pitchAngles];
-            ironcubCdAs_full = [ironcubCdAs_full; ironcubCdAs];
-            ironcubClAs_full = [ironcubClAs_full; ironcubClAs];
-            ironcubCsAs_full = [ironcubCsAs_full; ironcubCsAs];
-        end
-
-    end
-
-    linkAoAs_matrix(:,linkIndex) = linkAoAs_full;
-    linkSsAs_matrix(:,linkIndex) = linkSsAs_full;
-    linkCdAs_matrix(:,linkIndex) = linkCdAs_full;
-    linkClAs_matrix(:,linkIndex) = linkClAs_full;
-    linkCsAs_matrix(:,linkIndex) = linkCsAs_full;
-    linkCnAs_matrix(:,linkIndex) = linkCnAs_full;
-    linkCfAs_matrix(:,linkIndex) = linkCfAs_full;
-
-end
+%% Load dataset
+load([dataPath,'dataset.mat']);
 
 %% Evaluate pre-computed models
 % model coefficients
-Cd_head_coefs     = [0.00334; 0.0188; 0; 0.0142; -0.0172; 0];
-Cn_head_coefs     = [0.00425; 0.0116; 0; 0.0108; -0.0101; 0];
-Cd_leg_up_coefs   = [0.000637; 0; 0; 0.0144; 0; 0];
-Cn_leg_up_coefs   = [0; 0; 0; 0; 0; 0.0133];
-Cd_leg_low_coefs  = [0.000540; -0.00573; 0.0269; -0.00763; 0; 0];
-Cn_leg_low_coefs  = [0; 0; 0; 0; 0; 0.0100];
+Cd_root_link_coefs = [0.0156; 0; 0.0362; -0.0353; 0];
+Cd_arm_coefs       = [0.00172; 0.00167; 0.00575; 0; 0];
+Cd_arm_turb_coefs  = [0.00559; 0.00150; 0.00769; 0; 0.00136];    
 
 % model functions matrix
 model_functions_matrix = @(alpha) [ ones(length(alpha),1) , ... 
-                                    cosd(alpha)           , ... 
-                                    sind(alpha)           , ... 
+                                    cosd(alpha)           , ...
                                     sind(alpha).^2        , ... 
-                                    cosd(alpha).^3        , ... 
-                                    sind(alpha).^2.*cosd(alpha)  , ... 
+                                    sind(alpha).^3        , ... 
+                                    cosd(alpha).^3          ...
                                     ];
 
 % Coefficients model
 model = @(coefs,alpha) model_functions_matrix(alpha) * coefs;
 
-% head
-alpha_head = linkAoAs_matrix(:,1);
-Cd_head = model(Cd_head_coefs,alpha_head);
-Cn_head = model(Cn_head_coefs,alpha_head);
+% root_link
+alpha_rl = linkAoAs_matrix(:,9);
+Cd_root_link = model(Cd_root_link_coefs,alpha_rl);
 
-% left_leg_upper
-alpha_left_leg_upper = linkAoAs_matrix(:,10);
-Cd_left_leg_upper = model(Cd_leg_up_coefs,alpha_left_leg_upper);
-Cn_left_leg_upper = model(Cn_leg_up_coefs,alpha_left_leg_upper);
+% arms
+alpha_la = linkAoAs_matrix(:,5);
+Cd_left_arm = model(Cd_arm_coefs,alpha_la);
+alpha_ra = linkAoAs_matrix(:,7);
+Cd_right_arm = model(Cd_arm_coefs,alpha_ra);
 
-% left_leg_lower
-alpha_left_leg_lower = linkAoAs_matrix(:,11);
-Cd_left_leg_lower = model(Cd_leg_low_coefs,alpha_left_leg_lower);
-Cn_left_leg_lower = model(Cn_leg_low_coefs,alpha_left_leg_lower);
+% arm turbines
+alpha_lat = linkAoAs_matrix(:,6);
+Cd_left_arm_turb = model(Cd_arm_turb_coefs,alpha_lat);
+alpha_rat = linkAoAs_matrix(:,8);
+Cd_right_arm_turb = model(Cd_arm_turb_coefs,alpha_rat);
 
-% right_leg_upper
-alpha_right_leg_upper = linkAoAs_matrix(:,12);
-Cd_right_leg_upper = model(Cd_leg_up_coefs,alpha_right_leg_upper);
-Cn_right_leg_upper = model(Cn_leg_up_coefs,alpha_right_leg_upper);
-
-% right_leg_lower
-alpha_right_leg_lower = linkAoAs_matrix(:,13);
-Cd_right_leg_lower = model(Cd_leg_low_coefs,alpha_right_leg_lower);
-Cn_right_leg_lower = model(Cn_leg_low_coefs,alpha_right_leg_lower);
 
 % Calculate partial coefficients
-ironcubCd_partial = ironcubCdAs_full - Cd_head - Cd_left_leg_upper - ...
-                    Cd_left_leg_lower - Cd_right_leg_upper - Cd_right_leg_lower;
+ironcubCd_partial = ironcubCdAs_full - Cd_root_link - Cd_left_arm - Cd_right_arm - Cd_left_arm_turb - Cd_right_arm_turb;
 
-%% Calculate CdA_0 for the non-yet-modeled links
 
-Cd_0_coefs = [];
-for linkIndex = 2 : 9
+%% Generate links drag area ensemble aerodynamic model
+% Initial guess from separated analysis
+w_0 = [0; 0.0188; 0.0310; -0.0136; -0.0172;...
+       0.0399; -0.00817; ...
+       0.00956; -0.00319; 0.00302; 0.00461; ...
+       0.00956; -0.00319; 0.00302; 0.00461; ...
+       0.00172; 0.00167; 0.00575; ...
+       0.00559; 0.00150; 0.00769; 0.00136; ...
+       0.00172; 0.00167; 0.00575; ...
+       0.00559; 0.00150; 0.00769; 0.00136; ...
+       0; 0; 0; ...
+       0; -0.00219; 0.0152;...
+       0.00920; -0.00712; 0.0428; -0.0276; 0.00242; ...
+       0; -0.00219; 0.0152;...
+       0.00920; -0.00712; 0.0428; -0.0276; 0.00242 ...
+       ];
 
-    X_Cd_0 = @(alpha) [ ones(length(alpha),1)        , ...
-                        ...cosd(alpha)                  , ...
-                        ...sind(alpha)                  , ...
-                        ...sind(alpha).^2               , ...
-                        ...sind(alpha).*cosd(alpha)     , ...
-                        ...cosd(alpha).^3               , ...
-                        sind(alpha).^3               , ...
-                        ...sind(alpha).^2.*cosd(alpha)  , ...
-                        ];
-    
-    if linkIndex >= 3 && linkIndex <= 8
-        if linkIndex == 3
-            linkIndex_spec = linkIndex + 1;
-        elseif linkIndex == 4
-            linkIndex_spec = linkIndex - 1;
-        elseif linkIndex == 5 || linkIndex == 6
-            linkIndex_spec = linkIndex + 2;
-        elseif linkIndex == 7 || linkIndex == 8
-            linkIndex_spec = linkIndex - 2;
+% Build single link model matrices
+head_X      = @(alpha_h)  [ones(length(alpha_h),1), cosd(alpha_h), sind(alpha_h).^2, sind(alpha_h).^3, cosd(alpha_h).^3];
+torso_X     = @(alpha_t)  [ones(length(alpha_t),1), sind(alpha_t).^2];
+back_turb_X = @(alpha_bt) [ones(length(alpha_bt),1), cosd(alpha_bt), sind(alpha_bt).^2, cosd(alpha_bt).^3];
+arm_X       = @(alpha_a)  [ones(length(alpha_a),1), cosd(alpha_a), sind(alpha_a).^2];
+arm_turb_X  = @(alpha_at) [ones(length(alpha_at),1), cosd(alpha_at), sind(alpha_at).^2, cosd(alpha_at).^3];
+root_link_X = @(alpha_rl) [ones(length(alpha_rl),1), sind(alpha_rl).^2, sind(alpha_rl).^3];
+upper_leg_X = @(alpha_ul) [ones(length(alpha_ul),1), cosd(alpha_ul), sind(alpha_ul).^2];
+lower_leg_X = @(alpha_ll) [ones(length(alpha_ll),1), cosd(alpha_ll), sind(alpha_ll).^2, sind(alpha_ll).^3, cosd(alpha_ll).^3];
+
+% Build robot full models matrix and separated links matrix
+robot_X = @(alphas) ...
+                [ head_X(alphas(:,1)), torso_X(alphas(:,2)), back_turb_X(alphas(:,3)), back_turb_X(alphas(:,4)), ...
+                  arm_X(alphas(:,5)), arm_turb_X(alphas(:,6)), arm_X(alphas(:,7)),  arm_turb_X(alphas(:,8)), ...
+                  root_link_X(alphas(:,9)), ... 
+                  upper_leg_X(alphas(:,10)), lower_leg_X(alphas(:,11)), upper_leg_X(alphas(:,12)), lower_leg_X(alphas(:,13)) ];
+
+links_X = @(alphas) ...
+                blkdiag( head_X(alphas(:,1)), torso_X(alphas(:,2)), back_turb_X(alphas(:,3)), back_turb_X(alphas(:,4)), ...
+                  arm_X(alphas(:,5)), arm_turb_X(alphas(:,6)), arm_X(alphas(:,7)),  arm_turb_X(alphas(:,8)), ...
+                  root_link_X(alphas(:,9)), ... 
+                  upper_leg_X(alphas(:,10)), lower_leg_X(alphas(:,11)), ...
+                  upper_leg_X(alphas(:,12)), lower_leg_X(alphas(:,13)) );
+
+% Evaluate block matrices 
+X1 = robot_X(linkAoAs_matrix);
+X2 = links_X(linkAoAs_matrix);
+
+% Assemble X final matrix
+X = [X1; X2; eye(length(X1(1,:)))];
+
+% Evaluate related Y values
+robot_Y = ironcubCd_partial;    % ironcubCd_partial || ironcubCdAs_full
+links_Y = reshape(linkCdAs_matrix,[],1);
+
+% Assemble Y matrix
+Y = [robot_Y; links_Y; w_0];
+
+% Find X matrix starting indices for each link
+fake_X_mat = robot_X(10*ones(1,length(linkAoAs_matrix(1,:))));
+start_in = find(fake_X_mat==1); %[1,5,7,10,13,16,20,23,27,30,32,37,39]; %find(fake_X_mat==1);
+end_in   = [start_in(2:end)-1 length(fake_X_mat)];
+
+% Equality constraints for symmetry
+Aeq_back_turbs = Aeq_part_eq_init(   start_in([3 4]),   end_in([3 4]), length(X(1,:)) ); % back turbines constraints
+Aeq_arms       = Aeq_part_eq_init(   start_in([5 7]),   end_in([5 7]), length(X(1,:)) ); % arms constraints
+Aeq_arm_turbs  = Aeq_part_eq_init(   start_in([6 8]),   end_in([6 8]), length(X(1,:)) ); % arm turbines constraints
+Aeq_upper_legs = Aeq_part_eq_init( start_in([10 12]), end_in([10 12]), length(X(1,:)) ); % upper legs constraints
+Aeq_lower_legs = Aeq_part_eq_init( start_in([11 13]), end_in([11 13]), length(X(1,:)) ); % lower legs constraints
+
+% Equality constraint for zero root_link coefs
+Aeq_root_link = zeros( end_in(9) - start_in(9) + 1, length(X(1,:)) );
+Aeq_root_link(1:end,start_in(9):end_in(9)) = eye( end_in(9) - start_in(9) + 1 );
+Aeq_left_arm = zeros( end_in(5) - start_in(5) + 1, length(X(1,:)) );
+Aeq_left_arm(1:end,start_in(5):end_in(5)) = eye( end_in(5) - start_in(5) + 1 );
+Aeq_left_arm_turb = zeros( end_in(6) - start_in(6) + 1, length(X(1,:)) );
+Aeq_left_arm_turb(1:end,start_in(6):end_in(6)) = eye( end_in(6) - start_in(6) + 1 );
+
+% Equality constraint full matrix
+Aeq = [Aeq_back_turbs; ...
+       Aeq_arms; ...
+       Aeq_arm_turbs; ...
+       Aeq_upper_legs; ...
+       Aeq_lower_legs; ...
+       Aeq_root_link; ...
+       Aeq_left_arm; ...
+       Aeq_left_arm_turb ...
+       ];
+
+% Equality constraint condition
+beq = zeros(size(Aeq,1),1);
+
+% Inequality constraint for CdA always positive 
+alpha_vec = transpose(linspace(0,180,19));
+A = - robot_X(repmat(alpha_vec,1,length(X(1,:))));
+b = zeros(length(A(:,1)),1);
+
+% % Lower bounds
+tol = 1e-4;
+lb = w_0 - tol;
+ub = w_0 + tol;
+
+% least square linear optimization
+% options = optimoptions("lsqlin","Algorithm","active-set");
+Cd_coefs = lsqlin(X,Y,A,b,Aeq,beq,[],[],w_0);
+
+%% Model Plots
+
+N_alpha    = 1801;
+alpha_plot = transpose(linspace(0,180,N_alpha));
+
+Cd_models   = links_X(repmat(alpha_plot,1,length(X(1,:)))) * Cd_coefs;    
+
+plotIndex = 0;
+
+for linkIndex = 1 : length(cfdLinkNames) 
+
+    if ~contains(cfdLinkNames{linkIndex},"right")
+
+        Cd_model = Cd_models( N_alpha*(linkIndex-1)+1 : N_alpha*linkIndex );
+        plotIndex = plotIndex + 1; 
+        
+        if plotIndex <= 4
+            % plot link CdAs vs AoA
+            fig = figure(1);
+            ax(plotIndex) = subplot(2,2,plotIndex);
+        else
+            fig = figure(2);
+            ax(plotIndex) = subplot(2,2,plotIndex-4);
         end
-
-        X1 = X_Cd_0(linkAoAs_matrix(:,linkIndex));
-        Y1 = linkCdAs_matrix(:,linkIndex);
-        X2 = X_Cd_0(linkAoAs_matrix(:,linkIndex_spec));
-        Y2 = linkCdAs_matrix(:,linkIndex_spec);
-        X_full = [X1; X2];
-        Y_full = [Y1; Y2];
-    else
-        X1 = X_Cd_0(linkAoAs_matrix(:,linkIndex));
-        Y1 = linkCdAs_matrix(:,linkIndex);
-        X_full = X1;
-        Y_full = Y1;
+        subplot(ax(plotIndex));
+        scatter(linkAoAs_matrix(:,linkIndex),linkCdAs_matrix(:,linkIndex),[],linkSsAs_matrix(:,linkIndex)); hold on;
+        plot(alpha_plot,Cd_model,'k-','LineWidth',2); hold on;
+        xlabel('$\alpha_{link}$','Interpreter','latex');
+        ylabel('$C_D A$','Interpreter','latex');
+        title(cfdLinkNames{linkIndex},'Interpreter','none');
+        xlim([0 180]);
+        grid on;
+        c = colorbar;
+        c.Limits = [0 180];
+        c.Label.Interpreter = 'latex';
+        c.Label.String = '$\beta_{link}$';
+        c.Label.Position = [3, 95, 0];
+        c.Label.Rotation = 0;
+        c.Label.FontSize = 12;
+        
     end
-
-    coefs = X_full\Y_full;
-    Cd_0_coefs = [Cd_0_coefs;coefs(1)];
 
 end
 
-%% Generate links drag area aerodynamic model
-% X = @(alpha_v) [ ones(length(alpha_v(:,2)),1), sind(alpha_v(:,2)).^3, sind(alpha_v(:,2)).^2.*cosd(alpha_v(:,2)), ...
-%                  ones(length(alpha_v(:,3)),1), sind(alpha_v(:,3)).^3, sind(alpha_v(:,3)).^2.*cosd(alpha_v(:,3)), ...
-%                  ones(length(alpha_v(:,4)),1), sind(alpha_v(:,4)).^3, sind(alpha_v(:,4)).^2.*cosd(alpha_v(:,4)), ...
-%                  ones(length(alpha_v(:,5)),1), sind(alpha_v(:,5)).^3, sind(alpha_v(:,5)).^2.*cosd(alpha_v(:,5)), ...
-%                  ones(length(alpha_v(:,6)),1), sind(alpha_v(:,6)).^3, sind(alpha_v(:,6)).^2.*cosd(alpha_v(:,6)), ...
-%                  ones(length(alpha_v(:,7)),1), sind(alpha_v(:,7)).^3, sind(alpha_v(:,7)).^2.*cosd(alpha_v(:,7)), ...
-%                  ones(length(alpha_v(:,8)),1), sind(alpha_v(:,8)).^3, sind(alpha_v(:,8)).^2.*cosd(alpha_v(:,8)), ...
-%                  ones(length(alpha_v(:,9)),1), sind(alpha_v(:,9)).^3, sind(alpha_v(:,9)).^2.*cosd(alpha_v(:,9))];
-
-X = @(alpha_2, alpha_3, alpha_4, alpha_5, alpha_6, alpha_7, alpha_8, alpha_9) ...
-               [ ones(length(alpha_2),1), sind(alpha_2).^3, sind(alpha_3).^3, sind(alpha_4).^3, sind(alpha_5).^3, sind(alpha_6).^3, sind(alpha_7).^3, sind(alpha_8).^3, sind(alpha_9).^3];
-
-alpha_model = transpose(linspace(0,180,1801));
-
-Y1 = ironcubCd_partial;
-X1 = X(linkAoAs_matrix(:,2),linkAoAs_matrix(:,3),linkAoAs_matrix(:,4), ...
-       linkAoAs_matrix(:,5),linkAoAs_matrix(:,6),linkAoAs_matrix(:,7), ...
-       linkAoAs_matrix(:,8),linkAoAs_matrix(:,9));
-
-% equality constraints
-Aeq = zeros(3,length(X1(1,:)));
-Aeq(1,3) = 1; Aeq(1,4) = -1; %   I constraint: same coef for back turbines
-Aeq(2,5) = 1; Aeq(2,7) = -1; %  II constraint: same coef for arms
-Aeq(3,6) = 1; Aeq(3,8) = -1; % III constraint: same coef for arm turbines
-beq = zeros(3,1);
-
-% least square linear optimization
-Cd_coefs_lsqlin = lsqlin(X1,Y1,[],[],Aeq,beq,zeros(length(X1(1,:)),1));
-
-% scaling the Cd_0 coefs
-Cd_0 = Cd_0_coefs * (Cd_coefs_lsqlin(1)/sum(Cd_0_coefs));
-Cd_1 = Cd_coefs_lsqlin;
-
-% Cd_model    = X(alpha_model)*Cd_coefs;
-
-%% Theory vs Data Model Plots
-
-% plot link CdAs vs AoA
-% linkIndex = 2;
-% fig = figure(linkIndex);
-% scatter(linkAoAs_matrix(:,2),linkCdAs_full,[],linkSsAs_full); hold on;
-% plot(alpha_model,Cd_model,'k-','LineWidth',2);
-% xlabel('$\alpha_{link}$','Interpreter','latex');
-% ylabel('$C_D A$','Interpreter','latex');
-% title(cfdLinkName,'Interpreter','none');
-% grid on;
-% c = colorbar;
-% c.Limits = [0 180];
-% c.Label.Interpreter = 'latex';
-% c.Label.String = '$\beta_{link}$';
-% c.Label.Position = [3, 95, 0];
-% c.Label.Rotation = 0;
-% c.Label.FontSize = 12;
 
 
+%% functions
 
+function Aeq_part_eq = Aeq_part_eq_init(start_indices, end_indices, col_num)
+    
+    first_start_index = start_indices(1);
+    second_start_index = start_indices(2);
 
+    first_end_index = end_indices(1);
+    second_end_index = end_indices(2);
+    
+    % init equality constraint matrix
+    Aeq_part_eq = zeros( first_end_index - first_start_index + 1, col_num );
+    
+    % assign values for equality constraints
+    Aeq_part_eq( 1:end , first_start_index:first_end_index ) = ...
+                    eye( first_end_index - first_start_index + 1);
+    Aeq_part_eq( 1:end , second_start_index:second_end_index ) = ...
+                    - eye( second_end_index - second_start_index + 1);
+
+end
