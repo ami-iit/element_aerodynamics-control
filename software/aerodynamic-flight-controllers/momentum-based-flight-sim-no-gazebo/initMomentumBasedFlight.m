@@ -32,6 +32,7 @@ Config.simulationTime                   = inf;
 Config.tStep                            = 0.01;
 jets_config.use_jet_dyn                 = false;
 aero_config.use_wind_speed              = true;
+aero_config.use_aero_control            = true;
 
 %% SIMULATION SETTINGS
 
