@@ -90,7 +90,6 @@ aero_config.cfdModel.r_upper_leg.CdA         = [0; -0.00219; 0.0152; 0; 0];
 aero_config.cfdModel.r_lower_leg.CdA         = [0.00920; -0.00712; 0.0428; -0.0276; 0.00242];
 
 % CnA
-
 aero_config.cfdModel.head.CnA                = 0.0578;
 aero_config.cfdModel.chest.CnA               = 0.0511;
 aero_config.cfdModel.chest_l_jet_turbine.CnA = 0.0325;
