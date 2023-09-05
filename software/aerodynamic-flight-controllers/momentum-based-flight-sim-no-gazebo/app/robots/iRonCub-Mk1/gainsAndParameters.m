@@ -89,13 +89,13 @@ Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 
 % Attitude controller gains
-Config.gains.momentum.KP_angular = 50 .* ones(1,3);                            
-Config.gains.momentum.KD_angular =  2*sqrt(Config.gains.momentum.KP_angular); %125 .* ones(1,3) * 2;
+Config.gains.momentum.KP_angular = 50 .* ones(1,3) /2;                            
+Config.gains.momentum.KD_angular = 125 .* ones(1,3) *2; % 2*sqrt(Config.gains.momentum.KP_angular);
 % Postural task gains              % torso    % left arm      % right arm      % left leg           % right leg
 Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
                              
 % Torque control gains
-Config.gains.torqueControl.KI    = 250/5;                            
+Config.gains.torqueControl.KI    = 250;                            
 Config.gains.torqueControl.KP    = 2 * sqrt(Config.gains.torqueControl.KI);
 
 %% QP WEIGHTS AND THRESHOLDS
@@ -144,7 +144,7 @@ Config.sat.deadZoneThreshold                 = 0.00001;
 
 % QP boundaries
 Config.sat.maxJetsIntVar                     = [100; 100; 100; 100];
-Config.sat.maxJetsInt                        = [100; 100; 220; 220];
+Config.sat.maxJetsInt                        = [160; 160; 220; 220];
 Config.sat.maxJointVelDes                    = 45 .* pi/180 .* ones(Config.N_DOF,1);
 Config.sat.maxContactForcesVar               = 100 .* ones(12,1);
 Config.sat.jointTorquesSaturation            = 50 .* ones(Config.N_DOF,1);
