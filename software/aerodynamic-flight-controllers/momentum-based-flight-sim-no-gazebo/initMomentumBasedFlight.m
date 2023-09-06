@@ -18,7 +18,7 @@ clc
 
 %% GENERAL SIMULATION INFO
 
-robotName = 'iRonCub-Mk1_Gazebo';
+robotName = 'iRonCub-Mk1';
 setenv('YARP_ROBOT_NAME', robotName)
 
 % Set path to the utility functions and to WBC library
@@ -32,6 +32,7 @@ Config.simulationTime                   = inf;
 Config.tStep                            = 0.01;
 jets_config.use_jet_dyn                 = false;
 aero_config.use_wind_speed              = true;
+aero_config.use_aero_control            = true;
 
 %% SIMULATION SETTINGS
 

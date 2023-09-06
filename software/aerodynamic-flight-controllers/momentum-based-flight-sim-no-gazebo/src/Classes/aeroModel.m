@@ -6,9 +6,10 @@ classdef aeroModel < handle
         airDensity; 
         frameNames; frameAxis; linkFrame_X_linkCoM; linkFrame_T_linkCoM;
         linkDiameters; linkLengths; linkReferenceAreas;
-        sphereModel; cylinderModel;
+        sphereModel; cylinderModel; cfdModel;
         C_D_sphere; C_N_sphere; 
-        C_D_cylinder; C_N_cylinder; C_N_bar_cylinder; 
+        C_D_cylinder; C_N_cylinder; C_N_bar_cylinder;
+        CdA_model; CnA_model; CnA_bar_model;
     end
 
     methods
@@ -26,6 +27,7 @@ classdef aeroModel < handle
             obj.linkReferenceAreas  = model_config.linkReferenceAreas;
             obj.sphereModel         = model_config.sphereModel;
             obj.cylinderModel       = model_config.cylinderModel;
+            obj.cfdModel            = model_config.cfdModel;
         end
 
         function [C_D_sphere, C_N_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
@@ -73,6 +75,21 @@ classdef aeroModel < handle
 
         end
 
+        function [CdA_model, CnA_model, CnA_bar_model] = get_cfd_model_force_coefficients(obj, linkName, angleOfAttack)
+            % returns the cfd-model-based link aerodynamic drag coefficient
+
+            CdA_model = [1, cosd(angleOfAttack), sind(angleOfAttack).^2, sind(angleOfAttack).^3, cosd(angleOfAttack).^3] * obj.cfdModel.(linkName).CdA;
+            CnA_model = obj.cfdModel.(linkName).CnA * sind(angleOfAttack)^2 * cosd(angleOfAttack);
+
+            % Corrected coefficient accounting for the cross product
+            % normalization term sin(angleOfAttack)
+            CnA_bar_model = obj.cfdModel.(linkName).CnA * sind(angleOfAttack) * cosd(angleOfAttack);
+            
+            obj.CdA_model = CdA_model;
+            obj.CnA_model = CnA_model;
+            obj.CnA_bar_model = CnA_bar_model;
+
+        end
 
     end
 
