@@ -10,8 +10,8 @@ clc;
 %% Initialization
 
 % Data for the models
-dataPath = './data/';
-dataFile = [dataPath,'outputParameters.mat'];
+srcPath = '../src/';
+dataFile = [srcPath,'outputParametersAlias.mat'];
 load(dataFile);
 jointConfigNames = fieldnames(data);
 
@@ -24,7 +24,7 @@ cfdLinkNames   = {'head', 'torso', 'left_back_turbine', 'right_back_turbine', ..
                   'left_arm','left_arm_turbine','right_arm','right_arm_turbine',...
                   'root_link','left_leg_upper','left_leg_lower','right_leg_upper','right_leg_lower'};
 
-load('./src/aeroFrameTransforms.mat');
+load([srcPath,'aeroFrameTransforms.mat']);
 
 
 %% data for iDynTreeWrappers
@@ -49,6 +49,7 @@ linkCsAs_matrix = [];
 linkCnAs_matrix = [];
 linkCfAs_matrix = [];
 
+jointPosDeg_full = [];
 yawAngles_full   = [];
 pitchAngles_full = [];
 ironcubCdAs_full = [];
@@ -81,11 +82,13 @@ for linkIndex = 1 : length(cfdLinkNames)
     for jointConfigIndex = 1 : length(fieldnames(data))
 
         jointConfigName = jointConfigNames{jointConfigIndex};
-        jointPos        = data.(jointConfigName).jointConfig * pi/180;
+        jointPosDeg     = data.(jointConfigName).jointConfig;
+        jointPosRad     = jointPosDeg * pi/180;
+        
 
         % idyntree model initialization
         KinDynModel = iDynTreeWrappers.loadReducedModel(jointNames, 'root_link', modelPath, fileName, false);
-        iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPos, baseVel, jointVel, gravAcc);
+        iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPosRad, baseVel, jointVel, gravAcc);
 
         % robot visualization
         %             iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.96,0.96,0.96], ...
@@ -97,12 +100,13 @@ for linkIndex = 1 : length(cfdLinkNames)
         linkCdAs = dummyVector;
         linkClAs = dummyVector;
         linkCsAs = dummyVector;
-
-        yawAngles   = dummyVector;
-        pitchAngles = dummyVector;
-        ironcubCdAs = dummyVector;
-        ironcubClAs = dummyVector;
-        ironcubCsAs = dummyVector;
+        
+        jointPosDegs = nan(length(data.(jointConfigName).yawAngle(:)), length(jointPosDeg));
+        yawAngles    = dummyVector;
+        pitchAngles  = dummyVector;
+        ironcubCdAs  = dummyVector;
+        ironcubClAs  = dummyVector;
+        ironcubCsAs  = dummyVector;
 
         for simIndex = 1 : length(data.(jointConfigName).yawAngle(:))
 
@@ -150,11 +154,12 @@ for linkIndex = 1 : length(cfdLinkNames)
 
 
             if linkIndex == 1
-                yawAngles(simIndex)   = yawAngle;
-                pitchAngles(simIndex) = pitchAngle;
-                ironcubCdAs(simIndex) = data.(jointConfigName).ironcub_cd(simIndex);
-                ironcubClAs(simIndex) = data.(jointConfigName).ironcub_cl(simIndex);
-                ironcubCsAs(simIndex) = data.(jointConfigName).ironcub_cs(simIndex);
+                jointPosDegs(simIndex,:) = jointPosDeg;
+                yawAngles(simIndex)      = yawAngle;
+                pitchAngles(simIndex)    = pitchAngle;
+                ironcubCdAs(simIndex)    = data.(jointConfigName).ironcub_cd(simIndex);
+                ironcubClAs(simIndex)    = data.(jointConfigName).ironcub_cl(simIndex);
+                ironcubCsAs(simIndex)    = data.(jointConfigName).ironcub_cs(simIndex);
             end
 
         end
@@ -177,10 +182,11 @@ for linkIndex = 1 : length(cfdLinkNames)
             ironcubCdAs_full = [ironcubCdAs_full; ironcubCdAs];
             ironcubClAs_full = [ironcubClAs_full; ironcubClAs];
             ironcubCsAs_full = [ironcubCsAs_full; ironcubCsAs];
+            jointPosDeg_full = [jointPosDeg_full; jointPosDegs];
         end
 
     end
-
+    
     linkAoAs_matrix(:,linkIndex) = linkAoAs_full;
     linkSsAs_matrix(:,linkIndex) = linkSsAs_full;
     linkCdAs_matrix(:,linkIndex) = linkCdAs_full;
@@ -192,15 +198,17 @@ for linkIndex = 1 : length(cfdLinkNames)
 end
 
 %% Save data
-save([dataPath,'dataset.mat'],'linkAoAs_matrix', ...
-                              'linkSsAs_matrix', ...
-                              'linkCdAs_matrix', ...
-                              'linkClAs_matrix', ...
-                              'linkCsAs_matrix', ...
-                              'linkCnAs_matrix', ...
-                              'linkCfAs_matrix', ...
-                              'yawAngles_full', ...
-                              'pitchAngles_full', ...
-                              'ironcubCdAs_full', ...
-                              'ironcubClAs_full', ...
-                              'ironcubCsAs_full');
+save([srcPath,'datasetAlias.mat'],'cfdLinkNames', ...
+                                  'linkAoAs_matrix', ...
+                                  'linkSsAs_matrix', ...
+                                  'linkCdAs_matrix', ...
+                                  'linkClAs_matrix', ...
+                                  'linkCsAs_matrix', ...
+                                  'linkCnAs_matrix', ...
+                                  'linkCfAs_matrix', ...
+                                  'jointPosDeg_full', ...
+                                  'yawAngles_full', ...
+                                  'pitchAngles_full', ...
+                                  'ironcubCdAs_full', ...
+                                  'ironcubClAs_full', ...
+                                  'ironcubCsAs_full');

@@ -10,8 +10,8 @@ clc;
 %% Initialization
 
 % Data for the models
-dataPath = './data/';
-dataFile = [dataPath,'outputParameters.mat'];
+srcPath = '../src/';
+dataFile = [srcPath,'outputParameters.mat'];
 load(dataFile);
 jointConfigNames = fieldnames(data);
 
@@ -25,7 +25,7 @@ cfdLinkNames   = {'head', 'torso', 'left_back_turbine', 'right_back_turbine', ..
                   'root_link','left_leg_upper','left_leg_lower','right_leg_upper','right_leg_lower'};
 
 %% Load dataset
-load([dataPath,'dataset.mat']);
+load([srcPath,'dataset.mat']);
 
 %% Evaluate pre-computed models
 % model coefficients

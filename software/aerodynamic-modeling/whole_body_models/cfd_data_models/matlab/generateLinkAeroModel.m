@@ -10,8 +10,8 @@ clc;
 %% Initialization
 
 % Data for the models
-dataPath = './data/';
-dataFile = [dataPath,'outputParameters.mat'];
+srcPath = '../src/';
+dataFile = [srcPath,'outputParameters.mat'];
 load(dataFile);
 jointConfigNames = fieldnames(data);
 
@@ -27,7 +27,7 @@ cfdLinkNames   = {'head', 'torso', 'left_back_turbine', 'right_back_turbine', ..
 load('./src/aeroFrameTransforms.mat');
 
 %% Load dataset
-load([dataPath,'dataset.mat']);
+load([srcPath,'dataset.mat']);
 
 %% Assign link data
 linkIndex = 10;
