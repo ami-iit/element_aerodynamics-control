@@ -1,4 +1,4 @@
-function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_inequality, jointVel_err] =  ... 
+function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_inequality, jointVel_err, sDDot_star, St_invM_B, St_invM_bias] =  ... 
              aeroFlyingTorqueControl(M, h, J_jets, J_LFoot, J_RFoot, JDot_LFoot_nu, JDot_RFoot_nu, J_aeroForces, w_H_LFoot, w_H_RFoot, matrixOfJetsAxes, ...
                                      ConstraintsMatrix_feet, biasVectorConstraint_feet, jetsIntensities, stateVel, jointVel_star, contactForces_star, ...
                                      KI_torqueControl, KP_torqueControl, feetContactIsActive, activateEqConstrTorqueControl, robotIsLanded, aerodynamic_forces, jointPos_err, aero_config, Config)
@@ -42,7 +42,6 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
     for i = 1 : n_aero_links
         J_a(3*i-2:3*i,:) = J_aeroForces(6*i-5:6*i-3,:);
     end
-    
     
     % calculate the desired joint accelerations
     jointVel_err   =  stateVel(7:end) - jointVel_star;
