@@ -100,14 +100,14 @@ Config.gains.momentum.KP_angular = 50 .* ones(1,3);
 Config.gains.momentum.KD_angular = 125 .* ones(1,3); 
 
 % Postural task gains              % torso    % left arm      % right arm      % left leg           % right leg
-Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
+Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30]*0.05;
                              
 % Torque control gains
 
 % Config.gains.torqueControl.KI      = ones(1,23)*10;
 % Config.gains.torqueControl.KI(1:3) = 30; 
 Config.gains.torqueControl.KI    = 0;
-Config.gains.torqueControl.KP    = 5; % 2 * sqrt(Config.gains.torqueControl.KI);
+Config.gains.torqueControl.KP    = 100; % 2 * sqrt(Config.gains.torqueControl.KI);
 
 %% QP WEIGHTS AND THRESHOLDS
 
@@ -124,12 +124,12 @@ Config.weights.symAllThrusts                 = false;
 Config.weights.minArmsThrustDot              = 0.01;
 Config.weights.minChestThrustDot             = 0.01;
 Config.weights.minContactForcesDot           = 0.001;
-Config.weights.minJointVel                   = 0;
+Config.weights.minJointVel                   = 10;
 Config.weights.symmetryThrust                = 0.1;
 Config.weights.postural                      = 2.5;
-Config.weights.eqConstraints_momentumControl = 0*150;
-Config.weights.momentum                      = 0*10;
-Config.weights.angMomentumConstraint         = 0*150;
+Config.weights.eqConstraints_momentumControl = 150;
+Config.weights.momentum                      = 10;
+Config.weights.angMomentumConstraint         = 150;
 
 % QP TORQUE CONTROLLER
 
@@ -138,9 +138,9 @@ Config.weights.angMomentumConstraint         = 0*150;
 % peak in the legs torques that destabilizes the robot after landing. This
 % is still to be investigated.
 Config.weights.eqConstraints_torqueControl   = 100;
-Config.weights.minForces                     = 1*0.1;
+Config.weights.minForces                     = 1*0;
 Config.weights.minJointAcc                   = 1;
-Config.weights.minTorques                    = 0.001;
+Config.weights.minTorques                    = 0.001*0;
 
 % HESSIAN REGULARIZATION
 Config.reg.hessianQp                         = 1e-4;
@@ -152,6 +152,7 @@ Config.sat.jointTorquesDotMax                = 300;
 
 % DeadZone threshold for numerical integration
 Config.sat.deadZoneThreshold                 = 0.00001;
+Config.sat.deadZoneThresholdJointVel         = 0.005;
 
 % QP boundaries
 Config.sat.maxJetsIntVar                     = [100; 100; 100; 100];
