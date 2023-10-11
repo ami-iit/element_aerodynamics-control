@@ -25,26 +25,33 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             obj.robot  = Robot(obj.robot_config);
         end
         
-        function [aerodynamic_forces, generalized_aerodynamic_wrench] = stepImpl(obj, base_velocity, joints_velocity, wind_speed)
+        function [aerodynamic_forces, generalized_aerodynamic_wrench] = stepImpl(obj, aerodynamicForceAreas, base_velocity, joints_velocity, wind_speed)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             obj.set_global_aerodynamic_conditions(wind_speed, base_velocity);
-            [aerodynamic_forces, generalized_aerodynamic_wrench] = obj.compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(base_velocity, joints_velocity);
+            [aerodynamic_forces, generalized_aerodynamic_wrench] = obj.compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(base_velocity, joints_velocity, aerodynamicForceAreas);
         end
         
-        function [aerodynamic_forces, generalized_aerodynamic_wrench] = compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(obj, base_velocity, joints_velocity)
-            aerodynamic_forces = obj.compute_aerodynamic_forces_in_wrld_frame(base_velocity, joints_velocity);
+        function [aerodynamic_forces, generalized_aerodynamic_wrench] = compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(obj, base_velocity, joints_velocity, aerodynamicForceAreas)
+            % Transform from aerodynamic forces into aerodynamic wrenches
+            aerodynamic_forces = obj.compute_aerodynamic_forces_in_wrld_frame(base_velocity, joints_velocity, aerodynamicForceAreas);
             aerodynamic_wrenches = [aerodynamic_forces; zeros(3, length(obj.models.frameNames))];
             generalized_aerodynamic_wrench = obj.compute_generalized_aerodynamic_wrench(aerodynamic_wrenches);        
         end
         
-        function aerodynamic_forces = compute_aerodynamic_forces_in_wrld_frame(obj, base_velocity, joints_velocity)
+        function aerodynamic_forces = compute_aerodynamic_forces_in_wrld_frame(obj, base_velocity, joints_velocity, aerodynamicForceAreas)
+            
+            if obj.models.use_aeroNet
+                aerodynamic_forces = 0.5 * obj.conditions.airDensity * norm(obj.conditions.relativeWindVelocity)^2 * aerodynamicForceAreas;
+            else
                 aerodynamic_forces = nan(3,length(obj.models.frameNames));
-            for i = 1 : length(obj.models.frameNames)
-                linkCoMRelativeWindVelocity  = obj.compute_link_CoM_relative_wind_velocity(obj.models.frameNames{i}, obj.models.linkFrame_T_linkCoM(:,:,i), base_velocity, joints_velocity, obj.conditions.windSpeed);
-                aerodynamic_forces(1:3,i) = obj.compute_link_aerodynamic_force_in_world_frame(obj.models.frameNames{i}, obj.models.frameAxis(:,i), obj.models.linkDiameters(i), ...
-                                                                                              obj.models.linkLengths(i), obj.models.linkReferenceAreas(i), linkCoMRelativeWindVelocity);
+                for i = 1 : length(obj.models.frameNames)
+                    linkCoMRelativeWindVelocity  = obj.compute_link_CoM_relative_wind_velocity(obj.models.frameNames{i}, obj.models.linkFrame_T_linkCoM(:,:,i), base_velocity, joints_velocity, obj.conditions.windSpeed);
+                    aerodynamic_forces(1:3,i) = obj.compute_link_aerodynamic_force_in_world_frame(obj.models.frameNames{i}, obj.models.frameAxis(:,i), obj.models.linkDiameters(i), ...
+                        obj.models.linkLengths(i), obj.models.linkReferenceAreas(i), linkCoMRelativeWindVelocity);
+                end
             end
+
         end
 
         function  link_aerodynamic_force = compute_link_aerodynamic_force_in_world_frame(obj, frameName, frameAxis, linkDiameter, linkLength, linkReferenceArea, linkRelativeWindVelocity)          
@@ -69,8 +76,6 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
 
         end
         
-
-
         function linkRelativeWindVelocity  = compute_link_CoM_relative_wind_velocity(obj, frameName, linkFrame_T_linkCoM, base_velocity, joints_velocity, windSpeed)
             J_link_frame   = obj.robot.get_frame_jacobian(frameName);
 
@@ -112,7 +117,6 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             link_gen_aero_wrench = J_link' * linkFrame_aerodynamic_wrench;
         end
         
-
         function [out, out2] = getOutputSizeImpl(~)
             % Return size for each output port
             out = [3 13]; % aerodynamic forces

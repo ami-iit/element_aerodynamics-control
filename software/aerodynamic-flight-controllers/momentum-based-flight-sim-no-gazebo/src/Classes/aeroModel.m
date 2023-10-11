@@ -6,7 +6,7 @@ classdef aeroModel < handle
         airDensity; 
         frameNames; frameAxis; linkFrame_X_linkCoM; linkFrame_T_linkCoM;
         linkDiameters; linkLengths; linkReferenceAreas;
-        sphereModel; cylinderModel; cfdModel;
+        sphereModel; cylinderModel; cfdModel; use_aeroNet;
         C_D_sphere; C_N_sphere; 
         C_D_cylinder; C_N_cylinder; C_N_bar_cylinder;
         CdA_model; CnA_model; CnA_bar_model;
@@ -15,8 +15,8 @@ classdef aeroModel < handle
     methods
 
         function obj = aeroModel(model_config)
-            %JET Construct an instance of this class
-            %   Detailed explanation goes here
+            % Construct an instance of this class
+            % Detailed explanation goes here
             obj.airDensity          = model_config.airDensity;
             obj.frameNames          = model_config.frameNames;
             obj.frameAxis           = model_config.frameAxis;
@@ -28,6 +28,7 @@ classdef aeroModel < handle
             obj.sphereModel         = model_config.sphereModel;
             obj.cylinderModel       = model_config.cylinderModel;
             obj.cfdModel            = model_config.cfdModel;
+            obj.use_aeroNet         = model_config.use_aeroNet;
         end
 
         function [C_D_sphere, C_N_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)

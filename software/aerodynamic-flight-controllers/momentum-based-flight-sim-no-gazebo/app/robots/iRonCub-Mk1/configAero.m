@@ -4,7 +4,6 @@
 %                                                                         %
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 aero_config.airDensity = 1.225;
 
 %% Robot parameters
@@ -103,3 +102,30 @@ aero_config.cfdModel.l_upper_leg.CnA         = 0.0224;
 aero_config.cfdModel.l_lower_leg.CnA         = 0.0324;
 aero_config.cfdModel.r_upper_leg.CnA         = 0.0224;
 aero_config.cfdModel.r_lower_leg.CnA         = 0.0324;
+
+
+%% CFD-based neural network for aerodynamic force prediction
+
+% Configure neural network function and parameters
+if aero_config.use_aeroNet
+
+    % Path to the network model file
+    aero_config.onnxModelFile = 'model_L9_N10_p1_30000.onnx';
+    
+    % import network
+    aeroNet = importNetworkFromONNX(aero_config.onnxModelFile, InputDataFormats=["BC","BC"], OutputDataFormats="BC");
+
+    % initialize network
+    batch_size = 100;
+    % pitchAngles = dlarray(ones(batch_size,1),'CB');
+    % yawAngles   = dlarray(ones(batch_size,1),'CB');
+    windDirection = dlarray(ones(batch_size,3),'CB');
+    jointPosDeg   = dlarray(ones(batch_size,19),'CB');
+
+    aeroNet = initialize(aeroNet, windDirection, jointPosDeg);
+
+    % save network as .mat file
+    aero_config.aeroNetPath = './src/aeroNet/aeroNet.mat';
+    save(['../../../',aero_config.aeroNetPath],"aeroNet");
+
+end
