@@ -23,9 +23,10 @@
 *.wmv   filter=lfs diff=lfs merge=lfs -text
 *.eps   filter=lfs diff=lfs merge=lfs -text
 *.svg   filter=lfs diff=lfs merge=lfs -text
-# Neural networks models
+# Neural networks models and datasets
 *.pt    filter=lfs diff=lfs merge=lfs -text
 *.onnx  filter=lfs diff=lfs merge=lfs -text
+*.mat   filter=lfs diff=lfs merge=lfs -text
 # others
 *.zip   filter=lfs diff=lfs merge=lfs -text
 *.jar   filter=lfs diff=lfs merge=lfs -text
