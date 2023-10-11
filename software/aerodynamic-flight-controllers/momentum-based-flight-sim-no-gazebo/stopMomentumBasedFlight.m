@@ -18,6 +18,7 @@ end
     
 % remove local paths
 rmpath(genpath('./src/'))
+rmpath(genpath('./app/'))
 rmpath(genpath('../matlab-functions-lib/'));
 
 % Try to remove chache files and folders

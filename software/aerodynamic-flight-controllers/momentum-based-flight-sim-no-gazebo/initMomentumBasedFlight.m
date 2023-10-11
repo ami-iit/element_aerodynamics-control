@@ -24,20 +24,24 @@ setenv('YARP_ROBOT_NAME', robotName)
 % Set path to the utility functions and to WBC library
 import wbc.*
 addpath(genpath('./src/'));
+addpath(genpath('./app/'));
 addpath('../controlAndDataGui/');
 addpath(genpath('../matlab-functions-lib/'));
 
 % Simulation time and delta_t [s]
 Config.simulationTime                   = inf;
 Config.tStep                            = 0.01;
+
+% jets and aerodynamic parameters
 jets_config.use_jet_dyn                 = false;
 aero_config.use_wind_speed              = true;
 aero_config.use_aero_control            = true;
+aero_config.use_aeroNet                 = true;
 
 %% SIMULATION SETTINGS
 
 % Controller type: native GUI or joystick
-Config.USE_NATIVE_GUI                   = true;
+Config.USE_NATIVE_GUI                   = false;
 Config.USE_FLIGHT_DATA_GUI              = false;
 
 % Visualizer
@@ -79,7 +83,6 @@ run(strcat('app/robots/',robotName,'/configAero.m'));
 run(strcat('app/robots/',robotName,'/gainsAndParameters.m'));
 configJetControlParams;
 run(strcat('app/robots/',robotName,'/configJets.m'));
-% run(strcat('app/robots/',robotName,'/configAero.m'));
 
 % open the native GUI for control (if no joystick is present)
 if Config.USE_NATIVE_GUI
