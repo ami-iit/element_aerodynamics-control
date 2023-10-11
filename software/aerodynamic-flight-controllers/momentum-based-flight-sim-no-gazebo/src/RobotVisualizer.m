@@ -44,6 +44,7 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 %prepare the initial position of aerodynamics force vector
 %                 obj.prepareContactWrench();
                 obj.prepareAerodynamicWrench();
+                % obj.prepareAerodynamicFrame();
                 
                 tic;
             end
@@ -63,8 +64,9 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                     if time_interval > obj.min_time_viz 
                         obj.updateVisualization(world_H_base, joints_positions);
                         obj.updateJets(jetIntensities);
-%                         obj.updateContactWrench(contact_wrench_left_right);
+                        % obj.updateContactWrench(contact_wrench_left_right);
                         obj.updateAerodynamicWrench(aerodynamic_wrench);
+                        % obj.updateAerodynamicFrame(world_R_aero);
                         obj.viz.draw();
                         tic
                     end
@@ -97,7 +99,8 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 obj.viz.frames().updateFrame(0, obj.T_CoM);
         end
         
-        
+%% Prepare methods        
+
         function prepareRobot(obj)
             % Main variable of iDyntreeWrappers used for many things including updating
             % robot position and getting world to frame transforms
@@ -174,7 +177,24 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             % prepare also a flat arrow for the CoP (the last one)
 %             obj.viz.vectors().addVector(linkTransform.getPosition(), obj.force);
         end 
+
+%         function prepareAerodynamicFrame(obj) 
+%             % prepare forces plotting            
+%             for i=1:3
+%                 vectorPos     = iDynTree.Position(0,0,0);
+%                 for j=1:3
+%                     % note that the indexing starts from 0 (not from 1) as
+%                     % in C++
+%                     obj.force.setVal(j-1, 0);
+%                 end
+%                 obj.viz.vectors().addVector(vectorPos, obj.force);
+%             end
+%             % prepare also a flat arrow for the CoP (the last one)
+% %             obj.viz.vectors().addVector(linkTransform.getPosition(), obj.force);
+%         end 
         
+%% Update methods
+
         function updateJets(obj, jetIntensities)
             for i=1:4
                 obj.jet_int_iDyn.setVal(i-1, jetIntensities(i)/obj.max_jets_int);
@@ -226,23 +246,25 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
 %                 end
                 obj.force.fromMatlab(aerodynamicWrench(:, i) * obj.scaling_factor);
                 obj.viz.vectors().updateVector(i-1, vectorPos, obj.force);
-                % cop computation
-%                 p = linkTransform.getPosition().toMatlab();
-                % force-torque balance 
-%                 CoPs(:,i) = [[aerodynamicWrench(5,i); -aerodynamicWrench(4,i)] / aerodynamicWrench(3,i); 0.0] + [p(1:2); 0.0];
+
             end
-            % set contribution of the single CoP to zero if the contact
-            % force = 0. Also, if the one force is non null and the other
-            % is null do not compute the mean
-%             CoPs(:,1) = CoPs(:,1) * (aerodynamicWrench(3,1) > 0.0) * (1 - 0.5 * (aerodynamicWrench(3,2) > 0.0)); 
-%             CoPs(:,2) = CoPs(:,2) * (aerodynamicWrench(3,2) > 0.0) * (1 - 0.5 * (aerodynamicWrench(3,1) > 0.0)); 
-%             cop = sum(CoPs,2);
-%             for j=1:3
-%                 % the single aerodynamics force is scaled by a constant factor
-%                 obj.CoP.setVal(j-1, cop(j));
-%                 obj.force.setVal(j-1, 0.0);
-%             end
-%             obj.viz.vectors().updateVector(i, obj.CoP, obj.force);
         end
+
+%         function updateAerodynamicFrame(obj, world_R_aero)
+% %             CoPs = zeros(3,2);
+%             %update the contact forces 
+%             for i=1:3
+%                 vectorPos     = iDynTree.Position(0,0,0);
+% %                 vectorPos     = linkTransform.getPosition();
+% %                 for j=1:3
+% %                     % the single aerodynamics force is scaled by a constant factor
+% %                     obj.force.setVal(j-1, aerodynamicWrench(j, i) * obj.scaling_factor);
+% %                 end
+%                 obj.force.fromMatlab(world_R_aero(:, i) * obj.scaling_factor);
+%                 obj.viz.vectors().updateVector(i-1, vectorPos, obj.force);
+% 
+%             end
+%         end
+
     end
 end
