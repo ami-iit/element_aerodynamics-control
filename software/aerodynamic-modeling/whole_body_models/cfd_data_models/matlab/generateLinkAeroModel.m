@@ -24,8 +24,6 @@ cfdLinkNames   = {'head', 'torso', 'left_back_turbine', 'right_back_turbine', ..
                   'left_arm','left_arm_turbine','right_arm','right_arm_turbine',...
                   'root_link','left_leg_upper','left_leg_lower','right_leg_upper','right_leg_lower'};
 
-load('./src/aeroFrameTransforms.mat');
-
 %% Load dataset
 load([srcPath,'dataset.mat']);
 
@@ -74,21 +72,25 @@ end
 %                sind(alpha).^2.*cosd(alpha)  , ... 
 %                ];
 
-X1 = @(alpha) [...ones(length(alpha),1)        , ... 
+X1 = @(alpha) [ones(length(alpha),1)        , ... 
                cosd(alpha)                  , ...
                sind(alpha).^2               , ...
-               ...sind(alpha).^3               , ...
-               ...cosd(alpha).^3               , ...
+               sind(alpha).^3               , ...
+               cosd(alpha).^3               , ...
                ];
 
 Y1 = linkCdAs_full;
+
+% Least Squares Regression
 Cd_coefs = X1(linkAoAs_full)\Y1
+Cd_predicted = X1(linkAoAs_full)*Cd_coefs;
+mse = immse(Cd_predicted,Y1)
+
+% Lasso Regression
 [Cd_coefs_lasso, FitInfo] = lasso(X1(linkAoAs_full),Y1,'CV',10);
 lassoPlot(Cd_coefs_lasso,FitInfo,'PlotType','CV');
 grid on;
 legend('show'); % Show legend
-
-% svmModel = fitrsvm(linkAoAs_full,Y1,KernelFunction="polynomial",Standardize=true,PolynomialOrder=4);
 
 %% Generate single link CnA aerodynamic model
 X2 = @(alpha) [...ones(length(alpha),1)        , ... 
@@ -109,9 +111,8 @@ Cn_coef = X2(linkAoAs_full)\Y4;
 
 alpha_plot = transpose(linspace(0,180,1801));
 Cd_lsq     = X1(alpha_plot)*Cd_coefs;
-Cd_lasso   = X1(alpha_plot)*Cd_coefs_lasso(:,59);
-% Cd_svm     = predict(svmModel,alpha_plot);
-Cn_model   = X2(alpha_plot)*Cn_coef;
+% Cd_lasso   = X1(alpha_plot)*Cd_coefs_lasso(:,59);
+Cn_lsq     = X2(alpha_plot)*Cn_coef;
 
 % plot link CdAs vs AoA
 fig = figure();
@@ -134,7 +135,7 @@ c.Label.FontSize = 12;
 % plot link CnAs vs AoA
 % fig = figure();
 % scatter(linkAoAs_full,linkCnAs_full,[],linkSsAs_full); hold on;
-% plot(alpha_plot,Cn_model,'k-','LineWidth',2);
+% plot(alpha_plot,Cn_lsq,'k-','LineWidth',2);
 % xlabel('$\alpha_{link}$','Interpreter','latex');
 % ylabel('$C_N A$','Interpreter','latex');
 % title(cfdLinkName,'Interpreter','none');
