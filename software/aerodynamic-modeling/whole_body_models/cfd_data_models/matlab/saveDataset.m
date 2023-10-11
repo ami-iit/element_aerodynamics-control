@@ -8,12 +8,24 @@ clear all;
 clc;
 
 %% Initialization
-
 % Data for the models
 srcPath = '../src/';
-dataFile = [srcPath,'outputParametersAlias.mat'];
+dataFile = [srcPath,'outputParameters.mat'];
 load(dataFile);
 jointConfigNames = fieldnames(data);
+
+%% %%%%%%%%%%%%%%%%%%%%%%%% DATASET PURPOSE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+DATASET_PURPOSE      = 'Full'; % 'Train' | 'Test' | 'Full' |
+FORCES_IN_BASE_FRAME = true;
+
+if matches(DATASET_PURPOSE,'Train')
+    jointConfigNames = jointConfigNames(1:23);
+elseif matches(DATASET_PURPOSE,'Test')
+    jointConfigNames = jointConfigNames(24:end);
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Aerodynamic forces application points definitions
 aeroFrameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
@@ -49,12 +61,13 @@ linkCsAs_matrix = [];
 linkCnAs_matrix = [];
 linkCfAs_matrix = [];
 
-jointPosDeg_full = [];
-yawAngles_full   = [];
-pitchAngles_full = [];
-ironcubCdAs_full = [];
-ironcubClAs_full = [];
-ironcubCsAs_full = [];
+jointPosDeg_full   = [];
+yawAngles_full     = [];
+pitchAngles_full   = [];
+windDirection_full = [];
+ironcubCdAs_full   = [];
+ironcubClAs_full   = [];
+ironcubCsAs_full   = [];
 
 for linkIndex = 1 : length(cfdLinkNames)
 
@@ -79,7 +92,7 @@ for linkIndex = 1 : length(cfdLinkNames)
 
 
 
-    for jointConfigIndex = 1 : length(fieldnames(data))
+    for jointConfigIndex = 1: length(jointConfigNames)
 
         jointConfigName = jointConfigNames{jointConfigIndex};
         jointPosDeg     = data.(jointConfigName).jointConfig;
@@ -197,18 +210,52 @@ for linkIndex = 1 : length(cfdLinkNames)
 
 end
 
+for i = 1 : length(pitchAngles_full)
+
+    R_yaw   = rotz(yawAngles_full(i));
+    R_pitch = roty(pitchAngles_full(i) - 90);
+    A_R_b   = R_yaw * R_pitch;
+    b_R_A   = transpose(A_R_b);
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %         [       |       |       ]
+    % b_R_A = [ b_x_A | b_y_A | b_z_A ]
+    %         [       |       |       ]
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    windDirection_full(i,:) = b_R_A(:,1); 
+    
+    if FORCES_IN_BASE_FRAME
+
+        for linkIndex = 1 : length(cfdLinkNames)
+
+            linkAeroForceAreas = [linkCdAs_matrix(i,linkIndex); ...
+                                  linkCsAs_matrix(i,linkIndex); ...
+                                  linkClAs_matrix(i,linkIndex); ];
+
+            b_linkAeroForceAreas = b_R_A*linkAeroForceAreas;
+
+            linkCdAs_matrix(i,linkIndex) = b_linkAeroForceAreas(1);
+            linkCsAs_matrix(i,linkIndex) = b_linkAeroForceAreas(2);
+            linkClAs_matrix(i,linkIndex) = b_linkAeroForceAreas(3);
+
+        end
+
+    end
+
+end
+
 %% Save data
-save([srcPath,'datasetAlias.mat'],'cfdLinkNames', ...
-                                  'linkAoAs_matrix', ...
-                                  'linkSsAs_matrix', ...
-                                  'linkCdAs_matrix', ...
-                                  'linkClAs_matrix', ...
-                                  'linkCsAs_matrix', ...
-                                  'linkCnAs_matrix', ...
-                                  'linkCfAs_matrix', ...
-                                  'jointPosDeg_full', ...
-                                  'yawAngles_full', ...
-                                  'pitchAngles_full', ...
-                                  'ironcubCdAs_full', ...
-                                  'ironcubClAs_full', ...
-                                  'ironcubCsAs_full');
+save([srcPath,'dataset',DATASET_PURPOSE,'.mat'],'cfdLinkNames','*_matrix','*_full');
+                                                % 'linkAoAs_matrix', ...
+                                                % 'linkSsAs_matrix', ...
+                                                % 'linkCdAs_matrix', ...
+                                                % 'linkClAs_matrix', ...
+                                                % 'linkCsAs_matrix', ...
+                                                % 'linkCnAs_matrix', ...
+                                                % 'linkCfAs_matrix', ...
+                                                % 'jointPosDeg_full', ...
+                                                % 'yawAngles_full', ...
+                                                % 'pitchAngles_full', ...
+                                                % 'windDirection_full'...
+                                                % 'ironcubCdAs_full', ...
+                                                % 'ironcubClAs_full', ...
+                                                % 'ironcubCsAs_full');
