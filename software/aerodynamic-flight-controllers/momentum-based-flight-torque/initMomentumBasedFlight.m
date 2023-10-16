@@ -35,8 +35,8 @@ Config.tStep                            = 0.01;
 Config.USE_JETS                         = false;
 
 % Put 1 if testing with aerodynamic forces
-aero_config.USE_AERODYNAMICS            = false;
-aero_config.USE_WIND_SPEED              = false;
+aero_config.USE_AERODYNAMICS            = true;
+aero_config.USE_WIND_SPEED              = true;
 
 % If TRUE, jet dynamics is included in the controller. WARNING: if the
 % controller is interfaced with Gazebo simulator, also Gazebo needs 
