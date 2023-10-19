@@ -8,10 +8,15 @@ function contactForces_0 = selectInitContactForces_noFT(feetContactIsActive, con
         % moments, but the feet vertical forces. This resulted to be a bit
         % more robust than taking the full measured wrench
         initContactForces    = zeros(12,1);
-        initContactForces(3)  = contactForces(3);
-        initContactForces(9)  = contactForces(9);
-        initContactForces(5)  = contactForces(5);
-        initContactForces(11) = contactForces(11);
+        initContactForces(3)  = contactForces(3);%         (contactForces(3)+contactForces(9))/2;
+        initContactForces(9)  = contactForces(9);%         (contactForces(3)+contactForces(9))/2;
+        initContactForces(5)  = contactForces(5);%         (contactForces(5)+contactForces(11))/2;
+        initContactForces(11) = contactForces(11);%         (contactForces(5)+contactForces(11))/2;
+
+%         (contactForces(3)+contactForces(9))/2;
+%         (contactForces(3)+contactForces(9))/2;
+%         (contactForces(5)+contactForces(11))/2;
+%         (contactForces(5)+contactForces(11))/2;
     end
     if isempty(previous_feetInContact)
         
