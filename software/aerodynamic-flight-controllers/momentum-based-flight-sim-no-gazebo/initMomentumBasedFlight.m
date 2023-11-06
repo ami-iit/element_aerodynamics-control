@@ -40,9 +40,10 @@ aero_config.use_aeroNet                 = true;
 
 %% SIMULATION SETTINGS
 
-% Controller type: native GUI or joystick
+% Controller type: native GUI, joystick or autopilot
 Config.USE_NATIVE_GUI                   = false;
 Config.USE_FLIGHT_DATA_GUI              = false;
+Config.AUTOPILOT_ON                     = true;
 
 % Visualizer
 confVisualizer.visualizeRobot = true;
