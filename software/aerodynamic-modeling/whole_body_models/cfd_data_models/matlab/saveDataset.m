@@ -69,6 +69,10 @@ ironcubCdAs_full   = [];
 ironcubClAs_full   = [];
 ironcubCsAs_full   = [];
 
+% Initialize progress display
+disp('progress: [0%] completed');
+tic
+
 for linkIndex = 1 : length(cfdLinkNames)
 
     linkAoAs_full = [];
@@ -99,9 +103,9 @@ for linkIndex = 1 : length(cfdLinkNames)
         jointPosRad     = jointPosDeg * pi/180;
         
 
-        % idyntree model initialization
-        KinDynModel = iDynTreeWrappers.loadReducedModel(jointNames, 'root_link', modelPath, fileName, false);
-        iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPosRad, baseVel, jointVel, gravAcc);
+        % idyntree model initialization (suppressing disp output)
+        result1 = evalc("KinDynModel = iDynTreeWrappers.loadReducedModel(jointNames, 'root_link', modelPath, fileName, false)");
+        result2 = evalc("iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPosRad, baseVel, jointVel, gravAcc)");
 
         % robot visualization
         %             iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.96,0.96,0.96], ...
@@ -197,6 +201,17 @@ for linkIndex = 1 : length(cfdLinkNames)
             ironcubCsAs_full = [ironcubCsAs_full; ironcubCsAs];
             jointPosDeg_full = [jointPosDeg_full; jointPosDegs];
         end
+        
+        %% Status display
+        linkStatus = (linkIndex-1)/length(cfdLinkNames) * 100;
+        jointConfigStatus = linkStatus + jointConfigIndex/(length(jointConfigNames)*length(cfdLinkNames))*100;
+        clc;
+        disp(['progress: [',num2str(round(jointConfigStatus)),'%] completed']);
+
+        elapsedTime = toc;
+        totalTime = elapsedTime/(jointConfigStatus/100);
+        remainingTime = totalTime - elapsedTime;
+        disp(['remaining time: [',num2str(round(remainingTime)),'s]']);
 
     end
     
@@ -209,6 +224,8 @@ for linkIndex = 1 : length(cfdLinkNames)
     linkCfAs_matrix(:,linkIndex) = linkCfAs_full;
 
 end
+
+
 
 for i = 1 : length(pitchAngles_full)
 
