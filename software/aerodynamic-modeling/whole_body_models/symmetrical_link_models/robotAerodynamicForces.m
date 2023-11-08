@@ -17,7 +17,7 @@ fileName       = 'model_stl.urdf';
 meshFilePrefix = [componentPath,'\models'];
 
 %% ANALYSIS TYPE
-TEST = 'flight30'; % | hovering | flight30 | flight50 | flight60 |
+TEST = 'flyposition_Gazebo'; % | hovering | flight30 | flight50 | flight60 |
 
 if matches(TEST,'hovering')
     pitchAngle  = 90;
@@ -39,6 +39,11 @@ elseif matches(TEST,'flight60')
     yawAngle    = 0;
     Npoints     = length(pitchAngles);
     jointPos    = [0,0,0,-25,24,30,35,-25,24,30,35,0,10,7,0,0,0,0,10,7,0,0,0]* pi/180;
+elseif matches(TEST,'flyposition_Gazebo')
+    pitchAngle  = 84;
+    yawAngles   = 0;
+    Npoints     = length(yawAngles);
+    jointPos    = [0,0,0,-10,25,40,15,-10,25,40,15,0,0,0,0,-6,0,0,0,0,0,-6,0]* pi/180;
 end
 
 %% initialize plot variables
@@ -53,14 +58,14 @@ robotClA = nan(Npoints,1);
 for j = 1:Npoints
 
     %% airflow input
-    if contains(TEST,'hovering')
+    if contains(TEST,{'hovering','flyposition_Gazebo'})
         yawAngle   = yawAngles(j);  % [deg]
         barAngle   = 0; % [deg]
     elseif contains(TEST,'flight')
         pitchAngle = pitchAngles(j);  % [deg]
         barAngle   = 45; % [deg]
     end
-    airSpeed               = 17;            % [m/s]
+    airSpeed               = 12;            % [m/s]
     airDensity             = 1.225;         % [kg/m^3]
     airDynamicViscosity    = 1.8e-5;        % [N s/m^2] at T = 18 C
     
@@ -101,8 +106,8 @@ for j = 1:Npoints
     iDynTreeWrappers.setRobotState(KinDynModel, basePose, jointPos, baseVel, jointVel, gravAcc);
 
     %% robot visualization
-%     iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.9,0.9,0.9], 'material', 'metal', ...
-%                                                          'transparency', 0.7, 'debug', true, 'view', [-45 20]);
+    iDynTreeWrappers.prepareVisualization(KinDynModel, meshFilePrefix, 'color', [0.9,0.9,0.9], 'material', 'metal', ...
+                                                         'transparency', 0.7, 'debug', true, 'view', [-45 20]);
 
     %% local axis versor evaluation
     Nlinks       = length(frameNames);
@@ -110,7 +115,8 @@ for j = 1:Npoints
     w_axisVersor = nan(3,Nlinks);
 
     for i = 1:Nlinks
-        if matches(frameNames{i},{'head','chest','root_link','chest_l_jet_turbine','chest_r_jet_turbine','l_arm_jet_turbine','r_arm_jet_turbine'})
+        % if matches(frameNames{i},{'head','chest','root_link','chest_l_jet_turbine','chest_r_jet_turbine','l_arm_jet_turbine','r_arm_jet_turbine'})
+        if matches(frameNames{i},{'head','chest','root_link'})
             w_H_l = iDynTreeWrappers.getWorldTransform(KinDynModel,frameNames{i});
             w_axisVersor(:,i) = w_H_l(1:3,1:3) * [0; 1; 0];
         else
@@ -130,7 +136,8 @@ for j = 1:Npoints
     
     % Evaluate Cd and Cn in local coordinate frames
     for i = 1:Nlinks
-        angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i))*w_relativeVelocity)/airSpeed); % [deg]
+        angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i))*w_relativeVelocity)/(norm(w_relativeVelocity) + 1e-9)); % [deg]
+        % angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i)) * -w_relativeVelocity) / (norm(w_relativeVelocity) + 1e-9)); % [deg]
         reynoldsNumber(i) = (airDensity*airSpeed*linkDiameters(i))/airDynamicViscosity;
         if matches(frameNames{i},'head')
             [Cd(i), Cn(i)]        = sphereAerodynamicForces(reynoldsNumber(i));
@@ -207,39 +214,39 @@ for j = 1:Npoints
     robotClA(j) = robotLiftArea;
 end
 
-%% PLOTS
-if contains(TEST,'hovering')
-    plotAngles = yawAngles;
-    angleName  = '$\beta\,[^\circ]$';
-elseif contains(TEST,'flight')
-    plotAngles = pitchAngles;
-    angleName  = '$\alpha\,[^\circ]$';
-end
-
-fig1 = figure();
-plot(plotAngles,totalCdA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
-plot(plotAngles,robotCdA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
-grid on;
-ylabel('$C_D A\,[m^2]$','Interpreter','latex')
-xlabel(angleName,'Interpreter','latex')
-legend('Interpreter','latex','Location','best')
-legend show
-
-fig2 = figure();
-plot(plotAngles,totalClA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
-plot(plotAngles,robotClA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
-grid on;
-ylabel('$C_L A\,[m^2]$','Interpreter','latex')
-xlabel(angleName,'Interpreter','latex')
-legend('Interpreter','latex','Location','best')
-legend show
-
-fig3 = figure();
-plot(plotAngles,totalCsA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
-plot(plotAngles,robotCsA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
-grid on;
-ylabel('$C_S A\,[m^2]$','Interpreter','latex')
-xlabel(angleName,'Interpreter','latex')
-legend('Interpreter','latex','Location','best')
-legend show
-
+% %% PLOTS
+% if contains(TEST,{'hovering','flyposition_Gazebo'})
+%     plotAngles = yawAngles;
+%     angleName  = '$\beta\,[^\circ]$';
+% elseif contains(TEST,'flight')
+%     plotAngles = pitchAngles;
+%     angleName  = '$\alpha\,[^\circ]$';
+% end
+% 
+% fig1 = figure();
+% plot(plotAngles,totalCdA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
+% plot(plotAngles,robotCdA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
+% grid on;
+% ylabel('$C_D A\,[m^2]$','Interpreter','latex')
+% xlabel(angleName,'Interpreter','latex')
+% legend('Interpreter','latex','Location','best')
+% legend show
+% 
+% fig2 = figure();
+% plot(plotAngles,totalClA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
+% plot(plotAngles,robotClA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
+% grid on;
+% ylabel('$C_L A\,[m^2]$','Interpreter','latex')
+% xlabel(angleName,'Interpreter','latex')
+% legend('Interpreter','latex','Location','best')
+% legend show
+% 
+% fig3 = figure();
+% plot(plotAngles,totalCsA,'k-','linewidth',1.5,'DisplayName','robot + support');hold on;
+% plot(plotAngles,robotCsA,'k:','linewidth',1.5,'DisplayName','robot');hold on;
+% grid on;
+% ylabel('$C_S A\,[m^2]$','Interpreter','latex')
+% xlabel(angleName,'Interpreter','latex')
+% legend('Interpreter','latex','Location','best')
+% legend show
+% 
