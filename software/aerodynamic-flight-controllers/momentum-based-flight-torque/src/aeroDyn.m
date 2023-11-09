@@ -125,7 +125,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
 
         function frameIndex = get_frame_index(obj, frameName)
             frameIndex = 1;
-            while ~matches(obj.models.frameNames,frameName)
+            while ~matches(obj.models.frameNames{frameIndex},frameName)
                 frameIndex = frameIndex + 1;
             end
         end
