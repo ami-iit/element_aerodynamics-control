@@ -49,24 +49,28 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         function  link_aerodynamic_force = compute_link_aerodynamic_force_in_world_frame(obj, frameName, frameAxis, linkDiameter, linkLength, linkReferenceArea, linkRelativeWindVelocity)          
             linkAspectRatio    = linkLength/linkDiameter;
             linkAxisVersor     = obj.get_link_aerodynamic_axis_in_world_frame(frameName, frameAxis);
-            linkAngleOfAttack  = acosd((transpose(linkAxisVersor) * linkRelativeWindVelocity) / (norm(linkRelativeWindVelocity) + 1e-9)); % [deg]
+            linkAngleOfAttack  = acosd((transpose(linkAxisVersor) * -linkRelativeWindVelocity) / (norm(linkRelativeWindVelocity) + 1e-9)); % [deg]
             linkReynoldsNumber = (obj.conditions.airDensity * norm(linkRelativeWindVelocity) * linkDiameter) / obj.conditions.airDynamicViscosity;
-            if matches(frameName,'head')
-                [Cd, Cn] = obj.models.get_sphere_force_coefficients(linkReynoldsNumber);
-                linkNormalForce = - 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn * ...                                  
-                                  cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
-            else
-                [Cd, ~, Cn_sin] = obj.models.get_cylinder_force_coefficients(linkReynoldsNumber, linkAspectRatio, linkAngleOfAttack);
-                linkNormalForce = - 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn_sin * ...
-                                  cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
-            end
-            linkDragForce = 0.5 * obj.conditions.airDensity * linkReferenceArea * norm(linkRelativeWindVelocity) * Cd * linkRelativeWindVelocity;
-            link_aerodynamic_force = linkNormalForce + linkDragForce;
             
+            if obj.models.use_cfd_regr_model
+                % Use cfd linear regression model
+                [CdA, ~, CnA_bar] = obj.models.get_cfd_model_force_coefficients(frameName, linkAngleOfAttack);
+                linkNormalForce = 0.5 * obj.conditions.airDensity * CnA_bar * cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
+                linkDragForce   = 0.5 * obj.conditions.airDensity * norm(linkRelativeWindVelocity) * CdA * linkRelativeWindVelocity;
+            else
+                % Use sphere and cylinder models
+                if matches(frameName,'head')
+                    [Cd, ~, Cn_sin] = obj.models.get_sphere_force_coefficients(linkReynoldsNumber);
+                else
+                    [Cd, ~, Cn_sin] = obj.models.get_cylinder_force_coefficients(linkReynoldsNumber, linkAspectRatio, linkAngleOfAttack);
+                end
+                linkNormalForce = 0.5 * obj.conditions.airDensity * linkReferenceArea * Cn_sin * cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
+                linkDragForce   = 0.5 * obj.conditions.airDensity * linkReferenceArea * Cd * norm(linkRelativeWindVelocity) * linkRelativeWindVelocity;
+            end
+            
+            link_aerodynamic_force = linkNormalForce + linkDragForce;
         end
         
-
-
         function linkRelativeWindVelocity  = compute_link_CoM_relative_wind_velocity(obj, frameName, linkFrame_T_linkCoM, base_velocity, joints_velocity, windSpeed)
             J_link_frame   = obj.get_frame_jacobian(frameName);
 

@@ -6,9 +6,10 @@ classdef aeroModel < handle
         airDensity; 
         frameNames; frameAxis; linkFrame_X_linkCoM; linkFrame_T_linkCoM;
         linkDiameters; linkLengths; linkReferenceAreas;
-        sphereModel; cylinderModel;
-        C_D_sphere; C_N_sphere; 
-        C_D_cylinder; C_N_cylinder; C_N_bar_cylinder; 
+        sphereModel; cylinderModel; cfdModel; use_cfd_regr_model;
+        C_D_sphere; C_N_sphere; C_N_bar_sphere;
+        C_D_cylinder; C_N_cylinder; C_N_bar_cylinder;
+        CdA_model; CnA_model; CnA_bar_model;
     end
 
     methods
@@ -26,9 +27,11 @@ classdef aeroModel < handle
             obj.linkReferenceAreas  = model_config.linkReferenceAreas;
             obj.sphereModel         = model_config.sphereModel;
             obj.cylinderModel       = model_config.cylinderModel;
+            obj.use_cfd_regr_model  = model_config.use_cfd_regr_model;
+            % obj.use_aeroNet         = model_config.use_aeroNet;
         end
 
-        function [C_D_sphere, C_N_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
+        function [C_D_sphere, C_N_sphere, C_N_bar_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
             % returns the spherical link aerodynamic drag coefficient
 
             if reynoldsNumber >= 0 && reynoldsNumber < 10
@@ -43,6 +46,7 @@ classdef aeroModel < handle
             end
             
             C_N_sphere = 0;
+            C_N_bar_sphere = 0;
 
             obj.C_D_sphere = C_D_sphere;
             obj.C_N_sphere = C_N_sphere;
@@ -70,6 +74,22 @@ classdef aeroModel < handle
             obj.C_D_cylinder = C_D_cylinder;
             obj.C_N_cylinder = C_N_cylinder;
             obj.C_N_bar_cylinder = C_N_bar_cylinder;
+
+        end
+
+        function [CdA_model, CnA_model, CnA_bar_model] = get_cfd_model_force_coefficients(obj, linkName, angleOfAttack)
+            % returns the cfd-model-based link aerodynamic drag coefficient
+
+            CdA_model = [1, cosd(angleOfAttack), sind(angleOfAttack).^2, sind(angleOfAttack).^3, cosd(angleOfAttack).^3] * obj.cfdModel.(linkName).CdA;
+            CnA_model = obj.cfdModel.(linkName).CnA * sind(angleOfAttack)^2 * cosd(angleOfAttack);
+
+            % Corrected coefficient accounting for the cross product
+            % normalization term sin(angleOfAttack)
+            CnA_bar_model = obj.cfdModel.(linkName).CnA * sind(angleOfAttack) * cosd(angleOfAttack);
+            
+            obj.CdA_model = CdA_model;
+            obj.CnA_model = CnA_model;
+            obj.CnA_bar_model = CnA_bar_model;
 
         end
 
