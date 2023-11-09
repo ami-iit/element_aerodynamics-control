@@ -29,14 +29,18 @@ addpath('../controlAndDataGui/');
 addpath(genpath('../matlab-functions-lib/'));
 
 % Simulation time and delta_t [s]
-Config.simulationTime                   = inf;
-Config.tStep                            = 0.01;
+Config.simulationTime           = inf;
+Config.tStep                    = 0.01;
 
-% jets and aerodynamic parameters
-jets_config.use_jet_dyn                 = false;
-aero_config.use_wind_speed              = true;
-aero_config.use_aero_control            = true;
-aero_config.use_aeroNet                 = true;
+% jets parameters
+jets_config.use_jet_dyn         = false;
+
+% aerodynamic parameters
+aero_config.use_wind_speed      = true;     % activate external wind gust
+aero_config.use_aero_control    = true;     % make the controller aerodynamics aware
+
+aero_config.use_cfd_regr_model  = false;    % use CFD-based linear regression model
+aero_config.use_aeroNet         = false;    % use NN for aerodynamics estimation
 
 %% SIMULATION SETTINGS
 

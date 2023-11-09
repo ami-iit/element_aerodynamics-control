@@ -7,11 +7,14 @@
 aero_config.airDensity = 1.225;
 
 %% Robot parameters
-aero_config.frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
-                          'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
-                          'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
-for frameAxisIndex = 1 : length(aero_config.frameNames)
-    if matches(aero_config.frameNames{frameAxisIndex}, {'head','chest','root_link'})
+frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
+              'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
+              'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
+aero_config.frameNames = frameNames;
+
+aero_config.nAeroLinks = length(frameNames);
+for frameAxisIndex = 1 : aero_config.nAeroLinks
+    if matches(frameNames{frameAxisIndex}, {'head','chest','root_link'})
         aero_config.frameAxis(:,frameAxisIndex) = [0; 1; 0];
     else
         aero_config.frameAxis(:,frameAxisIndex) = [0; 0; 1];

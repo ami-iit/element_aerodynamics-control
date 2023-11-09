@@ -6,8 +6,8 @@ classdef aeroModel < handle
         airDensity; 
         frameNames; frameAxis; linkFrame_X_linkCoM; linkFrame_T_linkCoM;
         linkDiameters; linkLengths; linkReferenceAreas;
-        sphereModel; cylinderModel; cfdModel; use_aeroNet;
-        C_D_sphere; C_N_sphere; 
+        sphereModel; cylinderModel; cfdModel; use_cfd_regr_model; use_aeroNet;
+        C_D_sphere; C_N_sphere; C_N_bar_sphere;
         C_D_cylinder; C_N_cylinder; C_N_bar_cylinder;
         CdA_model; CnA_model; CnA_bar_model;
     end
@@ -28,10 +28,11 @@ classdef aeroModel < handle
             obj.sphereModel         = model_config.sphereModel;
             obj.cylinderModel       = model_config.cylinderModel;
             obj.cfdModel            = model_config.cfdModel;
+            obj.use_cfd_regr_model  = model_config.use_cfd_regr_model;
             obj.use_aeroNet         = model_config.use_aeroNet;
         end
 
-        function [C_D_sphere, C_N_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
+        function [C_D_sphere, C_N_sphere, C_N_bar_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
             % returns the spherical link aerodynamic drag coefficient
 
             if reynoldsNumber >= 0 && reynoldsNumber < 10
@@ -46,6 +47,7 @@ classdef aeroModel < handle
             end
             
             C_N_sphere = 0;
+            C_N_bar_sphere = 0;
 
             obj.C_D_sphere = C_D_sphere;
             obj.C_N_sphere = C_N_sphere;

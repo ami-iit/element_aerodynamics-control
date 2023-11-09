@@ -27,7 +27,7 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
         eps_constr_torqueControl = 0;
     end
 
-    f_j            = iRonCubLib.fromJetsIntensitiesToForces(matrixOfJetsAxes, jetsIntensities);
+    f_j            = iRonCubLib_v1.fromJetsIntensitiesToForces(matrixOfJetsAxes, jetsIntensities);
     J_j            = [J_jets(1:3,:); J_jets(7:9,:); J_jets(13:15,:); J_jets(19:21,:)];
     J_c            = [J_LFoot; J_RFoot];
     JDot_c_nu      = [JDot_LFoot_nu; JDot_RFoot_nu];
@@ -37,7 +37,7 @@ function [Hessian, gradient, ConstraintMatrix_inequality, biasVectorConstraint_i
     f_a          = reshape(aerodynamic_forces,[],1);
     
     % define aerodynamic forces jacobian
-    n_aero_links = length(aero_config.frameNames);
+    n_aero_links = aero_config.nAeroLinks;
     J_a          = zeros(3*n_aero_links,6+ndof);
     for i = 1 : n_aero_links
         J_a(3*i-2:3*i,:) = J_aeroForces(6*i-5:6*i-3,:);
