@@ -83,20 +83,17 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                     s.setVal(k,joints_positions(k+1));
                 end
                 baseRotation_iDyntree = iDynTree.Rotation();
+                baseRotation_iDyntree.fromMatlab(world_H_base(1:3,1:3));
                 baseOrigin_iDyntree   = iDynTree.Position();
+                baseOrigin_iDyntree.fromMatlab(world_H_base(1:3,4));
                 T = iDynTree.Transform();
-                for k = 0:2
-                    baseOrigin_iDyntree.setVal(k,world_H_base(k+1,4));
-                    for j = 0:2
-                        baseRotation_iDyntree.setVal(k,j,world_H_base(k+1,j+1));                   
-                    end
-                end      
                 T.setRotation(baseRotation_iDyntree);
                 T.setPosition(baseOrigin_iDyntree);
                 obj.viz.modelViz('iRonCub').setPositions(T, s);
                 % CoM frame update
                 obj.T_CoM.setPosition(obj.KinDynModel.kinDynComp.getCenterOfMassPosition());
                 obj.viz.frames().updateFrame(0, obj.T_CoM);
+                obj.viz.camera().setTarget(baseOrigin_iDyntree);
         end
         
 %% Prepare methods        
@@ -118,10 +115,15 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
             env.setElementVisibility('floor_grid', true);
             env.setElementVisibility('world_frame', true);
             obj.viz.camera().animator().enableMouseControl(true);
+            baseOrigin_iDyntree = iDynTree.Position();
+            baseOrigin_iDyntree.fromMatlab([0 0 1]);
+            offset = iDynTree.Position();
+            offset.fromMatlab([2, 1, 0]);
+            obj.viz.camera().setPosition(baseOrigin_iDyntree + offset);
             % adding lights
-            obj.viz.enviroment().addLight('sun1');
-            obj.viz.enviroment().lightViz('sun1').setType(iDynTree.DIRECTIONAL_LIGHT);
-            obj.viz.enviroment().lightViz('sun1').setDirection(iDynTree.Direction(-1, 0, 0));
+            % obj.viz.enviroment().addLight('sun1');
+            % obj.viz.enviroment().lightViz('sun1').setType(iDynTree.DIRECTIONAL_LIGHT);
+            % obj.viz.enviroment().lightViz('sun1').setDirection(iDynTree.Direction(-1, 0, 0));
             obj.viz.enviroment().addLight('sun2');
             obj.viz.enviroment().lightViz('sun2').setType(iDynTree.DIRECTIONAL_LIGHT);
             obj.viz.enviroment().lightViz('sun2').setDirection(iDynTree.Direction(1, 0, 0));
