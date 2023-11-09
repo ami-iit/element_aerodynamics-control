@@ -11,8 +11,8 @@ frameNames = {'head', 'chest', 'chest_l_jet_turbine', 'chest_r_jet_turbine', ...
     'l_upper_arm','l_arm_jet_turbine','r_upper_arm','r_arm_jet_turbine',...
     'root_link','l_upper_leg','l_lower_leg','r_upper_leg','r_lower_leg'};
 
-componentPath  = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
-modelPath      = [componentPath,'\models\iRonCub-Mk1\iRonCub\robots\iRonCub-Mk1_Gazebo\'];
+componentPath  = getenv('IRONCUB_SOFTWARE_SOURCE_DIR');
+modelPath      = [componentPath,'\models\iRonCub-Mk1_1_v1\iRonCub\robots\iRonCub-Mk1_1_v1\'];
 fileName       = 'model_stl.urdf';
 meshFilePrefix = [componentPath,'\models'];
 
@@ -40,10 +40,10 @@ elseif matches(TEST,'flight60')
     Npoints     = length(pitchAngles);
     jointPos    = [0,0,0,-25,24,30,35,-25,24,30,35,0,10,7,0,0,0,0,10,7,0,0,0]* pi/180;
 elseif matches(TEST,'flyposition_Gazebo')
-    pitchAngle  = 84;
-    yawAngles   = 0;
+    pitchAngle  = 90;
+    yawAngles   = -90;
     Npoints     = length(yawAngles);
-    jointPos    = [0,0,0,-10,25,40,15,-10,25,40,15,0,0,0,0,-6,0,0,0,0,0,-6,0]* pi/180;
+    jointPos    = [0,0,0,-10,25,40,15,-10,25,40,15,0,0,0,0,0,0,0,0,0,0,0,0]* pi/180;
 end
 
 %% initialize plot variables
@@ -70,7 +70,7 @@ for j = 1:Npoints
     airDynamicViscosity    = 1.8e-5;        % [N s/m^2] at T = 18 C
     
     % wind tunnel frame relative velocity
-    w_relativeVelocity     = [1; 0; 0] *airSpeed;
+    w_relativeVelocity     = [-1; 0; 0] *airSpeed;
 
     %% robot simplified model data (sphere and cylinders links)
     linkDiameters    = [0.1929, 0.2467, 0.102, 0.102, ...
@@ -89,6 +89,7 @@ for j = 1:Npoints
     % set base Pose according to yaw and pitch angles
     R_yaw     = rotz(yawAngle);
     R_pitch   = roty(pitchAngle - 90);
+    
     basePose  = [R_yaw * R_pitch, [0.3; 0; 0];
                       zeros(1,3),          1];
     % set bar axis versor
@@ -115,7 +116,6 @@ for j = 1:Npoints
     w_axisVersor = nan(3,Nlinks);
 
     for i = 1:Nlinks
-        % if matches(frameNames{i},{'head','chest','root_link','chest_l_jet_turbine','chest_r_jet_turbine','l_arm_jet_turbine','r_arm_jet_turbine'})
         if matches(frameNames{i},{'head','chest','root_link'})
             w_H_l = iDynTreeWrappers.getWorldTransform(KinDynModel,frameNames{i});
             w_axisVersor(:,i) = w_H_l(1:3,1:3) * [0; 1; 0];
@@ -136,8 +136,8 @@ for j = 1:Npoints
     
     % Evaluate Cd and Cn in local coordinate frames
     for i = 1:Nlinks
-        angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i))*w_relativeVelocity)/(norm(w_relativeVelocity) + 1e-9)); % [deg]
-        % angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i)) * -w_relativeVelocity) / (norm(w_relativeVelocity) + 1e-9)); % [deg]
+        % angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i))*w_relativeVelocity)/(norm(w_relativeVelocity) + 1e-9)); % [deg]
+        angleOfAttack(i)  = acosd((transpose(w_axisVersor(:,i)) * -w_relativeVelocity) / (norm(w_relativeVelocity) + 1e-9)); % [deg]
         reynoldsNumber(i) = (airDensity*airSpeed*linkDiameters(i))/airDynamicViscosity;
         if matches(frameNames{i},'head')
             [Cd(i), Cn(i)]        = sphereAerodynamicForces(reynoldsNumber(i));
@@ -157,10 +157,10 @@ for j = 1:Npoints
         linkDragForce(:, i) = 0.5 * airDensity * linkRefAreas(i) * airSpeed * Cd(i) * w_relativeVelocity;
 
         if matches(frameNames{i},'head')
-            linkNormalForce(:, i) = - 0.5 * airDensity * linkRefAreas(i) * Cn(i) * ...
+            linkNormalForce(:, i) = 0.5 * airDensity * linkRefAreas(i) * Cn(i) * ...
                                   cross(cross(w_relativeVelocity,w_axisVersor(:,i)),w_relativeVelocity) ;
         else
-            linkNormalForce(:, i) = - 0.5 * airDensity * linkRefAreas(i) * Cn_sin(i) * ...
+            linkNormalForce(:, i) = 0.5 * airDensity * linkRefAreas(i) * Cn_sin(i) * ...
                                   cross(cross(w_relativeVelocity,w_axisVersor(:,i)),w_relativeVelocity) ;
         end
     end
