@@ -51,8 +51,8 @@ Config.USE_FLIGHT_DATA_GUI  = false;
 Config.AUTOPILOT_ON         = true;
 
 % Autopilot trajectory (if AUTOPILOT_ON = true)
-Config.IN_LINE_TRAJECTORY       = true;
-Config.CLOSED_LOOP_TRAJECTORY   = false;
+Config.IN_LINE_TRAJECTORY       = false;
+Config.CLOSED_LOOP_TRAJECTORY   = true;
 
 % Visualizer
 confVisualizer.visualizeRobot = true;

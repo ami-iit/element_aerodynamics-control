@@ -21,21 +21,59 @@ function [joyButtons,joyAxes] = autopilotFCN(time, Config)
     if Config.IN_LINE_TRAJECTORY
         
         if time > 10 && time < 17
-            up_pressed = 1;         % Climb up
+            up_pressed = 1;             % Climb up
         end
         if time > 20 && time < 30
-            front_pressed = -1;     % Move forward
-            turbo_mode    = 1;      % Move max speed
+            front_pressed = -1;         % Move forward
+            turbo_mode    = 1;          % Move max speed
         end
         if time > 38 && time < 39
-            pitch_ac_pressed    = 1;% Bring chest straight
+            pitch_ac_pressed    = 1;    % Bring base vertical
         end
         if time > 40 && time < 47
-            down_pressed = 1;       % Approach the ground
+            down_pressed = 1;           % Approach the ground
         end
     
     % Perform Closed-loop trajectory
     elseif Config.CLOSED_LOOP_TRAJECTORY
+        
+        if time > 10 && time < 17
+            up_pressed  = 1;            % Climb up
+        end
+        if time > 20 && time < 27
+            front_pressed   = -1;       % Move forward 1
+            turbo_mode      = 1;        % Move max speed 1
+        end
+        if time > 35 && time < 38
+            yaw_c_pressed  = 1;        % Rotate base to the left 1
+        end
+        if time > 45 && time < 52
+            front_pressed   = -1;       % Move forward 2
+            turbo_mode      = 1;        % Move max speed 2
+        end
+        if time > 60 && time < 63
+            yaw_c_pressed  = 1;        % Rotate base to the left 2
+        end
+        if time > 70 && time < 77
+            front_pressed   = -1;       % Move forward 3
+            turbo_mode      = 1;        % Move max speed 3
+        end
+        if time > 85 && time < 88
+            yaw_c_pressed  = 1;        % Rotate base to the left 3
+        end
+        if time > 95 && time < 102
+            front_pressed   = -1;       % Move forward 4
+            turbo_mode      = 1;        % Move max speed 4
+        end
+        if time > 110 && time < 113
+            yaw_c_pressed  = 1;        % Rotate base to the left 4
+        end
+        if time > 120 && time < 121
+            pitch_ac_pressed    = 1;    % Bring base vertical
+        end
+        if time > 122 && time < 129
+            down_pressed = 1;           % Approach the ground
+        end
 
     end
 

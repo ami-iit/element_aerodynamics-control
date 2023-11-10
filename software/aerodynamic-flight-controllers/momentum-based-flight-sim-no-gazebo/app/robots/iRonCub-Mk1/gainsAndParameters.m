@@ -30,7 +30,7 @@ Config.references.gainSmoothingRotation        = 1;
 % rate of change of the references w.r.t. time. CoM position step length
 % must be interpreted as: [meters/timeStep]; base rotation as [deg/timeStep] 
 Config.references.stepLength_CoM               = [0.0075; 0.0025; 0.0075];
-Config.references.stepLength_rpyBase           = [0.15; 0.35; 0.35] .* pi/180;
+Config.references.stepLength_rpyBase           = [0.15; 0.3; 0.3] .* pi/180;
 
 % limit the rate of change along z CoM direction while landing (button Y pressed)
 Config.references.zCoMlimitStepLengthLanding   = 0.001;
