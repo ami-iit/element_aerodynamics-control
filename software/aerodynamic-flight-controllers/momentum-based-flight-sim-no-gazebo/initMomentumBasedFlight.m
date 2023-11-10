@@ -36,8 +36,9 @@ Config.tStep                    = 0.01;
 jets_config.use_jet_dyn         = false;
 
 % aerodynamic parameters
-aero_config.use_wind_speed      = true;     % activate external wind gust
-aero_config.use_aero_control    = true;     % make the controller aerodynamics aware
+aero_config.enable_aero_sim     = false;    % enable simulator aerodynamics
+aero_config.use_wind_speed      = false;    % activate external wind gust
+aero_config.use_aero_control    = false;    % use aero-aware controller
 
 aero_config.use_cfd_regr_model  = false;    % use CFD-based linear regression model
 aero_config.use_aeroNet         = false;    % use NN for aerodynamics estimation
@@ -45,9 +46,13 @@ aero_config.use_aeroNet         = false;    % use NN for aerodynamics estimation
 %% SIMULATION SETTINGS
 
 % Controller type: native GUI, joystick or autopilot
-Config.USE_NATIVE_GUI                   = false;
-Config.USE_FLIGHT_DATA_GUI              = false;
-Config.AUTOPILOT_ON                     = true;
+Config.USE_NATIVE_GUI       = false;
+Config.USE_FLIGHT_DATA_GUI  = false;
+Config.AUTOPILOT_ON         = true;
+
+% Autopilot trajectory (if AUTOPILOT_ON = true)
+Config.IN_LINE_TRAJECTORY       = true;
+Config.CLOSED_LOOP_TRAJECTORY   = false;
 
 % Visualizer
 confVisualizer.visualizeRobot = true;

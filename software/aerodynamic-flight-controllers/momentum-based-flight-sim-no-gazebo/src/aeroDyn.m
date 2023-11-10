@@ -30,12 +30,17 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             % discrete states.
             obj.set_global_aerodynamic_conditions(wind_speed, base_velocity);
             [aerodynamic_forces, generalized_aerodynamic_wrench] = obj.compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(base_velocity, joints_velocity, aerodynamicForceAreas);
+            % Set to zero aerodynamic effects if not enabled
+            if ~obj.models.enable_aero_sim
+                aerodynamic_forces = 0 * aerodynamic_forces;
+                generalized_aerodynamic_wrench = 0 * generalized_aerodynamic_wrench;
+            end
         end
         
         function [aerodynamic_forces, generalized_aerodynamic_wrench] = compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(obj, base_velocity, joints_velocity, aerodynamicForceAreas)
             % Transform from aerodynamic forces into aerodynamic wrenches
             aerodynamic_forces = obj.compute_aerodynamic_forces_in_wrld_frame(base_velocity, joints_velocity, aerodynamicForceAreas);
-            aerodynamic_wrenches = [aerodynamic_forces; zeros(3, length(obj.models.frameNames))];
+            aerodynamic_wrenches = [aerodynamic_forces; zeros(3, obj.models.nAeroLinks)];
             generalized_aerodynamic_wrench = obj.compute_generalized_aerodynamic_wrench(aerodynamic_wrenches);        
         end
         
@@ -44,8 +49,8 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             if obj.models.use_aeroNet
                 aerodynamic_forces = 0.5 * obj.conditions.airDensity * norm(obj.conditions.relativeWindVelocity)^2 * aerodynamicForceAreas;
             else
-                aerodynamic_forces = nan(3,length(obj.models.frameNames));
-                for i = 1 : length(obj.models.frameNames)
+                aerodynamic_forces = nan(3,obj.models.nAeroLinks);
+                for i = 1 : obj.models.nAeroLinks
                     linkCoMRelativeWindVelocity  = obj.compute_link_CoM_relative_wind_velocity(obj.models.frameNames{i}, obj.models.linkFrame_T_linkCoM(:,:,i), base_velocity, joints_velocity, obj.conditions.windSpeed);
                     aerodynamic_forces(1:3,i) = obj.compute_link_aerodynamic_force_in_world_frame(obj.models.frameNames{i}, obj.models.frameAxis(:,i), obj.models.linkDiameters(i), ...
                                                                                                   obj.models.linkLengths(i), obj.models.linkReferenceAreas(i), linkCoMRelativeWindVelocity);
@@ -108,7 +113,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         
         function generalized_aerodynamic_wrench = compute_generalized_aerodynamic_wrench(obj, aerodynamicWrenches)
             generalized_aerodynamic_wrench = zeros(29,1);
-            for i = 1 : length(obj.models.frameNames)
+            for i = 1 : obj.models.nAeroLinks
                 link_gen_aero_wrench = obj.compute_link_generalized_aerodynamic_wrench(obj.models.frameNames{i}, obj.models.linkFrame_X_linkCoM(:,:,i), aerodynamicWrenches(:, i));
                 generalized_aerodynamic_wrench = generalized_aerodynamic_wrench + link_gen_aero_wrench;
             end
