@@ -4,9 +4,11 @@ classdef aeroModel < handle
 
     properties
         airDensity; 
-        frameNames; frameAxis; linkFrame_X_linkCoM; linkFrame_T_linkCoM;
+        frameNames; nAeroLinks; frameAxis; 
+        linkFrame_X_linkCoM; linkFrame_T_linkCoM;
         linkDiameters; linkLengths; linkReferenceAreas;
-        sphereModel; cylinderModel; cfdModel; use_cfd_regr_model; use_aeroNet;
+        enable_aero_sim; use_cfd_regr_model; use_aeroNet;
+        sphereModel; cylinderModel; cfdModel; 
         C_D_sphere; C_N_sphere; C_N_bar_sphere;
         C_D_cylinder; C_N_cylinder; C_N_bar_cylinder;
         CdA_model; CnA_model; CnA_bar_model;
@@ -19,17 +21,19 @@ classdef aeroModel < handle
             % Detailed explanation goes here
             obj.airDensity          = model_config.airDensity;
             obj.frameNames          = model_config.frameNames;
+            obj.nAeroLinks          = model_config.nAeroLinks;
             obj.frameAxis           = model_config.frameAxis;
             obj.linkFrame_X_linkCoM = model_config.linkFrame_X_linkCoM;
             obj.linkFrame_T_linkCoM = model_config.linkFrame_T_linkCoM;
             obj.linkDiameters       = model_config.linkDiameters;
             obj.linkLengths         = model_config.linkLengths;
             obj.linkReferenceAreas  = model_config.linkReferenceAreas;
+            obj.enable_aero_sim     = model_config.enable_aero_sim;
+            obj.use_cfd_regr_model  = model_config.use_cfd_regr_model;
+            obj.use_aeroNet         = model_config.use_aeroNet;
             obj.sphereModel         = model_config.sphereModel;
             obj.cylinderModel       = model_config.cylinderModel;
             obj.cfdModel            = model_config.cfdModel;
-            obj.use_cfd_regr_model  = model_config.use_cfd_regr_model;
-            obj.use_aeroNet         = model_config.use_aeroNet;
         end
 
         function [C_D_sphere, C_N_sphere, C_N_bar_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)
