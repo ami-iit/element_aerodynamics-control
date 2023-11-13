@@ -29,16 +29,19 @@ catch ME
     warning(ME.message)
 end
 
-% Create a folder for collecting data
+% Collect data in a dedicated folder
 if Config.SAVE_WORKSPACE
 
-    if (~exist(['experiments',date],'dir'))
+    % Evaluate current date and time to name the folder and experiments
+    current_date = char(datetime('now','Format','yyyy-MM-dd'));
+    current_time = char(datetime('now','Format','H-mm'));
 
-        mkdir(['experiments',date]);
+    % Create the folder (if not existing yet)
+    if (~exist(['experiments/',current_date],'dir'))
+        mkdir(['experiments/',current_date]);
     end
     
-    matFileList = dir(['./experiments',date,'/*.mat']);  
-    c           = clock; 
+    matFileList = dir(['./experiments/',current_date,'/*.mat']);
    
-    save(['./experiments',date,'/exp_',num2str(c(4)),'-',num2str(c(5)),'.mat'])
+    save(['./experiments/',current_date,'/exp_',current_time,'.mat'])
 end
