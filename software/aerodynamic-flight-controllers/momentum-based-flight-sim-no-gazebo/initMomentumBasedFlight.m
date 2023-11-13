@@ -36,8 +36,8 @@ Config.tStep                    = 0.01;
 jets_config.use_jet_dyn         = false;
 
 % aerodynamic parameters
-aero_config.enable_aero_sim     = false;    % enable simulator aerodynamics
-aero_config.use_wind_speed      = false;    % activate external wind gust
+aero_config.enable_aero_sim     = true;    % enable simulator aerodynamics
+aero_config.use_wind_velocity   = true;    % activate external wind gust
 aero_config.use_aero_control    = false;    % use aero-aware controller
 
 aero_config.use_cfd_regr_model  = false;    % use CFD-based linear regression model
@@ -51,8 +51,12 @@ Config.USE_FLIGHT_DATA_GUI  = false;
 Config.AUTOPILOT_ON         = true;
 
 % Autopilot trajectory (if AUTOPILOT_ON = true)
-Config.IN_LINE_TRAJECTORY       = false;
-Config.CLOSED_LOOP_TRAJECTORY   = true;
+Config.IN_LINE_TRAJECTORY       = true;
+Config.CLOSED_LOOP_TRAJECTORY   = false;
+
+% Wind gust profile
+Config.CONSTANT_WIND_GUST  = true;
+Config.VARIABLE_WIND_GUST  = false;
 
 % Visualizer
 confVisualizer.visualizeRobot = true;
