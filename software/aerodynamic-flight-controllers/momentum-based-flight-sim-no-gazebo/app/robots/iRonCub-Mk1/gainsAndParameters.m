@@ -95,7 +95,7 @@ Config.gains.momentum.KD_angular = 125 .* ones(1,3) *2; % 2*sqrt(Config.gains.mo
 Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
                              
 % Torque control gains
-Config.gains.torqueControl.KI    = 250;                            
+Config.gains.torqueControl.KI    = 100;                            
 Config.gains.torqueControl.KP    = 2 * sqrt(Config.gains.torqueControl.KI);
 
 %% QP WEIGHTS AND THRESHOLDS
