@@ -94,6 +94,9 @@ classdef RobotVisualizer < matlab.System & matlab.system.mixin.CustomIcon
                 obj.T_CoM.setPosition(obj.KinDynModel.kinDynComp.getCenterOfMassPosition());
                 obj.viz.frames().updateFrame(0, obj.T_CoM);
                 obj.viz.camera().setTarget(baseOrigin_iDyntree);
+                offset = iDynTree.Position();                               % Comment these
+                offset.fromMatlab([2, 1, 1]);                               % lines to manually 
+                obj.viz.camera().setPosition(baseOrigin_iDyntree + offset); % adjust the view
         end
         
 %% Prepare methods        
