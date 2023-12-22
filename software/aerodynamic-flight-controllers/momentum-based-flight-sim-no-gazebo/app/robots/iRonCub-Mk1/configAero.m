@@ -114,7 +114,7 @@ aero_config.cfdModel.r_lower_leg.CnA         = 0.0321;
 if aero_config.use_aeroNet
 
     % Path to the network model file
-    aero_config.onnxModelFile = 'model_L9_N10_p1_30000.onnx';
+    aero_config.onnxModelFile = 'model_L9_N10_p1_60000.onnx';
     
     % import network
     aeroNet = importNetworkFromONNX(aero_config.onnxModelFile, InputDataFormats=["BC","BC"], OutputDataFormats="BC");
