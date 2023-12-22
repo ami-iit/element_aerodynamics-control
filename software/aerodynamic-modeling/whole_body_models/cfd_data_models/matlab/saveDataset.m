@@ -40,7 +40,7 @@ load([srcPath,'aeroFrameTransforms.mat']);
 
 
 %% data for iDynTreeWrappers
-componentPath  = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
+componentPath  = getenv('IRONCUB_SOFTWARE_SOURCE_DIR');
 modelPath      = [componentPath,'/models/iRonCub-Mk1/iRonCub/robots/iRonCub-Mk1_Gazebo/'];
 fileName       = 'model_stl.urdf';
 meshFilePrefix = [componentPath,'/models'];
@@ -261,7 +261,13 @@ for i = 1 : length(pitchAngles_full)
 end
 
 %% Save data
-save([srcPath,'dataset',DATASET_PURPOSE,'.mat'],'cfdLinkNames','*_matrix','*_full');
+if FORCES_IN_BASE_FRAME
+    datasetFileName = ['dataset',DATASET_PURPOSE,'.mat'];
+else
+    datasetFileName = ['dataset',DATASET_PURPOSE,'AeroFrame.mat'];
+end
+
+save([srcPath,datasetFileName],'cfdLinkNames','*_matrix','*_full');
                                                 % 'linkAoAs_matrix', ...
                                                 % 'linkSsAs_matrix', ...
                                                 % 'linkCdAs_matrix', ...

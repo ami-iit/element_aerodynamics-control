@@ -20,9 +20,8 @@ from sklearn.metrics import mean_squared_error
 
 
 ############################ PATH DEFINITIONS ###############################
-matFilePath = pathlib.Path(__file__).parents[1] / "src" / "datasetTrain.mat"
-testMatFilePath = pathlib.Path(__file__).parents[1] / "src" / "datasetTest.mat"
-nnModelPath = pathlib.Path(__file__).parents[1] / "models" / "model_L9_N10_p1_30000.pt" 
+matFilePath = pathlib.Path(__file__).parents[1] / "src" / "datasetFullAeroFrame.mat"
+nnModelPath = pathlib.Path(__file__).parents[1] / "models" / "model_L9_N10_p1_60000_aeroFrame.pt" 
 
 ############################## DEVICE SETUP #################################
 # Device will determine whether to run the training on GPU or CPU.
@@ -86,41 +85,7 @@ linkAoAs_train = linkAoAs_train.to(device)
 linkAoAs_val = linkAoAs_val.to(device)
 
 linkAeroForces_train = linkAeroForces_train.to(device)  
-linkAeroForces_val = linkAeroForces_val.to(device)  
-
-############################# LOAD TEST DATASET #############################
-# Load test dataset .mat file
-dataset_test = sp.io.loadmat(testMatFilePath)
-
-# Load variables from dataset
-pitchAngle_test = dataset_test['pitchAngles_full']
-yawAngle_test = dataset_test['yawAngles_full']
-windDirection_test = dataset_test['windDirection_full']
-jointPos_test = dataset_test['jointPosDeg_full']
-linkCdAs_test = dataset_test['linkCdAs_matrix']
-linkClAs_test = dataset_test['linkClAs_matrix']
-linkCsAs_test = dataset_test['linkCsAs_matrix']
-linkAoAs_test = dataset_test['linkAoAs_matrix']
-
-linkAeroForces_test = np.concatenate((linkCdAs_test, linkClAs_test, linkCsAs_test), axis=1)
-
-# from arrays to tensors
-pitchAngle_test = Variable(torch.from_numpy(pitchAngle_test.transpose()).float(), requires_grad=True)
-yawAngle_test = Variable(torch.from_numpy(yawAngle_test.transpose()).float(), requires_grad=True)
-windDirection_test = Variable(torch.from_numpy(windDirection_test.transpose()).float(), requires_grad=True)
-jointPos_test = Variable(torch.from_numpy(jointPos_test.transpose()).float(), requires_grad=True)
-linkAoAs_test = Variable(torch.from_numpy(linkAoAs_test.transpose()).float(), requires_grad=True)
-
-linkAeroForces_test = Variable(torch.from_numpy(linkAeroForces_test.transpose()).float(), requires_grad=True)
-
-# Move tensors to the configured device
-pitchAngle_test = pitchAngle_test.to(device)  # input
-yawAngle_test = yawAngle_test.to(device)  # input
-windDirection_test = windDirection_test.to(device)  # input
-jointPos_test = jointPos_test.to(device)  # input
-linkAoAs_test = linkAoAs_test.to(device)  # input
-
-linkAeroForces_test = linkAeroForces_test.to(device)  #  CFD data
+linkAeroForces_val = linkAeroForces_val.to(device)
 
 ############################# LOAD THE NN MODEL #################################      
 
@@ -133,7 +98,6 @@ print('\n model loaded from: {}'.format(nnModelPath))
 
 linkAeroForces_predicted_train = model(windDirection_train, jointPos_train)
 linkAeroForces_predicted_val  = model(windDirection_val, jointPos_val)
-linkAeroForces_predicted_test  = model(windDirection_test, jointPos_test)
 
 ############################# PLOT THE RESULTS #################################
 plotVariableName = r'$C_D A$'
@@ -146,16 +110,12 @@ plotPreStartIndex = plotVariable*nLink
 if torch.cuda.is_available():
     pitchAngle_train = pitchAngle_train.cpu()
     pitchAngle_val   = pitchAngle_val.cpu()
-    pitchAngle_test  = pitchAngle_test.cpu()
     linkAoAs_train = linkAoAs_train.cpu()
     linkAoAs_val   = linkAoAs_val.cpu()
-    linkAoAs_test  = linkAoAs_test.cpu()
     linkAeroForces_train = linkAeroForces_train.cpu()
     linkAeroForces_val   = linkAeroForces_val.cpu()
-    linkAeroForces_test  = linkAeroForces_test.cpu()
     linkAeroForces_predicted_train = linkAeroForces_predicted_train.cpu()
     linkAeroForces_predicted_val   = linkAeroForces_predicted_val.cpu()
-    linkAeroForces_predicted_test  = linkAeroForces_predicted_test.cpu()
 
 
 for linkIndex in range(0,nLink,1):
@@ -232,26 +192,6 @@ for linkIndex in range(0,nLink,1):
     valMSE = mean_squared_error(linkAeroForces_predicted_val.detach().numpy()[plotStartIndex,:], linkAeroForces_val.detach().numpy()[plotStartIndex,:])
     # print(str(plotVariableName) + ' MSE for link ' + str(cfdLinkNames[0][linkIndex][0]) + ' on validation dataset: ' + str(valMSE))
     print("%.2e" % valMSE)
-    
-    # Subplot 4
-    ax4 = fig.add_subplot(224)
-    ax4.scatter(linkAoAs_test.detach().numpy()[linkIndex,:], linkAeroForces_predicted_test.detach().numpy()[plotStartIndex,:] - linkAeroForces_test.detach().numpy()[plotStartIndex,:], 
-                s=16, label='NN test error', facecolors='none', edgecolors='tab:purple', alpha=0.5)
-    
-    ax4.xaxis.set_label_coords(0.5, -0.08)  # Adjust the x-axis label position
-    ax4.set_xlabel(r'$\alpha_{link}$ [deg]')
-    ax4.xaxis.label.set_fontsize(12)
-    ax4.set_xlim([0,180])
-
-    #ax4.yaxis.set_label_coords(-0.12, 0.5)  # Adjust the y-axis label position
-    #ax4.set_ylabel(r'$C_D A$')
-    #ax4.yaxis.label.set_fontsize(12)
-    ax4.yaxis.set_tick_params()
-    # ax4.set_ylim(limits)
-
-    ax4.set_title(str(cfdLinkNames[0][linkIndex][0]))
-    ax4.grid()
-    ax4.legend()
 
     plt.show(block=False)
     
@@ -314,23 +254,6 @@ ax3.yaxis.set_tick_params()
 ax3.set_title('iRonCub')
 ax3.grid()
 ax3.legend()
-
-# Subplot 4
-ax4 = fig.add_subplot(224)
-ax4.scatter(pitchAngle_test.detach().numpy()[0], np.sum(linkAeroForces_predicted_test.detach().numpy()[sumStartIndex:sumEndIndex,:] - linkAeroForces_test.detach().numpy()[sumStartIndex:sumEndIndex,:],axis=0)/np.sum(linkAeroForces_test.detach().numpy()[sumStartIndex:sumEndIndex,:],axis=0) *100, 
-            s=16, label='NN test % error', facecolors='none', edgecolors='tab:purple', alpha=0.5)
-ax4.xaxis.set_label_coords(0.5, -0.08)  # Adjust the x-axis label position
-ax4.set_xlabel(r'$\alpha_{robot}$ [deg]')
-ax4.xaxis.label.set_fontsize(12)
-ax4.set_xlim([0,180])
-# ax4.yaxis.set_label_coords(-0.15, 0.5)  # Adjust the y-axis label position
-# ax4.set_ylabel(r'$C_D A$')
-# ax4.yaxis.label.set_fontsize(12)
-ax4.yaxis.set_tick_params()
-# ax3.set_ylim(limits)
-ax4.set_title('iRonCub')
-ax4.grid()
-ax4.legend()
 
 plt.show(block=False)
 

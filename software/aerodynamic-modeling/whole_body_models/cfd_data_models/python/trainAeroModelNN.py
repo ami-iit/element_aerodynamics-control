@@ -91,7 +91,7 @@ output_parameters = 39      # number of parameters from output layer
 batch_size    = 1000        # batch size for training
 learning_rate = 0.001       # learning rate for training
 
-num_epochs     = 30000      # number of epochs for training
+num_epochs     = 60000      # number of epochs for training
 n_neurons      = 2**10      # neurons for each layer
 num_layers     = 9          # number of hidden layers
 dropout_prob   = 0.1        # dropout probability
