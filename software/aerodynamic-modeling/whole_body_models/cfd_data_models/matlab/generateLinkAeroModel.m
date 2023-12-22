@@ -25,10 +25,10 @@ cfdLinkNames   = {'head', 'torso', 'left_back_turbine', 'right_back_turbine', ..
                   'root_link','left_leg_upper','left_leg_lower','right_leg_upper','right_leg_lower'};
 
 %% Load dataset
-load([srcPath,'dataset.mat']);
+load([srcPath,'datasetFullAeroFrame.mat']);
 
 %% Assign link data
-linkIndex = 10;
+linkIndex = 11;
 cfdLinkName = cfdLinkNames{linkIndex};
 aeroFrameName = aeroFrameNames{linkIndex};
 
@@ -82,7 +82,9 @@ X1 = @(alpha) [ones(length(alpha),1)        , ...
 Y1 = linkCdAs_full;
 
 % Least Squares Regression
-Cd_coefs = X1(linkAoAs_full)\Y1
+Cd_coefs = X1(linkAoAs_full)\Y1;
+format long
+disp(Cd_coefs)
 Cd_predicted = X1(linkAoAs_full)*Cd_coefs;
 mse = immse(Cd_predicted,Y1)
 
@@ -114,32 +116,64 @@ Cd_lsq     = X1(alpha_plot)*Cd_coefs;
 % Cd_lasso   = X1(alpha_plot)*Cd_coefs_lasso(:,59);
 Cn_lsq     = X2(alpha_plot)*Cn_coef;
 
+figure_size = [100 200 1120 720];
+font_size   = 24;
+
 % plot link CdAs vs AoA
 fig = figure();
-scatter(linkAoAs_full,linkCdAs_full,[],linkSsAs_full); hold on;
-plot(alpha_plot,Cd_lsq,'k-','LineWidth',2); hold on;
-% plot(alpha_plot,Cd_svm,'k--','LineWidth',2);
-% plot(alpha_plot,Cd_lasso,'k--','LineWidth',2);
-xlabel('$\alpha_{link}$','Interpreter','latex');
-ylabel('$C_D A$','Interpreter','latex');
-title(cfdLinkName,'Interpreter','none');
+fig.Position = figure_size;
+% scatter(linkAoAs_full,linkCdAs_full,[],linkSsAs_full); hold on;
+scatter(linkAoAs_full,linkCdAs_full,'DisplayName','CFD dataset'); hold on;
+plot(alpha_plot,Cd_lsq,'k-','LineWidth',2,'DisplayName','model prediction'); hold on;
+xlabel('$\alpha_{link}$','Interpreter','latex','FontSize',24);
+ylabel('$C_D A$','Interpreter','latex','FontSize',24);
+xlim([0 180]);
+% title(cfdLinkName,'Interpreter','none');
 grid on;
-c = colorbar;
-c.Limits = [0 180];
-c.Label.Interpreter = 'latex';
-c.Label.String = '$\beta_{link}$';
-c.Label.Position = [3, 95, 0];
-c.Label.Rotation = 0;
-c.Label.FontSize = 12;
+legend;
+set(gca,'fontsize', font_size);
+% c = colorbar;
+% c.Limits = [0 180];
+% c.Label.Interpreter = 'latex';
+% c.Label.String = '$\beta_{link}$';
+% c.Label.Position = [3, 95, 0];
+% c.Label.Rotation = 0;
+% c.Label.FontSize = 12;
+
 
 % plot link CnAs vs AoA
-% fig = figure();
+fig = figure();
+fig.Position = figure_size;
 % scatter(linkAoAs_full,linkCnAs_full,[],linkSsAs_full); hold on;
-% plot(alpha_plot,Cn_lsq,'k-','LineWidth',2);
-% xlabel('$\alpha_{link}$','Interpreter','latex');
-% ylabel('$C_N A$','Interpreter','latex');
+scatter(linkAoAs_full,linkCnAs_full,'DisplayName','CFD dataset'); hold on;
+plot(alpha_plot,Cn_lsq,'k-','LineWidth',2,'DisplayName','model prediction');
+xlabel('$\alpha_{link}$','Interpreter','latex');
+ylabel('$C_N A$','Interpreter','latex');
+xlim([0 180]);
 % title(cfdLinkName,'Interpreter','none');
-% grid on;
+grid on;
+legend;
+set(gca,'fontsize', font_size);
+% c = colorbar;
+% c.Limits = [0 180];
+% c.Label.Interpreter = 'latex';
+% c.Label.String = '$\beta_{link}$';
+% c.Label.Position = [3, 95, 0];
+% c.Label.Rotation = 0;
+% c.Label.FontSize = 12;
+
+
+% plot link CdAs error vs AoA
+fig = figure();
+fig.Position = figure_size;
+% scatter(linkAoAs_full,linkCdAs_full,[],linkSsAs_full); hold on;
+scatter(linkAoAs_full,X1(linkAoAs_full)*Cd_coefs-linkCdAs_full); hold on;
+xlabel('$\alpha_{link}$','Interpreter','latex','FontSize',24);
+ylabel('$\Delta C_D A$','Interpreter','latex','FontSize',24);
+xlim([0 180]);
+% title(cfdLinkName,'Interpreter','none');
+grid on;
+set(gca,'fontsize', font_size);
 % c = colorbar;
 % c.Limits = [0 180];
 % c.Label.Interpreter = 'latex';
