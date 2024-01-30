@@ -89,15 +89,15 @@ Config.gains.momentum.KD_linear = 2 * sqrt(Config.gains.momentum.KP_linear);
 Config.gains.momentum.KO        = 10 .* eye(6); 
 
 % Attitude controller gains
-Config.gains.momentum.KP_angular = 25 .* ones(1,3);
-Config.gains.momentum.KD_angular = 250 .* ones(1,3);     %2*sqrt(Config.gains.momentum.KP_angular);
+Config.gains.momentum.KP_angular = 50 .* ones(1,3);
+Config.gains.momentum.KD_angular = 125 .* ones(1,3);     %2*sqrt(Config.gains.momentum.KP_angular);
 
 % Postural task gains              % torso    % left arm      % right arm      % left leg           % right leg
 Config.gains.postural.KP         = [30 30 30   20 20 20 20     20 20 20 20   30 30 30 30 30 30    30 30 30 30 30 30];
                              
 % Torque control gains
-Config.gains.torqueControl.KI    = 100;                            
-Config.gains.torqueControl.KP    = 2 * sqrt(Config.gains.torqueControl.KI);
+Config.gains.torqueControl.KI    = 100;
+Config.gains.torqueControl.KP    = 2 * sqrt(Config.gains.torqueControl.KI);% *1.5;
 
 %% QP WEIGHTS AND THRESHOLDS
 
@@ -114,9 +114,9 @@ Config.weights.symAllThrusts                 = false;
 Config.weights.minArmsThrustDot              = 0.01;
 Config.weights.minChestThrustDot             = 0.01;
 Config.weights.minContactForcesDot           = 0.001;
-Config.weights.minJointVel                   = 10;
+Config.weights.minJointVel                   = 10;%*1.2;
 Config.weights.symmetryThrust                = 0.1;
-Config.weights.postural                      = 2.5;
+Config.weights.postural                      = 2.5*1.5;
 Config.weights.eqConstraints_momentumControl = 150;
 Config.weights.momentum                      = 10;
 Config.weights.angMomentumConstraint         = 150;
