@@ -111,7 +111,7 @@ aero_config.cfdModel.r_lower_leg.CnA         = 0.0321;
 %% CFD-based neural network for aerodynamic force prediction
 
 % Configure neural network function and parameters
-if aero_config.use_aeroNet
+if aero_config.use_sim_aeroNet || aero_config.use_ctrl_aeroNet
 
     % Path to the network model file
     aero_config.onnxModelFile = 'model_L9_N10_p1_60000.onnx';

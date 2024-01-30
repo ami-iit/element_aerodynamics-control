@@ -1,11 +1,10 @@
-classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
+classdef aeroCtrl < matlab.System & matlab.system.mixin.Propagates
     % step_block This block takes as input the joint torques and the
     % applied external forces and evolves the state of the robot
     
     % Public, tunable properties
     properties (Nontunable)
         aero_config;
-        robot_config;
     end
     
     properties (DiscreteState)
@@ -14,39 +13,36 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
     
     properties (Access = private)
         models;
-        robot;
         conditions;
+        kinematics;
     end
     
     methods (Access = protected)
         
         function setupImpl(obj)
             obj.models = aeroModel(obj.aero_config);
-            obj.robot  = Robot(obj.robot_config);
         end
         
-        function [aerodynamic_forces, generalized_aerodynamic_wrench] = stepImpl(obj, aerodynamicForceAreas, base_velocity, joints_velocity, wind_speed)
+        function aerodynamic_forces = stepImpl(obj, aerodynamicForceAreas, base_velocity, joints_velocity, wind_speed, J_aeroForce, matrixOfAeroTransform)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             obj.set_global_aerodynamic_conditions(wind_speed, base_velocity);
-            [aerodynamic_forces, generalized_aerodynamic_wrench] = obj.compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(base_velocity, joints_velocity, aerodynamicForceAreas);
+            obj.set_kinematics(J_aeroForce, matrixOfAeroTransform);
+            aerodynamic_forces = obj.compute_aerodynamic_forces(base_velocity, joints_velocity, aerodynamicForceAreas);
             % Set to zero aerodynamic effects if not enabled
-            if ~obj.models.enable_aero_sim
+            if ~obj.models.enable_aero_control
                 aerodynamic_forces = 0 * aerodynamic_forces;
-                generalized_aerodynamic_wrench = 0 * generalized_aerodynamic_wrench;
             end
         end
         
-        function [aerodynamic_forces, generalized_aerodynamic_wrench] = compute_aerodynamic_forces_and_generalized_aerodynamic_wrench(obj, base_velocity, joints_velocity, aerodynamicForceAreas)
+        function aerodynamic_forces = compute_aerodynamic_forces(obj, base_velocity, joints_velocity, aerodynamicForceAreas)
             % Transform from aerodynamic forces into aerodynamic wrenches
-            aerodynamic_forces = obj.compute_aerodynamic_forces_in_wrld_frame(base_velocity, joints_velocity, aerodynamicForceAreas);
-            aerodynamic_wrenches = [aerodynamic_forces; zeros(3, obj.models.nAeroLinks)];
-            generalized_aerodynamic_wrench = obj.compute_generalized_aerodynamic_wrench(aerodynamic_wrenches);        
+            aerodynamic_forces = obj.compute_aerodynamic_forces_in_wrld_frame(base_velocity, joints_velocity, aerodynamicForceAreas);      
         end
         
         function aerodynamic_forces = compute_aerodynamic_forces_in_wrld_frame(obj, base_velocity, joints_velocity, aerodynamicForceAreas)
             
-            if obj.models.use_sim_aeroNet
+            if obj.models.use_ctrl_aeroNet
                 aerodynamic_forces = 0.5 * obj.conditions.airDensity * norm(obj.conditions.relativeWindVelocity)^2 * aerodynamicForceAreas;
             else
                 aerodynamic_forces = nan(3,obj.models.nAeroLinks);
@@ -65,7 +61,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             linkAngleOfAttack  = acosd((transpose(linkAxisVersor) * -linkRelativeWindVelocity) / (norm(linkRelativeWindVelocity) + 1e-9)); % [deg]
             linkReynoldsNumber = (obj.conditions.airDensity * norm(linkRelativeWindVelocity) * linkDiameter) / obj.conditions.airDynamicViscosity;
             
-            if obj.models.use_sim_zero_order_model
+            if obj.models.use_ctrl_zero_order_model
                 % Use cfd linear regression model
                 [CdA, ~, CnA_bar] = obj.models.get_cfd_model_force_coefficients(frameName, linkAngleOfAttack);
                 linkNormalForce = 0.5 * obj.conditions.airDensity * CnA_bar * cross(cross(linkRelativeWindVelocity,linkAxisVersor),linkRelativeWindVelocity);
@@ -85,7 +81,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         end
         
         function linkRelativeWindVelocity  = compute_link_CoM_relative_wind_velocity(obj, frameName, linkFrame_T_linkCoM, base_velocity, joints_velocity, windSpeed)
-            J_link_frame   = obj.robot.get_frame_jacobian(frameName);
+            J_link_frame   = obj.get_frame_jacobian(frameName);
 
             % computing the jacobian relative to the link CoM from the link
             % frame one
@@ -100,7 +96,7 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
         end
 
         function link_axis_versor = get_link_aerodynamic_axis_in_world_frame(obj, frameName, frameAxis)
-            w_H_l            = obj.robot.get_frame_H(frameName);
+            w_H_l            = obj.get_frame_transform(frameName);
             link_axis_versor = w_H_l(1:3,1:3) * frameAxis;
         end
 
@@ -110,25 +106,32 @@ classdef aeroDyn < matlab.System & matlab.system.mixin.Propagates
             obj.conditions.airDensity           = obj.models.airDensity;
             obj.conditions.airDynamicViscosity  = 1.8e-5;
         end
-        
-        function generalized_aerodynamic_wrench = compute_generalized_aerodynamic_wrench(obj, aerodynamicWrenches)
-            generalized_aerodynamic_wrench = zeros(29,1);
-            for i = 1 : obj.models.nAeroLinks
-                link_gen_aero_wrench = obj.compute_link_generalized_aerodynamic_wrench(obj.models.frameNames{i}, obj.models.linkFrame_X_linkCoM(:,:,i), aerodynamicWrenches(:, i));
-                generalized_aerodynamic_wrench = generalized_aerodynamic_wrench + link_gen_aero_wrench;
-            end
+
+        function set_kinematics(obj, J_aeroForce, matrixOfAeroTransform)
+            obj.kinematics.J_aeroForce            = J_aeroForce;
+            obj.kinematics.matrixOfAeroTransform  = matrixOfAeroTransform;
         end
 
-        function link_gen_aero_wrench = compute_link_generalized_aerodynamic_wrench(obj, frameName, linkFrame_X_linkCoM, aerodynamic_wrench)
-            J_link = obj.robot.get_frame_jacobian(frameName);
-            linkFrame_aerodynamic_wrench = linkFrame_X_linkCoM * aerodynamic_wrench;
-            link_gen_aero_wrench = J_link' * linkFrame_aerodynamic_wrench;
+        function J_link_frame = get_frame_jacobian(obj, frameName)
+            frameIndex   = obj.get_frame_index(frameName);
+            J_link_frame = obj.kinematics.J_aeroForce(6*frameIndex-5:6*frameIndex,:);
+        end
+
+        function J_link_frame = get_frame_transform(obj, frameName)
+            frameIndex   = obj.get_frame_index(frameName);
+            J_link_frame = obj.kinematics.matrixOfAeroTransform(4*frameIndex-3:4*frameIndex,:);
+        end
+
+        function frameIndex = get_frame_index(obj, frameName)
+            frameIndex = 1;
+            while ~matches(obj.models.frameNames{frameIndex},frameName)
+                frameIndex = frameIndex + 1;
+            end
         end
         
         function [out, out2] = getOutputSizeImpl(~)
             % Return size for each output port
             out = [3 13]; % aerodynamic forces
-            out2 = [29 1]; % generalized aerodynamic wrench
         end
         
         function [out, out2] = getOutputDataTypeImpl(~)

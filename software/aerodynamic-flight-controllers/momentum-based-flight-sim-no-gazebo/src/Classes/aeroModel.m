@@ -7,7 +7,8 @@ classdef aeroModel < handle
         frameNames; nAeroLinks; frameAxis; 
         linkFrame_X_linkCoM; linkFrame_T_linkCoM;
         linkDiameters; linkLengths; linkReferenceAreas;
-        enable_aero_sim; use_cfd_regr_model; use_aeroNet;
+        enable_aero_sim; use_sim_zero_order_model; use_sim_aeroNet;
+        enable_aero_control; use_ctrl_zero_order_model; use_ctrl_aeroNet;
         sphereModel; cylinderModel; cfdModel; 
         C_D_sphere; C_N_sphere; C_N_bar_sphere;
         C_D_cylinder; C_N_cylinder; C_N_bar_cylinder;
@@ -19,21 +20,24 @@ classdef aeroModel < handle
         function obj = aeroModel(model_config)
             % Construct an instance of this class
             % Detailed explanation goes here
-            obj.airDensity          = model_config.airDensity;
-            obj.frameNames          = model_config.frameNames;
-            obj.nAeroLinks          = model_config.nAeroLinks;
-            obj.frameAxis           = model_config.frameAxis;
-            obj.linkFrame_X_linkCoM = model_config.linkFrame_X_linkCoM;
-            obj.linkFrame_T_linkCoM = model_config.linkFrame_T_linkCoM;
-            obj.linkDiameters       = model_config.linkDiameters;
-            obj.linkLengths         = model_config.linkLengths;
-            obj.linkReferenceAreas  = model_config.linkReferenceAreas;
-            obj.enable_aero_sim     = model_config.enable_aero_sim;
-            obj.use_cfd_regr_model  = model_config.use_cfd_regr_model;
-            obj.use_aeroNet         = model_config.use_aeroNet;
-            obj.sphereModel         = model_config.sphereModel;
-            obj.cylinderModel       = model_config.cylinderModel;
-            obj.cfdModel            = model_config.cfdModel;
+            obj.airDensity                = model_config.airDensity;
+            obj.frameNames                = model_config.frameNames;
+            obj.nAeroLinks                = model_config.nAeroLinks;
+            obj.frameAxis                 = model_config.frameAxis;
+            obj.linkFrame_X_linkCoM       = model_config.linkFrame_X_linkCoM;
+            obj.linkFrame_T_linkCoM       = model_config.linkFrame_T_linkCoM;
+            obj.linkDiameters             = model_config.linkDiameters;
+            obj.linkLengths               = model_config.linkLengths;
+            obj.linkReferenceAreas        = model_config.linkReferenceAreas;
+            obj.enable_aero_sim           = model_config.enable_aero_sim;
+            obj.use_sim_zero_order_model  = model_config.use_sim_zero_order_model;
+            obj.use_sim_aeroNet           = model_config.use_sim_aeroNet;
+            obj.enable_aero_control       = model_config.enable_aero_control;
+            obj.use_ctrl_zero_order_model = model_config.use_ctrl_zero_order_model;
+            obj.use_ctrl_aeroNet          = model_config.use_ctrl_aeroNet;
+            obj.sphereModel               = model_config.sphereModel;
+            obj.cylinderModel             = model_config.cylinderModel;
+            obj.cfdModel                  = model_config.cfdModel;
         end
 
         function [C_D_sphere, C_N_sphere, C_N_bar_sphere] = get_sphere_force_coefficients(obj, reynoldsNumber)

@@ -29,19 +29,22 @@ addpath('../controlAndDataGui/');
 addpath(genpath('../matlab-functions-lib/'));
 
 % Simulation time and delta_t [s]
-Config.simulationTime           = 120;
+Config.simulationTime           = 50;
 Config.tStep                    = 0.01;
 
 % jets parameters
 jets_config.use_jet_dyn         = false;
 
-% aerodynamic parameters
-aero_config.enable_aero_sim     = true;    % enable simulator aerodynamics
-aero_config.use_wind_velocity   = true;    % activate external wind gust
-aero_config.use_aero_control    = true;     % use aero-aware controller
+% aerodynamic simulator parameters and models
+aero_config.enable_aero_sim          = true;    % enable simulator aerodynamics
+aero_config.use_wind_velocity        = true;    % activate external wind gust
+aero_config.use_sim_zero_order_model = false;    % use CFD-based linear regression model
+aero_config.use_sim_aeroNet          = true;   % use NN for aerodynamics estimation
 
-aero_config.use_cfd_regr_model  = false;    % use CFD-based linear regression model
-aero_config.use_aeroNet         = true;    % use NN for aerodynamics estimation
+% aerodynamic control models
+aero_config.enable_aero_control       = true;   % use aero-aware controller
+aero_config.use_ctrl_zero_order_model = false;  % use CFD-based linear regression model
+aero_config.use_ctrl_aeroNet          = false;  % [WARNING: NOT IMPLEMENTED] use NN for aerodynamics estimation
 
 %% SIMULATION SETTINGS
 
@@ -51,9 +54,9 @@ Config.USE_FLIGHT_DATA_GUI  = false;
 Config.AUTOPILOT_ON         = true;
 
 % Autopilot trajectory (if AUTOPILOT_ON = true)
-Config.IN_LINE_TRAJECTORY               = false;
+Config.IN_LINE_TRAJECTORY               = true;
 Config.CLOSED_LOOP_TRAJECTORY           = false;
-Config.CLOSED_LOOP_TRAJECTORY_NO_TURBO  = true;
+Config.CLOSED_LOOP_TRAJECTORY_NO_TURBO  = false;
 
 % Wind gust profile
 Config.CONSTANT_WIND_GUST  = true;
