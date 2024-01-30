@@ -47,6 +47,9 @@ build/
 # PNGs
 *.png
 
+# EPSs
+*.eps
+
 # SVGs
 *.svg
 
