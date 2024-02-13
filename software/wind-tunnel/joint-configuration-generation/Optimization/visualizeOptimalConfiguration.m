@@ -2,7 +2,7 @@
 %                               by the algorithm runLocalChangesOptimization.m
 %
 % Author: Gabriele Nava (gabriele.nava@iit.it)
-% Modified by: Fabio Di Natale
+% Modified by: Fabio Di Natale, Antonello Paolino
 % Genova, Oct 2022
 %
 
@@ -15,7 +15,7 @@ clc
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set robot name
-robotName = 'iRonCub-Mk1';
+robotName = 'iRonCub-Mk3';
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                          SETUP ROBOT DATA                             %%
@@ -46,7 +46,7 @@ for i = 1 : jointConfigNumber
 
 % Visualize the configuration
 
-% figure window style. Default: 'normal'
+% Set figure window style. Default: 'normal'
 figureWindowStyle = 'docked';
 set(0,'DefaultFigureWindowStyle',figureWindowStyle)
    
@@ -54,6 +54,10 @@ set(0,'DefaultFigureWindowStyle',figureWindowStyle)
 visualizeRobot(jointPosMatrix(i,:)*(pi/180), KinDynModel, Config)
     
 end
+
+% Restore figure window style
+figureWindowStyle = 'normal';
+set(0,'DefaultFigureWindowStyle',figureWindowStyle)
 
 % Remove local paths
 rmpath(genpath('./src'))
