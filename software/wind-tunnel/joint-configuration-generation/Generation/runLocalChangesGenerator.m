@@ -20,10 +20,9 @@ clc
 robotName = 'iRonCub-Mk3';
 
 % Select the number of configurations to be generated
-jointConfigNumber = 50;
+jointConfigNumber = 100;
 
 % Set the Gaussian distribution parameters
-sigma = 10;
 beta  = 0.7; % truncate gaussian to this percentage of joint range
 
 % Select the joints to be blocked (0: free, 1:locked)
@@ -58,7 +57,8 @@ minJointLimits  = Config.robot.minJointLimits;
 maxJointLimits  = Config.robot.maxJointLimits;
 
 % Compute vectors of means and scaled min and max joint limits
-meanJointValues      = (minJointLimits + maxJointLimits)/2;
+sigmas  = (maxJointLimits - minJointLimits) / 6; % 6-sigma interval
+meanJointValues = (minJointLimits + maxJointLimits)/2;
 scaledMinJointLimits = meanJointValues - beta * (meanJointValues - minJointLimits);
 scaledMaxJointLimits = meanJointValues + beta * (maxJointLimits - meanJointValues);
 
@@ -93,6 +93,7 @@ for jointIndex = 1 : jointsNumber
         meanJointValue      = meanJointValues(jointIndex);
         scaledMinJointLimit = scaledMinJointLimits(jointIndex);
         scaledMaxJointLimit = scaledMaxJointLimits(jointIndex);
+        sigma = sigmas(jointIndex);
 
         % creating a Gaussian distribution: N(mean,sigma), truncated at beta*limits
         gaussianDistribution = truncate(makedist('Normal', meanJointValue, sigma), scaledMinJointLimit, scaledMaxJointLimit);
