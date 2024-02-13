@@ -14,21 +14,16 @@ Config.robot.scaleTorsoJointsLimits = 1;
 Config.robot.scaleArmsJointsLimits  = 1;
 Config.robot.scaleLegsJointsLimits  = 1;
 
-Config.robot.scaleShPitchLb    = 0.25;
-Config.robot.scaleShRollUb     = 0.25;
-Config.robot.scaleShYawUb      = 0.5;
-Config.robot.scaleElbowUb      = 0.5;
-Config.robot.scaleTorsoYaw     = 0.5;
-Config.robot.scaleTorsoPitchUb = 0.5;
-Config.robot.scaleHipRollUb    = 0.5;
-Config.robot.scaleHipPitchUb   = 0.5;
-Config.robot.scaleHipYaw       = 0.5;
-Config.robot.scaleKneeLb       = 0.5;
+% Default joints positions limits [min, max] 
+% Config.robot.torsoJointsLimit = [-15, 40; -20, 20; -40, 40];
+% Config.robot.armsJointsLimit  = [-170, 15; 10, 160; -45, 75; 0, 75];
+% Config.robot.legsJointsLimit  = [-35, 85; 5, 90; -65, 65; -70, 5; -40, 30; -20, 20];
 
-%--- Joints Positions Limits [min, max] ---%
-Config.robot.torsoJointsLimit = Config.robot.scaleTorsoJointsLimits * [-15, 40*Config.robot.scaleTorsoPitchUb; -20, 20; -40*Config.robot.scaleTorsoYaw, 40*Config.robot.scaleTorsoYaw];
-Config.robot.armsJointsLimit  = Config.robot.scaleArmsJointsLimits * [-170*Config.robot.scaleShPitchLb, 15; 10, 160*Config.robot.scaleShRollUb; -45, 75*Config.robot.scaleShYawUb; 0, 75*Config.robot.scaleElbowUb];
-Config.robot.legsJointsLimit  = Config.robot.scaleLegsJointsLimits * [-35, 85*Config.robot.scaleHipPitchUb; 5, 90*Config.robot.scaleHipRollUb; -65*Config.robot.scaleHipYaw, 65; -70*Config.robot.scaleKneeLb, 5; -40, 30; -20, 20];
+% Set Joints Positions Limits [min, max]
+Config.robot.torsoJointsLimit = Config.robot.scaleTorsoJointsLimits * [-15, 20; -20, 20; -20, 20];
+Config.robot.armsJointsLimit  = Config.robot.scaleArmsJointsLimits * [-42.5, 15; 10, 40; -45, 37.5; 0, 37.5];
+Config.robot.legsJointsLimit  = Config.robot.scaleLegsJointsLimits * [-35, 42.5; 5, 45; -32.5, 65; -35, 5; -40, 30; -20, 20];
+
 
 % Assign joint limits
 % Create vectors of min and max joint limits
@@ -83,8 +78,8 @@ Config.robot.baseLinkName = 'root_link';
 % Model name and path (hard-coded for the moment)
 Config.robot.component_path = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
 Config.robot.modelName      = 'model_stl.urdf';
-Config.robot.meshesPath     = [Config.robot.component_path '\models'];
-Config.robot.modelPath      = [Config.robot.component_path '\models\iRonCub-Mk3\iRonCub\robots\iRonCub-Mk3\'];
+Config.robot.meshesPath     = [Config.robot.component_path '/models'];
+Config.robot.modelPath      = [Config.robot.component_path '/models/iRonCub-Mk3/iRonCub/robots/iRonCub-Mk3/'];
 Config.robot.DEBUG          = false;
 
 % Set initial base pose w.r.t. the world frame the gravity vector
@@ -97,12 +92,12 @@ KinDynModel = iDynTreeWrappers.loadReducedModel(Config.robot.jointList, Config.r
 
 %% Set collision parameters
 
-% Turn on to verify that the current robot configuration does not contain
-% self collisions. WARNING: the solver may find intermediate solutions
-% which do not respect constraints, it is fine.
+% turn on to verify that the current robot configuration does not contain
+% self collisions or collisions with jet cones. WARNING: the solver may
+% find intermediate solutions which do not respect constraints, it is fine
 Config.DEBUG_COLLISIONS = false;
 
-% List of links with collisions
+% list of links with collisions
 Config.collisions.framesList = {'l_arm_jet_turbine', 'r_arm_jet_turbine', ...
                                 'chest_l_jet_turbine', 'chest_r_jet_turbine' , ...
                                 'l_upper_arm', 'r_upper_arm', ...
@@ -110,19 +105,19 @@ Config.collisions.framesList = {'l_arm_jet_turbine', 'r_arm_jet_turbine', ...
                                 'l_lower_leg', 'r_lower_leg', ...
                                 'root_link', 'chest'};
 
-%---------------------------- Arm Turbines -------------------------------%
-Config.collisions.(Config.collisions.framesList{1}).centers  = [0.0  0.0  -0.03;
-                                                                0.0  0.0  -0.08;
-                                                                0.0  0.0  -0.14;
-                                                                0.0  0.0  -0.19];
+%---------------------------- arm turbines -------------------------------%
+Config.collisions.(Config.collisions.framesList{1}).centers  = [0.0  0.0  -0.06;
+                                                                0.0  0.0  -0.12;
+                                                                0.0  0.0  -0.16;
+                                                                0.0  0.0  -0.225];
 
 Config.collisions.(Config.collisions.framesList{2}).centers  = Config.collisions.(Config.collisions.framesList{1}).centers;
 
-Config.collisions.(Config.collisions.framesList{1}).radiuses = [0.035; 0.05; 0.05; 0.05];
+Config.collisions.(Config.collisions.framesList{1}).radiuses = [0.05; 0.06; 0.06; 0.06];
 
 Config.collisions.(Config.collisions.framesList{2}).radiuses = Config.collisions.(Config.collisions.framesList{1}).radiuses;
 
-%---------------------------- Jetpack Turbines ----------------------------%
+%---------------------------- jetpack turbines ----------------------------%
 Config.collisions.(Config.collisions.framesList{3}).centers  = [0.0  0.0  -0.06;
                                                                 0.0  0.0  -0.12;
                                                                 0.0  0.0  -0.16;
@@ -134,50 +129,49 @@ Config.collisions.(Config.collisions.framesList{3}).radiuses = [0.05; 0.06; 0.06
 
 Config.collisions.(Config.collisions.framesList{4}).radiuses = Config.collisions.(Config.collisions.framesList{3}).radiuses;
 
-%------------------------------ Upper Arms -------------------------------%
-Config.collisions.(Config.collisions.framesList{5}).centers  = [-0.015  0.0  0.005;
-                                                                -0.015  0.0  0.05];
+%------------------------------ upper arms -------------------------------%
+Config.collisions.(Config.collisions.framesList{5}).centers  = [-0.0 -0.0 -0.02;
+                                                                -0.0 -0.0 -0.08];
 
 Config.collisions.(Config.collisions.framesList{6}).centers  = Config.collisions.(Config.collisions.framesList{5}).centers;
 
-Config.collisions.(Config.collisions.framesList{5}).radiuses = [0.0475; 0.0475];
+Config.collisions.(Config.collisions.framesList{5}).radiuses = [0.05; 0.05];
 
 Config.collisions.(Config.collisions.framesList{6}).radiuses = Config.collisions.(Config.collisions.framesList{5}).radiuses;
 
-%------------------------------ Upper Legs -------------------------------%
-Config.collisions.(Config.collisions.framesList{7}).centers  = [0.005  0.0   0.01;
-                                                                0.01   0.0  -0.06];
+%------------------------------ upper legs -------------------------------%
+Config.collisions.(Config.collisions.framesList{7}).centers  = [0.005 0.01  0.05;
+                                                                0.01  0.01 -0.01];
 
-Config.collisions.(Config.collisions.framesList{8}).centers  = Config.collisions.(Config.collisions.framesList{7}).centers;
+Config.collisions.(Config.collisions.framesList{8}).centers      =  Config.collisions.(Config.collisions.framesList{7}).centers;
+Config.collisions.(Config.collisions.framesList{8}).centers(:,2) = -Config.collisions.(Config.collisions.framesList{8}).centers(:,2);
 
-Config.collisions.(Config.collisions.framesList{7}).radiuses = [0.06; 0.06];
+Config.collisions.(Config.collisions.framesList{7}).radiuses = [0.0675; 0.0675];
 
 Config.collisions.(Config.collisions.framesList{8}).radiuses = Config.collisions.(Config.collisions.framesList{7}).radiuses;
 
-%------------------------------ Lower Legs -------------------------------%
-Config.collisions.(Config.collisions.framesList{9}).centers   = [0.01  0.0 -0.04;
-                                                                 0.0   0.0 -0.1;
-                                                                 0.0   0.0 -0.14];
+%------------------------------ lower legs -------------------------------%
+Config.collisions.(Config.collisions.framesList{9}).centers   = [-0.02 -0.02 -0.07;
+                                                                 -0.02 -0.02 -0.13;
+                                                                 -0.02 -0.02 -0.17];
 
-Config.collisions.(Config.collisions.framesList{10}).centers  = Config.collisions.(Config.collisions.framesList{9}).centers;
+Config.collisions.(Config.collisions.framesList{10}).centers      = Config.collisions.(Config.collisions.framesList{9}).centers;
+Config.collisions.(Config.collisions.framesList{10}).centers(:,2) = -Config.collisions.(Config.collisions.framesList{10}).centers(:,2);
 
 Config.collisions.(Config.collisions.framesList{9}).radiuses  = [0.06; 0.06; 0.06];
 
 Config.collisions.(Config.collisions.framesList{10}).radiuses = Config.collisions.(Config.collisions.framesList{9}).radiuses;
 
-%------------------------------ Base Link --------------------------------%
-Config.collisions.(Config.collisions.framesList{11}).centers  = [0.02   0.05 -0.02;
-                                                                 0.02  -0.05 -0.02;
-                                                                 0.02   0.0  -0.09;
-                                                                 0.02   0.0  -0.18];
+%------------------------------ base link --------------------------------%
+Config.collisions.(Config.collisions.framesList{11}).centers  = [0.02   0.05  0.01;
+                                                                 0.02  -0.05  0.01;
+                                                                 0.02   0.0   0.05;
+                                                                 0.02   0.0   -0.02];
 
-Config.collisions.(Config.collisions.framesList{11}).radiuses = [0.06; 0.06; 0.065; 0.03];
+Config.collisions.(Config.collisions.framesList{11}).radiuses = [0.05; 0.05; 0.055;0.03];
 
-%-------------------------------- Chest ----------------------------------%
-Config.collisions.(Config.collisions.framesList{12}).centers  = [ 0.0    0.04  0.01;
-                                                                 -0.045  0.02  -0.1;
-                                                                  0.045  0.02  -0.1;
-                                                                  0.0    0.1   -0.1];
+%-------------------------------- chest ----------------------------------%
+Config.collisions.(Config.collisions.framesList{12}).centers  = [ 0.0   0.0  0.0;
+                                                                  0.0   0.0  0.0775];
 
-Config.collisions.(Config.collisions.framesList{12}).radiuses = [0.08; 0.06; 0.06; 0.095];
-
+Config.collisions.(Config.collisions.framesList{12}).radiuses = [0.08; 0.0975];
