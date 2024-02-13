@@ -53,7 +53,7 @@ Config.robot.homeConfigNames{4} = 'flight60';
 
 % Default Home Positions
 Config.robot.homePosHovering = [zeros(1,3), [-10   25   40   15],   [-10   25   40   15],   [0 10 7 zeros(1,3)], [0 10 7 zeros(1,3)]];
-Config.robot.homePosFlight30 = [zeros(1,3), [-40.7 11.3 26.5 58.3], [-40.7 11.3 26.5 58.3], [0 10 7 zeros(1,3)], [0 10 7 zeros(1,3)]];
+Config.robot.homePosFlight30 = [zeros(1,3), [-40.7 21.3 26.5 58.3], [-40.7 21.3 26.5 58.3], [0 10 7 zeros(1,3)], [0 10 7 zeros(1,3)]];
 Config.robot.homePosFlight50 = [zeros(1,3), [-31.3 19   26.3 45.3], [-31.3 19   26.3 45.3], [0 10 7 zeros(1,3)], [0 10 7 zeros(1,3)]];
 Config.robot.homePosFlight60 = [zeros(1,3), [-25   24   30   35],   [-25   24   30   35],   [0 10 7 zeros(1,3)], [0 10 7 zeros(1,3)]];
 

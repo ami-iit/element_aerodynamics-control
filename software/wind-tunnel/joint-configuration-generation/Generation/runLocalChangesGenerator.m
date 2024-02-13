@@ -20,7 +20,7 @@ clc
 robotName = 'iRonCub-Mk3';
 
 % Select the number of configurations to be generated
-jointConfigNumber = 100;
+jointConfigNumber = 10;
 
 % Set the Gaussian distribution parameters
 beta  = 0.7; % truncate gaussian to this percentage of joint range

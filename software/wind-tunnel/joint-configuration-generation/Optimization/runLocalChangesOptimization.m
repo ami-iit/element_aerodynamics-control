@@ -20,7 +20,7 @@ clc
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set robot name
-robotName = 'iRonCub-Mk1';
+robotName = 'iRonCub-Mk3';
 
 % Select the joints to be blocked (0: free, 1:locked)
 torsoLockedJoints = [0, 0, 0];
