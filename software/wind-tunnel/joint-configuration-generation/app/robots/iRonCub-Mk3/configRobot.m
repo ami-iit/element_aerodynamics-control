@@ -10,14 +10,25 @@ Config.robot.ndof = 23;
 
 % Joints limits list. Limits are scaled by a safety range (smaller than the
 % normal joints limit range)
+Config.robot.scaleTorsoJointsLimits = 1;
+Config.robot.scaleArmsJointsLimits  = 1;
+Config.robot.scaleLegsJointsLimits  = 1;
 
-Config.robot.scaleTorsoJointsLimits = 0.7;
-Config.robot.scaleArmsJointsLimits  = 0.8;
-Config.robot.scaleLegsJointsLimits  = 0.5;
+Config.robot.scaleShPitchLb    = 0.25;
+Config.robot.scaleShRollUb     = 0.25;
+Config.robot.scaleShYawUb      = 0.5;
+Config.robot.scaleElbowUb      = 0.5;
+Config.robot.scaleTorsoYaw     = 0.5;
+Config.robot.scaleTorsoPitchUb = 0.5;
+Config.robot.scaleHipRollUb    = 0.5;
+Config.robot.scaleHipPitchUb   = 0.5;
+Config.robot.scaleHipYaw       = 0.5;
+Config.robot.scaleKneeLb       = 0.5;
 
-Config.robot.torsoJointsLimit = Config.robot.scaleTorsoJointsLimits * [-20, 70; -30, 30; -50, 50];
-Config.robot.armsJointsLimit  = Config.robot.scaleArmsJointsLimits * [-90, 10; 0, 160; -35, 80; 15, 105];
-Config.robot.legsJointsLimit  = Config.robot.scaleLegsJointsLimits *[-35, 80; -15, 90; -70, 70; -100, 0; -30, 30; -20, 20];
+%--- Joints Positions Limits [min, max] ---%
+Config.robot.torsoJointsLimit = Config.robot.scaleTorsoJointsLimits * [-15, 40*Config.robot.scaleTorsoPitchUb; -20, 20; -40*Config.robot.scaleTorsoYaw, 40*Config.robot.scaleTorsoYaw];
+Config.robot.armsJointsLimit  = Config.robot.scaleArmsJointsLimits * [-170*Config.robot.scaleShPitchLb, 15; 10, 160*Config.robot.scaleShRollUb; -45, 75*Config.robot.scaleShYawUb; 0, 75*Config.robot.scaleElbowUb];
+Config.robot.legsJointsLimit  = Config.robot.scaleLegsJointsLimits * [-35, 85*Config.robot.scaleHipPitchUb; 5, 90*Config.robot.scaleHipRollUb; -65*Config.robot.scaleHipYaw, 65; -70*Config.robot.scaleKneeLb, 5; -40, 30; -20, 20];
 
 % Assign joint limits
 % Create vectors of min and max joint limits
@@ -70,10 +81,10 @@ Config.robot.jointList = {'torso_pitch','torso_roll','torso_yaw', ...
 Config.robot.baseLinkName = 'root_link';
 
 % Model name and path (hard-coded for the moment)
-Config.robot.component_path = getenv('IRONCUB_SOFTWARE_SOURCE_DIR');
+Config.robot.component_path = getenv('IRONCUB_COMPONENT_SOURCE_DIR');
 Config.robot.modelName      = 'model_stl.urdf';
 Config.robot.meshesPath     = [Config.robot.component_path '\models'];
-Config.robot.modelPath      = [Config.robot.component_path '\models\iRonCub-Mk1\iRonCub\robots\iRonCub-Mk1\'];
+Config.robot.modelPath      = [Config.robot.component_path '\models\iRonCub-Mk3\iRonCub\robots\iRonCub-Mk3\'];
 Config.robot.DEBUG          = false;
 
 % Set initial base pose w.r.t. the world frame the gravity vector

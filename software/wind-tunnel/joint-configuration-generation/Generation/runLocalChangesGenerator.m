@@ -17,10 +17,14 @@ clc
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set robot name
-robotName = 'iRonCub-Mk1';
+robotName = 'iRonCub-Mk3';
 
 % Select the number of configurations to be generated
-jointConfigNumber = 10;
+jointConfigNumber = 50;
+
+% Set the Gaussian distribution parameters
+sigma = 10;
+beta  = 0.7; % truncate gaussian to this percentage of joint range
 
 % Select the joints to be blocked (0: free, 1:locked)
 torsoLockedJoints = [0, 0, 0];
@@ -29,12 +33,12 @@ rightArmLockedJoints = [0, 0, 0, 0];
 leftLegLockedJoints = [0, 0, 0, 0, 1, 1];
 rightLegLockedJoints = [0, 0, 0, 0, 1, 1];
 
+% Build locked joints logic vector
 lockedJoints = logical([torsoLockedJoints, ...
                         leftArmLockedJoints, ...
                         rightArmLockedJoints, ...
                         leftLegLockedJoints, ...
                         rightLegLockedJoints]);
-
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                          SETUP ROBOT DATA                             %%
@@ -43,12 +47,20 @@ lockedJoints = logical([torsoLockedJoints, ...
 % Run robot configuration script
 run(['../app/robots/',robotName,'/configRobot.m']);
 
+% Assign locked joint positions
+lockedJointConfig = Config.robot.lockedJointConfig;
+
 % Assign joints number variable
 jointsNumber = Config.robot.ndof;
 
 % Assign vectors of min and max joint limits
 minJointLimits  = Config.robot.minJointLimits;
 maxJointLimits  = Config.robot.maxJointLimits;
+
+% Compute vectors of means and scaled min and max joint limits
+meanJointValues      = (minJointLimits + maxJointLimits)/2;
+scaledMinJointLimits = meanJointValues - beta * (meanJointValues - minJointLimits);
+scaledMaxJointLimits = meanJointValues + beta * (maxJointLimits - meanJointValues);
 
 % Assign home configuration cell
 homeConfigNames = Config.robot.homeConfigNames;
@@ -60,6 +72,7 @@ homePosMatrix = Config.robot.homePosMatrix;
 %%                     GENERATE RANDOM CONFIGURATIONS                    %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Initialize new generated configuration names
 newConfigNames = cell(jointConfigNumber,1);
 
 % Assign new generated configuration names
@@ -72,14 +85,25 @@ newJointPosMatrix = zeros(jointConfigNumber,jointsNumber);
 
 % Assign new joint position matrix values
 for jointIndex = 1 : jointsNumber
-
-    minJointLimit = minJointLimits(jointIndex);
-    maxJointLimit = maxJointLimits(jointIndex);
     
     if lockedJoints(jointIndex)
-        newJointPosMatrix(:,jointIndex) = ones(jointConfigNumber,1)*Config.robot.homePosHovering(jointIndex);
+        newJointPosMatrix(:,jointIndex) = ones(jointConfigNumber,1) * lockedJointConfig(jointIndex);
     else
-        newJointPosMatrix(:,jointIndex) = minJointLimit + ( maxJointLimit - minJointLimit ) * rand(jointConfigNumber,1);
+        % Get mean joint value and scaled joint limits for gaussian truncation
+        meanJointValue      = meanJointValues(jointIndex);
+        scaledMinJointLimit = scaledMinJointLimits(jointIndex);
+        scaledMaxJointLimit = scaledMaxJointLimits(jointIndex);
+
+        % creating a Gaussian distribution: N(mean,sigma), truncated at beta*limits
+        gaussianDistribution = truncate(makedist('Normal', meanJointValue, sigma), scaledMinJointLimit, scaledMaxJointLimit);
+
+        % Generating random numbers from the truncated Gaussian distribution
+        newJointPosMatrix(:,jointIndex) = random(gaussianDistribution, [jointConfigNumber, 1]);
+
+        % Generating random numbers from Uniform distribution (old method)
+        % minJointLimit = minJointLimits(jointIndex);
+        % maxJointLimit = maxJointLimits(jointIndex);
+        % newJointPosMatrix(:,jointIndex) = minJointLimit + ( maxJointLimit - minJointLimit ) * rand(jointConfigNumber,1);
     end
 
 end
@@ -93,35 +117,35 @@ end
 figure('Name','torso joints [deg]')
 tiledlayout(2,2)
 for jointIndex = 1 : 3
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot left arm joints data
 figure('Name','left arm joints [deg]')
 tiledlayout(2,2)
 for jointIndex = 4 : 7
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot right arm joints data
 figure('Name','right arm joints [deg]')
 tiledlayout(2,2)
 for jointIndex = 8 : 11
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot left leg joints data
 figure('Name','left leg joints [deg]')
 tiledlayout(2,3)
 for jointIndex = 12 : 17
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot right leg joints data
 figure('Name','right leg joints [deg]')
 tiledlayout(2,3)
 for jointIndex = 18 : 23
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 
@@ -152,10 +176,14 @@ writetable(cell2table([fullConfigNames num2cell(fullJointPosMatrix)]), ...
 %%                             PLOT FUNCTION                             %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [] = plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix)
+function [] = plotTile(jointIndex, minJointLimits, maxJointLimits, ...
+                       newJointPosMatrix, scaledMinJointLimits, scaledMaxJointLimits)
     
     minJointLimit = minJointLimits(jointIndex);
     maxJointLimit = maxJointLimits(jointIndex);
+
+    scaledMinJointLimit = scaledMinJointLimits(jointIndex);
+    scaledMaxJointLimit = scaledMaxJointLimits(jointIndex);
     
     nexttile
     hold on;
@@ -163,6 +191,8 @@ function [] = plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatri
     xlim([minJointLimit maxJointLimit]);
     
     plot([minJointLimit maxJointLimit], [0 0], 'r-');
+    plot([scaledMinJointLimit scaledMinJointLimit],[-1 1],'g-');
+    plot([scaledMaxJointLimit scaledMaxJointLimit],[-1 1],'g-');
 
     scatter(newJointPosMatrix(:,jointIndex), ...
             newJointPosMatrix(:,jointIndex)*0, 12, 'k', 'filled');
