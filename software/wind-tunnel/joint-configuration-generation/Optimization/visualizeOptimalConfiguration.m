@@ -1,9 +1,13 @@
-% VISUALIZEOPTIMALCONFIGURATION runs an algorithm to show the optimal configuration generated
-%                               by the algorithm runLocalChangesOptimization.m
+% Description: This script visualizes the optimized robot configurations 
+% generated with the script runLocalChangesOptimization. The code has been 
+% implemented to work for iRonCub-Mk1 
+% (installing https://github.com/ami-iit/ironcub-mk1-software) and 
+% iRonCub-Mk3 (installing https://github.com/ami-iit/component_ironcub)
 %
 % Author: Gabriele Nava (gabriele.nava@iit.it)
 % Modified by: Fabio Di Natale, Antonello Paolino
-% Genova, Oct 2022
+%
+% Genova, February 2024.
 %
 
 clear variables
@@ -14,7 +18,7 @@ clc
 %%                          TUNABLE PARAMETERS                           %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Set robot name
+% Set robot name: 'iRonCub-Mk1' or 'iRonCub-Mk3'
 robotName = 'iRonCub-Mk3';
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

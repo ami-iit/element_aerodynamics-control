@@ -1,11 +1,13 @@
-% This script generates different random set of all the joint angles for 
-% iRonCub MK1 robot. It's possible to set any joint to be always fixed to
-% the same value equal to the home position.
+% Description: This script generates different sets of all the joint angles 
+% following an assigned Gaussian distribution. It is possible to fix any
+% joint position to a desired value (locked joint position in the config
+% file). The code has been implemented to work for iRonCub-Mk1 (installing 
+% https://github.com/ami-iit/ironcub-mk1-software) and iRonCub-Mk3 
+% (installing https://github.com/ami-iit/component_ironcub)
 %
-% Author: Fabio Di Natale
-% Modified by: Gabriele Nava, Antonello Paolino
+% Authors: Antonello Paolino, Fabio Di Natale, Gabriele Nava
 %
-% March 2022.
+% Genova, February 2024.
 %
 
 clear variables
@@ -16,7 +18,7 @@ clc
 %%                          TUNABLE PARAMETERS                           %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Set robot name
+% Set robot name: 'iRonCub-Mk1' or 'iRonCub-Mk3'
 robotName = 'iRonCub-Mk3';
 
 % Select the number of configurations to be generated
@@ -89,19 +91,21 @@ for jointIndex = 1 : jointsNumber
     if lockedJoints(jointIndex)
         newJointPosMatrix(:,jointIndex) = ones(jointConfigNumber,1) * lockedJointConfig(jointIndex);
     else
-        % Get mean joint value and scaled joint limits for gaussian truncation
+        % Get mean joint value and scaled joint limits for gaussian 
+        % distribution truncation
         meanJointValue      = meanJointValues(jointIndex);
         scaledMinJointLimit = scaledMinJointLimits(jointIndex);
         scaledMaxJointLimit = scaledMaxJointLimits(jointIndex);
         sigma = sigmas(jointIndex);
 
-        % creating a Gaussian distribution: N(mean,sigma), truncated at beta*limits
+        % Create a Gaussian distribution N(mean,sigma), truncated at 
+        % beta*limits
         gaussianDistribution = truncate(makedist('Normal', meanJointValue, sigma), scaledMinJointLimit, scaledMaxJointLimit);
 
-        % Generating random numbers from the truncated Gaussian distribution
+        % Generating joint values from the truncated Gaussian distribution
         newJointPosMatrix(:,jointIndex) = random(gaussianDistribution, [jointConfigNumber, 1]);
 
-        % Generating random numbers from Uniform distribution (old method)
+        % Generating random numbers from Uniform distribution (legacy)
         % minJointLimit = minJointLimits(jointIndex);
         % maxJointLimit = maxJointLimits(jointIndex);
         % newJointPosMatrix(:,jointIndex) = minJointLimit + ( maxJointLimit - minJointLimit ) * rand(jointConfigNumber,1);
@@ -118,35 +122,40 @@ end
 figure('Name','torso joints [deg]')
 tiledlayout(2,2)
 for jointIndex = 1 : 3
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,...
+             newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot left arm joints data
 figure('Name','left arm joints [deg]')
 tiledlayout(2,2)
 for jointIndex = 4 : 7
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,...
+             newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot right arm joints data
 figure('Name','right arm joints [deg]')
 tiledlayout(2,2)
 for jointIndex = 8 : 11
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,...
+             newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot left leg joints data
 figure('Name','left leg joints [deg]')
 tiledlayout(2,3)
 for jointIndex = 12 : 17
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,...
+             newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 % Plot right leg joints data
 figure('Name','right leg joints [deg]')
 tiledlayout(2,3)
 for jointIndex = 18 : 23
-    plotTile(jointIndex,minJointLimits,maxJointLimits,newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
+    plotTile(jointIndex,minJointLimits,maxJointLimits,...
+             newJointPosMatrix,scaledMinJointLimits,scaledMaxJointLimits);
 end
 
 

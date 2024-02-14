@@ -1,14 +1,14 @@
-% RUNLOCALCHANGESOPTIMIZATION runs an algorithm to optimize joints and jets position
-%                             after they are generated through an algorithm
-%                             in order to differ between each other for
-%                             small changes.
-%
-% The optimal configuration is calculated by solving a nonlinear
-% minimization problem with fmincon.
+% Description: This script runs an optimization algorithm to modify 
+% different joint configurations to avoid robot self-collisions. It is 
+% possible to fix any joint position to a desired value (locked joint 
+% position in the config file). The code has been implemented to work for 
+% iRonCub-Mk1 (installing https://github.com/ami-iit/ironcub-mk1-software) 
+% and iRonCub-Mk3 (installing https://github.com/ami-iit/component_ironcub)
 %
 % Author: Gabriele Nava (gabriele.nava@iit.it)
 % Modified by: Fabio Di Natale, Antonello Paolino
-% Genova, Oct 2022
+%
+% Genova, February 2024.
 %
 
 clear variables
@@ -19,7 +19,7 @@ clc
 %%                          TUNABLE PARAMETERS                           %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Set robot name
+% Set robot name: 'iRonCub-Mk1' or 'iRonCub-Mk3'
 robotName = 'iRonCub-Mk3';
 
 % Select the joints to be blocked (0: free, 1:locked)
@@ -72,14 +72,17 @@ optJointConfigNumber = size(optJointPosMatrix,1);
 % Run optimization on non-home positions
 for i = 1 : optJointConfigNumber
     
+    % Set current joint configuration angles as initial and desired values
     Config.opti.u_des = newJointPosMatrix(i,:)'*(pi/180);
     uInit = Config.opti.u_des;
+
+    % Limit locked joints to (almost) fixed values
+    Config.opti.upperBound(lockedJoints) = uInit(lockedJoints) + 1e-3;
+    Config.opti.lowerBound(lockedJoints) = uInit(lockedJoints) - 1e-3;
 
     % Set the initial robot position
     iDynTreeWrappers.setRobotState(KinDynModel, Config.robot.w_H_b_init, Config.opti.u_des, ...
                                    zeros(6,1), zeros(Config.robot.ndof,1), Config.robot.gravityAcc);
-    
-    %-------------------------------------------------------------------------%
     
     % The variables to be optimized are collected in a vector as follows:
     %
@@ -91,15 +94,10 @@ for i = 1 : optJointConfigNumber
     
     % Compute the cost function
     costFunction = @(u) computeCostFunction(u, KinDynModel, Config);
-    
-    %-------------------------------------------------------------------------%
-    % Run nonlinear optimization
+
+    %%%%%%%%%%%%%%%%%%%%% Run nonlinear optimization %%%%%%%%%%%%%%%%%%%%%%
     disp('[runJointsPositionOptimization]: running optimization...')
     
-    % Limit locked joints to (almost) fixed values
-    Config.opti.upperBound(lockedJoints) = uInit(lockedJoints) + 1e-3;
-    Config.opti.lowerBound(lockedJoints) = uInit(lockedJoints) - 1e-3;
-
     tic;
     [uStar, fval, exitflag, output] = fmincon(costFunction, uInit, [], [], [], [], Config.opti.lowerBound, ...
         Config.opti.upperBound, nonLinearConstraints, Config.opti.fminconOptions);
@@ -109,11 +107,10 @@ for i = 1 : optJointConfigNumber
     % Assign fixed joints values
     uStar(lockedJoints) = uInit(lockedJoints);
     
+    % Assign optimized joint values to matrix
     optJointPosMatrix(i,:) = uStar*180/pi;
     
-    %-------------------------------------------------------------------------%
-    
-    % Display results
+    %%%%%%%%%%%%%%%%%%%%%%%%%%% Display results %%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     % Check 1: display the initial and optimized joints position
     disp(' ')
