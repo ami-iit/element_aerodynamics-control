@@ -3,6 +3,15 @@
 Here you can find all the software developed to model, evaluate and validate the effects produced by the aerodynamic forces acting on a flying humanoid robot (in the specific `iRonCub-Mk1` and `iRonCub-Mk3` robot models).
 
 
+#### Dependencies
+
+The software included in this repo has some external dependencies, to install them please refer to:
+
+* [iRonCub common software](https://github.com/ami-iit/component_ironcub/tree/master/software#ironcub-common-software), for the software related to `iRonCub-Mk3` robot (in [wind-tunnel](./wind-tunnel/)) 
+
+* [iRonCub-Mk1 software](https://github.com/ami-iit/ironcub-mk1-software#ironcub-mk1-software), for the software related to `iRonCub-Mk1` robot.
+
+
 #### [Aerodynamic flight controllers](./aerodynamic-flight-controllers/)
 
 These controllers are built based on the [momentum-based-flight-sim-no-gazebo](https://github.com/ami-iit/ironcub-mk1-software/tree/main/flight-controllers-stable/momentum-based-flight-sim-no-gazebo) controller from https://github.com/ami-iit/ironcub-mk1-software, while the aerodynamic simulator is a modified version of the [matlab-whole-body-simulator](https://github.com/ami-iit/matlab-whole-body-simulator). The **aerodynamic-flight-controllers** aim at evaluating the aerodynamic effects on iRonCub and study possible control techniques to handle aerodynamic effects.
