@@ -20,9 +20,7 @@ These controllers are built based on the [momentum-based-flight-sim-no-gazebo](h
 
 * In [whole-body-aerodynamics-flight](/aerodynamic_flight_controllers/whole-body-aerodynamics-flight), whole-body aerodynamic forces are introduced to the simulator and to the controller. The controller is tested with two types of trajectories and different combinations of simulator/controller aerodynamic models. 
 
-* In [whole-body-aerodynamics-balancing](/aerodynamic_flight_controllers/whole-body-aerodynamics-balancing), whole-body aerodynamic forces are introduced to the real robot torque controller. The controller has been validated on the robot balancing while subject to a fictitious wind. 
-
-Refer to the [wiki page](https://github.com/ami-iit/element_aerodynamics-control/wiki#aerodynamic-flight-controller) for info on how to run the aerodynamic-flight-controllers.
+* In [whole-body-aerodynamics-balancing](/aerodynamic_flight_controllers/whole-body-aerodynamics-balancing), whole-body aerodynamic forces are introduced to the real robot torque controller. The controller has been validated on the robot balancing while subject to a fictitious wind.
 
 
 #### [Aerodynamic modeling](./aerodynamic-modeling/)
@@ -45,6 +43,8 @@ Here you can find the code used to control the `iRonCub-Mk1` and `iRonCub-Mk3` r
 * In [joint-configuration-generation](./wind-tunnel/joint-configuration-generation/), there are matlab scripts to generate automatic random joint configurations close to the reference positions, accountign also for locked joints,
 
 * In [position-control](./wind-tunnel/position-control/), there is the position controller used to move the robot in the desired generated joint positions to test it and acqurie the aerodynamic force data.
+
+Please refer to [this wiki](https://github.com/ami-iit/element_ironcub-control/wiki/How-to-run-iRonCub-simulation-in-Gazebo-with-Simulink-controllers) for info on how to run the Simulink position-control model in Gazebo with the robot models.
 
 
 ### Related publications:
