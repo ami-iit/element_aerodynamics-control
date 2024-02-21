@@ -22,7 +22,7 @@ slprj/
 
 # Matlab binary .mat files
 *.mat
-!*/aeroFrameTransforms.mat
+!*aeroFrameTransforms.mat
 
 # Matlab figures
 *.fig
