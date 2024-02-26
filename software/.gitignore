@@ -22,6 +22,9 @@ slprj/
 
 # Matlab binary .mat files
 *.mat
+!*aeroFrameTransforms.mat
+!*outputParameters.mat
+!*dataset*.mat
 
 # Matlab figures
 *.fig
