@@ -1,20 +1,13 @@
 import scipy as sp
-import scipy.io
 import pathlib
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import torch
-import torch.nn as nn
 import torch.onnx
 import torch.jit
 from torch.autograd import Variable
 import random as random
 import time as time
-import torch.nn.init as init
-import torch.nn.functional as F
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
@@ -118,6 +111,41 @@ if torch.cuda.is_available():
     linkAeroForces_predicted_val   = linkAeroForces_predicted_val.cpu()
 
 
+linkAoAs_train_plot = linkAoAs_train.detach().numpy()[0,:]
+linkCdAs_train_plot = linkAeroForces_train.detach().numpy()[0,:]
+linkAoAs_val_plot = linkAoAs_val.detach().numpy()[0,:]
+linkCdAs_val_plot = linkAeroForces_val.detach().numpy()[0,:]
+
+
+# plot
+font_size = 40
+
+plt.rcParams.update({'text.usetex': True,
+                     'font.family': 'serif',
+                     'font.size': font_size,
+                     'font.weight': 'bold',
+                     'font.style': 'italic'})
+plt.figure(figsize=(20, 10))
+plt.scatter(linkAoAs_train_plot, linkCdAs_train_plot, s=32, label='CFD train dataset', facecolors='none', edgecolors='tab:blue', alpha=0.5, linewidths=2)
+plt.scatter(linkAoAs_val_plot, linkCdAs_val_plot, s=32, label='CFD validation dataset', facecolors='none', edgecolors='tab:orange', alpha=0.5, linewidths=2)
+plt.xlabel(r'$\alpha_{link}$ [deg]')
+plt.ylabel(r"$C_D A$")
+# plt.ylim([0.1, 0.4])
+# plt.xlim([0, 10])
+plt.grid()
+plt.legend()
+# plt.show(block=False)
+# manager = plt.get_current_fig_manager()
+# manager.window.showMaximized()
+
+# save image to pdf file with screen size
+cwd = pathlib.Path(__file__).parents[0]
+plt.savefig(str(cwd/'head-NN-1.pdf'), format='pdf')
+
+print('debugging')
+
+
+
 for linkIndex in range(0,nLink,1):
 
     plotStartIndex = plotPreStartIndex + linkIndex
@@ -178,13 +206,15 @@ for linkIndex in range(0,nLink,1):
     ax3.set_xlim([0,180])
 
     ax3.yaxis.set_label_coords(-0.15, 0.5)  # Adjust the y-axis label position
-    ax3.set_ylabel('$\Delta$ ' + plotVariableName)
+    ax3.set_ylabel(r'$\Delta$ ' + plotVariableName)
     ax3.yaxis.label.set_fontsize(12)
     ax3.yaxis.set_tick_params()
 
     ax3.set_title(str(cfdLinkNames[0][linkIndex][0]))
     ax3.grid()
     ax3.legend()
+    
+    plt.show(block=False)
     
     # Print MSE
     trainMSE = mean_squared_error(linkAeroForces_predicted_train.detach().numpy()[plotStartIndex,:], linkAeroForces_train.detach().numpy()[plotStartIndex,:])
@@ -193,8 +223,6 @@ for linkIndex in range(0,nLink,1):
     # print(str(plotVariableName) + ' MSE for link ' + str(cfdLinkNames[0][linkIndex][0]) + ' on validation dataset: ' + str(valMSE))
     print("%.2e" % valMSE)
 
-    plt.show(block=False)
-    
 
 sumStartIndex = plotPreStartIndex
 sumEndIndex   = plotPreStartIndex + nLink
@@ -247,7 +275,7 @@ ax3.set_xlabel(r'$\alpha_{robot}$ [deg]')
 ax3.xaxis.label.set_fontsize(12)
 ax3.set_xlim([0,180])
 ax3.yaxis.set_label_coords(-0.15, 0.5)  # Adjust the y-axis label position
-ax3.set_ylabel('$\Delta$ ' + plotVariableName)
+ax3.set_ylabel(r'$\Delta$ ' + plotVariableName)
 ax3.yaxis.label.set_fontsize(12)
 ax3.yaxis.set_tick_params()
 # ax3.set_ylim(limits)
