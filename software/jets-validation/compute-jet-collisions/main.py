@@ -11,7 +11,7 @@ from src.robot import Robot
 
 def main():
     # Get root path
-    root = Path(__file__).parents[0]
+    root = Path(__file__).parent
     # Initialize robot object
     robot_name = "iRonCub-Mk1"
     urdf_path = str(
@@ -20,7 +20,7 @@ def main():
     robot = Robot(robot_name, urdf_path)
 
     # Load simulation data from mat file
-    file = Path(__file__).parent / "mat" / "12-40_joint-positions.mat"
+    file = root / "mat" / "12-40_joint-positions.mat"
     data = loadmat(file)
     timestamps = data["time"].flatten()
     joint_pos = data["jointPos"] * np.pi / 180
@@ -30,7 +30,7 @@ def main():
 
     # Initialize collisions dict
     robot.set_state(pitch, yaw, joint_pos[0, :])
-    colls = robot.compute_collisions()
+    colls = robot.compute_collision_volume()
     collisions = {key: [] for key in colls.keys()}
     for i in range(len(timestamps)):
         s = joint_pos[i, :]
@@ -56,7 +56,7 @@ def main():
         values = np.array(collisions[key])
         plt.plot(timestamps, values, label=f"{key} Collisions")
     plt.xlabel("Time (s)")
-    plt.ylabel("Collision Volume")
+    plt.ylabel("Collision Volume Fraction")
     plt.title("Collision Data Over Time")
     plt.legend()
     plt.grid()
