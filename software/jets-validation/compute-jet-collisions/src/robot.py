@@ -113,7 +113,7 @@ class Robot:
                                     vol = min(j_r / b_r, 1)
                                 if vol > volumes[idx]:
                                     volumes[idx] = vol
-                coll_vol[frame_name] = np.dot(volumes, b_radii) / np.sum(b_radii)
+                coll_vol[frame_name] = np.dot(volumes, b_radii**3) / np.sum(b_radii**3)
         return coll_vol
 
     # Visualization
