@@ -7,7 +7,7 @@ varName1       = 'aeroForcesSim_SCOPE';
 varName2       = 'aeroForcesControl_SCOPE';
 yVarLabel     = '$f_a$ [N]';
 
-expType       = 5; 
+expType       = 7; 
 
 yLimits        = [-16 5];
 legendLocation = 'best';
@@ -31,6 +31,12 @@ elseif expType == 4
 elseif expType == 5
     expMatFile = '../experiments/2024-01-30/exp_12-40.mat';
     figurePath = './12-40/';
+elseif expType == 6
+    expMatFile = '../experiments/2025-04-02/exp_15-39.mat';
+    figurePath = './15-39/';
+elseif expType == 7
+    expMatFile = '../experiments/2025-04-02/exp_15-45.mat';
+    figurePath = './15-45/';
 end
 
 load(expMatFile);

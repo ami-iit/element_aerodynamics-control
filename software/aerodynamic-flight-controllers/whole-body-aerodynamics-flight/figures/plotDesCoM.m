@@ -6,7 +6,7 @@ clc;
 varName       = 'posCOM_des_SCOPE';
 yVarLabel     = '$o_{G,des}$ [m]';
 
-expType       = 2; 
+expType       = 6; 
 
 yLimits        = [-10 80];
 legendLocation = 'east';
@@ -30,6 +30,12 @@ elseif expType == 4
 elseif expType == 5
     expMatFile = '../experiments/2024-01-30/exp_12-40.mat';
     figurePath = './12-40/';
+elseif expType == 6
+    expMatFile = '../experiments/2025-04-02/exp_15-39.mat';
+    figurePath = './15-39/';
+elseif expType == 7
+    expMatFile = '../experiments/2025-04-02/exp_15-45.mat';
+    figurePath = './15-45/';
 end
 
 load(expMatFile);
