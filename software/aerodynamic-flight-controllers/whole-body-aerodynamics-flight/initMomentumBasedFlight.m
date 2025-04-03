@@ -38,13 +38,18 @@ jets_config.use_jet_dyn         = false;
 % aerodynamic simulator parameters and models
 aero_config.enable_aero_sim          = true;    % enable simulator aerodynamics
 aero_config.use_wind_velocity        = true;    % activate external wind gust
-aero_config.use_sim_zero_order_model = false;    % use CFD-based linear regression model
+aero_config.use_sim_zero_order_model = true;    % use CFD-based linear regression model
 aero_config.use_sim_aeroNet          = true;   % use NN for aerodynamics estimation
 
 % aerodynamic control models
 aero_config.enable_aero_control       = true;   % use aero-aware controller
-aero_config.use_ctrl_zero_order_model = false;  % use CFD-based linear regression model
+aero_config.use_ctrl_zero_order_model = true;  % use CFD-based linear regression model
 aero_config.use_ctrl_aeroNet          = false;  % [WARNING: NOT IMPLEMENTED] use NN for aerodynamics estimation
+
+% New parameters
+aero_config.use_distributed_forces = true;
+aero_config.use_centroidal_torques = true;
+aero_config.use_centroidal_full_force = true;
 
 %% SIMULATION SETTINGS
 

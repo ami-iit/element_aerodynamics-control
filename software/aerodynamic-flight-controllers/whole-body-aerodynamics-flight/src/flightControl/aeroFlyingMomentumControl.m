@@ -155,7 +155,8 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     end
     
     % Assemble the Aa matrix blocks for LDot_estimated evaluation
-    Aa = [Aa_linear; Aa_angular];
+    if aero_config.use_centroidal_torques, val = 1; else, val = 0; end
+    Aa = [Aa_linear; Aa_angular * val];
     
     % initialize a [(3*n_aero_links)x(6+ndof)] SJ support matrix for 
     % Lambda_a angular block calculation
@@ -174,7 +175,8 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     end
     
     % Calculate the linear and angular blocks inside Lambda_a matrix
-    Lambda_a_angular = I_hor * SJ_aero_matrix;
+    if aero_config.use_centroidal_torques, val = 1; else, val = 0; end
+    Lambda_a_angular = I_hor * SJ_aero_matrix * val;
     Lambda_a_linear  = Lambda_a_angular*0;
     
     % Assemble Lambda_a matrix
