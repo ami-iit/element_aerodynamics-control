@@ -1,4 +1,4 @@
-function [y, A, B, C, D] = computeACKFinputs(M, matrixOfJetsAxes, matrixOfJetsArms, pos_vel_acc_jerk_CoM_des, wind_velocity, Config)
+function [y, A, B, C, D] = computeACKFinputs(baseTwist, M, matrixOfJetsAxes, matrixOfJetsArms, pos_vel_acc_jerk_CoM_des, wind_velocity, Config)
 
     % compute the robot total mass and gravity
     m                      = M(1,1);
@@ -21,16 +21,17 @@ function [y, A, B, C, D] = computeACKFinputs(M, matrixOfJetsAxes, matrixOfJetsAr
     
     % compute matrix Aj
     Aj = [Aj_linear; Aj_angular];
-    B = Aj;
+    D = Aj;
     
     % Compute aerodynamic matrix
-    k_a = 0.5 * 1.225 * norm(wind_velocity)^2;
+    rel_wind_velocity = wind_velocity - baseTwist(1:3);
+    k_a = 0.5 * 1.225 * norm(rel_wind_velocity)^2;
     A_a = eye(6);
-    A = k_a * A_a;
+    C = k_a * A_a;
 
     % Assume zero-derivative of aerodynamic coefficients
-    C = 0*A;
-    D = 0*B;
+    A = zeros(6,6);
+    B = zeros(6,4);
 
     % Assign measurement
     y = LDot_des + f_grav;

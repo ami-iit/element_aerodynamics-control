@@ -160,9 +160,7 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
         Aa_angular = 0*Aa_angular;
     end
     if aero_config.use_aerodynamic_kalman_filter
-        Aa_linear = eye(3);
-        Aa_angular = eye(3);
-        aerodynamic_force_vector = centroidal_aerodynamic_force_KF;
+        Aa_centroidal_kf = eye(6);
     end
     
     % Assemble the Aa matrix blocks for LDot_estimated evaluation
@@ -237,7 +235,11 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     g_angMomentum   = [zeros(4,1); zeros(12,1); zeros(ndof,1)];  
     
     % compute the momentum error derivative/integral
-    LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa * aerodynamic_force_vector - f_grav;
+    if aero_config.use_aerodynamic_kalman_filter
+        LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa_centroidal_kf * centroidal_aerodynamic_force_KF - f_grav;
+    else
+        LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa * aerodynamic_force_vector - f_grav;
+    end
     LDot_tilde      = LDot_estimated - LDot_des;
     intL_tilde      = [(m * posCoM - intL_des(1:3)); zeros(3,1)];
     

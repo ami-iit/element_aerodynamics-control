@@ -47,7 +47,7 @@ aero_config.use_ctrl_zero_order_model = true;  % use CFD-based linear regression
 aero_config.use_ctrl_aeroNet          = false;  % [WARNING: NOT IMPLEMENTED] use NN for aerodynamics estimation
 
 % New parameters
-aero_config.use_distributed_forces = false;
+aero_config.use_distributed_forces = true;
 aero_config.use_centroidal_torques = true;
 
 aero_config.use_aerodynamic_kalman_filter = false;
