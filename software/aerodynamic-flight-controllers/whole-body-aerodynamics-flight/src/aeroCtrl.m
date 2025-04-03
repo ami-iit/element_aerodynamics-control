@@ -23,10 +23,10 @@ classdef aeroCtrl < matlab.System & matlab.system.mixin.Propagates
             obj.models = aeroModel(obj.aero_config);
         end
         
-        function aerodynamic_forces = stepImpl(obj, aerodynamicForceAreas, base_velocity, joints_velocity, wind_speed, J_aeroForce, matrixOfAeroTransform)
+        function aerodynamic_forces = stepImpl(obj, aerodynamicForceAreas, base_velocity, joints_velocity, wind_velocity, J_aeroForce, matrixOfAeroTransform)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
-            obj.set_global_aerodynamic_conditions(wind_speed, base_velocity);
+            obj.set_global_aerodynamic_conditions(wind_velocity, base_velocity);
             obj.set_kinematics(J_aeroForce, matrixOfAeroTransform);
             aerodynamic_forces = obj.compute_aerodynamic_forces(base_velocity, joints_velocity, aerodynamicForceAreas);
             % Set to zero aerodynamic effects if not enabled
@@ -100,9 +100,9 @@ classdef aeroCtrl < matlab.System & matlab.system.mixin.Propagates
             link_axis_versor = w_H_l(1:3,1:3) * frameAxis;
         end
 
-        function set_global_aerodynamic_conditions(obj, windSpeed, base_velocity)
-            obj.conditions.windSpeed            = windSpeed;
-            obj.conditions.relativeWindVelocity = windSpeed - base_velocity(1:3);
+        function set_global_aerodynamic_conditions(obj, wind_velocity, base_velocity)
+            obj.conditions.windSpeed            = wind_velocity;
+            obj.conditions.relativeWindVelocity = wind_velocity - base_velocity(1:3);
             obj.conditions.airDensity           = obj.models.airDensity;
             obj.conditions.airDynamicViscosity  = 1.8e-5;
         end

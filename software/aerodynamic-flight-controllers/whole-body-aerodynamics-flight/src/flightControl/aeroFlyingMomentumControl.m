@@ -2,7 +2,8 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
              aeroFlyingMomentumControl(jointPos, w_baseTwist, jetsIntensities, J_jets, J_CoM, J_LFoot, J_RFoot, posCoM, w_R_b, w_H_LFoot, w_H_RFoot, ...
                                        matrixOfJetsAxes, matrixOfJetsArms, matrixOfAeroArms, J_aeroForces, w_I_c, L, M, CMM, pos_vel_acc_jerk_CoM_des, ....
                                        rot_vel_acc_jerk_base_des, jointPos_des, KP_momentum, KD_momentum, KP_postural, feetContactIsActive, ...
-                                       decreaseMaxFootVerticalForce, increaseMinFootVerticalForce, robotIsLanded, contactForces_hat, aerodynamic_forces, aero_config, Config)
+                                       decreaseMaxFootVerticalForce, increaseMinFootVerticalForce, robotIsLanded, contactForces_hat, ...
+                                       aerodynamic_forces, centroidal_aerodynamic_force_KF, aero_config, Config)
                                
     % FLYINGMOMENTUMCONTROL implements a momentum-based flying controller.
     %                       Two different control algorithms are implemented.
@@ -154,9 +155,18 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
 
     end
     
+    % Set centroidal aerodynamic matrices according to options
+    if ~aero_config.use_centroidal_torques
+        Aa_angular = 0*Aa_angular;
+    end
+    if aero_config.use_aerodynamic_kalman_filter
+        Aa_linear = eye(3);
+        Aa_angular = eye(3);
+        aerodynamic_force_vector = centroidal_aerodynamic_force_KF;
+    end
+    
     % Assemble the Aa matrix blocks for LDot_estimated evaluation
-    if aero_config.use_centroidal_torques, val = 1; else, val = 0; end
-    Aa = [Aa_linear; Aa_angular * val];
+    Aa = [Aa_linear; Aa_angular];
     
     % initialize a [(3*n_aero_links)x(6+ndof)] SJ support matrix for 
     % Lambda_a angular block calculation
@@ -175,9 +185,12 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     end
     
     % Calculate the linear and angular blocks inside Lambda_a matrix
-    if aero_config.use_centroidal_torques, val = 1; else, val = 0; end
-    Lambda_a_angular = I_hor * SJ_aero_matrix * val;
+    Lambda_a_angular = I_hor * SJ_aero_matrix;
     Lambda_a_linear  = Lambda_a_angular*0;
+
+    if ~aero_config.use_distributed_forces
+        Lambda_a_angular = 0*Lambda_a_angular; 
+    end
     
     % Assemble Lambda_a matrix
     Lambda_a  = [Lambda_a_linear; Lambda_a_angular];
