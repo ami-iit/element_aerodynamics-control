@@ -20,7 +20,7 @@ def main():
     robot = Robot(robot_name, urdf_path)
 
     # Load simulation data from mat file
-    file = root / "mat" / "12-40_joint-positions.mat"
+    file = root / "mat" / "18-31_joint-positions.mat"
     data = loadmat(file)
     timestamps = data["time"].flatten()
     joint_pos = data["jointPos"] * np.pi / 180
@@ -41,24 +41,26 @@ def main():
         print(f"Processing {i+1}/{len(timestamps)}", end="\r", flush=True)
 
     # Plot collisions data
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(12, 8))
     for key in collisions.keys():
         bool_values = np.array(collisions[key]) > 0.0
-        plt.plot(timestamps, bool_values, label=f"{key} Collisions")
+        plt.plot(timestamps, bool_values, label=f"{key}")
     plt.xlabel("Time (s)")
     plt.ylabel("Collision Event")
-    plt.title("Collision Data Over Time")
+    # plt.title("Collision Data Over Time")
     plt.legend()
     plt.grid()
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(12, 8))
     for key in collisions.keys():
         values = np.array(collisions[key])
-        plt.plot(timestamps, values, label=f"{key} Collisions")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Collision Volume Fraction")
-    plt.title("Collision Data Over Time")
-    plt.legend()
+        plt.plot(timestamps, values, label=f"{key}", linewidth=2)
+    plt.xticks(fontsize=24)
+    plt.yticks(fontsize=24)
+    plt.xlabel(r"$t$ (s)", fontsize=24)
+    plt.ylabel(r"$V$", fontsize=24)
+    # plt.title("Collision Data Over Time", fontsize=32)
+    plt.legend(fontsize=24)
     plt.grid()
     plt.show()
 
