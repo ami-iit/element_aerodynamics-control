@@ -6,7 +6,7 @@ clc;
 varName       = 'thrusts_SCOPE';
 yVarLabel     = '$T$ [N]';
 
-expType       = 6; 
+expType       = 9; 
 
 yLimits        = [0 220];
 legendLocation = 'sw';
@@ -36,6 +36,12 @@ elseif expType == 6
 elseif expType == 7
     expMatFile = '../experiments/2025-04-02/exp_15-45.mat';
     figurePath = './15-45/';
+elseif expType == 8
+    expMatFile = '../experiments/2025-04-03/exp_16-13.mat';
+    figurePath = './16-13/';
+elseif expType == 9
+    expMatFile = '../experiments/2025-04-03/exp_17-22.mat';
+    figurePath = './17-22/';
 end
 
 load(expMatFile);

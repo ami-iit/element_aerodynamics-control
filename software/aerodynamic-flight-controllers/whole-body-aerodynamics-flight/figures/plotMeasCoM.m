@@ -3,17 +3,15 @@ clear all;
 clc;
 
 %% Define settings
-varName1       = 'aeroForcesSim_SCOPE';
-varName2       = 'centroidal_aerodynamic_force_kf';
-% varName2       = 'aeroForcesControl_SCOPE';
-yVarLabel     = '$f_a$ [N]';
+varName       = 'posCoM_SCOPE';
+yVarLabel     = '$o_{G}$ [m]';
 
-expType       = 9   ; 
+expType       = 6; 
 
-yLimits        = [-16 5];
-legendLocation = 'best';
+yLimits        = [-5 80];
+legendLocation = 'sw';
 
-figNamePrefix = 'aeroForce';
+figNamePrefix = varName(1:end-6);
 
 %% Load mat file and define paths
 
@@ -50,35 +48,25 @@ load(expMatFile);
 
 %% assign variables
 
-x = out.(varName1).time;
+x = out.(varName).time;
 
-y1 = squeeze(sum(out.(varName1).signals.values(1,:,:),2));
-y2 = squeeze(sum(out.(varName1).signals.values(2,:,:),2));
-y3 = squeeze(sum(out.(varName1).signals.values(3,:,:),2));
+y1 = squeeze(out.(varName).signals(1).values);
+y2 = squeeze(out.(varName).signals(2).values);
+y3 = squeeze(out.(varName).signals(3).values);
+% y1 = squeeze(out.(varName).signals.values(:,1));
+% y2 = squeeze(out.(varName).signals.values(:,2));
+% y3 = squeeze(out.(varName).signals.values(:,3));
+% y4 = squeeze(out.(varName).signals.values(:,4));
 
-y4 = out.(varName2).signals.values(:,1);
-y5 = out.(varName2).signals.values(:,2);
-y6 = out.(varName2).signals.values(:,3);
-
-% y4 = squeeze(sum(out.(varName2).signals.values(1,:,:),2));
-% y5 = squeeze(sum(out.(varName2).signals.values(2,:,:),2));
-% y6 = squeeze(sum(out.(varName2).signals.values(3,:,:),2));
-
-% y1 = squeeze(sum(abs(out.(varName1).signals(1).values(:,:,:)),1));
-% y2 = squeeze(sum(abs(out.(varName1).signals(2).values(:,:,:)),1));
-% y3 = squeeze(sum(abs(out.(varName1).signals(3).values(:,:,:)),1));
-% y4 = squeeze(sum(abs(out.(varName1).signals(4).values(:,:,:)),1));
-% y5 = squeeze(sum(abs(out.(varName1).signals(5).values(:,:,:)),1));
 
 %% plot
-% legendNames = {'sim-x','sim-y','sim-z','ctrl-x','ctrl-y','ctrl-z'};
-legendNames = {'sim-x','sim-y','sim-z','kf-x','kf-y','kf-z'};
+legendNames = {'x','y','z'};
 
 fig = figure();
 fig.Position = [200 300 900 600];
 ax = gca;
 hold on
-plot(x,y1,'b-',x,y2,'r-',x,y3,'g-',x,y4,'b--',x,y5,'r--',x,y6,'g--','LineWidth',2);
+plot(x,y1,x,y2,x,y3,'LineWidth',2);
 grid on;
 
 ax.FontSize = 20;
