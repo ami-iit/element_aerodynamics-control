@@ -145,6 +145,31 @@ plt.savefig(str(cwd/'head-NN-1.pdf'), format='pdf')
 print('debugging')
 
 
+# Axisymmetric aerodynamic model
+axsym_coefs = np.array([[0.373, 1.89, 1.235, 0.163, -1.75, 4.02],
+                   [3.96, 0.0, -0.818, 0.0, 0.0, 5.00],
+                   [0.941, -0.308, 0.320, 0, 0.433, 3.23],
+                   [0.941, -0.308, 0.320, 0, 0.433, 3.23],
+                   [0.113, 0.225, 0.684, 0, 0, 1.14],
+                   [0.520, 0.128, 0.860, 0, 0.163, 1.52],
+                   [0.113, 0.225, 0.684, 0, 0, 1.14],
+                   [0.520, 0.128, 0.860, 0, 0.163, 1.52],
+                   [1.54, 0, 3.46, -3.31, 0, 2.89],
+                   [0, -0.261, 1.52, 0, 0, 2.19],
+                   [0.853, -0.881, 4.24, -2.58, 0.434, 3.21],
+                   [0, -0.261, 1.52, 0, 0, 2.19],
+                   [0.853, -0.881, 4.24, -2.58, 0.434, 3.21]]) * 1e-2
+
+W1 = lambda alpha: np.column_stack([
+    np.ones(len(alpha)), 
+    np.cos(np.radians(alpha)), 
+    np.sin(np.radians(alpha))**2, 
+    np.sin(np.radians(alpha))**3, 
+    np.cos(np.radians(alpha))**3
+    ])
+W2 = lambda alpha: np.sin(np.radians(alpha))**2 * np.cos(np.radians(alpha))
+
+print(f"Aerodynamic model performances for {plotVariableName}:\n")
 
 for linkIndex in range(0,nLink,1):
 
@@ -214,14 +239,37 @@ for linkIndex in range(0,nLink,1):
     ax3.grid()
     ax3.legend()
     
-    plt.show(block=False)
-    
     # Print MSE
     trainMSE = mean_squared_error(linkAeroForces_predicted_train.detach().numpy()[plotStartIndex,:], linkAeroForces_train.detach().numpy()[plotStartIndex,:])
-    # print(str(plotVariableName) + ' MSE for link ' + str(cfdLinkNames[0][linkIndex][0]) + ' on train dataset: ' + str(trainMSE))
     valMSE = mean_squared_error(linkAeroForces_predicted_val.detach().numpy()[plotStartIndex,:], linkAeroForces_val.detach().numpy()[plotStartIndex,:])
-    # print(str(plotVariableName) + ' MSE for link ' + str(cfdLinkNames[0][linkIndex][0]) + ' on validation dataset: ' + str(valMSE))
-    print("%.2e" % valMSE)
+    # print("%.2e" % valMSE)
+    
+    # Print NRMSE and NME
+    print(f"link {str(cfdLinkNames[0][linkIndex][0])}") 
+    aero_forces_pred = np.hstack((linkAeroForces_predicted_train.detach().numpy()[plotStartIndex,:], linkAeroForces_predicted_val.detach().numpy()[plotStartIndex,:]))
+    aero_forces_data = np.hstack((linkAeroForces_train.detach().numpy()[plotStartIndex,:], linkAeroForces_val.detach().numpy()[plotStartIndex,:]))
+    link_aoas_all = np.hstack((linkAoAs_train.detach().numpy()[linkIndex,:], linkAoAs_val.detach().numpy()[linkIndex,:]))
+    delta_aero_forces = aero_forces_pred - aero_forces_data
+    nme_aero_forces = np.max(np.abs(delta_aero_forces)) / (np.max(aero_forces_data) - np.min(aero_forces_data))
+    rmse_aero_forces = np.sqrt(np.mean(delta_aero_forces**2))
+    nrmse_aero_forces = rmse_aero_forces / (np.max(aero_forces_data) - np.min(aero_forces_data))
+    print(f"DNN <-> CFD: NRMSE = {nrmse_aero_forces:.5f}, NME = {nme_aero_forces:.5f}")
+    
+    if plotVariable == 0:  # CdA
+        aero_forces_axsym = W1(link_aoas_all) @ axsym_coefs[linkIndex,:-1]
+    elif plotVariable == 1:  # ClA
+        aero_forces_axsym = W2(link_aoas_all) * axsym_coefs[linkIndex,-1]
+    delta_aero_forces_axsym = aero_forces_axsym - aero_forces_data
+    nme_aero_forces_axsym = np.max(np.abs(delta_aero_forces_axsym)) / (np.max(aero_forces_data) - np.min(aero_forces_data))
+    rmse_aero_forces_axsym = np.sqrt(np.mean(delta_aero_forces_axsym**2))
+    nrmse_aero_forces_axsym = rmse_aero_forces_axsym / (np.max(aero_forces_data) - np.min(aero_forces_data))
+    print(f"AXS <-> CFD: NRMSE = {nrmse_aero_forces_axsym:.5f}, NME = {nme_aero_forces_axsym:.5f}")
+    
+    delta_aero_forces_models = aero_forces_axsym - aero_forces_pred
+    nme_aero_forces_models = np.max(np.abs(delta_aero_forces_models)) / (np.max(aero_forces_pred) - np.min(aero_forces_pred))
+    rmse_aero_forces_models = np.sqrt(np.mean(delta_aero_forces_models**2))
+    nrmse_aero_forces_models = rmse_aero_forces_models / (np.max(aero_forces_pred) - np.min(aero_forces_pred))
+    print(f"AXS <-> DNN: NRMSE = {nrmse_aero_forces_models:.5f}, NME = {nme_aero_forces_models:.5f} \n")
 
 
 sumStartIndex = plotPreStartIndex
@@ -283,7 +331,7 @@ ax3.set_title('iRonCub')
 ax3.grid()
 ax3.legend()
 
-plt.show(block=False)
+plt.show()
 
 # Closing all the plots
 wait = input("Press Enter to close the figures.")
