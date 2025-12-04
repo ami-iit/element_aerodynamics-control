@@ -2,7 +2,8 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
              aeroFlyingMomentumControl(jointPos, w_baseTwist, jetsIntensities, J_jets, J_CoM, J_LFoot, J_RFoot, posCoM, w_R_b, w_H_LFoot, w_H_RFoot, ...
                                        matrixOfJetsAxes, matrixOfJetsArms, matrixOfAeroArms, J_aeroForces, w_I_c, L, M, CMM, pos_vel_acc_jerk_CoM_des, ....
                                        rot_vel_acc_jerk_base_des, jointPos_des, KP_momentum, KD_momentum, KP_postural, feetContactIsActive, ...
-                                       decreaseMaxFootVerticalForce, increaseMinFootVerticalForce, robotIsLanded, contactForces_hat, aerodynamic_forces, aero_config, Config)
+                                       decreaseMaxFootVerticalForce, increaseMinFootVerticalForce, robotIsLanded, contactForces_hat, ...
+                                       aerodynamic_forces, centroidal_aerodynamic_force_KF, aero_config, Config)
                                
     % FLYINGMOMENTUMCONTROL implements a momentum-based flying controller.
     %                       Two different control algorithms are implemented.
@@ -154,6 +155,14 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
 
     end
     
+    % Set centroidal aerodynamic matrices according to options
+    if ~aero_config.use_centroidal_torques
+        Aa_angular = 0*Aa_angular;
+    end
+    if aero_config.use_aerodynamic_kalman_filter
+        Aa_centroidal_kf = eye(6);
+    end
+    
     % Assemble the Aa matrix blocks for LDot_estimated evaluation
     Aa = [Aa_linear; Aa_angular];
     
@@ -176,6 +185,10 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     % Calculate the linear and angular blocks inside Lambda_a matrix
     Lambda_a_angular = I_hor * SJ_aero_matrix;
     Lambda_a_linear  = Lambda_a_angular*0;
+
+    if ~aero_config.use_distributed_forces
+        Lambda_a_angular = 0*Lambda_a_angular; 
+    end
     
     % Assemble Lambda_a matrix
     Lambda_a  = [Lambda_a_linear; Lambda_a_angular];
@@ -222,7 +235,11 @@ function [HessianMatrixQP, gVectorQP, lowerBoundQP, upperBoundQP, L_des, LDot_es
     g_angMomentum   = [zeros(4,1); zeros(12,1); zeros(ndof,1)];  
     
     % compute the momentum error derivative/integral
-    LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa * aerodynamic_force_vector - f_grav;
+    if aero_config.use_aerodynamic_kalman_filter
+        LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa_centroidal_kf * centroidal_aerodynamic_force_KF - f_grav;
+    else
+        LDot_estimated  = Aj * jetsIntensities + Ac * contactForces_hat .* feetContactIsActive + Aa * aerodynamic_force_vector - f_grav;
+    end
     LDot_tilde      = LDot_estimated - LDot_des;
     intL_tilde      = [(m * posCoM - intL_des(1:3)); zeros(3,1)];
     
