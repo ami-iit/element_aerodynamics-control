@@ -118,12 +118,13 @@ Cn_lsq     = X2(alpha_plot)*Cn_coef;
 
 figure_size = [100 200 1120 720];
 font_size   = 32;
+font = "Times New Roman";
+sz = 60;
 
 % plot link CdAs vs AoA
 fig = figure();
 fig.Position = figure_size;
-% scatter(linkAoAs_full,linkCdAs_full,[],linkSsAs_full); hold on;
-scatter(linkAoAs_full,linkCdAs_full,'DisplayName','CFD dataset'); hold on;
+scatter(linkAoAs_full,linkCdAs_full,sz,'DisplayName','CFD dataset'); hold on;
 plot(alpha_plot,Cd_lsq,'k-','LineWidth',2,'DisplayName','model prediction'); hold on;
 xlabel('$\alpha_{link}$ [deg]','Interpreter','latex','FontSize',font_size);
 ylabel('$C_D A$','Interpreter','latex','FontSize',font_size);
@@ -132,6 +133,7 @@ xlim([0 180]);
 grid on;
 legend;
 set(gca,'fontsize', font_size);
+fontname(font);
 % c = colorbar;
 % c.Limits = [0 180];
 % c.Label.Interpreter = 'latex';
@@ -144,8 +146,7 @@ set(gca,'fontsize', font_size);
 % plot link CnAs vs AoA
 fig = figure();
 fig.Position = figure_size;
-% scatter(linkAoAs_full,linkCnAs_full,[],linkSsAs_full); hold on;
-scatter(linkAoAs_full,linkCnAs_full,'DisplayName','CFD dataset'); hold on;
+scatter(linkAoAs_full,linkCnAs_full,sz,'DisplayName','CFD dataset'); hold on;
 plot(alpha_plot,Cn_lsq,'k-','LineWidth',2,'DisplayName','model prediction');
 xlabel('$\alpha_{link}$ [deg]','Interpreter','latex','FontSize',font_size);
 ylabel('$C_N A$','Interpreter','latex','FontSize',font_size);
@@ -154,6 +155,7 @@ xlim([0 180]);
 grid on;
 legend;
 set(gca,'fontsize', font_size);
+fontname(font);
 % c = colorbar;
 % c.Limits = [0 180];
 % c.Label.Interpreter = 'latex';
@@ -166,14 +168,34 @@ set(gca,'fontsize', font_size);
 % plot link CdAs error vs AoA
 fig = figure();
 fig.Position = figure_size;
-% scatter(linkAoAs_full,linkCdAs_full,[],linkSsAs_full); hold on;
-scatter(linkAoAs_full,X1(linkAoAs_full)*Cd_coefs-linkCdAs_full); hold on;
+scatter(linkAoAs_full,X1(linkAoAs_full)*Cd_coefs-linkCdAs_full,sz); hold on;
 xlabel('$\alpha_{link}$','Interpreter','latex','FontSize',24);
 ylabel('$\Delta C_D A$','Interpreter','latex','FontSize',24);
 xlim([0 180]);
 % title(cfdLinkName,'Interpreter','none');
 grid on;
 set(gca,'fontsize', font_size);
+fontname(font);
+% c = colorbar;
+% c.Limits = [0 180];
+% c.Label.Interpreter = 'latex';
+% c.Label.String = '$\beta_{link}$';
+% c.Label.Position = [3, 95, 0];
+% c.Label.Rotation = 0;
+% c.Label.FontSize = 12;
+
+
+% plot link CdAs error vs AoA
+fig = figure();
+fig.Position = figure_size;
+scatter(linkAoAs_full,X2(linkAoAs_full)*Cn_coef-linkCnAs_full,sz); hold on;
+xlabel('$\alpha_{link}$','Interpreter','latex','FontSize',24);
+ylabel('$\Delta C_D A$','Interpreter','latex','FontSize',24);
+xlim([0 180]);
+% title(cfdLinkName,'Interpreter','none');
+grid on;
+set(gca,'fontsize', font_size);
+fontname(font);
 % c = colorbar;
 % c.Limits = [0 180];
 % c.Label.Interpreter = 'latex';
